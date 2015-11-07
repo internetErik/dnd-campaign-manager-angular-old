@@ -78,7 +78,6 @@ export class CharacterForm {
 	addCharacter(character) {
 		if(this.characterForm.valid) {
 				console.log(character);
-
 		}
 	}
 }

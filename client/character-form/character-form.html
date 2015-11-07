@@ -1,0 +1,100 @@
+<form [ng-form-model]="characterForm" #f="form" (submit)="addCharacter(f.value)">
+	<h2>Character Name</h2>
+	<div>
+			<label for="firstName">First Name</label>
+			<input id="firstName" type="text" ng-control="firstName">
+	</div>
+	<div>
+			<label for="middleName">Middle Name</label>
+			<input id="middleName" type="text" ng-control="middleName">
+	</div>
+	<div>
+			<label for="lastName">Last Name</label>
+			<input id="lastName" type="text" ng-control="lastName">
+	</div>
+	<div>
+			<label for="title">Title</label>
+			<input id="title" type="text" ng-control="title">
+	</div>
+
+	<h2>Biological Information</h2>
+	<div>
+			<label for="race">Race</label>
+			<input id="race" type="text" ng-control="race">
+	</div>
+	<div>
+			<label for="gender">Gender</label>
+			<input id="gender" type="text" ng-control="gender">
+	</div>
+	<div>
+			<label for="height">Height</label>
+			<br>
+			<input id="height" type="number" ng-control="height-m"> meteres
+			<input type="number" ng-control="height-cm"> cm
+	</div>
+	<div>
+			<label for="weight">Weight</label>
+			<input id="weight" type="number" ng-control="weight">kg
+	</div>
+
+	<h2>Stats</h2>
+	<div>
+			<label for="str">Strength</label>
+			<input id="str" type="number" ng-control="str">
+	</div>
+	<div>
+			<label for="int">Intelligence</label>
+			<input id="int" type="number" ng-control="int">
+	</div>
+	<div>
+			<label for="wis">Wisdom</label>
+			<input id="wis" type="number" ng-control="wis">
+	</div>
+	<div>
+			<label for="con">Constitution</label>
+			<input id="con" type="number" ng-control="con">
+	</div>
+	<div>
+			<label for="dex">Dexterity</label>
+			<input id="dex" type="number" ng-control="dex">
+	</div>
+	<div>
+			<label for="cha">Charisma</label>
+			<input id="cha" type="number" ng-control="cha">
+	</div>
+
+	<h2>Skills</h2>
+	<h3>Add Skill</h3>
+	<div>
+		<label for="skillName">Name</label>
+		<input id="skillName" type="text" [(ng-model)]="newSkillName">
+		<button (click)="addSkill()">+</button>
+	</div>
+
+	<div *ng-for="#skill of skills">
+		<label>{{ skill }}</label>
+		<input type="number" id="skill-{{ skill }}" value="0">
+		<button (click)="removeSkill(skill)">-</button>
+	</div>
+
+	<h2>Feats</h2>
+	<div>
+		<label for="featName">Name</label>
+		<input id="featName" type="text" [(ng-model)]="newFeatName">
+		<button (click)="addFeat()">+</button>
+	</div>
+
+	<div *ng-for="#feat of feats">
+		<label>{{ feat }}</label> 
+		<br>
+		<textarea cols="80" rows="3" value=""></textarea>
+		<br>
+		<button (click)="removeFeat(feat)">-</button>
+	</div>
+
+	<h2>Backstory</h2>
+	<div>
+		<textarea id="backstory" cols="80" rows="10" ng-control="backstory"></textarea>
+	</div>
+	<button>Create Character</button>
+</form>

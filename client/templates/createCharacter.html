@@ -1,0 +1,182 @@
+<template name="createCharacter">
+	<div>
+			<label for="name">Character Name</label>
+			<input id="name" type="text" class="name">
+	</div>
+
+	<div>
+			<label for="race">Character Race</label>
+			<input id="race" type="text" class="race">
+	</div>
+
+	<h2>Stats</h2>
+	<div>
+			<label for="str">Strength</label>
+			<input id="str" type="text" class="str">
+	</div>
+	<div>
+			<label for="int">Intelligence</label>
+			<input id="int" type="text" class="int">
+	</div>
+	<div>
+			<label for="wis">Wisdom</label>
+			<input id="wis" type="text" class="wis">
+	</div>
+	<div>
+			<label for="con">Constitution</label>
+			<input id="con" type="text" class="con">
+	</div>
+	<div>
+			<label for="dex">Dexterity</label>
+			<input id="dex" type="text" class="dex">
+	</div>
+	<div>
+			<label for="cha">Charisma</label>
+			<input id="cha" type="text" class="cha">
+	</div>
+
+	<h2>Skills</h2>
+	
+	<div>
+		<label for="">Appraise (Int)</label><input type="text">
+	</div>
+	<div>
+		<label for="">Autohypnosis (Wis)</label><input type="text">
+	</div>
+	<div>
+		<label for="">Balance (Dex)</label><input type="text">
+	</div>
+	<div>
+		<label for="">Bluff (Cha)</label><input type="text">
+	</div>
+	<div>
+		<label for="">Climb (Str)</label><input type="text">
+	</div>
+	<div>
+		<label for="">Concentration (Con)</label><input type="text">
+	</div>
+	<div>
+		<label for="">Control Shape (Wis)</label><input type="text">
+	</div>
+	<div>
+		<label for="">Craft (Int)</label><input type="text">
+	</div>
+	<div>
+		<label for="">Decipher Script (Int)</label><input type="text">
+	</div>
+	<div>
+		<label for="">Diplomacy (Cha)</label><input type="text">
+	</div>
+	<div>
+		<label for="">Disable Device (Int)</label><input type="text">
+	</div>
+	<div>
+		<label for="">Disguise (Cha)</label><input type="text">
+	</div>
+	<div>
+		<label for="">Escape Artist (Dex)</label><input type="text">
+	</div>
+	<div>
+		<label for="">Forgery (Int)</label><input type="text">
+	</div>
+	<div>
+		<label for="">Gather Information (Cha)</label><input type="text">
+	</div>
+	<div>
+		<label for="">Handle Animal (Cha)</label><input type="text">
+	</div>
+	<div>
+		<label for="">Heal (Wis)</label><input type="text">
+	</div>
+	<div>
+		<label for="">Hide (Dex)</label><input type="text">
+	</div>
+	<div>
+		<label for="">Intimidate (Cha)</label><input type="text">
+	</div>
+	<div>
+		<label for="">Jump (Str)</label><input type="text">
+	</div>
+	<div>
+		<label for="">Knowledge (Int)</label><input type="text">
+	</div>
+	<div>
+		<label for="">Listen (Wis)</label><input type="text">
+	</div>
+	<div>
+		<label for="">Move Silently (Dex)</label><input type="text">
+	</div>
+	<div>
+		<label for="">Open Lock (Dex)</label><input type="text">
+	</div>
+	<div>
+		<label for="">Perform (Cha)</label><input type="text">
+	</div>
+	<div>
+		<label for="">Psicraft (Int)</label><input type="text">
+	</div>
+	<div>
+		<label for="">Profession (Wis)</label><input type="text">
+	</div>
+	<div>
+		<label for="">Ride (Dex)</label><input type="text">
+	</div>
+	<div>
+		<label for="">Search (Int)</label><input type="text">
+	</div>
+	<div>
+		<label for="">Sense Motive (Wis)</label><input type="text">
+	</div>
+	<div>
+		<label for="">Sleight of Hand (Dex)</label><input type="text">
+	</div>
+	<div>
+		<label for="">Speak Language (none)</label><input type="text">
+	</div>
+	<div>
+		<label for="">Spellcraft (Int)</label><input type="text">
+	</div>
+	<div>
+		<label for="">Spot (Wis)</label><input type="text">
+	</div>
+	<div>
+		<label for="">Survival (Wis)</label><input type="text">
+	</div>
+	<div>
+		<label for="">Swim (Str)</label><input type="text">
+	</div>
+	<div>
+		<label for="">Tumble (Dex)</label><input type="text">
+	</div>
+	<div>
+		<label for="">Use Magic Device (Cha)</label><input type="text">
+	</div>
+	<div>
+		<label for="">Use Psionic Device (Cha)</label><input type="text">
+	</div>
+	<div>
+		<label for="">Use Rope (Dex)</label><input type="text">
+	</div>
+
+	<h2>Feats</h2>
+	{{#each feat in feats}}
+	<div>
+		<label>name</label><input type="text" value="{{feat.name}}">
+		<br>
+		<label for="">description</label>
+		<br>
+		<textarea name="" id="" cols="80" rows="10" value="{{feat.description}}"></textarea>
+	</div>
+	{{/each}}
+	<div>
+		<h3>Add a Feat</h3>
+		<label for="new-feat">Name</label>
+		<input id="new-feat" class="js-new-feat" type="text">
+		<button class="js-add-feat">+</button>
+	</div>
+
+	<h2>Backstory</h2>
+	<div>
+		<textarea id="backstory" cols="80" rows="10" class="backstory"></textarea>
+	</div>
+</template>

@@ -2,8 +2,6 @@
 
 import {Characters} from 'collections/characters';
 
-Meteor.methods({
-		'insertCharacter': function(character) {
-				Characters.insert(character);
-		}
+Meteor.publish('characters', function() {
+		return Characters.find();
 });

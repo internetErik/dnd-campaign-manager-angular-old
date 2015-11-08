@@ -2,6 +2,8 @@
 
 import {Component, View, NgFor} from 'angular2/angular2';
 
+import {Router} from 'angular2/router';
+
 import {Characters} from 'collections/characters';
 
 import {FORM_DIRECTIVES, FormBuilder, Control, ControlGroup, Validators} from 'angular2/angular2';
@@ -15,13 +17,14 @@ import {FORM_DIRECTIVES, FormBuilder, Control, ControlGroup, Validators} from 'a
 })
 export class CharacterForm {
 	characterForm: ControlGroup;
+	router: Router;
 
 	newSkillName: string;
 	newFeatName: string;
 	skills: string[];
 	feats: string[];
 
-	constructor() {
+	constructor(_router: Router) {
 			var fb = new FormBuilder();
 			this.characterForm = fb.group({
 					firstName: ['', Validators.required],
@@ -47,6 +50,8 @@ export class CharacterForm {
 
 			this.skills = [];
 			this.feats = [];
+
+			this.router = _router;
 	}
 
 	addSkill(e) {
@@ -89,7 +94,7 @@ export class CharacterForm {
 		e.preventDefault();
 
 		if(this.characterForm.valid) {
-				let skills = [], feats = [], c;
+				let skills = [], feats = [], c, _id;
 
 				//build skill data
 				if (this.skills.length > 0) {
@@ -104,7 +109,7 @@ export class CharacterForm {
 						feats = this.feats.map((feat) => {
 								var ele: HTMLInputElement = 
 									<HTMLInputElement>document.querySelector('#feat-' + feat);
-								return { name: feat, level: ele.value };
+								return { name: feat, description: ele.value };
 						});
 				}
 
@@ -129,29 +134,31 @@ export class CharacterForm {
 						feats: feats
 				};
 
-				Characters.insert(c);
+				_id = Characters.insert(c);
+
+				this.router.parent.navigate(['/CharacterDetail', { characterId: _id }]);
 
 				//reset form
-				(<any>this.characterForm.controls['firstName']).updateValue('');
-				(<any>this.characterForm.controls['middleName']).updateValue('');
-				(<any>this.characterForm.controls['lastName']).updateValue('');
-				(<any>this.characterForm.controls['title']).updateValue('');
-				(<any>this.characterForm.controls['race']).updateValue('');
-				(<any>this.characterForm.controls['gender']).updateValue('');
-				(<any>this.characterForm.controls['heightM']).updateValue(0);
-				(<any>this.characterForm.controls['heightCm']).updateValue(0);
-				(<any>this.characterForm.controls['weight']).updateValue(0);
-				(<any>this.characterForm.controls['str']).updateValue(0);
-				(<any>this.characterForm.controls['int']).updateValue(0);
-				(<any>this.characterForm.controls['wis']).updateValue(0);
-				(<any>this.characterForm.controls['con']).updateValue(0);
-				(<any>this.characterForm.controls['dex']).updateValue(0);
-				(<any>this.characterForm.controls['cha']).updateValue(0);
-				(<any>this.characterForm.controls['backstory']).updateValue('');
-				this.skills = [];
-				this.feats = [];
-				this.newSkillName = '';
-				this.newFeatName = '';
+				// (<any>this.characterForm.controls['firstName']).updateValue('');
+				// (<any>this.characterForm.controls['middleName']).updateValue('');
+				// (<any>this.characterForm.controls['lastName']).updateValue('');
+				// (<any>this.characterForm.controls['title']).updateValue('');
+				// (<any>this.characterForm.controls['race']).updateValue('');
+				// (<any>this.characterForm.controls['gender']).updateValue('');
+				// (<any>this.characterForm.controls['heightM']).updateValue(0);
+				// (<any>this.characterForm.controls['heightCm']).updateValue(0);
+				// (<any>this.characterForm.controls['weight']).updateValue(0);
+				// (<any>this.characterForm.controls['str']).updateValue(0);
+				// (<any>this.characterForm.controls['int']).updateValue(0);
+				// (<any>this.characterForm.controls['wis']).updateValue(0);
+				// (<any>this.characterForm.controls['con']).updateValue(0);
+				// (<any>this.characterForm.controls['dex']).updateValue(0);
+				// (<any>this.characterForm.controls['cha']).updateValue(0);
+				// (<any>this.characterForm.controls['backstory']).updateValue('');
+				// this.skills = [];
+				// this.feats = [];
+				// this.newSkillName = '';
+				// this.newFeatName = '';
 		}
 	}
 }

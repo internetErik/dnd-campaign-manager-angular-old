@@ -1,0 +1,69 @@
+<div>
+	<h2>Character Name</h2>
+	<div>
+		{{character.title}} {{character.firstName}} {{character.middleName}} {{character.lastName}}
+	</div>
+	
+	<h2>Biological Information</h2>
+	<div>
+			<label for="race">Race</label>
+			{{character.race}}
+	</div>
+	<div>
+			<label for="gender">Gender</label>
+			{{character.gender}}
+	</div>
+	<div>
+			<label for="height">Height</label>
+			{{character.heightM}}m {{character.heightCm}}cm
+	</div>
+	<div>
+			<label for="weight">Weight</label>
+			{{character.weight}}kg
+	</div>
+	
+	<h2>Stats</h2>
+	<div>
+			<label for="str">Strength</label>
+			{{character.str}}
+	</div>
+	<div>
+			<label for="int">Intelligence</label>
+			{{character.int}}
+	</div>
+	<div>
+			<label for="wis">Wisdom</label>
+			{{character.wis}}
+	</div>
+	<div>
+			<label for="con">Constitution</label>
+			{{character.con}}
+	</div>
+	<div>
+			<label for="dex">Dexterity</label>
+			{{character.dex}}
+	</div>
+	<div>
+			<label for="cha">Charisma</label>
+			{{character.cha}}
+	</div>
+	
+	<h2>Skills</h2>
+	<div *ng-for="#skill of character.skills">
+		<label>{{ skill.name }}</label>
+		{{skill.level}}
+	</div>
+	
+	<h2>Feats</h2>
+	<div *ng-for="#feat of character.feats">
+		<label>{{ feat.name }}</label> 
+		<br>
+		{{feat.description}}
+	</div>
+	
+	<h2>Backstory</h2>
+	<div>
+		{{character.backstory}}
+	</div>
+	<button (click)="deleteCharacter()">Delete</button>
+</div>

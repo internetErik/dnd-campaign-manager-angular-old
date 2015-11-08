@@ -22,7 +22,6 @@ class App {
 		characters: Mongo.Cursor<Object>;
 
 		constructor() {
-			Meteor.subscribe('characters');
 			this.characters = Characters.find();
 		}
 }

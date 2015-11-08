@@ -2,9 +2,9 @@
 
 import {Component, View, NgFor} from 'angular2/angular2';
 
-import {FORM_DIRECTIVES, FormBuilder, Control, ControlGroup, Validators} from 'angular2/angular2';
+import {Characters} from 'collections/characters';
 
-// import {Characters} from 'collections/characters';
+import {FORM_DIRECTIVES, FormBuilder, Control, ControlGroup, Validators} from 'angular2/angular2';
 
 @Component({
 	selector: 'character-form'
@@ -129,7 +129,7 @@ export class CharacterForm {
 						feats: feats
 				};
 
-				Meteor.call('insertCharacter', c);
+				Characters.insert(c);
 
 				//reset form
 				(<any>this.characterForm.controls['firstName']).updateValue('');

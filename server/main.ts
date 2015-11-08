@@ -1,9 +1,3 @@
-/// <reference path="../typings/angular2-meteor.d.ts" />
+import {loadCharacters} from 'server/loadCharacters';
 
-import {Characters} from 'collections/characters';
-
-Meteor.methods({
-		'insertCharacter': function(character) {
-				Characters.insert(character);
-		}
-});
+Meteor.startup(loadCharacters);

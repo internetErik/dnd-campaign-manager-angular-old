@@ -29,7 +29,6 @@ import {ROUTER_PROVIDERS, ROUTER_DIRECTIVES, RouteConfig, APP_BASE_HREF} from 'a
 		<nav>
 			<a href="/">Home</a> |
 			<a [router-link]="['/CharacterList']">Characters</a>
-			<login></login>
 		</nav>
 		<router-outlet></router-outlet>
 		<dice></dice>

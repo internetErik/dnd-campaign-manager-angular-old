@@ -1,31 +1,33 @@
 <div class="login-form">
-	<div>
-		Logged in as somebody
+	<div *ng-if="loggedIn">
+		logout {{loggedIn.emails[0].address}}
 	</div>
-	<div>
+	<div *ng-if="!loggedIn">
 		<form *ng-if="isLoggingIn"
-			[ng-form-model]="loginForm" #lf="form" (submit)="addCharacter($event, lf.value)">
+			[ng-form-model]="loginForm" #lf="form" (submit)="login($event, lf.value)">
 			<button (click)="toggleForm($event)">Register</button>
 			<br>
 			<label for="email">Email</label>
-			<input type="text" id="email">
+			<input type="text" id="email" ng-control="email">
 			<br>
 			<label for="password">Password</label>
-			<input type="password" id="password">
+			<input type="password" id="password" ng-control="password">
+			<button>Login</button>
 		</form>
 
 		<form *ng-if="!isLoggingIn" 
-			[ng-form-model]="registerForm" #rf="form" (submit)="addCharacter($event, rf.value)">
+			[ng-form-model]="registerForm" #rf="form" (submit)="register($event, rf.value)">
 			<button (click)="toggleForm($event)">Login</button>
 			<br>
 			<label for="email">Email</label>
-			<input type="text" id="email">
+			<input type="text" id="email" ng-control="email">
 			<br>
 			<label for="password">Password</label>
-			<input type="password" id="password">
+			<input type="password" id="password" ng-control="password">
 			<br>
 			<label for="repassword">Re-enter Password</label>
-			<input type="password" id="repassword">
+			<input type="password" id="repassword" ng-control="repassword">
+			<button>Register</button>
 		</form>
 	</div>
 </div>

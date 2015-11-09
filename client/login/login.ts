@@ -19,18 +19,43 @@ import {FORM_DIRECTIVES, FormBuilder, Control, ControlGroup, Validators} from 'a
 export class Login {
 		loginForm: ControlGroup;
 		registerForm: ControlGroup;
-
+		
+		loggedIn: any;
 		isLoggingIn: boolean;
 
     router: Router;
 
 		constructor(_router: Router) {
+				var lfb = new FormBuilder();
+				var rfb = new FormBuilder();
+
 				this.router = _router;
 				this.isLoggingIn = true;
+				this.loggedIn = Meteor.user();
+
+				this.loginForm = lfb.group({
+						email: ['', Validators.required],
+						password: ['', Validators.required]
+				});
+
+				this.registerForm = rfb.group({
+						email: ['', Validators.required],
+						password: ['', Validators.required],
+						repassword: ['', Validators.required]
+				});
 		}
 
 		toggleForm(e) {
 				e.preventDefault();
 				this.isLoggingIn = !this.isLoggingIn;
+		}
+
+		login(e, form) {
+				e.preventDefault();
+		}
+
+		register(e, form) {
+				e.preventDefault();
+
 		}
 }

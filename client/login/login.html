@@ -1,0 +1,31 @@
+<div class="login-form">
+	<div>
+		Logged in as somebody
+	</div>
+	<div>
+		<form *ng-if="isLoggingIn"
+			[ng-form-model]="loginForm" #lf="form" (submit)="addCharacter($event, lf.value)">
+			<button (click)="toggleForm($event)">Register</button>
+			<br>
+			<label for="email">Email</label>
+			<input type="text" id="email">
+			<br>
+			<label for="password">Password</label>
+			<input type="password" id="password">
+		</form>
+
+		<form *ng-if="!isLoggingIn" 
+			[ng-form-model]="registerForm" #rf="form" (submit)="addCharacter($event, rf.value)">
+			<button (click)="toggleForm($event)">Login</button>
+			<br>
+			<label for="email">Email</label>
+			<input type="text" id="email">
+			<br>
+			<label for="password">Password</label>
+			<input type="password" id="password">
+			<br>
+			<label for="repassword">Re-enter Password</label>
+			<input type="password" id="repassword">
+		</form>
+	</div>
+</div>

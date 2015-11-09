@@ -20,3 +20,8 @@
 label {
 	color: #666;
 }
+
+.login-form {
+	position: absolute;
+	right: 0;
+}

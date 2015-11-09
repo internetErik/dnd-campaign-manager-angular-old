@@ -17,3 +17,4 @@ es5-shim                # ECMAScript 5 compatibility for older browsers.
 urigo:angular2-meteor
 autopublish
 insecure
+accounts-password

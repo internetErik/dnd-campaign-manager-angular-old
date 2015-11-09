@@ -16,6 +16,8 @@ import {CharacterDetail} from 'client/character-detail/character-detail';
 
 import {Dice} from 'client/dice/dice';
 
+import {Login} from 'client/login/login';
+
 import {ROUTER_PROVIDERS, ROUTER_DIRECTIVES, RouteConfig, APP_BASE_HREF} from 'angular2/router';
 
 
@@ -27,11 +29,12 @@ import {ROUTER_PROVIDERS, ROUTER_DIRECTIVES, RouteConfig, APP_BASE_HREF} from 'a
 		<nav>
 			<a href="/">Home</a> |
 			<a [router-link]="['/CharacterList']">Characters</a>
+			<login></login>
 		</nav>
 		<router-outlet></router-outlet>
 		<dice></dice>
 		`,
-		directives: [ROUTER_DIRECTIVES, Dice]
+		directives: [ROUTER_DIRECTIVES, Dice, Login]
 })
 @RouteConfig([
 		{

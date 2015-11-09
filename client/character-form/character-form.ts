@@ -131,26 +131,28 @@ export class CharacterForm {
 				let spells = [],
 						skills = [],
 						feats = [],
-						_id,
-						c;
+						_id, //id returned from insert
+						c; //the character we are inserting
 
 				//build spell data
 				if (this.spells.length > 0) {
 						spells = this.spells.map((spell) => {
-								var eLev: HTMLInputElement =
+								let eLev: HTMLInputElement =
 										<HTMLInputElement>document.querySelector('#spellLevel-' + spell);
-								var eDesc: HTMLInputElement =
+								let eDesc: HTMLInputElement =
 										<HTMLInputElement>document.querySelector('#spellDesc-' + spell);
-								return { name: spell, level: eLev.value, description: eDesc.value, tab: 0 };
+								let eDomain: HTMLInputElement =
+										<HTMLInputElement>document.querySelector('#spellDomain-' + spell);
+								return { name: spell, level: eLev.value, domain: eDomain.value, description: eDesc.value, tab: 0 };
 						})
 				}
 
 				//build skill data
 				if (this.skills.length > 0) {
 						skills = this.skills.map((skill) => {
-								var eLev: HTMLInputElement =
+								let eLev: HTMLInputElement =
 										<HTMLInputElement>document.querySelector('#skillLevel-' + skill);
-								var eStat: HTMLInputElement =
+								let eStat: HTMLInputElement =
 										<HTMLInputElement>document.querySelector('#skillStat-' + skill);
 								return { name: skill, level: eLev.value, stat: eStat.value, tab: 0 };
 						})
@@ -159,7 +161,7 @@ export class CharacterForm {
 				//build feat data
 				if (this.feats.length > 0) {
 						feats = this.feats.map((feat) => {
-								var ele: HTMLInputElement =
+								let ele: HTMLInputElement =
 										<HTMLInputElement>document.querySelector('#feat-' + feat);
 								return { name: feat, description: ele.value };
 						});

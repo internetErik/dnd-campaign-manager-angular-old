@@ -149,6 +149,9 @@
 		<label>Level</label>
 		<input type="number" min="0" id="spellLevel-{{ spell }}" value="0">
 		<br>
+		<label>Domain</label>
+		<input type="text" id="spellDomain-{{ spell }}">
+		<br>
 		<label>Description</label> 
 		<br>
 		<textarea id="spellDesc-{{spell}}" cols="45" rows="3"></textarea>
@@ -165,7 +168,6 @@
 
 	<div *ng-for="#skill of skills">
 		<label>{{ skill }}</label>
-		<input type="number" min="0" id="skillLevel-{{ skill }}" value="0">
 		(<select min="0" id="skillStat-{{ skill }}">
 			<option value="str">Str</option>
 			<option value="int">Int</option>
@@ -174,10 +176,13 @@
 			<option value="dex">Dex</option>
 			<option value="cha">Cha</option>
 		</select>)
+		<label>level</label>
+		<input type="number" min="0" id="skillLevel-{{ skill }}" value="0">
 		<button (click)="removeSkill(skill)">-</button>
 	</div>
 
 	<h2>Feats</h2>
+	<h3>Add Feat</h3>
 	<div>
 		<label for="featName">Name</label>
 		<input id="featName" type="text" [(ng-model)]="newFeatName" (keyup.enter)="addFeat($event)">

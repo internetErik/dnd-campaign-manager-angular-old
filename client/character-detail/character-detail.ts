@@ -1,6 +1,6 @@
 /// <reference path="../../typings/angular2-meteor.d.ts" />
 
-import {Component, View, NgFor, NgIf} from 'angular2/angular2';
+import {Component, View, NgFor, NgIf, FORM_DIRECTIVES} from 'angular2/angular2';
 
 import {RouteParams, Router} from 'angular2/router';
 
@@ -11,16 +11,39 @@ import {Characters} from 'collections/characters';
 })
 @View({
     templateUrl: 'client/character-detail/character-detail.html',
-    directives: [NgFor, NgIf]
+    directives: [FORM_DIRECTIVES, NgFor, NgIf]
 })
 export class CharacterDetail {
-    character: Object;
+    character: any;
     router: Router;
 
-    constructor(_router: Router, params: RouteParams) {
+		newSpellName: string;
+		newSpellLevel: number;
+		newSpellDomain: string;
+		newSpellDescription: string;
+
+		newSkillName: string;
+		newSkillStat: string;
+		newSkillLevel: number;
+
+		newFeatName: string;
+		newFeatDesc: string;
+
+		constructor(_router: Router, params: RouteParams) {
         var characterId = params.get('characterId');
         this.character = Characters.findOne({ _id: characterId });
         this.router = _router;
+
+				this.newSpellName = '';
+				this.newSpellLevel = 0;
+				this.newSpellDomain = '';
+				this.newSpellDescription = '';
+				
+				this.newSkillName = '';
+				this.newSkillStat = '';
+				this.newSkillLevel = 0;
+
+				this.newFeatName = '';
     }
 
     deleteCharacter() {
@@ -32,11 +55,56 @@ export class CharacterDetail {
 
     incrementTab(tabName) {
 				this.character[tabName] += 1;
-				Characters.update({ _id: this.character._id }, this.character);
+				this.updateCharacter();
     }
 
     clearTab(tabName) {
 				this.character[tabName] = 0;
-				Characters.update({ _id: this.character._id }, this.character);
+				this.updateCharacter();
     }
+
+		addSpell(e) {
+				e.preventDefault();
+				if (this.newSpellName && this.character.spells.indexOf(this.newSpellName) === -1) {
+					if(this.newSpellLevel && this.newSpellDomain && this.newSpellDescription) {
+						let spell = { name: this.newSpellName, level: this.newSpellLevel, domain: this.newSpellDomain, description: this.newSpellDescription, tab: 0 };
+						this.character.spells.push(spell);
+						this.newSpellName = '';
+						this.newSpellLevel = 0;
+						this.newSpellDomain = '';
+						this.newSpellDescription = '';
+						this.updateCharacter();
+					}
+				}
+		}
+
+		addSkill(e) {
+				e.preventDefault();
+				if (this.newSkillName && this.character.skills.indexOf(this.newSkillName) === -1) {
+						if (this.newSkillLevel && this.newSkillStat) {
+								let skill = {name: this.newSkillName, level: this.newSkillLevel, stat: this.newSkillStat};
+								this.character.skills.push(skill);
+								this.newSkillName = '';
+								this.newSkillStat = '';
+								this.newSkillLevel = 0;
+								this.updateCharacter();
+						}
+				}
+		}
+
+		addFeat(e) {
+				e.preventDefault();
+				if (this.newFeatName && this.character.feats.indexOf(this.newFeatName) === -1) {
+					if(this.newFeatDesc) {
+						this.character.feats.push({name: this.newFeatName, description: this.newFeatDesc});
+						this.newFeatName = '';
+						this.newFeatDesc = '';
+						this.updateCharacter();
+					}
+				}
+		}
+
+		updateCharacter() {
+				Characters.update({ _id: this.character._id }, this.character);
+		}
 }

@@ -10,19 +10,28 @@
 			{{character.race}}
 	</div>
 	<div>
-			<label for="gender">Gender</label>
-			{{character.gender}}
+			<label for="sex">Sex</label>
+			{{character.sex}}
 	</div>
 	<div>
 			<label for="height">Height</label>
-			{{character.heightM}}m {{character.heightCm}}cm
+			{{character.heightM}} m {{character.heightCm}} cm
 	</div>
 	<div>
 			<label for="weight">Weight</label>
-			{{character.weight}}kg
+			{{character.weight}} kg
+	</div>
+
+	<div>
+		<label for="description">Description</label>
+		{{character.description}}
 	</div>
 	
 	<h2>Stats</h2>
+	<div>
+			<label for="str">HP</label>
+			{{character.hp}}
+	</div>
 	<div>
 			<label for="str">Strength</label>
 			{{character.str}}
@@ -46,6 +55,76 @@
 	<div>
 			<label for="cha">Charisma</label>
 			{{character.cha}}
+	</div>
+	<div>
+			<label for="hitRoll">Hit Roll</label>
+			{{character.hitRoll}}
+	</div>
+	<h3>Saves</h3>
+	<div>
+			<label for="reflex">Reflex</label>
+			{{character.reflex}}
+	</div>
+	<div>
+			<label for="fortitude">Fortitude</label>
+			{{character.fortitude}}
+	</div>
+	<div>
+			<label for="will">Will</label>
+			{{character.will}}
+	</div>
+	
+	<h2>Magic</h2>
+	<h3>Effortless Spells</h3>
+	<div>
+		<label for="level0">Level 0</label>
+		{{character.level0}}
+	</div>
+	<div>
+		<label for="level1">Level 1</label>
+		{{character.level1}}
+	</div>
+	<div>
+		<label for="level2">Level 2</label>
+		{{character.level2}}
+	</div>
+	<div>
+		<label for="level3">Level 3</label>
+		{{character.level3}}
+	</div>
+	<div>
+		<label for="level4">Level 4</label>
+		{{character.level4}}
+	</div>
+	<div>
+		<label for="level5">Level 5</label>
+		{{character.level6}}
+	</div>
+	<div>
+		<label for="level6">Level 6</label>
+		{{character.level6}}
+	</div>
+	<div>
+		<label for="level7">Level 7</label>
+		{{character.level7}}
+	</div>
+	<div>
+		<label for="level8">Level 8</label>
+		{{character.level8}}
+	</div>
+	<div>
+		<label for="level9">Level 9</label>
+		{{character.level9}}
+	</div>
+	<h3>Spells</h3>
+	<div *ng-for="#spell of character.spells">
+		<label>{{ spell.name }}</label>
+		<br>
+		level: {{spell.level}}
+		<br>
+		Description:
+		<br>
+		{{spell.description}}
 	</div>
 	
 	<h2>Skills</h2>

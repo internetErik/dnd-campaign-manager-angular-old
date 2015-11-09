@@ -23,8 +23,8 @@
 			<input id="race" type="text" ng-control="race">
 	</div>
 	<div>
-			<label for="gender">Gender</label>
-			<input id="gender" type="text" ng-control="gender">
+			<label for="sex">Sex</label>
+			<input id="sex" type="text" ng-control="sex">
 	</div>
 	<div>
 			<label for="height">Height</label>
@@ -35,33 +35,123 @@
 	</div>
 	<div>
 			<label for="weight">Weight</label>
-			<input id="weight" type="number" min="0" value="90" ng-control="weight">kg
+			<input id="weight" type="number" min="0" value="90" ng-control="weight"> kg
+	</div>
+
+	<div>
+		<label for="description">Description</label>
+		<textarea id="description" cols="45" rows="3" ng-control="description"></textarea>
 	</div>
 
 	<h2>Stats</h2>
 	<div>
+			<label for="hp">HP</label>
+			<input id="hp" type="number" min="1" ng-control="hp">
+	</div>
+	<div>
 			<label for="str">Strength</label>
-			<input id="str" type="number" min="0" value="10" ng-control="str">
+			<input id="str" type="number" min="0" ng-control="str">
 	</div>
 	<div>
 			<label for="int">Intelligence</label>
-			<input id="int" type="number" min="0" value="10" ng-control="int">
+			<input id="int" type="number" min="0" ng-control="int">
 	</div>
 	<div>
 			<label for="wis">Wisdom</label>
-			<input id="wis" type="number" min="0" value="10" ng-control="wis">
+			<input id="wis" type="number" min="0" ng-control="wis">
 	</div>
 	<div>
 			<label for="con">Constitution</label>
-			<input id="con" type="number" min="0" value="10" ng-control="con">
+			<input id="con" type="number" min="0" ng-control="con">
 	</div>
 	<div>
 			<label for="dex">Dexterity</label>
-			<input id="dex" type="number" min="0" value="10" ng-control="dex">
+			<input id="dex" type="number" min="0" ng-control="dex">
 	</div>
 	<div>
 			<label for="cha">Charisma</label>
-			<input id="cha" type="number" min="0" value="10" ng-control="cha">
+			<input id="cha" type="number" min="0" ng-control="cha">
+	</div>
+	<div>
+			<label for="hitRoll">Hit Roll</label>
+			<input id="hitRoll" type="number" min="0" ng-control="hitRoll">
+	</div>
+
+	<h3>Saves</h3>
+	<div>
+			<label for="reflex">Reflex</label>
+			<input id="reflex" type="number" min="0" ng-control="reflex">
+	</div>
+	<div>
+			<label for="fortitude">Fortitude</label>
+			<input id="fortitude" type="number" min="0" ng-control="fortitude">
+	</div>
+	<div>
+			<label for="will">Will</label>
+			<input id="will" type="number" min="0" ng-control="will">
+	</div>
+
+	<h2>Magic</h2>
+	<h3>Effortless Spells</h3>
+	<div>
+		<label for="level0">Level 0</label>
+		<input id="level0" type="number" min="0" ng-control="level0">
+	</div>
+	<div>
+		<label for="level1">Level 1</label>
+		<input type="number" id="level1" min="0" ng-control="level1">
+	</div>
+	<div>
+		<label for="level2">Level 2</label>
+		<input type="number" id="level2" min="0" ng-control="level2">
+	</div>
+	<div>
+		<label for="level3">Level 3</label>
+		<input type="number" id="level3" min="0" ng-control="level3">
+	</div>
+	<div>
+		<label for="level4">Level 4</label>
+		<input type="number" id="level4" min="0" ng-control="level4">
+	</div>
+	<div>
+		<label for="level5">Level 5</label>
+		<input type="number" id="level5" min="0" ng-control="level5">
+	</div>
+	<div>
+		<label for="level6">Level 6</label>
+		<input type="number" id="level6" min="0" ng-control="level6">
+	</div>
+	<div>
+		<label for="level7">Level 7</label>
+		<input type="number" id="level7" min="0" ng-control="level7">
+	</div>
+	<div>
+		<label for="level8">Level 8</label>
+		<input type="number" id="level8" min="0" ng-control="level8">
+	</div>
+	<div>
+		<label for="level9">Level 9</label>
+		<input type="number" id="level9" min="0" ng-control="level9">
+	</div>
+
+	<h3>Add Spell</h3>
+	<div>
+		<label for="spellName">Name</label>
+		<input id="spellName" type="text" [(ng-model)]="newSpellName" (keyup.enter)="addSpell($event)">
+		<button (click)="addSpell($event)">+</button>
+	</div>
+
+	<h3>Spells</h3>
+	<div *ng-for="#spell of spells">
+		<label>{{ spell }}</label>
+		<br>
+		<label>Level</label>
+		<input type="number" min="0" id="spellLevel-{{ spell }}" value="0">
+		<br>
+		<label>Description</label> 
+		<br>
+		<textarea id="spellDesc-{{spell}}" cols="45" rows="3"></textarea>
+		<button (click)="removeSpell(spell)">-</button>
 	</div>
 
 	<h2>Skills</h2>
@@ -88,14 +178,14 @@
 	<div *ng-for="#feat of feats">
 		<label>{{ feat }}</label> 
 		<br>
-		<textarea cols="80" rows="3" id="feat-{{ feat }}" value=""></textarea>
+		<textarea cols="45" rows="3" id="feat-{{ feat }}" value=""></textarea>
 		<br>
 		<button (click)="removeFeat(feat)">-</button>
 	</div>
 
 	<h2>Backstory</h2>
 	<div>
-		<textarea id="backstory" cols="80" rows="10" ng-control="backstory"></textarea>
+		<textarea id="backstory" cols="45" rows="10" ng-control="backstory"></textarea>
 	</div>
 	<button>Create Character</button>
 </form>

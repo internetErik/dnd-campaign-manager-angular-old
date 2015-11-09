@@ -19,8 +19,10 @@ export class CharacterForm {
 	characterForm: ControlGroup;
 	router: Router;
 
+	newSpellName: string;
 	newSkillName: string;
 	newFeatName: string;
+	spells: string[];
 	skills: string[];
 	feats: string[];
 
@@ -32,26 +34,58 @@ export class CharacterForm {
 					lastName: [''],
 					title: [''],
 					race: ['', Validators.required],
-					gender: [''],
-					heightM: ['', Validators.required],
-					heightCm: ['', Validators.required],
-					weight: ['', Validators.required],
-					str: ['', Validators.required],
-					int: ['', Validators.required],
-					wis: ['', Validators.required],
-					con: ['', Validators.required],
-					dex: ['', Validators.required],
-					cha: ['', Validators.required],
+					sex: [''],
+					heightM: [1, Validators.required],
+					heightCm: [50, Validators.required],
+					weight: [80, Validators.required],
+					description: [''],
+					hp: [1, Validators.required],
+					str: [10, Validators.required],
+					int: [10, Validators.required],
+					wis: [10, Validators.required],
+					con: [10, Validators.required],
+					dex: [10, Validators.required],
+					cha: [10, Validators.required],
+					hitRoll: [0, Validators.required],
+					reflex: [0, Validators.required],
+					fortitude: [0, Validators.required],
+					will: [0, Validators.required],
+					level0: [0, Validators.required],
+					level1: [0, Validators.required],
+					level2: [0, Validators.required],
+					level3: [0, Validators.required],
+					level4: [0, Validators.required],
+					level5: [0, Validators.required],
+					level6: [0, Validators.required],
+					level7: [0, Validators.required],
+					level8: [0, Validators.required],
+					level9: [0, Validators.required],
 					backstory: ['']
 			});
 
+			this.newSpellName = '';
 			this.newSkillName = '';
 			this.newFeatName = '';
 
+			this.spells = [];
 			this.skills = [];
 			this.feats = [];
 
 			this.router = _router;
+	}
+
+	addSpell(e) {
+			e.preventDefault();
+			if (this.newSpellName && this.spells.indexOf(this.newSpellName) === -1) {
+					this.spells.push(this.newSpellName);
+					this.newSpellName = '';
+			}
+	}
+
+	removeSpell(spell) {
+			var i = this.spells.indexOf(spell);
+			if (i > -1)
+					this.spells.splice(i, 1);
 	}
 
 	addSkill(e) {
@@ -94,17 +128,33 @@ export class CharacterForm {
 		e.preventDefault();
 
 		if(this.characterForm.valid) {
-				let skills = [], feats = [], c, _id;
+				let spells = [],
+						skills = [], 
+						feats = [], 
+						_id, 
+						c;
+
+				//build spell data
+				if (this.spells.length > 0) {
+						spells = this.spells.map((spell) => {
+								var eLev: HTMLInputElement =
+										<HTMLInputElement>document.querySelector('#spellLevel-' + spell);
+								var eDesc: HTMLInputElement =
+										<HTMLInputElement>document.querySelector('#spellDesc-' + spell);
+								return { name: spell, level: eLev.value, description: eDesc.value, tab: 0 };
+						})
+				}
 
 				//build skill data
 				if (this.skills.length > 0) {
 						skills = this.skills.map((skill) => {
-								var ele: HTMLInputElement = 
-									<HTMLInputElement>document.querySelector('#skill-' + skill);
-								return { name: skill, level: ele.value };
+								var ele: HTMLInputElement =
+										<HTMLInputElement>document.querySelector('#skill-' + skill);
+								return { name: skill, level: ele.value, tab: 0 };
 						})
 				}
-				//build skill data
+
+				//build feat data
 				if (this.feats.length > 0) {
 						feats = this.feats.map((feat) => {
 								var ele: HTMLInputElement = 
@@ -119,17 +169,54 @@ export class CharacterForm {
 						lastName: character.lastName,
 						title: character.title,
 						race: character.race,
-						gender: character.gender,
+						sex: character.sex,
 						heightM: character.heightM,
 						heightCm: character.heightCm,
 						weight: character.weight,
+						description: character.description
+						hp: character.hp,
 						str: character.str,
 						int: character.int,
 						wis: character.wis,
 						con: character.con,
 						dex: character.dex,
 						cha: character.cha,
+						willTab: 0,
+						strTab: 0,
+						intTab: 0,
+						wisTab: 0,
+						conTab: 0,
+						dexTab: 0,
+						chaTab: 0,
+						hitRoll: character.hitRoll,
+						hitRollTab: 0,
+						reflex: character.reflex,
+						fortitude: character.fortitude,
+						will: character.will,
+						reflexTab: 0,
+						fortitudeTab: 0,
+						level0: character.level0,
+						level1: character.level1,
+						level2: character.level2,
+						level3: character.level3,
+						level4: character.level4,
+						level5: character.level5,
+						level6: character.level6,
+						level7: character.level7,
+						level8: character.level8,
+						level9: character.level9,
+						level0Tab: 0,
+						level1Tab: 0,
+						level2Tab: 0,
+						level3Tab: 0,
+						level4Tab: 0,
+						level5Tab: 0,
+						level6Tab: 0,
+						level7Tab: 0,
+						level8Tab: 0,
+						level9Tab: 0,
 						backstory: character.backstory,
+						spells: spells,
 						skills: skills,
 						feats: feats
 				};
@@ -137,28 +224,6 @@ export class CharacterForm {
 				_id = Characters.insert(c);
 
 				this.router.parent.navigate(['/CharacterDetail', { characterId: _id }]);
-
-				//reset form
-				// (<any>this.characterForm.controls['firstName']).updateValue('');
-				// (<any>this.characterForm.controls['middleName']).updateValue('');
-				// (<any>this.characterForm.controls['lastName']).updateValue('');
-				// (<any>this.characterForm.controls['title']).updateValue('');
-				// (<any>this.characterForm.controls['race']).updateValue('');
-				// (<any>this.characterForm.controls['gender']).updateValue('');
-				// (<any>this.characterForm.controls['heightM']).updateValue(0);
-				// (<any>this.characterForm.controls['heightCm']).updateValue(0);
-				// (<any>this.characterForm.controls['weight']).updateValue(0);
-				// (<any>this.characterForm.controls['str']).updateValue(0);
-				// (<any>this.characterForm.controls['int']).updateValue(0);
-				// (<any>this.characterForm.controls['wis']).updateValue(0);
-				// (<any>this.characterForm.controls['con']).updateValue(0);
-				// (<any>this.characterForm.controls['dex']).updateValue(0);
-				// (<any>this.characterForm.controls['cha']).updateValue(0);
-				// (<any>this.characterForm.controls['backstory']).updateValue('');
-				// this.skills = [];
-				// this.feats = [];
-				// this.newSkillName = '';
-				// this.newFeatName = '';
 		}
 	}
 }

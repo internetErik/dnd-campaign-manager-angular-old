@@ -1,6 +1,6 @@
 /// <reference path="../../typings/angular2-meteor.d.ts" />
 
-import {Component, View, NgFor} from 'angular2/angular2';
+import {Component, View, NgFor, NgIf} from 'angular2/angular2';
 
 import {RouteParams, Router} from 'angular2/router';
 
@@ -11,7 +11,7 @@ import {Characters} from 'collections/characters';
 })
 @View({
     templateUrl: 'client/character-detail/character-detail.html',
-    directives: [NgFor]
+    directives: [NgFor, NgIf]
 })
 export class CharacterDetail {
     character: Object;
@@ -24,9 +24,19 @@ export class CharacterDetail {
     }
 
     deleteCharacter() {
-			if(confirm(`Are you sure you want to delete ${this.character.firstName} ${this.character.lastName}?`)) {
+			if(confirm(`Are you sure you want to delete this character?`)) {
 				Characters.remove({ _id: this.character._id });
 				this.router.parent.navigate(['/CharacterList']);
 			}
+    }
+
+    incrementTab(tabName) {
+				this.character[tabName] += 1;
+				Characters.update({ _id: this.character._id }, this.character);
+    }
+
+    clearTab(tabName) {
+				this.character[tabName] = 0;
+				Characters.update({ _id: this.character._id }, this.character);
     }
 }

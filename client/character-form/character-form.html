@@ -165,7 +165,15 @@
 
 	<div *ng-for="#skill of skills">
 		<label>{{ skill }}</label>
-		<input type="number" min="0" id="skill-{{ skill }}" value="0">
+		<input type="number" min="0" id="skillLevel-{{ skill }}" value="0">
+		(<select min="0" id="skillStat-{{ skill }}">
+			<option value="str">Str</option>
+			<option value="int">Int</option>
+			<option value="wis">Wis</option>
+			<option value="con">Con</option>
+			<option value="dex">Dex</option>
+			<option value="cha">Cha</option>
+		</select>)
 		<button (click)="removeSkill(skill)">-</button>
 	</div>
 

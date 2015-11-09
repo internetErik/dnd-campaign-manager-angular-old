@@ -10,8 +10,13 @@
 	background-color: white;
 	border: 1px solid black;
 	width: 100%;
+	transition: .5s left ease-in-out;
 }
 
 .hide-dice {
 	left: 90%;
+}
+
+label {
+	color: #666;
 }

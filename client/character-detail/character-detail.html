@@ -1,141 +1,190 @@
 <div>
 	<h2>Character Name</h2>
 	<div>
-		{{character.title}} {{character.firstName}} {{character.middleName}} {{character.lastName}}
+		<h3>{{character.title}} {{character.firstName}} {{character.middleName}} {{character.lastName}}</h3>
 	</div>
 	
 	<h2>Biological Information</h2>
 	<div>
-			<label for="race">Race</label>
+			<label for="race">Race:</label>
 			{{character.race}}
 	</div>
 	<div>
-			<label for="sex">Sex</label>
+			<label for="sex">Sex:</label>
 			{{character.sex}}
 	</div>
 	<div>
-			<label for="height">Height</label>
+			<label for="height">Height:</label>
 			{{character.heightM}} m {{character.heightCm}} cm
 	</div>
 	<div>
-			<label for="weight">Weight</label>
+			<label for="weight">Weight:</label>
 			{{character.weight}} kg
 	</div>
 
 	<div>
-		<label for="description">Description</label>
+		<label for="description">Description:</label>
+		<br>
 		{{character.description}}
 	</div>
 	
 	<h2>Stats</h2>
 	<div>
-			<label for="str">HP</label>
+			<label for="str">HP:</label>
 			{{character.hp}}
 	</div>
 	<div>
-			<label for="str">Strength</label>
+			<label for="str">Strength:</label>
 			{{character.str}}
+			tab: {{character.strTab}} 
+			<button (click)="incrementTab('strTab')">+</button>
+			<button (click)="clearTab('strTab')">&times;</button>
 	</div>
 	<div>
-			<label for="int">Intelligence</label>
+			<label for="int">Intelligence:</label>
 			{{character.int}}
+			tab: {{character.intTab}} 
+			<button (click)="incrementTab('intTab')">+</button>
+			<button (click)="clearTab('intTab')">&times;</button>
 	</div>
 	<div>
-			<label for="wis">Wisdom</label>
+			<label for="wis">Wisdom:</label>
 			{{character.wis}}
+			tab: {{character.wisTab}} 
+			<button (click)="incrementTab('wisTab')">+</button>
+			<button (click)="clearTab('wisTab')">&times;</button>
 	</div>
 	<div>
-			<label for="con">Constitution</label>
+			<label for="con">Constitution:</label>
 			{{character.con}}
+			tab: {{character.conTab}} 
+			<button (click)="incrementTab('conTab')">+</button>
+			<button (click)="clearTab('conTab')">&times;</button>
 	</div>
 	<div>
-			<label for="dex">Dexterity</label>
+			<label for="dex">Dexterity:</label>
 			{{character.dex}}
+			tab: {{character.dexTab}} 
+			<button (click)="incrementTab('dexTab')">+</button>
+			<button (click)="clearTab('dexTab')">&times;</button>
 	</div>
 	<div>
-			<label for="cha">Charisma</label>
+			<label for="cha">Charisma:</label>
 			{{character.cha}}
+			tab: {{character.chaTab}} 
+			<button (click)="incrementTab('chaTab')">+</button>
+			<button (click)="clearTab('chaTab')">&times;</button>
 	</div>
 	<div>
-			<label for="hitRoll">Hit Roll</label>
+			<label for="hitRoll">Hit Roll:</label>
 			{{character.hitRoll}}
 	</div>
 	<h3>Saves</h3>
 	<div>
-			<label for="reflex">Reflex</label>
+			<label for="reflex">Reflex:</label>
 			{{character.reflex}}
 	</div>
 	<div>
-			<label for="fortitude">Fortitude</label>
+			<label for="fortitude">Fortitude:</label>
 			{{character.fortitude}}
 	</div>
 	<div>
-			<label for="will">Will</label>
+			<label for="will">Will:</label>
 			{{character.will}}
 	</div>
 	
 	<h2>Magic</h2>
 	<h3>Effortless Spells</h3>
 	<div>
-		<label for="level0">Level 0</label>
+		<label for="level0">Level 0:</label>
 		{{character.level0}}
+		tab: {{character.level0Tab}} 
+		<button (click)="incrementTab('level0Tab')">+</button>
+		<button (click)="clearTab('level0Tab')">&times;</button>
 	</div>
 	<div>
-		<label for="level1">Level 1</label>
+		<label for="level1">Level 1:</label>
 		{{character.level1}}
+		tab: {{character.level1Tab}} 
+		<button (click)="incrementTab('level1Tab')">+</button>
+		<button (click)="clearTab('level1Tab')">&times;</button>
 	</div>
 	<div>
-		<label for="level2">Level 2</label>
+		<label for="level2">Level 2:</label>
 		{{character.level2}}
+		tab: {{character.level2Tab}} 
+		<button (click)="incrementTab('level2Tab')">+</button>
+		<button (click)="clearTab('level2Tab')">&times;</button>
 	</div>
 	<div>
-		<label for="level3">Level 3</label>
+		<label for="level3">Level 3:</label>
 		{{character.level3}}
+		tab: {{character.level3Tab}} 
+		<button (click)="incrementTab('level3Tab')">+</button>
+		<button (click)="clearTab('level3Tab')">&times;</button>
 	</div>
 	<div>
-		<label for="level4">Level 4</label>
+		<label for="level4">Level 4:</label>
 		{{character.level4}}
+		tab: {{character.level4Tab}} 
+		<button (click)="incrementTab('level4Tab')">+</button>
+		<button (click)="clearTab('level4Tab')">&times;</button>
 	</div>
 	<div>
-		<label for="level5">Level 5</label>
+		<label for="level5">Level 5:</label>
+		{{character.level5}}
+		tab: {{character.level5Tab}} 
+		<button (click)="incrementTab('level5Tab')">+</button>
+		<button (click)="clearTab('level5Tab')">&times;</button>
+	</div>
+	<div>
+		<label for="level6">Level 6:</label>
 		{{character.level6}}
+		tab: {{character.level6Tab}} 
+		<button (click)="incrementTab('level6Tab')">+</button>
+		<button (click)="clearTab('level6Tab')">&times;</button>
 	</div>
 	<div>
-		<label for="level6">Level 6</label>
-		{{character.level6}}
-	</div>
-	<div>
-		<label for="level7">Level 7</label>
+		<label for="level7">Level 7:</label>
 		{{character.level7}}
+		tab: {{character.level7Tab}} 
+		<button (click)="incrementTab('level7Tab')">+</button>
+		<button (click)="clearTab('level7Tab')">&times;</button>
 	</div>
 	<div>
-		<label for="level8">Level 8</label>
+		<label for="level8">Level 8:</label>
 		{{character.level8}}
+		tab: {{character.level8Tab}} 
+		<button (click)="incrementTab('level8Tab')">+</button>
+		<button (click)="clearTab('level8Tab')">&times;</button>
 	</div>
 	<div>
-		<label for="level9">Level 9</label>
+		<label for="level9">Level 9:</label>
 		{{character.level9}}
+		tab: {{character.level9Tab}} 
+		<button (click)="incrementTab('level9Tab')">+</button>
+		<button (click)="clearTab('level9Tab')">&times;</button>
 	</div>
 	<h3>Spells</h3>
 	<div *ng-for="#spell of character.spells">
-		<label>{{ spell.name }}</label>
+		<label>{{ spell.name }}:</label>
 		<br>
-		level: {{spell.level}}
+		<label>level:</label> {{spell.level}}
 		<br>
-		Description:
+		<label>Description:</label>
 		<br>
 		{{spell.description}}
 	</div>
 	
 	<h2>Skills</h2>
 	<div *ng-for="#skill of character.skills">
-		<label>{{ skill.name }}</label>
-		{{skill.level}}
+		<label>{{ skill.name }} ({{skill.stat}}):</label>
+		{{skill.level}} <button (click)="incrementTab(skill.stat+'Tab')">Use</button>
 	</div>
 	
 	<h2>Feats</h2>
 	<div *ng-for="#feat of character.feats">
-		<label>{{ feat.name }}</label> 
+		<label>{{ feat.name }}:</label> 
 		<br>
 		{{feat.description}}
 	</div>

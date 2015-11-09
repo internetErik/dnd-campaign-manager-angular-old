@@ -148,9 +148,11 @@ export class CharacterForm {
 				//build skill data
 				if (this.skills.length > 0) {
 						skills = this.skills.map((skill) => {
-								var ele: HTMLInputElement =
-										<HTMLInputElement>document.querySelector('#skill-' + skill);
-								return { name: skill, level: ele.value, tab: 0 };
+								var eLev: HTMLInputElement =
+										<HTMLInputElement>document.querySelector('#skillLevel-' + skill);
+								var eStat: HTMLInputElement =
+										<HTMLInputElement>document.querySelector('#skillStat-' + skill);
+								return { name: skill, level: eLev.value, stat: eStat.value, tab: 0 };
 						})
 				}
 

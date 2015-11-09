@@ -15,21 +15,25 @@ export class Dice {
 	lastRolls: string[];
 	disabled: boolean;
 
+	//are the dice visible?
+	diceHidden: boolean;
+
 	constructor() {
 			this.currentRoll = '';
 			this.lastRolls = [];
 			this.disabled = false;
+			this.diceHidden = true;
 	}
 
 
 	simpleRoll(sides) {
-			this.addLastRoll(this.currentRoll);
 			this.disabled = true;
 			this.currentRoll = '. . . ROLLING! . . .';
 			setTimeout(() => {
 				let roll = (Math.floor((Math.random() * 100)) % sides) + 1;
 				this.currentRoll = `${roll} (d${sides})`;
 				this.disabled = false;
+				this.addLastRoll(this.currentRoll);
 			}, 250);
 	}
 
@@ -41,8 +45,13 @@ export class Dice {
 		}
 	}
 
-	clearLastRolls() {
+	clearRolls() {
+			this.currentRoll = '';
 			this.lastRolls = [];
+	}
+
+	toggleDice() {
+			this.diceHidden = !this.diceHidden;
 	}
 
 }

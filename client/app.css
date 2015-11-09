@@ -1,0 +1,17 @@
+.ng-invalid {
+	border: 1px solid red;
+}
+
+.dice {
+	position: fixed; 
+	bottom: 0; 
+	left: 0;
+	padding: 20px; 
+	background-color: white;
+	border: 1px solid black;
+	width: 100%;
+}
+
+.hide-dice {
+	left: 90%;
+}

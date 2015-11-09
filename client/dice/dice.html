@@ -1,4 +1,10 @@
-<div style="position: fixed; bottom: 0;">
+<div class="dice" 
+	[class.hide-dice]="diceHidden">
+	<button (click)="toggleDice();">
+		<span *ng-if="diceHidden">Show</span>
+		<span *ng-if="!diceHidden">Hide</span>
+	</button>
+	<button (click)="clearRolls()">Clear</button>
 	<button [disabled]="disabled" (click)="simpleRoll(2)">d2</button>
 	<button [disabled]="disabled" (click)="simpleRoll(4)">d4</button>
 	<button [disabled]="disabled" (click)="simpleRoll(6)">d6</button>
@@ -10,6 +16,6 @@
 	<br>
 	Current Roll: {{currentRoll}}
 	<br>
-	Last 5 Rolls <button (click)="clearLastRolls()">clear</button>: 
-		<span *ng-for="#roll of lastRolls; #last = last">{{roll}}<span *ng-if="!last">,</span> </span>
+	Last 5 Rolls: 
+	<span *ng-for="#roll of lastRolls; #last = last">{{roll}}<span *ng-if="!last">,</span> </span>
 </div>

@@ -1,9 +1,9 @@
 <div>
-	<a [router-link]="['/CharacterForm']">Add A Character</a>
 	<h2>Character List</h2>
 	<div *ng-for="#character of characters">
 		<a [router-link]="['/CharacterDetail', {characterId: character._id}]">
 			{{character.firstName}} {{character.middleName}} {{character.lastName}}
 		</a>
 	</div>
+		<a [router-link]="['/CharacterForm']"><button>+</button></a>
 </div>

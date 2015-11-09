@@ -1,7 +1,7 @@
 <form [ng-form-model]="characterForm" #f="form" (submit)="addCharacter($event, f.value)">
 	<h2>Character Name</h2>
 	<div>
-			<label for="firstName">First Name</label>
+			<label for="firstName">First Name*</label>
 			<input id="firstName" type="text" ng-control="firstName">
 	</div>
 	<div>
@@ -19,7 +19,7 @@
 
 	<h2>Biological Information</h2>
 	<div>
-			<label for="race">Race</label>
+			<label for="race">Race*</label>
 			<input id="race" type="text" ng-control="race">
 	</div>
 	<div>
@@ -27,15 +27,15 @@
 			<input id="sex" type="text" ng-control="sex">
 	</div>
 	<div>
-			<label for="height">Height</label>
-			<input id="height" type="number" min="0" value="1" ng-control="heightM"> 
+			<label for="height">Height*</label>
+			<input id="height" type="number" min="0" ng-control="heightM"> 
 			m
-			<input type="number" min="0" value="90" ng-control="heightCm"> 
+			<input type="number" min="0" max="99" ng-control="heightCm"> 
 			cm
 	</div>
 	<div>
-			<label for="weight">Weight</label>
-			<input id="weight" type="number" min="0" value="90" ng-control="weight"> kg
+			<label for="weight">Weight*</label>
+			<input id="weight" type="number" min="0" ng-control="weight"> kg
 	</div>
 
 	<div>
@@ -46,92 +46,92 @@
 
 	<h2>Stats</h2>
 	<div>
-			<label for="hp">HP</label>
+			<label for="hp">HP*</label>
 			<input id="hp" type="number" min="1" ng-control="hp">
 	</div>
 	<div>
-			<label for="str">Strength</label>
+			<label for="str">Strength*</label>
 			<input id="str" type="number" min="0" ng-control="str">
 	</div>
 	<div>
-			<label for="int">Intelligence</label>
+			<label for="int">Intelligence*</label>
 			<input id="int" type="number" min="0" ng-control="int">
 	</div>
 	<div>
-			<label for="wis">Wisdom</label>
+			<label for="wis">Wisdom*</label>
 			<input id="wis" type="number" min="0" ng-control="wis">
 	</div>
 	<div>
-			<label for="con">Constitution</label>
+			<label for="con">Constitution*</label>
 			<input id="con" type="number" min="0" ng-control="con">
 	</div>
 	<div>
-			<label for="dex">Dexterity</label>
+			<label for="dex">Dexterity*</label>
 			<input id="dex" type="number" min="0" ng-control="dex">
 	</div>
 	<div>
-			<label for="cha">Charisma</label>
+			<label for="cha">Charisma*</label>
 			<input id="cha" type="number" min="0" ng-control="cha">
 	</div>
 	<div>
-			<label for="hitRoll">Hit Roll</label>
+			<label for="hitRoll">Hit Roll*</label>
 			<input id="hitRoll" type="number" min="0" ng-control="hitRoll">
 	</div>
 
 	<h3>Saves</h3>
 	<div>
-			<label for="reflex">Reflex</label>
+			<label for="reflex">Reflex*</label>
 			<input id="reflex" type="number" min="0" ng-control="reflex">
 	</div>
 	<div>
-			<label for="fortitude">Fortitude</label>
+			<label for="fortitude">Fortitude*</label>
 			<input id="fortitude" type="number" min="0" ng-control="fortitude">
 	</div>
 	<div>
-			<label for="will">Will</label>
+			<label for="will">Will*</label>
 			<input id="will" type="number" min="0" ng-control="will">
 	</div>
 
 	<h2>Magic</h2>
 	<h3>Effortless Spells</h3>
 	<div>
-		<label for="level0">Level 0</label>
+		<label for="level0">Level 0*</label>
 		<input id="level0" type="number" min="0" ng-control="level0">
 	</div>
 	<div>
-		<label for="level1">Level 1</label>
+		<label for="level1">Level 1*</label>
 		<input type="number" id="level1" min="0" ng-control="level1">
 	</div>
 	<div>
-		<label for="level2">Level 2</label>
+		<label for="level2">Level 2*</label>
 		<input type="number" id="level2" min="0" ng-control="level2">
 	</div>
 	<div>
-		<label for="level3">Level 3</label>
+		<label for="level3">Level 3*</label>
 		<input type="number" id="level3" min="0" ng-control="level3">
 	</div>
 	<div>
-		<label for="level4">Level 4</label>
+		<label for="level4">Level 4*</label>
 		<input type="number" id="level4" min="0" ng-control="level4">
 	</div>
 	<div>
-		<label for="level5">Level 5</label>
+		<label for="level5">Level 5*</label>
 		<input type="number" id="level5" min="0" ng-control="level5">
 	</div>
 	<div>
-		<label for="level6">Level 6</label>
+		<label for="level6">Level 6*</label>
 		<input type="number" id="level6" min="0" ng-control="level6">
 	</div>
 	<div>
-		<label for="level7">Level 7</label>
+		<label for="level7">Level 7*</label>
 		<input type="number" id="level7" min="0" ng-control="level7">
 	</div>
 	<div>
-		<label for="level8">Level 8</label>
+		<label for="level8">Level 8*</label>
 		<input type="number" id="level8" min="0" ng-control="level8">
 	</div>
 	<div>
-		<label for="level9">Level 9</label>
+		<label for="level9">Level 9*</label>
 		<input type="number" id="level9" min="0" ng-control="level9">
 	</div>
 

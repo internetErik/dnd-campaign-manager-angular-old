@@ -127,11 +127,11 @@ export class CharacterForm {
 	addCharacter(e, character: any) {
 		e.preventDefault();
 
-		if(this.characterForm.valid) {
+		if (this.characterForm.valid) {
 				let spells = [],
-						skills = [], 
-						feats = [], 
-						_id, 
+						skills = [],
+						feats = [],
+						_id,
 						c;
 
 				//build spell data
@@ -157,8 +157,8 @@ export class CharacterForm {
 				//build feat data
 				if (this.feats.length > 0) {
 						feats = this.feats.map((feat) => {
-								var ele: HTMLInputElement = 
-									<HTMLInputElement>document.querySelector('#feat-' + feat);
+								var ele: HTMLInputElement =
+										<HTMLInputElement>document.querySelector('#feat-' + feat);
 								return { name: feat, description: ele.value };
 						});
 				}
@@ -173,7 +173,7 @@ export class CharacterForm {
 						heightM: character.heightM,
 						heightCm: character.heightCm,
 						weight: character.weight,
-						description: character.description
+						description: character.description,
 						hp: character.hp,
 						str: character.str,
 						int: character.int,
@@ -225,5 +225,7 @@ export class CharacterForm {
 
 				this.router.parent.navigate(['/CharacterDetail', { characterId: _id }]);
 		}
+		else
+				console.log("form not valid");
 	}
 }

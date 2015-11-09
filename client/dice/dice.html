@@ -1,0 +1,15 @@
+<div style="position: fixed; bottom: 0;">
+	<button [disabled]="disabled" (click)="simpleRoll(2)">d2</button>
+	<button [disabled]="disabled" (click)="simpleRoll(4)">d4</button>
+	<button [disabled]="disabled" (click)="simpleRoll(6)">d6</button>
+	<button [disabled]="disabled" (click)="simpleRoll(8)">d8</button>
+	<button [disabled]="disabled" (click)="simpleRoll(10)">d10</button>
+	<button [disabled]="disabled" (click)="simpleRoll(12)">d12</button>
+	<button [disabled]="disabled" (click)="simpleRoll(20)">d20</button>
+	<button [disabled]="disabled" (click)="simpleRoll(100)">d100</button>
+	<br>
+	Current Roll: {{currentRoll}}
+	<br>
+	Last 5 Rolls <button (click)="clearLastRolls()">clear</button>: 
+		<span *ng-for="#roll of lastRolls; #last = last">{{roll}}<span *ng-if="!last">,</span> </span>
+</div>

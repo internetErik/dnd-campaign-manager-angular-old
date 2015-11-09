@@ -14,6 +14,8 @@ import {CharacterForm} from 'client/character-form/character-form';
 
 import {CharacterDetail} from 'client/character-detail/character-detail';
 
+import {Dice} from 'client/dice/dice';
+
 import {ROUTER_PROVIDERS, ROUTER_DIRECTIVES, RouteConfig, APP_BASE_HREF} from 'angular2/router';
 
 
@@ -27,8 +29,9 @@ import {ROUTER_PROVIDERS, ROUTER_DIRECTIVES, RouteConfig, APP_BASE_HREF} from 'a
 			<a [router-link]="['/CharacterList']">Characters</a>
 		</nav>
 		<router-outlet></router-outlet>
+		<dice></dice>
 		`,
-		directives: [ROUTER_DIRECTIVES]
+		directives: [ROUTER_DIRECTIVES, Dice]
 })
 @RouteConfig([
 		{

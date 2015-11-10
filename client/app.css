@@ -17,6 +17,10 @@
 	left: 90%;
 }
 
+.critical-roll {
+	color: red;
+}
+
 label {
 	color: #666;
 	width: 100px;

@@ -27,13 +27,17 @@ export class Dice {
 	}
 
 	simpleRoll(sides) {
+			var bonusInput: HTMLInputElement =
+										<HTMLInputElement>document.querySelector('.js-bonus-to-roll');
+			var bonus: number = parseInt(bonusInput.value) || 0;
 			this.disabled = true;
 			this.currentRoll = '. . . ROLLING! . . .';
 			setTimeout(() => {
 				let result = (Math.floor((Math.random() * 100)) % sides) + 1;
-				this.currentRoll = `${result} (d${sides})`;
+				console.log(bonus);
+				this.currentRoll = `${result + bonus} (d${sides} + ${bonus})`;
 				this.disabled = false;
-				this.insertRoll(result, sides);
+				this.insertRoll(result, sides, bonus);
 			}, 250);
 	}
 
@@ -46,8 +50,8 @@ export class Dice {
 			this.diceHidden = !this.diceHidden;
 	}
 
-	insertRoll(result, sides) {
-			Rolls.insert({ result: result, createdAt: Date.now(), sides: sides });
+	insertRoll(result, sides, bonus) {
+			Rolls.insert({ result: result, createdAt: Date.now(), sides: sides, bonus: bonus, critical: result === sides });
 	}
 
 }

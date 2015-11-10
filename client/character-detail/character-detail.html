@@ -1,5 +1,5 @@
 <div>
-	<button (click)="saveCharacter($event)">Save</button>
+	<button (click)="saveCharacter($event)">Save</button> {{saveMessage}}
 	<h2>Character Name</h2>
 	<div>
 		<h3>
@@ -313,7 +313,7 @@
 	<div class="p10-0">
 		<textarea cols="45" rows="10" [(ng-model)]="character.backstory"></textarea>
 	</div>
-	<button (click)="saveCharacter($event)">Save</button>
+	<button (click)="saveCharacter($event)">Save</button> {{saveMessage}}
 	<br> <br> <br>
 	<button (click)="deleteCharacter($event)">Delete</button>
 </div>

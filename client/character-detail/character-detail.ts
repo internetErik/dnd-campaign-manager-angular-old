@@ -31,6 +31,8 @@ export class CharacterDetail {
 		newFeatName: string;
 		newFeatDesc: string;
 
+		saveMessage: string;
+
 		constructor(_router: Router, params: RouteParams) {
         var characterId = params.get('characterId');
         this.character = Characters.findOne({ _id: characterId });
@@ -46,6 +48,8 @@ export class CharacterDetail {
 				this.newSkillLevel = 0;
 
 				this.newFeatName = '';
+
+				this.saveMessage = '';
     }
 
     deleteCharacter(e) {
@@ -125,6 +129,12 @@ export class CharacterDetail {
 		}
 
 		updateCharacter() {
-				Characters.update({ _id: this.character._id }, this.character);
+				var save = Characters.update({ _id: this.character._id }, this.character);
+				
+				if (save) {
+						this.saveMessage = 'saved successfully . . .';
+						setTimeout(() => { this.saveMessage = '' }, 500);
+				}
+
 		}
 }

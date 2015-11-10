@@ -29,7 +29,6 @@ export class ContentCreator {
 
 		newSkillName: string;
 		newSkillStat: string;
-		newSkillLevel: number;
 
 		newFeatName: string;
 		newFeatDesc: string;
@@ -63,12 +62,11 @@ export class ContentCreator {
 		addSkill(e: Event) {
 				e.preventDefault();
 				if (this.newSkillName && !Skills.findOne({ name: this.newSkillName })) {
-						if (this.newSkillLevel && this.newSkillStat) {
-								let skill = { name: this.newSkillName, level: this.newSkillLevel, stat: this.newSkillStat };
+						if (this.newSkillStat) {
+								let skill = { name: this.newSkillName, stat: this.newSkillStat };
 								Skills.insert(skill);
 								this.newSkillName = '';
 								this.newSkillStat = '';
-								this.newSkillLevel = 0;
 						}
 				}
 		}

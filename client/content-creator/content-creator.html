@@ -33,9 +33,7 @@
 	
 	<h2>Skills</h2>
 	<div *ng-for="#skill of skills;#i = index" [class.pt15]="i !== 0">
-		<label>{{ skill.name }} ({{skill.stat}}):</label>
-		<input type="number" value="{{skill.level}}">
-		<button (click)="incrementTab(skill.stat+'Tab')">Use</button>
+		{{ skill.name }} ({{skill.stat}})
 		<button (click)="removeSkill($event, skill)">-</button>
 	</div>
 	<h3>Add Skill</h3>
@@ -50,8 +48,6 @@
 			<option value="dex">Dex</option>
 			<option value="cha">Cha</option>
 		</select>)
-		<label for="skillLevel">Level</label>
-		<input type="number" min="0" [(ng-model)]="newSkillLevel">
 		<button (click)="addSkill($event)">+</button>
 	</div>
 	

@@ -16,6 +16,8 @@ import {CharacterDetail} from 'client/character-detail/character-detail';
 
 import {CombatDisplay} from 'client/combat-display/combat-display';
 
+import {ContentCreator} from 'client/content-creator/content-creator';
+
 import {DiceHelper} from 'client/dice-helper/dice-helper';
 
 import {Login} from 'client/login/login';
@@ -31,7 +33,8 @@ import {ROUTER_PROVIDERS, ROUTER_DIRECTIVES, RouteConfig, APP_BASE_HREF} from 'a
 		<nav>
 			<a [router-link]="['/HomePage']">Home</a> |
 			<a [router-link]="['/CharacterList']">Characters</a> |
-			<a [router-link]="['/CombatDisplay']">Combat Display</a>
+			<a [router-link]="['/CombatDisplay']">Combat Display</a> |
+			<a [router-link]="['/ContentCreator']">Content Creator</a>
 		</nav>
 		<router-outlet></router-outlet>
 		<dice-helper></dice-helper>
@@ -64,9 +67,14 @@ import {ROUTER_PROVIDERS, ROUTER_DIRECTIVES, RouteConfig, APP_BASE_HREF} from 'a
     	component: CharacterDetail 
     },
     {
-    	path: '/combat',
-			as: 'CombatDisplay',
-    	component: CombatDisplay
+				path: '/combat',
+				as: 'CombatDisplay',
+				component: CombatDisplay
+    }
+    {
+				path: '/create',
+				as: 'ContentCreator',
+				component: ContentCreator
     }
 ])
 class App { }

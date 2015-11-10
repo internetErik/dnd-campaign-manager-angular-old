@@ -16,9 +16,16 @@
 	Bonus: <input type="number" class="js-bonus-to-roll" value="0" >
 	<br>
 	Current Roll: {{currentRoll}} 
-	<br>
-	Last 5 Rolls: 
-	<span *ng-for="#roll of lastRolls; #last = last" [class.critical-roll]="roll.critical">
-		{{roll.result + roll.bonus}} (d{{roll.sides}} + {{roll.bonus}})<span *ng-if="!last">,</span> 
-	</span>
+	<div *ng-if="rollPublic">
+		Last 5 Rolls: 
+		<span *ng-for="#roll of lastRolls; #last = last" [class.critical-roll]="roll.critical">
+			{{roll.result + roll.bonus}} (d{{roll.sides}} + {{roll.bonus}})<span *ng-if="!last">,</span> 
+		</span>
+	</div>
+	<div>
+		<button (click)="togglePublic()">
+			<span *ng-if="rollPublic">Public</span>
+			<span *ng-if="!rollPublic">Private</span>
+		</button>
+	</div>
 </div>

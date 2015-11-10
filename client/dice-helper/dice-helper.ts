@@ -16,7 +16,12 @@ import {Rolls} from 'collections/rolls';
 export class DiceHelper {
 		currentRoll: string;
 		lastRolls: any;
+		
+		//are the buttons disabled because we are rolling?
 		disabled: boolean;
+
+		//should these rolls be public or private?
+		rollPublic: boolean;
 
 		//are the dice visible?
 		diceHidden: boolean;
@@ -24,6 +29,7 @@ export class DiceHelper {
 		constructor() {
 				this.currentRoll = '';
 				this.lastRolls = Rolls.find({}, { sort: { createdAt: -1 }, limit: 5 });
+				this.rollPublic = true;
 				this.disabled = false;
 				this.diceHidden = true;
 		}
@@ -38,7 +44,8 @@ export class DiceHelper {
 						let result = simpleRoll(sides);
 						this.currentRoll = `${result + bonus} (d${sides} + ${bonus})`;
 						this.disabled = false;
-						this.insertRoll(result, sides, bonus);
+						if(this.rollPublic)
+							this.insertRoll(result, sides, bonus);
 				}, 250);
 		}
 
@@ -53,6 +60,11 @@ export class DiceHelper {
 
 		insertRoll(result, sides, bonus) {
 				Rolls.insert({ result: result, createdAt: Date.now(), sides: sides, bonus: bonus, critical: result === sides });
+		}
+
+		togglePublic() {
+				console.log("hello world");
+				this.rollPublic = !this.rollPublic;
 		}
 
 }

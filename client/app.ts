@@ -29,7 +29,7 @@ import {ROUTER_PROVIDERS, ROUTER_DIRECTIVES, RouteConfig, APP_BASE_HREF} from 'a
 @View({
 		template: `
 		<nav>
-			<a href="/">Home</a> |
+			<a [router-link]="['/HomePage']">Home</a> |
 			<a [router-link]="['/CharacterList']">Characters</a> |
 			<a [router-link]="['/CombatDisplay']">Combat Display</a>
 		</nav>
@@ -41,6 +41,10 @@ import {ROUTER_PROVIDERS, ROUTER_DIRECTIVES, RouteConfig, APP_BASE_HREF} from 'a
 @RouteConfig([
 		{
 			path: '/',
+			redirectTo: '/HomePage'
+		},
+		{
+			path: '/home',
 			as: 'HomePage',
 			component: HomePage
 		},

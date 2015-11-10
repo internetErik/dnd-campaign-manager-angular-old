@@ -1,0 +1,21 @@
+<div>
+	<h2>Players</h2>
+	<div>
+		<input type="text" class="js-character"><button (click)="addCharacter()">+</button>
+
+		<div *ng-for="#character of characters">
+		{{character.name}} initiative: {{character.initiative}} <button (click)="removeCharacter(character)">-</button>
+		</div>
+	</div>
+	<h2>Enemies</h2>
+	<div>
+		<input type="text" class="js-enemy"><button (click)="addEnemy()">+</button>
+
+		
+		<div *ng-for="#enemy of enemies">
+		{{enemy.name}} initiative: {{enemy.initiative}} <button (click)="removeEnemy(enemy)">-</button>
+		</div>
+
+		
+	</div>
+</div>

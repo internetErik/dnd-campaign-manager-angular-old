@@ -1,7 +1,77 @@
 <div>
+<h1>Content Creator</h1>
 	<h2>Spells</h2>
-
+	<div *ng-for="#spell of spells;#i = index" [class.pt30]="i !== 0">
+		<h4>{{ spell.name }}:</h4>
+		<label>Level:</label> {{spell.level}}
+		<br>
+		<label>Domain:</label> {{spell.domain}}
+		<br>
+		<label>Description:</label>
+		<br>
+		{{spell.description}}
+		<br>
+		<button (click)="removeSpell($event, spell);">-</button>
+	</div>
+	<h3>Add Spell</h3>
+	<div class="p10-0">
+		<label for="spellName">Name</label>
+		<input id="spellName" type="text" [(ng-model)]="newSpellName">
+		<br>
+		<label>Level</label>
+		<input type="number" min="0" [(ng-model)]="newSpellLevel">
+		<br>
+		<label>Domain</label>
+		<input type="text" [(ng-model)]="newSpellDomain">
+		<br>
+		<label>Description</label> 
+		<br>
+		<textarea [(ng-model)]="newSpellDescription" cols="45" rows="3"></textarea>
+		<br>
+		<button (click)="addSpell($event)">+</button>
+	</div>
+	
 	<h2>Skills</h2>
-
+	<div *ng-for="#skill of skills;#i = index" [class.pt15]="i !== 0">
+		<label>{{ skill.name }} ({{skill.stat}}):</label>
+		<input type="number" value="{{skill.level}}">
+		<button (click)="incrementTab(skill.stat+'Tab')">Use</button>
+		<button (click)="removeSkill($event, skill)">-</button>
+	</div>
+	<h3>Add Skill</h3>
+	<div class="p10-0">
+		<label for="skillName">Name</label>
+		<input id="skillName" type="text" [(ng-model)]="newSkillName">
+		(<select min="0" [(ng-model)]="newSkillStat">
+			<option value="str">Str</option>
+			<option value="int">Int</option>
+			<option value="wis">Wis</option>
+			<option value="con">Con</option>
+			<option value="dex">Dex</option>
+			<option value="cha">Cha</option>
+		</select>)
+		<label for="skillLevel">Level</label>
+		<input type="number" min="0" [(ng-model)]="newSkillLevel">
+		<button (click)="addSkill($event)">+</button>
+	</div>
+	
 	<h2>Feats</h2>
+	<div *ng-for="#feat of feats;#i = index" [class.pt30]="i !== 0">
+		<label>{{ feat.name }}:</label> 
+		<br>
+		{{feat.description}}
+		<br>
+		<button (click)="removeFeat($event, feat)">-</button>
+	</div>
+	<h3>Add Feat</h3>
+	<div class="p10-0">
+		<label for="featName">Name</label>
+		<input id="featName" type="text" [(ng-model)]="newFeatName">
+		<br>
+		<label for="featDesc">Description</label> 
+		<br>
+		<textarea cols="45" rows="3" id="featDesc" [(ng-model)]="newFeatDesc"></textarea>
+		<br>
+		<button (click)="addFeat($event)">+</button>
+	</div>
 </div>

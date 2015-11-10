@@ -19,9 +19,23 @@
 
 label {
 	color: #666;
+	width: 100px;
+	display: inline-block;
 }
 
 .login-form {
 	position: absolute;
 	right: 0;
+}
+
+.p10-0 {
+	padding: 10px 0;
+}
+
+.pt15 {
+	padding-top: 15px;
+}
+
+.pt30 {
+	padding-top: 30px;
 }

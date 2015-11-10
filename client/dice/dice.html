@@ -14,8 +14,10 @@
 	<button [disabled]="disabled" (click)="simpleRoll(20)">d20</button>
 	<button [disabled]="disabled" (click)="simpleRoll(100)">d100</button>
 	<br>
-	Current Roll: {{currentRoll}}
+	Current Roll: {{currentRoll}} 
 	<br>
 	Last 5 Rolls: 
-	<span *ng-for="#roll of lastRolls; #last = last">{{roll}}<span *ng-if="!last">,</span> </span>
+	<span *ng-for="#roll of lastRolls; #last = last">
+		{{roll.result}} (d{{roll.sides}})<span *ng-if="!last">,</span> 
+	</span>
 </div>

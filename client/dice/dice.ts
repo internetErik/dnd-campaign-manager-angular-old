@@ -2,6 +2,7 @@
 
 import {Component, View, NgFor, NgIf} from 'angular2/angular2';
 
+import {Rolls} from 'collections/rolls';
 
 @Component({
     selector: 'dice'
@@ -12,7 +13,7 @@ import {Component, View, NgFor, NgIf} from 'angular2/angular2';
 })
 export class Dice {
 	currentRoll: string;
-	lastRolls: string[];
+	lastRolls: any;
 	disabled: boolean;
 
 	//are the dice visible?
@@ -20,38 +21,33 @@ export class Dice {
 
 	constructor() {
 			this.currentRoll = '';
-			this.lastRolls = [];
+			this.lastRolls = Rolls.find({}, {sort: { createdAt: -1 }, limit: 5 });
 			this.disabled = false;
 			this.diceHidden = true;
 	}
-
 
 	simpleRoll(sides) {
 			this.disabled = true;
 			this.currentRoll = '. . . ROLLING! . . .';
 			setTimeout(() => {
-				let roll = (Math.floor((Math.random() * 100)) % sides) + 1;
-				this.currentRoll = `${roll} (d${sides})`;
+				let result = (Math.floor((Math.random() * 100)) % sides) + 1;
+				this.currentRoll = `${result} (d${sides})`;
 				this.disabled = false;
-				this.addLastRoll(this.currentRoll);
+				this.insertRoll(result, sides);
 			}, 250);
-	}
-
-	addLastRoll(roll) {
-		if(roll) {
-			this.lastRolls.push(roll);
-			if (this.lastRolls.length > 5)
-					this.lastRolls.shift();
-		}
 	}
 
 	clearRolls() {
 			this.currentRoll = '';
-			this.lastRolls = [];
+			Meteor.call('clearRolls');
 	}
 
 	toggleDice() {
 			this.diceHidden = !this.diceHidden;
+	}
+
+	insertRoll(result, sides) {
+			Rolls.insert({ result: result, createdAt: Date.now(), sides: sides });
 	}
 
 }

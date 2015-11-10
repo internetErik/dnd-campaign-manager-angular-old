@@ -1,6 +1,8 @@
 /// <reference path="../../typings/angular2-meteor.d.ts" />
 
-import {Component, View, NgFor, NgIf, FORM_DIRECTIVES} from 'angular2/angular2';
+import {Component, View, NgFor, NgIf} from 'angular2/angular2';
+
+import {FORM_DIRECTIVES, FormBuilder, Control, ControlGroup, Validators} from 'angular2/angular2';
 
 import {RouteParams, Router} from 'angular2/router';
 
@@ -46,7 +48,8 @@ export class CharacterDetail {
 				this.newFeatName = '';
     }
 
-    deleteCharacter() {
+    deleteCharacter(e) {
+			e.preventDefault();
 			if(confirm(`Are you sure you want to delete this character?`)) {
 				Characters.remove({ _id: this.character._id });
 				this.router.parent.navigate(['/CharacterList']);
@@ -78,6 +81,10 @@ export class CharacterDetail {
 				}
 		}
 
+		removeSpell(e, spell) {
+
+		}
+
 		addSkill(e) {
 				e.preventDefault();
 				if (this.newSkillName && this.character.skills.indexOf(this.newSkillName) === -1) {
@@ -92,6 +99,10 @@ export class CharacterDetail {
 				}
 		}
 
+		removeSkill(e, skill) {
+
+		}
+
 		addFeat(e) {
 				e.preventDefault();
 				if (this.newFeatName && this.character.feats.indexOf(this.newFeatName) === -1) {
@@ -102,6 +113,15 @@ export class CharacterDetail {
 						this.updateCharacter();
 					}
 				}
+		}
+
+		removeFeat(e, feat) {
+
+		}
+
+		saveCharacter(e) {
+				e.preventDefault();
+				this.updateCharacter();
 		}
 
 		updateCharacter() {

@@ -30,7 +30,7 @@ import {ROUTER_PROVIDERS, ROUTER_DIRECTIVES, RouteConfig, APP_BASE_HREF} from 'a
 		template: `
 		<nav>
 			<a href="/">Home</a> |
-			<a [router-link]="['/CharacterList']">Characters</a>
+			<a [router-link]="['/CharacterList']">Characters</a> |
 			<a [router-link]="['/CombatDisplay']">Combat Display</a>
 		</nav>
 		<router-outlet></router-outlet>

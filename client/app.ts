@@ -16,7 +16,7 @@ import {CharacterDetail} from 'client/character-detail/character-detail';
 
 import {CombatDisplay} from 'client/combat-display/combat-display';
 
-import {Dice} from 'client/dice/dice';
+import {DiceHelper} from 'client/dice-helper/dice-helper';
 
 import {Login} from 'client/login/login';
 
@@ -34,9 +34,9 @@ import {ROUTER_PROVIDERS, ROUTER_DIRECTIVES, RouteConfig, APP_BASE_HREF} from 'a
 			<a [router-link]="['/CombatDisplay']">Combat Display</a>
 		</nav>
 		<router-outlet></router-outlet>
-		<dice></dice>
+		<dice-helper></dice-helper>
 		`,
-		directives: [ROUTER_DIRECTIVES, Dice, Login]
+		directives: [ROUTER_DIRECTIVES, DiceHelper, Login]
 })
 @RouteConfig([
 		{

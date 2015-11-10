@@ -43,3 +43,7 @@ label {
 .pt30 {
 	padding-top: 30px;
 }
+
+.enemy {
+	color: red;
+}

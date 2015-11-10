@@ -2,17 +2,14 @@
 
 import {Component, View, NgFor} from 'angular2/angular2';
 
-import {Router} from 'angular2/router';
+import {simpleRoll} from 'lib/dice';
 
-import {Characters} from 'collections/characters';
-
-import {FORM_DIRECTIVES, FormBuilder, Control, ControlGroup, Validators} from 'angular2/angular2';
 @Component({
 	selector: 'combat-display'
 })
 @View({
 	templateUrl: 'client/combat-display/combat-display.html',
-	directives: [FORM_DIRECTIVES, NgFor]
+	directives: [NgFor]
 })
 export class CombatDisplay {
 
@@ -24,31 +21,33 @@ export class CombatDisplay {
 				this.enemies = [];
 		}
 
-		addCharacter() {
-			var ele: HTMLInputElement =
-				<HTMLInputElement>document.querySelector('.js-character');
-			var val = ele.value;
-			if(val)
-					this.characters.push({ name: val });
+		rollInitiative() {
+			this.characters = this.characters
+					.map((c) => { 
+							c.initiative = simpleRoll(100);
+							return c; 
+					})
+			.sort((a:any, b:any) => {
+					if (a.initiative > b.initiative)
+							return -1;
+					else if (a.initiative < b.initiative)
+							return 1;
+					else
+							return 0;
+			});
 		}
 
-		removeCharacter(character) {
+		add(type) {
+			var ele: HTMLInputElement =
+				<HTMLInputElement>document.querySelector('.js-' + type);
+			var val = ele.value;
+			if(val)
+					this.characters.push({ name: val, initiative: 0, type: type });
+		}
+
+		remove(character) {
 				var i = this.characters.indexOf(character);
 				if(i > -1)
 					this.characters.splice(i, 1);
-		}
-
-		addEnemy() { 
-			var ele: HTMLInputElement =
-					<HTMLInputElement>document.querySelector('.js-enemy');
-			var val = ele.value;
-			if (val)
-					this.enemies.push({ name: val });
-		}
-
-		removeEnemy(enemy) {
-				var i = this.enemies.indexOf(enemy);
-				if (i > -1)
-				this.enemies.splice(i, 1);
 		}
 }

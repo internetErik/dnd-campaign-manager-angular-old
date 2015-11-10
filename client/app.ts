@@ -70,7 +70,7 @@ import {ROUTER_PROVIDERS, ROUTER_DIRECTIVES, RouteConfig, APP_BASE_HREF} from 'a
 				path: '/combat',
 				as: 'CombatDisplay',
 				component: CombatDisplay
-    }
+    },
     {
 				path: '/create',
 				as: 'ContentCreator',

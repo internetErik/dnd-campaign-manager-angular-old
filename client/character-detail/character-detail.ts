@@ -86,7 +86,12 @@ export class CharacterDetail {
 		}
 
 		removeSpell(e, spell) {
-
+			e.preventDefault();
+			var i = this.character.spells.indexOf(spell);
+			if (i > -1) {
+					this.character.spells.splice(i, 1);
+					this.updateCharacter();
+			}
 		}
 
 		addSkill(e) {
@@ -104,7 +109,12 @@ export class CharacterDetail {
 		}
 
 		removeSkill(e, skill) {
-
+				e.preventDefault()
+				var i = this.character.skills.indexOf(skill);
+				if (i > -1) {
+					this.character.skills.splice(i, 1);
+					this.updateCharacter();
+				}
 		}
 
 		addFeat(e) {
@@ -120,7 +130,12 @@ export class CharacterDetail {
 		}
 
 		removeFeat(e, feat) {
-
+			e.preventDefault();
+			var i = this.character.feats.indexOf(feat);
+			if (i > -1) {
+				this.character.feats.splice(i, 1);
+				this.updateCharacter();
+			}
 		}
 
 		saveCharacter(e) {

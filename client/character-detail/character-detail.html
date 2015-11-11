@@ -45,26 +45,22 @@
 	<div class="p10-0">
 		<label for="description">Description:</label>
 		<br>
-		{{character.description}}
+		<textarea id="description" cols="45" rows="10" [(ng-model)]="character.description"></textarea>
 	</div>
 
 	<h2>Equipment</h2>
 	<div class="p10-0">
-		<label for="gold">Bronze:</label>
-		<input type="number" min="0" [(ng-model)]="character.bronze">
-	</div>
-	<div class="p10-0">
-		<label for="gold">Silver:</label>
-		<input type="number" min="0" [(ng-model)]="character.silver">
-	</div>
-	<div class="p10-0">
-		<label for="gold">Gold:</label>
-		<input type="number" min="0" [(ng-model)]="character.gold">
-	</div>
-	<div class="p10-0">
 		<label for="inventory">Inventory:</label>
 		<br>
 		<textarea id="inventory" cols="45" rows="10" [(ng-model)]="character.inventory"></textarea>
+	</div>
+	<div class="p10-0">
+		<label for="gold">Bronze:</label>
+		<input type="number" min="0" [(ng-model)]="character.bronze">
+		<label for="gold">Silver:</label>
+		<input type="number" min="0" [(ng-model)]="character.silver">
+		<label for="gold">Gold:</label>
+		<input type="number" min="0" [(ng-model)]="character.gold">
 	</div>
 	
 	<h2>Stats</h2>

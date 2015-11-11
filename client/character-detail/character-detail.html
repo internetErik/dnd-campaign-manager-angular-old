@@ -291,6 +291,78 @@
 		<button (click)="clearTab('level9Tab')">&times;</button>
 	</div>
 
+	<h3>Spell Fail Rate</h3>
+	<div class="p10-0">
+		<label for="level0">Level 0:</label>
+		{{character.level0Fail - character.level0FailBonus}}%
+		<br>
+		Base: <input type="number" [(ng-model)]="character.level0Fail" min="0" max="100">%
+		Bonus: <input type="number" [(ng-model)]="character.level0FailBonus" min="0" max="100">%
+	</div>
+	<div class="p10-0">
+		<label for="level0">Level 1:</label>
+		{{character.level1Fail - character.level1FailBonus}}%
+		<br>
+		Base: <input type="number" [(ng-model)]="character.level1Fail" min="0" max="100">%
+		Bonus: <input type="number" [(ng-model)]="character.level1FailBonus" min="0" max="100">%
+	</div>
+	<div class="p10-0">
+		<label for="level0">Level 2:</label>
+		{{character.level2Fail - character.level2FailBonus}}%
+		<br>
+		Base: <input type="number" [(ng-model)]="character.level2Fail" min="0" max="100">%
+		Bonus: <input type="number" [(ng-model)]="character.level2FailBonus" min="0" max="100">%
+	</div>
+	<div class="p10-0">
+		<label for="level0">Level 3:</label>
+		{{character.level3Fail - character.level3FailBonus}}%
+		<br>
+		Base: <input type="number" [(ng-model)]="character.level3Fail" min="0" max="100">%
+		Bonus: <input type="number" [(ng-model)]="character.level3FailBonus" min="0" max="100">%
+	</div>
+	<div class="p10-0">
+		<label for="level0">Level 4:</label>
+		{{character.level4Fail - character.level4FailBonus}}%
+		<br>
+		Base: <input type="number" [(ng-model)]="character.level4Fail" min="0" max="100">%
+		Bonus: <input type="number" [(ng-model)]="character.level4FailBonus" min="0" max="100">%
+	</div>
+	<div class="p10-0">
+		<label for="level0">Level 5:</label>
+		{{character.level5Fail - character.level5FailBonus}}%
+		<br>
+		Base: <input type="number" [(ng-model)]="character.level5Fail" min="0" max="100">%
+		Bonus: <input type="number" [(ng-model)]="character.level5FailBonus" min="0" max="100">%
+	</div>
+	<div class="p10-0">
+		<label for="level0">Level 6:</label>
+		{{character.level6Fail - character.level6FailBonus}}%
+		<br>
+		Base: <input type="number" [(ng-model)]="character.level6Fail" min="0" max="100">%
+		Bonus: <input type="number" [(ng-model)]="character.level6FailBonus" min="0" max="100">%
+	</div>
+	<div class="p10-0">
+		<label for="level0">Level 7:</label>
+		{{character.level7Fail - character.level7FailBonus}}%
+		<br>
+		Base: <input type="number" [(ng-model)]="character.level7Fail" min="0" max="100">%
+		Bonus: <input type="number" [(ng-model)]="character.level7FailBonus" min="0" max="100">%
+	</div>
+	<div class="p10-0">
+		<label for="level0">Level 8:</label>
+		{{character.level8Fail - character.level8FailBonus}}%
+		<br>
+		Base: <input type="number" [(ng-model)]="character.level8Fail" min="0" max="100">%
+		Bonus: <input type="number" [(ng-model)]="character.level8FailBonus" min="0" max="100">%
+	</div>
+	<div class="p10-0">
+		<label for="level0">Level 9:</label>
+		{{character.level9Fail - character.level9FailBonus}}%
+		<br>
+		Base: <input type="number" [(ng-model)]="character.level9Fail" min="0" max="100">%
+		Bonus: <input type="number" [(ng-model)]="character.level9FailBonus" min="0" max="100">%
+	</div>
+
 	<h3>Spells</h3>
 	<div *ng-for="#spell of character.spells;#i = index" [class.pt30]="i !== 0">
 		<label>{{ spell.name }}:</label>

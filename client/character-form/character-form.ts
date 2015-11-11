@@ -271,6 +271,7 @@ export class CharacterForm {
 						level7Tab: 0,
 						level8Tab: 0,
 						level9Tab: 0,
+						notes: '',
 						backstory: character.backstory,
 						spells: spells,
 						skills: skills,

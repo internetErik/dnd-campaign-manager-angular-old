@@ -10,7 +10,10 @@
 	<ol>
 		<li *ng-for="#character of characters" 
 			[class.enemy]="character.type === 'enemy'">
-		{{character.name}} initiative: {{character.initiative}} <button (click)="removeCharacter(character)">-</button>
+		{{character.name}} initiative: {{character.initiative}} | 
+		Rounds Occupied: {{character.roundsOccupied}}
+		<button (click)="occupy(character)">Occupy</button>
+		<button (click)="removeCharacter(character)">-</button>
 		</li>
 	</ol>
 </div>

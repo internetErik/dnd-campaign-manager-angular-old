@@ -137,6 +137,13 @@
 			<button (click)="clearTab('chaTab')">&times;</button>
 	</div>
 	<div class="p10-0">
+		<label for="movement">Movement:</label>
+		{{character.movement + character.movementBonus}}
+		<br>
+		Base: <input type="number" [(ng-model)]="character.movement">
+		Bonus: <input type="number" [(ng-model)]="character.movementBonus">
+	</div>
+	<div class="p10-0">
 			<label for="hitRoll">Hit Roll:</label>
 			{{character.hitRoll + character.hitRollBonus}}
 			<br>
@@ -152,9 +159,10 @@
 	</div>
 	<div class="p10-0">
 		<label for="ac">Evade:</label>
-		{{ character.evade + character.evadeBonus }}
+		{{ character.evade + character.block + character.evadeBonus }}
 		<br>
 		Base: <input type="number" [(ng-model)]="character.evade">
+		Block: <input type="number" [(ng-model)]="character.block">
 		Bonus: <input type="number" [(ng-model)]="character.evadeBonus">
 	</div>
 	<h3>Saves</h3>

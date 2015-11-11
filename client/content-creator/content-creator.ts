@@ -44,7 +44,13 @@ export class ContentCreator {
 				e.preventDefault();
 				if (this.newSpellName && !Spells.findOne({ name: this.newSpellName })) {
 						if (this.newSpellLevel && this.newSpellDomain && this.newSpellDescription) {
-								let spell = { name: this.newSpellName, level: this.newSpellLevel, domain: this.newSpellDomain, description: this.newSpellDescription, tab: 0 };
+								let spell = { 
+									name: this.newSpellName.toLowerCase(), 
+									level: this.newSpellLevel, 
+									domain: this.newSpellDomain, 
+									description: this.newSpellDescription
+								};
+
 								Spells.insert(spell);
 								this.newSpellName = '';
 								this.newSpellLevel = 0;
@@ -63,7 +69,10 @@ export class ContentCreator {
 				e.preventDefault();
 				if (this.newSkillName && !Skills.findOne({ name: this.newSkillName })) {
 						if (this.newSkillStat) {
-								let skill = { name: this.newSkillName, stat: this.newSkillStat };
+								let skill = { 
+									name: this.newSkillName.toLowerCase(), 
+									stat: this.newSkillStat 
+								};
 								Skills.insert(skill);
 								this.newSkillName = '';
 								this.newSkillStat = '';
@@ -80,7 +89,10 @@ export class ContentCreator {
 				e.preventDefault();
 				if (this.newFeatName && !Feats.findOne({ name: this.newFeatName })) {
 						if (this.newFeatDesc) {
-								Feats.insert({ name: this.newFeatName, description: this.newFeatDesc });
+								Feats.insert({ 
+									name: this.newFeatName.toLowerCase(), 
+									description: this.newFeatDesc 
+								});
 								this.newFeatName = '';
 								this.newFeatDesc = '';
 						}

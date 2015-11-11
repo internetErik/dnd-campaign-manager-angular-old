@@ -145,7 +145,12 @@ export class CharacterForm {
 										<HTMLInputElement>document.querySelector('#spellDesc-' + spell);
 								let eDomain: HTMLInputElement =
 										<HTMLInputElement>document.querySelector('#spellDomain-' + spell);
-								return { name: spell, level: eLev.value, domain: eDomain.value, description: eDesc.value, tab: 0 };
+								return { 
+									name: spell.toLowerCase(), 
+									level: eLev.value, 
+									domain: eDomain.value, 
+									description: eDesc.value 
+								};
 						})
 				}
 
@@ -156,7 +161,12 @@ export class CharacterForm {
 										<HTMLInputElement>document.querySelector('#skillLevel-' + skill);
 								let eStat: HTMLInputElement =
 										<HTMLInputElement>document.querySelector('#skillStat-' + skill);
-								return { name: skill, level: eLev.value, stat: eStat.value, tab: 0 };
+								return { 
+									name: skill.toLowerCase(), 
+									level: eLev.value, 
+									stat: eStat.value, 
+									tab: 0 
+								};
 						})
 				}
 
@@ -165,7 +175,10 @@ export class CharacterForm {
 						feats = this.feats.map((feat) => {
 								let ele: HTMLInputElement =
 										<HTMLInputElement>document.querySelector('#feat-' + feat);
-								return { name: feat, description: ele.value };
+								return { 
+									name: feat.toLowerCase(), 
+									description: ele.value 
+								};
 						});
 				}
 

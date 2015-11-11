@@ -35,8 +35,8 @@ export class CharacterDetail {
 
 		constructor(_router: Router, params: RouteParams) {
         var characterId = params.get('characterId');
-        this.character = Characters.findOne({ _id: characterId });
         this.router = _router;
+				this.character = Characters.findOne({ _id: characterId });
 
 				this.newSpellName = '';
 				this.newSpellLevel = 0;
@@ -74,7 +74,12 @@ export class CharacterDetail {
 				e.preventDefault();
 				if (this.newSpellName && this.character.spells.indexOf(this.newSpellName) === -1) {
 					if(this.newSpellLevel && this.newSpellDomain && this.newSpellDescription) {
-						let spell = { name: this.newSpellName, level: this.newSpellLevel, domain: this.newSpellDomain, description: this.newSpellDescription, tab: 0 };
+						let spell = { 
+							name: this.newSpellName.toLowerCase(), 
+							level: this.newSpellLevel, 
+							domain: this.newSpellDomain, 
+							description: this.newSpellDescription
+						};
 						this.character.spells.push(spell);
 						this.newSpellName = '';
 						this.newSpellLevel = 0;
@@ -98,7 +103,11 @@ export class CharacterDetail {
 				e.preventDefault();
 				if (this.newSkillName && this.character.skills.indexOf(this.newSkillName) === -1) {
 						if (this.newSkillLevel && this.newSkillStat) {
-								let skill = {name: this.newSkillName, level: this.newSkillLevel, stat: this.newSkillStat};
+								let skill = {
+									name: this.newSkillName.toLowerCase(), 
+									level: this.newSkillLevel, 
+									stat: this.newSkillStat
+								};
 								this.character.skills.push(skill);
 								this.newSkillName = '';
 								this.newSkillStat = '';
@@ -121,7 +130,10 @@ export class CharacterDetail {
 				e.preventDefault();
 				if (this.newFeatName && this.character.feats.indexOf(this.newFeatName) === -1) {
 					if(this.newFeatDesc) {
-						this.character.feats.push({name: this.newFeatName, description: this.newFeatDesc});
+						this.character.feats.push({
+							name: this.newFeatName.toLowerCase(), 
+							description: this.newFeatDesc
+						});
 						this.newFeatName = '';
 						this.newFeatDesc = '';
 						this.updateCharacter();

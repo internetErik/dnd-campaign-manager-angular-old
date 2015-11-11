@@ -1,12 +1,22 @@
 <div>
 	<button (click)="saveCharacter($event)">Save</button> {{saveMessage}}
-	<h2>Character Name</h2>
+	<h2>Name</h2>
 	<div>
 		<h3>
 			{{character.title}} {{character.firstName}} {{character.middleName}} {{character.lastName}}
 		</h3>
 	</div>
-	
+
+	<h2>Religion/Morals</h2>
+	<div class="p10-0">
+		<label for="alignment">Deity</label>
+		<input type="text" [(ng-model)]="character.deity">
+	</div>
+	<div class="p10-0">
+		<label for="alignment">Alignment</label>
+		<input type="text" [(ng-model)]="character.alignment">
+	</div>
+
 	<h2>Biological Information</h2>
 	<div class="p10-0">
 			<label for="race">Race:</label>
@@ -24,11 +34,37 @@
 			<label for="weight">Weight:</label>
 			{{character.weight}} kg
 	</div>
-
+	<div class="p10-0">
+		<label for="age">Birthday:</label>
+		<input type="text" [(ng-model)]="character.birthday">
+	</div>
+	<div class="p10-0">
+		<label for="age">Age:</label>
+		<input type="number" [(ng-model)]="character.age">
+	</div>
 	<div class="p10-0">
 		<label for="description">Description:</label>
 		<br>
 		{{character.description}}
+	</div>
+
+	<h2>Equipment</h2>
+	<div class="p10-0">
+		<label for="gold">Bronze:</label>
+		<input type="number" min="0" [(ng-model)]="character.bronze">
+	</div>
+	<div class="p10-0">
+		<label for="gold">Silver:</label>
+		<input type="number" min="0" [(ng-model)]="character.silver">
+	</div>
+	<div class="p10-0">
+		<label for="gold">Gold:</label>
+		<input type="number" min="0" [(ng-model)]="character.gold">
+	</div>
+	<div class="p10-0">
+		<label for="inventory">Inventory:</label>
+		<br>
+		<textarea id="inventory" cols="45" rows="10" [(ng-model)]="character.inventory"></textarea>
 	</div>
 	
 	<h2>Stats</h2>
@@ -106,6 +142,20 @@
 			<br>
 			Base: <input type="number" [(ng-model)]="character.hitRoll">
 			Bonus: <input type="number" [(ng-model)]="character.hitRollBonus">
+	</div>
+	<div class="p10-0">
+		<label for="ac">Armor Class:</label>
+		{{ character.ac + character.acBonus }}
+		<br>
+		Base: <input type="number" [(ng-model)]="character.ac">
+		Bonus: <input type="number" [(ng-model)]="character.acBonus">
+	</div>
+	<div class="p10-0">
+		<label for="ac">Evade:</label>
+		{{ character.evade + character.evadeBonus }}
+		<br>
+		Base: <input type="number" [(ng-model)]="character.evade">
+		Bonus: <input type="number" [(ng-model)]="character.evadeBonus">
 	</div>
 	<h3>Saves</h3>
 	<div class="p10-0">

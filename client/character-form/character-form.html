@@ -1,143 +1,150 @@
 <form [ng-form-model]="characterForm" #f="form" (submit)="addCharacter($event, f.value)">
-	<h2>Character Name</h2>
+	<h2>Name</h2>
 	<div>
-			<label for="firstName">First Name*</label>
+			<label for="firstName">First Name*:</label>
 			<input id="firstName" type="text" ng-control="firstName">
 	</div>
 	<div>
-			<label for="middleName">Middle Name</label>
+			<label for="middleName">Middle Name:</label>
 			<input id="middleName" type="text" ng-control="middleName">
 	</div>
 	<div>
-			<label for="lastName">Last Name</label>
+			<label for="lastName">Last Name:</label>
 			<input id="lastName" type="text" ng-control="lastName">
 	</div>
 	<div>
-			<label for="title">Title</label>
+			<label for="title">Title:</label>
 			<input id="title" type="text" ng-control="title">
 	</div>
 
 	<h2>Biological Information</h2>
 	<div>
-			<label for="race">Race*</label>
+			<label for="race">Race*:</label>
 			<input id="race" type="text" ng-control="race">
 	</div>
 	<div>
-			<label for="sex">Sex</label>
+			<label for="sex">Sex:</label>
 			<input id="sex" type="text" ng-control="sex">
 	</div>
 	<div>
-			<label for="height">Height*</label>
+			<label for="height">Height*:</label>
 			<input id="height" type="number" min="0" ng-control="heightM"> 
 			m
 			<input type="number" min="0" max="99" ng-control="heightCm"> 
 			cm
 	</div>
 	<div>
-			<label for="weight">Weight*</label>
+			<label for="weight">Weight*:</label>
 			<input id="weight" type="number" min="0" ng-control="weight"> kg
 	</div>
-
 	<div>
-		<label for="description">Description</label>
+		<label for="birthday">Birthday:</label>
+		<input type="text" ng-control="birthday">
+	</div>
+	<div>
+		<label for="age">Age:</label>
+		<input type="number" min="0" ng-control="age">
+	</div>
+	<div>
+		<label for="description">Description::</label>
 		<br>
 		<textarea id="description" cols="45" rows="3" ng-control="description"></textarea>
 	</div>
 
 	<h2>Stats</h2>
 	<div>
-			<label for="hp">HP*</label>
+			<label for="hp">HP*:</label>
 			<input id="hp" type="number" min="1" ng-control="hp">
 	</div>
 	<div>
-			<label for="str">Strength*</label>
+			<label for="str">Strength*:</label>
 			<input id="str" type="number" min="0" ng-control="str">
 	</div>
 	<div>
-			<label for="int">Intelligence*</label>
+			<label for="int">Intelligence*:</label>
 			<input id="int" type="number" min="0" ng-control="int">
 	</div>
 	<div>
-			<label for="wis">Wisdom*</label>
+			<label for="wis">Wisdom*:</label>
 			<input id="wis" type="number" min="0" ng-control="wis">
 	</div>
 	<div>
-			<label for="con">Constitution*</label>
+			<label for="con">Constitution*:</label>
 			<input id="con" type="number" min="0" ng-control="con">
 	</div>
 	<div>
-			<label for="dex">Dexterity*</label>
+			<label for="dex">Dexterity*:</label>
 			<input id="dex" type="number" min="0" ng-control="dex">
 	</div>
 	<div>
-			<label for="cha">Charisma*</label>
+			<label for="cha">Charisma*:</label>
 			<input id="cha" type="number" min="0" ng-control="cha">
 	</div>
 	<div>
-			<label for="hitRoll">Hit Roll</label>
+			<label for="hitRoll">Hit Roll:</label>
 			<input id="hitRoll" type="number" min="0" ng-control="hitRoll">
 	</div>
 
 	<h3>Saves</h3>
 	<div>
-			<label for="reflex">Reflex</label>
+			<label for="reflex">Reflex:</label>
 			<input id="reflex" type="number" min="0" ng-control="reflex">
 	</div>
 	<div>
-			<label for="fortitude">Fortitude</label>
+			<label for="fortitude">Fortitude:</label>
 			<input id="fortitude" type="number" min="0" ng-control="fortitude">
 	</div>
 	<div>
-			<label for="will">Will</label>
+			<label for="will">Will:</label>
 			<input id="will" type="number" min="0" ng-control="will">
 	</div>
 
 	<h2>Magic</h2>
 	<h3>Effortless Spells</h3>
 	<div>
-		<label for="level0">Level 0</label>
+		<label for="level0">Level 0:</label>
 		<input id="level0" type="number" min="0" ng-control="level0">
 	</div>
 	<div>
-		<label for="level1">Level 1</label>
+		<label for="level1">Level 1:</label>
 		<input type="number" id="level1" min="0" ng-control="level1">
 	</div>
 	<div>
-		<label for="level2">Level 2</label>
+		<label for="level2">Level 2:</label>
 		<input type="number" id="level2" min="0" ng-control="level2">
 	</div>
 	<div>
-		<label for="level3">Level 3</label>
+		<label for="level3">Level 3:</label>
 		<input type="number" id="level3" min="0" ng-control="level3">
 	</div>
 	<div>
-		<label for="level4">Level 4</label>
+		<label for="level4">Level 4:</label>
 		<input type="number" id="level4" min="0" ng-control="level4">
 	</div>
 	<div>
-		<label for="level5">Level 5</label>
+		<label for="level5">Level 5:</label>
 		<input type="number" id="level5" min="0" ng-control="level5">
 	</div>
 	<div>
-		<label for="level6">Level 6</label>
+		<label for="level6">Level 6:</label>
 		<input type="number" id="level6" min="0" ng-control="level6">
 	</div>
 	<div>
-		<label for="level7">Level 7</label>
+		<label for="level7">Level 7:</label>
 		<input type="number" id="level7" min="0" ng-control="level7">
 	</div>
 	<div>
-		<label for="level8">Level 8</label>
+		<label for="level8">Level 8:</label>
 		<input type="number" id="level8" min="0" ng-control="level8">
 	</div>
 	<div>
-		<label for="level9">Level 9</label>
+		<label for="level9">Level 9:</label>
 		<input type="number" id="level9" min="0" ng-control="level9">
 	</div>
 
 	<h3>Add Spell</h3>
 	<div>
-		<label for="spellName">Name</label>
+		<label for="spellName">Name:</label>
 		<input id="spellName" type="text" [(ng-model)]="newSpellName" (keyup.enter)="addSpell($event)">
 		<button (click)="addSpell($event)">+</button>
 	</div>
@@ -146,13 +153,13 @@
 	<div *ng-for="#spell of spells">
 		<label>{{ spell }}</label>
 		<br>
-		<label>Level</label>
+		<label>Level:</label>
 		<input type="number" min="0" id="spellLevel-{{ spell }}" value="0">
 		<br>
-		<label>Domain</label>
+		<label>Domain:</label>
 		<input type="text" id="spellDomain-{{ spell }}">
 		<br>
-		<label>Description</label> 
+		<label>Description:</label> 
 		<br>
 		<textarea id="spellDesc-{{spell}}" cols="45" rows="3"></textarea>
 		<button (click)="removeSpell(spell)">-</button>
@@ -161,7 +168,7 @@
 	<h2>Skills</h2>
 	<h3>Add Skill</h3>
 	<div>
-		<label for="skillName">Name</label>
+		<label for="skillName">Name:</label>
 		<input id="skillName" type="text" [(ng-model)]="newSkillName" (keyup.enter)="addSkill($event)">
 		<button (click)="addSkill($event)">+</button>
 	</div>
@@ -176,7 +183,7 @@
 			<option value="dex">Dex</option>
 			<option value="cha">Cha</option>
 		</select>)
-		<label>level</label>
+		<label>level:</label>
 		<input type="number" min="0" id="skillLevel-{{ skill }}" value="0">
 		<button (click)="removeSkill(skill)">-</button>
 	</div>
@@ -184,7 +191,7 @@
 	<h2>Feats</h2>
 	<h3>Add Feat</h3>
 	<div>
-		<label for="featName">Name</label>
+		<label for="featName">Name:</label>
 		<input id="featName" type="text" [(ng-model)]="newFeatName" (keyup.enter)="addFeat($event)">
 		<button (click)="addFeat($event)">+</button>
 	</div>

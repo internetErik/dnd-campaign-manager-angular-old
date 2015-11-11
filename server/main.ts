@@ -14,7 +14,7 @@ Meteor.startup(function() {
 		Spells.find().count();
 		Skills.find().count();
 		Feats.find().count();
-		Monsters.find().count(); 
+		Monsters.find().count();
 });
 
 Meteor.methods({

@@ -15,7 +15,5 @@ standard-minifiers      # JS/CSS minifiers run for production mode
 es5-shim                # ECMAScript 5 compatibility for older browsers.
 
 urigo:angular2-meteor
-autopublish
-insecure
 accounts-password
 barbatus:ng2-meteor-accounts-ui

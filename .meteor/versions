@@ -2,7 +2,6 @@ accounts-base@1.2.2
 accounts-password@1.1.4
 accounts-ui@1.1.6
 accounts-ui-unstyled@1.1.8
-autopublish@1.0.4
 autoupdate@1.2.4
 babel-compiler@5.8.24_1
 babel-runtime@0.1.4
@@ -39,7 +38,6 @@ html-tools@1.0.5
 htmljs@1.0.5
 http@1.1.1
 id-map@1.0.4
-insecure@1.0.4
 jquery@1.11.4
 launch-screen@1.0.4
 less@2.5.1
@@ -79,7 +77,7 @@ templating-tools@1.0.0
 tracker@1.0.9
 ui@1.0.8
 underscore@1.0.4
-urigo:angular2-meteor@0.2.4
+urigo:angular2-meteor@0.2.5
 url@1.0.5
 webapp@1.2.3
 webapp-hashing@1.0.5

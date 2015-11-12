@@ -3,8 +3,6 @@
 
 import {Component, View, NgFor, provide} from 'angular2/angular2';
 
-import {Characters} from 'collections/characters';
-
 import {bootstrap} from 'angular2-meteor';
 
 import {HomePage} from 'client/home-page/home-page';
@@ -36,7 +34,6 @@ import {ROUTER_PROVIDERS, ROUTER_DIRECTIVES, RouteConfig, APP_BASE_HREF} from 'a
 			<a [router-link]="['/CharacterList']">Characters</a> |
 			<a [router-link]="['/CombatDisplay']">Combat Display</a> |
 			<a [router-link]="['/ContentCreator']">Content Creator</a>
-
 			<accounts-ui></accounts-ui>
 		</nav>
 		<router-outlet></router-outlet>
@@ -81,5 +78,4 @@ import {ROUTER_PROVIDERS, ROUTER_DIRECTIVES, RouteConfig, APP_BASE_HREF} from 'a
     }
 ])
 class App { }
-
 bootstrap(App, [ROUTER_PROVIDERS, provide(APP_BASE_HREF, { useValue: '/' })]);

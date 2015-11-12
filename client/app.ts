@@ -78,8 +78,12 @@ import {ROUTER_PROVIDERS, ROUTER_DIRECTIVES, RouteConfig, APP_BASE_HREF} from 'a
     }
 ])
 class App { 
-	constructor() {
+		constructor() {
+			Meteor.subscribe('campaigns');
 			Meteor.subscribe('characters');
+			Meteor.subscribe('spells');
+			Meteor.subscribe('skills');
+			Meteor.subscribe('feats');
 			Meteor.subscribe('rolls');
 	}
 }

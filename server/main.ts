@@ -1,6 +1,5 @@
 import {loadCharacters} from 'server/loadCharacters';
 
-import {Users} from 'collections/users';
 import {Characters} from 'collections/characters';
 import {Campaigns} from 'collections/campaigns';
 import {Rolls} from 'collections/rolls';
@@ -13,7 +12,6 @@ Meteor.startup(function() {
 		//for some reason if we don't do something with the DBS on start, 
 		//they won't show on the front end
 		loadCharacters();
-		Users.find().count();
 		Campaigns.find().count();
 		Rolls.find().count();
 		Spells.find().count();
@@ -75,11 +73,17 @@ Meteor.methods({
 	updateSpell: function(_id, spell) { 
 			return Spells.update({ _id: _id }, spell);
 	},
+	removeSpell: function(_id) {
+			Spells.remove({ _id: _id });
+	},
 	insertSkill: function(skill) { 
 			return Skills.insert(skill);
 	},
 	updateSkill: function(_id, skill) { 
 			return Skills.update({ _id: _id }, skill);
+	},
+	removeSkill: function(_id) {
+			Skills.remove({ _id: _id });
 	},
 	insertFeat: function(feat) { 
 			return Feats.insert(feat);

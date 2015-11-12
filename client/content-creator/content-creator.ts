@@ -51,7 +51,7 @@ export class ContentCreator {
 									description: this.newSpellDescription
 								};
 
-								Meteor.call('insertSpel', spell);
+								Meteor.call('insertSpell', spell);
 								this.newSpellName = '';
 								this.newSpellLevel = 0;
 								this.newSpellDomain = '';

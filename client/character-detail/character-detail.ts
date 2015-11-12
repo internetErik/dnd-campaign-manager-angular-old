@@ -156,14 +156,15 @@ export class CharacterDetail {
 		}
 
 		updateCharacter() {
-				Meteor.call('updateCharacter', this.character._id, this.character, (e,r) => {
-						if (e)
+				this.saveMessage = "saving . . .";
+				Meteor.call('updateCharacter', this.character._id, this.character, (e, r) => {
+						this.saveMessage = 'saved successfully!';
+						if (e) {
+								this.saveMessage = 'Error saving character!';
 								console.log("Error updating character:", e);
-						else {
-								this.saveMessage = 'saved successfully . . .';
-								setTimeout(() => { this.saveMessage = '' }, 500);
 						}
-				})
-
+						else
+								setTimeout(() => { this.saveMessage = '' }, 500);
+				});
 		}
 }

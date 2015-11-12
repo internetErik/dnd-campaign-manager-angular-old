@@ -1,4 +1,5 @@
 /// <reference path="../typings/angular2-meteor.d.ts" />
+/// <reference path="../typings/meteor-accounts-ui.d.ts" />
 
 import {Component, View, NgFor, provide} from 'angular2/angular2';
 
@@ -20,7 +21,7 @@ import {ContentCreator} from 'client/content-creator/content-creator';
 
 import {DiceHelper} from 'client/dice-helper/dice-helper';
 
-import {Login} from 'client/login/login';
+import {AccountsUI} from 'meteor-accounts-ui';
 
 import {ROUTER_PROVIDERS, ROUTER_DIRECTIVES, RouteConfig, APP_BASE_HREF} from 'angular2/router';
 
@@ -35,11 +36,13 @@ import {ROUTER_PROVIDERS, ROUTER_DIRECTIVES, RouteConfig, APP_BASE_HREF} from 'a
 			<a [router-link]="['/CharacterList']">Characters</a> |
 			<a [router-link]="['/CombatDisplay']">Combat Display</a> |
 			<a [router-link]="['/ContentCreator']">Content Creator</a>
+
+			<accounts-ui></accounts-ui>
 		</nav>
 		<router-outlet></router-outlet>
 		<dice-helper></dice-helper>
 		`,
-		directives: [ROUTER_DIRECTIVES, DiceHelper, Login]
+		directives: [ROUTER_DIRECTIVES, DiceHelper, AccountsUI]
 })
 @RouteConfig([
 		{

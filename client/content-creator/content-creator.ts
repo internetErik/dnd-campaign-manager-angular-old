@@ -51,7 +51,7 @@ export class ContentCreator {
 									description: this.newSpellDescription
 								};
 
-								Spells.insert(spell);
+								Meteor.call('insertSpel', spell);
 								this.newSpellName = '';
 								this.newSpellLevel = 0;
 								this.newSpellDomain = '';
@@ -62,7 +62,7 @@ export class ContentCreator {
 
 		removeSpell(e: Event, spell) {
 				e.preventDefault();
-				Spells.remove({ _id: spell._id });
+				Meteor.call('removeSpell', spell._id);
 		}
 
 		addSkill(e: Event) {
@@ -73,7 +73,7 @@ export class ContentCreator {
 									name: this.newSkillName.toLowerCase(), 
 									stat: this.newSkillStat 
 								};
-								Skills.insert(skill);
+								Meteor.call('insertSkill',skill);
 								this.newSkillName = '';
 								this.newSkillStat = '';
 						}
@@ -82,14 +82,14 @@ export class ContentCreator {
 
 		removeSkill(e: Event, skill) {
 				e.preventDefault();
-				Skills.remove({ _id: skill._id });
+				Meteor.call('removeSkill', skill._id );
 		}
 
 		addFeat(e: Event) {
 				e.preventDefault();
 				if (this.newFeatName && !Feats.findOne({ name: this.newFeatName })) {
 						if (this.newFeatDesc) {
-								Feats.insert({ 
+								Meteor.call('insertFeat', { 
 									name: this.newFeatName.toLowerCase(), 
 									description: this.newFeatDesc 
 								});
@@ -101,6 +101,6 @@ export class ContentCreator {
 
 		removeFeat(e: Event, feat) {
 				e.preventDefault();
-				Feats.remove({ _id: feat._id });
+				Meteor.call('removeFeat', feat._id );
 		}
 }

@@ -298,9 +298,13 @@ export class CharacterForm {
 						feats: feats
 				};
 
-				_id = Characters.insert(c);
+				Meteor.call('insertCharacter', c, (e, r) => {
+						if (e)
+							console.log("error inserting?", e);
+						else
+							this.router.parent.navigate(['/CharacterDetail', { characterId: r }]);
+				});
 
-				this.router.parent.navigate(['/CharacterDetail', { characterId: _id }]);
 		}
 		else
 				console.log("form not valid");

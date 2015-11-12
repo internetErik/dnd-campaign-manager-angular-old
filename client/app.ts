@@ -77,5 +77,10 @@ import {ROUTER_PROVIDERS, ROUTER_DIRECTIVES, RouteConfig, APP_BASE_HREF} from 'a
 				component: ContentCreator
     }
 ])
-class App { }
+class App { 
+	constructor() {
+			Meteor.subscribe('characters');
+			Meteor.subscribe('rolls');
+	}
+}
 bootstrap(App, [ROUTER_PROVIDERS, provide(APP_BASE_HREF, { useValue: '/' })]);

@@ -59,11 +59,18 @@ export class DiceHelper {
 		}
 
 		insertRoll(result, sides, bonus) {
-				Rolls.insert({ result: result, createdAt: Date.now(), sides: sides, bonus: bonus, critical: result === sides });
+				var roll = { 
+					result: result, 
+					createdAt: Date.now(), 
+					sides: sides, 
+					bonus: bonus, 
+					critical: result === sides 
+				};
+
+				Meteor.call('insertRoll', roll);
 		}
 
 		togglePublic() {
-				console.log("hello world");
 				this.rollPublic = !this.rollPublic;
 		}
 

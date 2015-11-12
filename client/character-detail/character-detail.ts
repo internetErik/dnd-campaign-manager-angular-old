@@ -55,7 +55,7 @@ export class CharacterDetail {
     deleteCharacter(e) {
 			e.preventDefault();
 			if(confirm(`Are you sure you want to delete this character?`)) {
-				Characters.remove({ _id: this.character._id });
+				Meteor.call('removeCharacter', this.character._id);
 				this.router.parent.navigate(['/CharacterList']);
 			}
     }
@@ -156,12 +156,14 @@ export class CharacterDetail {
 		}
 
 		updateCharacter() {
-				var save = Characters.update({ _id: this.character._id }, this.character);
-				
-				if (save) {
-						this.saveMessage = 'saved successfully . . .';
-						setTimeout(() => { this.saveMessage = '' }, 500);
-				}
+				Meteor.call('updateCharacter', this.character._id, this.character, (e,r) => {
+						if (e)
+								console.log("Error updating character:", e);
+						else {
+								this.saveMessage = 'saved successfully . . .';
+								setTimeout(() => { this.saveMessage = '' }, 500);
+						}
+				})
 
 		}
 }

@@ -1,12 +1,16 @@
 <div>
-	<h2>Combatants</h2>
+	<h1>Combat Display</h1>
+	<h2>Add Combatants</h2>
+	<div>
+		<label for="character">Character: </label>
+		<input id="character" type="text" class="js-character"><button (click)="add('character')">+</button>
+	</div>
+	<div>
+		<label for="enemy">Enemy: </label>
+		<input id="enemy" type="text" class="js-enemy"><button (click)="add('enemy')">+</button>
+	</div>
 	<button (click)="rollInitiative()">Roll Initiative</button>
-	<div>
-		add character <input type="text" class="js-character"><button (click)="add('character')">+</button>
-	</div>
-	<div>
-		add enemy <input type="text" class="js-enemy"><button (click)="add('enemy')">+</button>
-	</div>
+	<h2>Combatants</h2>
 	<ol>
 		<li *ng-for="#character of characters" 
 			[class.enemy]="character.type === 'enemy'">

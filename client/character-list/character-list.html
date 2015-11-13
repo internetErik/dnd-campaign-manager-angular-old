@@ -1,5 +1,5 @@
 <div>
-	<h2>Character List</h2>
+	<h1>Character List</h1>
 	<div *ng-for="#character of characters">
 		<a [router-link]="['/CharacterDetail', {characterId: character._id}]">
 			{{character.firstName}} {{character.middleName}} {{character.lastName}}

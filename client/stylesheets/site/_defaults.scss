@@ -14,6 +14,16 @@ input {
 	font-family: $font-family-mono;
 }
 
+label {
+	color: #666;
+	width: 150px;
+	display: inline-block;
+}
+
+button {
+	border: 1px solid black;
+}
+
 ::-webkit-input-placeholder { /* WebKit browsers */
     color: white;
 }

@@ -36,14 +36,14 @@ export class CampaignForm {
 
 			if(this.campaignForm.valid) {
 				Meteor.call('insertCampaign', campaign, (e, r) => {
-						if(e)
-							console.log("Error creating campaign: ", e);
-						else
-							this.router.parent.navigate(['/CampaignApp', { campaignId: r }]);
+				if(e)
+					console.log("Error creating campaign: ", e);
+				else
+					this.router.parent.navigate(['/CampaignList']);
 				});
 			}
 			else
-					console.log("form not valid");
+				console.log("form not valid");
 
 		}
 }

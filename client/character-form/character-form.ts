@@ -2,12 +2,10 @@
 /// <reference path="../../typings/meteor-accounts.d.ts" />
 
 import {Component, View, NgFor} from 'angular2/angular2';
-
-import {Router} from 'angular2/router';
+import {FORM_DIRECTIVES, FormBuilder, Control, ControlGroup, Validators} from 'angular2/angular2';
+import {Router, RouteParams} from 'angular2/router';
 
 import {Characters} from 'collections/characters';
-
-import {FORM_DIRECTIVES, FormBuilder, Control, ControlGroup, Validators} from 'angular2/angular2';
 
 import {RequireUser} from 'meteor-accounts';
 
@@ -22,6 +20,7 @@ import {RequireUser} from 'meteor-accounts';
 export class CharacterForm {
 	characterForm: ControlGroup;
 	router: Router;
+	campaignId: string;
 
 	newSpellName: string;
 	newSkillName: string;
@@ -30,96 +29,99 @@ export class CharacterForm {
 	skills: string[];
 	feats: string[];
 
-	constructor(_router: Router) {
-			var fb = new FormBuilder();
-			this.characterForm = fb.group({
-					firstName: ['', Validators.required],
-					middleName: [''],
-					lastName: [''],
-					title: [''],
-					race: ['', Validators.required],
-					sex: [''],
-					heightM: [1, Validators.required],
-					heightCm: [50, Validators.required],
-					weight: [80, Validators.required],
-					birthday: [''],
-					age: [18],
-					description: [''],
-					hp: [1, Validators.required],
-					str: [10, Validators.required],
-					int: [10, Validators.required],
-					wis: [10, Validators.required],
-					con: [10, Validators.required],
-					dex: [10, Validators.required],
-					cha: [10, Validators.required],
-					hitRoll: [0],
-					reflex: [0],
-					fortitude: [0],
-					will: [0],
-					level0: [0],
-					level1: [0],
-					level2: [0],
-					level3: [0],
-					level4: [0],
-					level5: [0],
-					level6: [0],
-					level7: [0],
-					level8: [0],
-					level9: [0],
-					backstory: ['']
-			});
+	constructor(_router: Router, params: RouteParams) {
+		var fb = new FormBuilder();
 
-			this.newSpellName = '';
-			this.newSkillName = '';
-			this.newFeatName = '';
+		this.campaignId = params.get('campaignId');
 
-			this.spells = [];
-			this.skills = [];
-			this.feats = [];
+		this.characterForm = fb.group({
+			firstName: ['', Validators.required],
+			middleName: [''],
+			lastName: [''],
+			title: [''],
+			race: ['', Validators.required],
+			sex: [''],
+			heightM: [1, Validators.required],
+			heightCm: [50, Validators.required],
+			weight: [80, Validators.required],
+			birthday: [''],
+			age: [18],
+			description: [''],
+			hp: [1, Validators.required],
+			str: [10, Validators.required],
+			int: [10, Validators.required],
+			wis: [10, Validators.required],
+			con: [10, Validators.required],
+			dex: [10, Validators.required],
+			cha: [10, Validators.required],
+			hitRoll: [0],
+			reflex: [0],
+			fortitude: [0],
+			will: [0],
+			level0: [0],
+			level1: [0],
+			level2: [0],
+			level3: [0],
+			level4: [0],
+			level5: [0],
+			level6: [0],
+			level7: [0],
+			level8: [0],
+			level9: [0],
+			backstory: ['']
+		});
 
-			this.router = _router;
+		this.newSpellName = '';
+		this.newSkillName = '';
+		this.newFeatName = '';
+
+		this.spells = [];
+		this.skills = [];
+		this.feats = [];
+
+		this.router = _router;
 	}
 
 	addSpell(e) {
-			e.preventDefault();
-			if (this.newSpellName && this.spells.indexOf(this.newSpellName) === -1) {
-					this.spells.push(this.newSpellName);
-					this.newSpellName = '';
-			}
+		e.preventDefault();
+		if (this.newSpellName && this.spells.indexOf(this.newSpellName) === -1) {
+			this.spells.push(this.newSpellName);
+			this.newSpellName = '';
+		}
 	}
 
 	removeSpell(spell) {
-			var i = this.spells.indexOf(spell);
-			if (i > -1)
-					this.spells.splice(i, 1);
+		var i = this.spells.indexOf(spell);
+		if (i > -1)
+			this.spells.splice(i, 1);
 	}
 
 	addSkill(e) {
-			e.preventDefault();
-			if(this.newSkillName && this.skills.indexOf(this.newSkillName) === -1) {
-					this.skills.push(this.newSkillName);
-					this.newSkillName = '';
-			}
+		e.preventDefault();
+		if(this.newSkillName && this.skills.indexOf(this.newSkillName) === -1) {
+			this.skills.push(this.newSkillName);
+			this.newSkillName = '';
+		}
 	}
 
 	removeSkill(skill) {
-			var i = this.skills.indexOf(skill);
-			if (i > -1)
-					this.skills.splice(i, 1);
+		var i = this.skills.indexOf(skill);
+		if (i > -1)
+				this.skills.splice(i, 1);
 	}
 
 	addFeat(e) {
-			e.preventDefault();
-			if (this.newFeatName && this.feats.indexOf(this.newFeatName) === -1) {
-					this.feats.push(this.newFeatName);
-					this.newFeatName = '';
-			}
+		e.preventDefault();
+		if (this.newFeatName && this.feats.indexOf(this.newFeatName) === -1) {
+			this.feats.push(this.newFeatName);
+			this.newFeatName = '';
+		}
 	}
 
 	removeFeat(feat) {
-			var i = this.feats.indexOf(feat);
-			if (i > -1)
-					this.feats.splice(i, 1);
+		var i = this.feats.indexOf(feat);
+		if (i > -1)
+			this.feats.splice(i, 1);
 	}
 
 	/**
@@ -134,183 +136,184 @@ export class CharacterForm {
 		e.preventDefault();
 
 		if (this.characterForm.valid) {
-				let spells = [],
-						skills = [],
-						feats = [],
-						_id, //id returned from insert
-						c; //the character we are inserting
+			let spells = [],
+				skills = [],
+				feats = [],
+				_id, //id returned from insert
+				c; //the character we are inserting
 
-				//build spell data
-				if (this.spells.length > 0) {
-						spells = this.spells.map((spell) => {
-								let eLev: HTMLInputElement =
-										<HTMLInputElement>document.querySelector('#spellLevel-' + spell);
-								let eDesc: HTMLInputElement =
-										<HTMLInputElement>document.querySelector('#spellDesc-' + spell);
-								let eDomain: HTMLInputElement =
-										<HTMLInputElement>document.querySelector('#spellDomain-' + spell);
-								return { 
-									name: spell.toLowerCase(), 
-									level: eLev.value, 
-									domain: eDomain.value, 
-									description: eDesc.value 
-								};
-						})
-				}
+			//build spell data
+			if (this.spells.length > 0) {
+				spells = this.spells.map((spell) => {
+					let eLev: HTMLInputElement =
+							<HTMLInputElement>document.querySelector('#spellLevel-' + spell);
+					let eDesc: HTMLInputElement =
+							<HTMLInputElement>document.querySelector('#spellDesc-' + spell);
+					let eDomain: HTMLInputElement =
+							<HTMLInputElement>document.querySelector('#spellDomain-' + spell);
+					return { 
+						name: spell.toLowerCase(), 
+						level: eLev.value, 
+						domain: eDomain.value, 
+						description: eDesc.value 
+					};
+				})
+			}
 
-				//build skill data
-				if (this.skills.length > 0) {
-						skills = this.skills.map((skill) => {
-								let eLev: HTMLInputElement =
-										<HTMLInputElement>document.querySelector('#skillLevel-' + skill);
-								let eStat: HTMLInputElement =
-										<HTMLInputElement>document.querySelector('#skillStat-' + skill);
-								return { 
-									name: skill.toLowerCase(), 
-									level: eLev.value, 
-									stat: eStat.value, 
-									tab: 0 
-								};
-						})
-				}
+			//build skill data
+			if (this.skills.length > 0) {
+				skills = this.skills.map((skill) => {
+					let eLev: HTMLInputElement =
+							<HTMLInputElement>document.querySelector('#skillLevel-' + skill);
+					let eStat: HTMLInputElement =
+							<HTMLInputElement>document.querySelector('#skillStat-' + skill);
+					return { 
+						name: skill.toLowerCase(), 
+						level: eLev.value, 
+						stat: eStat.value, 
+						tab: 0 
+					};
+				})
+			}
 
-				//build feat data
-				if (this.feats.length > 0) {
-						feats = this.feats.map((feat) => {
-								let ele: HTMLInputElement =
-										<HTMLInputElement>document.querySelector('#feat-' + feat);
-								return { 
-									name: feat.toLowerCase(), 
-									description: ele.value 
-								};
-						});
-				}
-
-				c = {
-						firstName: character.firstName,
-						middleName: character.middleName,
-						lastName: character.lastName,
-						title: character.title,
-						race: character.race,
-						sex: character.sex,
-						heightM: character.heightM,
-						heightCm: character.heightCm,
-						weight: character.weight,
-						birthday: character.birthday,
-						age: character.age,
-						description: character.description,
-						bronze: 0,
-						silver: 0,
-						gold: 0,
-						inventory: '',
-						diety: '',
-						alignment: '',
-						hp: character.hp,
-						damage: 0,
-						hpBonus: 0,
-						str: character.str,
-						int: character.int,
-						wis: character.wis,
-						con: character.con,
-						dex: character.dex,
-						cha: character.cha,
-						strBonus: 0,
-						intBonus: 0,
-						wisBonus: 0,
-						conBonus: 0,
-						dexBonus: 0,
-						chaBonus: 0,
-						strTab: 0,
-						intTab: 0,
-						wisTab: 0,
-						conTab: 0,
-						dexTab: 0,
-						chaTab: 0,
-						movement: 2,
-						movementBonus: 0,
-						hitRoll: character.hitRoll,
-						hitRollBonus: 0,
-						hitRollTab: 0,
-						ac: 0,
-						acBonus: 0,
-						evade: 0,
-						block: 0,
-						evadeBonus: 0,
-						reflex: character.reflex,
-						fortitude: character.fortitude,
-						will: character.will,
-						reflexBonus: 0,
-						fortitudeBonus: 0,
-						willBonus: 0,
-						reflexTab: 0,
-						fortitudeTab: 0,
-						willTab: 0,
-						level0: 0,
-						level1: 0,
-						level2: 0,
-						level3: 0,
-						level4: 0,
-						level5: 0,
-						level6: 0,
-						level7: 0,
-						level8: 0,
-						level9: 0,
-						level0Bonus: 0,
-						level1Bonus: 0,
-						level2Bonus: 0,
-						level3Bonus: 0,
-						level4Bonus: 0,
-						level5Bonus: 0,
-						level6Bonus: 0,
-						level7Bonus: 0,
-						level8Bonus: 0,
-						level9Bonus: 0,
-						level0Fail: 99,
-						level1Fail: 99,
-						level2Fail: 99,
-						level3Fail: 99,
-						level4Fail: 99,
-						level5Fail: 99,
-						level6Fail: 99,
-						level7Fail: 99,
-						level8Fail: 99,
-						level9Fail: 99,
-						level0FailBonus: 0,
-						level1FailBonus: 0,
-						level2FailBonus: 0,
-						level3FailBonus: 0,
-						level4FailBonus: 0,
-						level5FailBonus: 0,
-						level6FailBonus: 0,
-						level7FailBonus: 0,
-						level8FailBonus: 0,
-						level9FailBonus: 0,
-						level0Tab: 0,
-						level1Tab: 0,
-						level2Tab: 0,
-						level3Tab: 0,
-						level4Tab: 0,
-						level5Tab: 0,
-						level6Tab: 0,
-						level7Tab: 0,
-						level8Tab: 0,
-						level9Tab: 0,
-						notes: '',
-						backstory: character.backstory,
-						spells: spells,
-						skills: skills,
-						feats: feats
-				};
-
-				Meteor.call('insertCharacter', c, (e, r) => {
-						if (e)
-							console.log("error inserting?", e);
-						else
-							this.router.parent.navigate(['/CharacterDetail', { characterId: r }]);
+			//build feat data
+			if (this.feats.length > 0) {
+				feats = this.feats.map((feat) => {
+					let ele: HTMLInputElement =
+							<HTMLInputElement>document.querySelector('#feat-' + feat);
+					return { 
+						name: feat.toLowerCase(), 
+						description: ele.value 
+					};
 				});
+			}
+
+			c = {
+				campaignId: this.campaignId,
+				firstName: character.firstName,
+				middleName: character.middleName,
+				lastName: character.lastName,
+				title: character.title,
+				race: character.race,
+				sex: character.sex,
+				heightM: character.heightM,
+				heightCm: character.heightCm,
+				weight: character.weight,
+				birthday: character.birthday,
+				age: character.age,
+				description: character.description,
+				bronze: 0,
+				silver: 0,
+				gold: 0,
+				inventory: '',
+				diety: '',
+				alignment: '',
+				hp: character.hp,
+				damage: 0,
+				hpBonus: 0,
+				str: character.str,
+				int: character.int,
+				wis: character.wis,
+				con: character.con,
+				dex: character.dex,
+				cha: character.cha,
+				strBonus: 0,
+				intBonus: 0,
+				wisBonus: 0,
+				conBonus: 0,
+				dexBonus: 0,
+				chaBonus: 0,
+				strTab: 0,
+				intTab: 0,
+				wisTab: 0,
+				conTab: 0,
+				dexTab: 0,
+				chaTab: 0,
+				movement: 2,
+				movementBonus: 0,
+				hitRoll: character.hitRoll,
+				hitRollBonus: 0,
+				hitRollTab: 0,
+				ac: 0,
+				acBonus: 0,
+				evade: 0,
+				block: 0,
+				evadeBonus: 0,
+				reflex: character.reflex,
+				fortitude: character.fortitude,
+				will: character.will,
+				reflexBonus: 0,
+				fortitudeBonus: 0,
+				willBonus: 0,
+				reflexTab: 0,
+				fortitudeTab: 0,
+				willTab: 0,
+				level0: 0,
+				level1: 0,
+				level2: 0,
+				level3: 0,
+				level4: 0,
+				level5: 0,
+				level6: 0,
+				level7: 0,
+				level8: 0,
+				level9: 0,
+				level0Bonus: 0,
+				level1Bonus: 0,
+				level2Bonus: 0,
+				level3Bonus: 0,
+				level4Bonus: 0,
+				level5Bonus: 0,
+				level6Bonus: 0,
+				level7Bonus: 0,
+				level8Bonus: 0,
+				level9Bonus: 0,
+				level0Fail: 99,
+				level1Fail: 99,
+				level2Fail: 99,
+				level3Fail: 99,
+				level4Fail: 99,
+				level5Fail: 99,
+				level6Fail: 99,
+				level7Fail: 99,
+				level8Fail: 99,
+				level9Fail: 99,
+				level0FailBonus: 0,
+				level1FailBonus: 0,
+				level2FailBonus: 0,
+				level3FailBonus: 0,
+				level4FailBonus: 0,
+				level5FailBonus: 0,
+				level6FailBonus: 0,
+				level7FailBonus: 0,
+				level8FailBonus: 0,
+				level9FailBonus: 0,
+				level0Tab: 0,
+				level1Tab: 0,
+				level2Tab: 0,
+				level3Tab: 0,
+				level4Tab: 0,
+				level5Tab: 0,
+				level6Tab: 0,
+				level7Tab: 0,
+				level8Tab: 0,
+				level9Tab: 0,
+				notes: '',
+				backstory: character.backstory,
+				spells: spells,
+				skills: skills,
+				feats: feats
+			};
+
+			Meteor.call('insertCharacter', c, (e, r) => {
+				if (e)
+					console.log("error inserting?", e);
+				else
+					this.router.parent.navigate(['/CharacterDetail', { characterId: r }]);
+			});
 
 		}
 		else
-				console.log("form not valid");
+			console.log("form not valid");
 	}
 }

@@ -5,5 +5,5 @@
 			{{character.firstName}} {{character.middleName}} {{character.lastName}}
 		</a>
 	</div>
-		<a [router-link]="['/CharacterForm']"><button>+</button></a>
+	<a [router-link]="['/CharacterForm', {campaignId: campaignId}]"><button>+</button></a>
 </div>

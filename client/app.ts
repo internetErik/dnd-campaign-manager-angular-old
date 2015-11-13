@@ -1,7 +1,7 @@
 /// <reference path="../typings/angular2-meteor.d.ts" />
 /// <reference path="../typings/meteor-accounts-ui.d.ts" />
 
-import {Component, View, NgFor, provide} from 'angular2/angular2';
+import {Component, View, NgIf, NgZone, provide} from 'angular2/angular2';
 
 import {bootstrap} from 'angular2-meteor';
 
@@ -30,16 +30,18 @@ import {ROUTER_PROVIDERS, ROUTER_DIRECTIVES, RouteConfig, APP_BASE_HREF} from 'a
 @View({
 		template: `
 		<nav>
+			<span *ng-if="user">
 			<a [router-link]="['/HomePage']">Home</a> |
 			<a [router-link]="['/CharacterList']">Characters</a> |
 			<a [router-link]="['/CombatDisplay']">Combat Display</a> |
 			<a [router-link]="['/ContentCreator']">Content Creator</a>
+			</span>
 			<accounts-ui></accounts-ui>
 		</nav>
 		<router-outlet></router-outlet>
 		<dice-helper></dice-helper>
 		`,
-		directives: [ROUTER_DIRECTIVES, DiceHelper, AccountsUI]
+		directives: [ROUTER_DIRECTIVES, NgIf, DiceHelper, AccountsUI]
 })
 @RouteConfig([
 		{
@@ -78,7 +80,11 @@ import {ROUTER_PROVIDERS, ROUTER_DIRECTIVES, RouteConfig, APP_BASE_HREF} from 'a
     }
 ])
 class App { 
-		constructor() {
+		user: any;
+		constructor(zone: NgZone) {
+			Tracker.autorun(() => zone.run(() => {
+				this.user = Meteor.user();
+			}));
 			Meteor.subscribe('campaigns');
 			Meteor.subscribe('characters');
 			Meteor.subscribe('spells');

@@ -1,4 +1,5 @@
 /// <reference path="../../typings/angular2-meteor.d.ts" />
+/// <reference path="../../typings/meteor-accounts.d.ts" />
 
 import {Component, View, NgFor} from 'angular2/angular2';
 
@@ -8,6 +9,8 @@ import {Characters} from 'collections/characters';
 
 import {FORM_DIRECTIVES, FormBuilder, Control, ControlGroup, Validators} from 'angular2/angular2';
 
+import {RequireUser} from 'meteor-accounts';
+
 @Component({
 	selector: 'character-form'
 })
@@ -15,6 +18,7 @@ import {FORM_DIRECTIVES, FormBuilder, Control, ControlGroup, Validators} from 'a
 	templateUrl: 'client/character-form/character-form.html',
 	directives: [FORM_DIRECTIVES, NgFor]
 })
+@RequireUser()
 export class CharacterForm {
 	characterForm: ControlGroup;
 	router: Router;

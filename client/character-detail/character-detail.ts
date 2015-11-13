@@ -1,4 +1,5 @@
 /// <reference path="../../typings/angular2-meteor.d.ts" />
+/// <reference path="../../typings/meteor-accounts.d.ts" />
 
 import {Component, View, NgFor, NgIf} from 'angular2/angular2';
 
@@ -8,6 +9,8 @@ import {RouteParams, Router} from 'angular2/router';
 
 import {Characters} from 'collections/characters';
 
+import {RequireUser} from 'meteor-accounts';
+
 @Component({
     selector: 'character-detail'
 })
@@ -15,6 +18,7 @@ import {Characters} from 'collections/characters';
     templateUrl: 'client/character-detail/character-detail.html',
     directives: [FORM_DIRECTIVES, NgFor, NgIf]
 })
+@RequireUser()
 export class CharacterDetail {
     character: any;
     router: Router;

@@ -1,0 +1,5 @@
+<form [ng-form-model]="campaignForm" #f="form" (submit)="addCampaign($event, f.value)">
+<label for="name">Name:</label>
+<input id="name" type="text" ng-control="name">
+<button>Create Campaign</button>
+</form>

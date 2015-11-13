@@ -1,0 +1,29 @@
+// *************************************************
+// ** This file contains framework.  These styles **
+// ** Are not meant for just one element, but to  **
+// ** compose on many elements.                   **
+// *************************************************
+
+// pick your poison
+@import "config/reset";  //modified
+//@import "config/normalize";
+
+//font awesome is recommended for speedy development
+	// keep icomoon (https://icomoon.io/) in mind, also
+@import "../../node_modules/font-awesome/scss/font-awesome";
+
+//font-awesome overrides
+	// this is so we can develop quickly with icons to achieve wireframes
+	// and then switch to actual site design
+@import "site/font-awesome-overrides";
+
+@import "config/variables";
+
+//collection of single style classes
+	// the goal is to allow wireframing to (mostly) be accomplished 
+	// with atomic styles and for the finished design styles to be in 
+	// component css (mostly in media queries)
+@import "site/atomic";
+
+//styles that can be reused
+@import "site/composables";

@@ -1,0 +1,63 @@
+//variable naming
+// use $<property>-description: value
+	// ex.
+	// $color-light-blue
+	// $width-large
+
+// base font -- assuming we are working with font-size: 10px;
+$font-size-base: 1.8em;
+
+// wire framing colors
+$color-black: #101010;
+$color-white: #fefefe;
+$color-lightgray: lightgray;
+$color-gray: gray;
+
+$width-wrapper: 960px;
+
+// breakpoints
+	// Define these widths by the actual design! Don't use default values
+$bp-lgx: 1350px;
+$bp-lg: 1100px;
+$bp-md: 768px;
+$bp-sm: 500px;
+
+$bp-wrapper: $width-wrapper;
+
+// heights/widths
+	// ex.
+	// $height-panel-title: 75px;
+	// $width-col: round($width-wrapper / 3);
+
+// site colors
+	// ex.
+	// $color-brand-gold: #ffb81b;
+	// $color-brand-blue: #0e254d;
+
+// susy config
+$susy: (
+	flow: ltr,
+	math: fluid,
+	output: float,
+	gutter-position: after,
+	container: auto,
+	container-position: center,
+	columns: 4,
+	gutters: .25,
+	column-width: false,
+	global-box-sizing: border-box,
+	last-flow: to,
+	debug: (
+		image: hide,
+		color: rgba(#66f, .25),
+		output: background,
+		toggle: top right,
+	),
+	use-custom: (
+		background-image: true,
+		background-options: false,
+		box-sizing: true,
+		clearfix: false,
+		rem: true,
+	)
+);

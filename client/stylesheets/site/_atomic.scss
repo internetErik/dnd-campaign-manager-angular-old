@@ -1,0 +1,473 @@
+$pxs: 0, 1, 5, 10, 15, 20, 25, 30, 40, 44, 50, 60, 70, 80, 90, 100, 125, 150, 175, 200, 225, 250, 275, 300, 325, 350, 375, 400, 500, 600, 700, 800;
+
+//padding/margin/height/width
+@each $w in $pxs {
+  .p#{$w} {
+    padding: #{$w}px;
+  }
+  
+  .p#{$w}-0 {
+    padding: #{$w}px 0;
+  }
+  
+  .p0-#{$w} {
+    padding: 0 #{$w}px;
+  }
+  
+  .m#{$w} {
+    margin: #{$w}px;
+  }
+  
+  .m#{$w}-0 {
+    margin: #{$w}px 0;
+  }
+  
+  .m0-#{$w} {
+    margin: 0 #{$w}px;
+  }
+
+  .h#{$w} {
+    height: #{$w}px;
+  }
+
+  .w#{$w} {
+    width: #{$w}px;
+  }
+
+  .t#{$w} {
+    top: #{$w}px;
+  }
+
+  .b#{$w} {
+    bottom: #{$w}px;
+  }
+
+  .l#{$w} {
+    left: #{$w}px;
+  }
+
+  .r#{$w} {
+    right: #{$w}px;
+  }
+}
+
+@each $w in $pxs {
+  .pt#{$w} {
+    padding-top: #{$w}px;
+  }
+  
+  .pb#{$w} {
+    padding-bottom: #{$w}px;
+  }
+  
+  .pr#{$w} {
+    padding-right: #{$w}px;
+  }
+  
+  .pl#{$w} {
+    padding-left: #{$w}px;
+  }
+  
+  .mt#{$w} {
+    margin-top: #{$w}px;
+  }
+  
+  .mb#{$w} {
+    margin-bottom: #{$w}px;
+  }
+  
+  .mr#{$w} {
+    margin-right: #{$w}px;
+  }
+  
+  .ml#{$w} {
+    margin-left: #{$w}px;
+  }
+}
+
+.m0-auto {
+  margin: 0 auto;
+}
+
+$perc: '1', '2', '3', '4', '5', '10', '15', '20', '25', '30', '35', '40', '45', '50', '55', '60', '65', '70', '75', '80', '85', '90', '95', '100';
+
+@each $p in $perc {
+  .w#{$p}\% {
+    width: #{$p}%;
+  }
+
+  .h#{$p}\% {
+    height: #{$p}%;
+  }
+
+  .t#{$p}\% {
+    top: #{$p}%;
+  }
+
+  .b#{$p}\% {
+    bottom: #{$p}%;
+  }
+
+  .l#{$p}\% {
+    left: #{$p}%;
+  }
+
+  .r#{$p}\% {
+    right: #{$p}%;
+  }
+}
+
+.w12\.25\% {
+  width: 12.25%;
+}
+
+.h12\.25\% {
+  height: 12.25%;
+}
+
+.t12\.25\% {
+  top: 12.25%;
+}
+
+.b12\.25\% {
+  bottom: 12.25%;
+}
+
+.l12\.25\% {
+  left: 12.25%;
+}
+
+.r12\.25\% {
+  right: 12.25%;
+}
+
+.w33\.3333\% {
+  width: 33.3333%;
+}
+
+.h33\.3333\% {
+  height: 33.3333%;
+}
+
+.t33\.3333\% {
+  top: 33.3333%;
+}
+
+.b33\.3333\% {
+  bottom: 33.3333%;
+}
+
+.l33\.3333\% {
+  left: 33.3333%;
+}
+
+.r33\.3333\% {
+  right: 33.3333%;
+}
+
+.w66\.6666\% {
+  width: 66.6666%;
+}
+
+.h66\.6666\% {
+  height: 66.6666%;
+}
+
+.t66\.6666\% {
+  top: 66.6666%;
+}
+
+.b66\.6666\% {
+  bottom: 66.6666%;
+}
+
+.l66\.6666\% {
+  left: 66.6666%;
+}
+
+.r66\.6666\% {
+  right: 66.6666%;
+}
+
+$zs: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10;
+
+@each $z in $zs {
+  .z#{$z} {
+    z-index: $z;
+  }
+}
+
+//display
+.dn {
+  display: none;
+}
+
+.d-i {
+  display: inline;
+}
+
+.db {
+  display: block;
+}
+
+.dib {
+  display: inline-block;
+}
+
+//position
+.posr {
+  position: relative;
+}
+
+.posa {
+  position: absolute;
+}
+
+.posf {
+  position: fixed;
+}
+
+//overflows
+.oh {
+  overflow: hidden;
+}
+
+.oa {
+  overflow: auto;
+}
+
+.oya {
+  overflow-y: auto;
+} 
+
+.oyh {
+  overflow-y: hidden;
+}
+
+.oxa {
+  overflow-x: auto;
+}
+
+.oxh {
+  overflow-x: hidden;
+}
+
+//floats
+.fl {
+  float: left;
+}
+
+.fr {
+  float: right;
+}
+
+//clears
+.clb {
+  clear: both;
+}
+
+.cll {
+  clear: left;
+}
+
+.clr {
+  clear: right;
+}
+
+//text alignment
+.tal {
+  text-align: left;
+}
+
+.tac {
+  text-align: center;
+}
+
+.tar {
+  text-align: right;
+}
+
+.taj {
+  text-align: justify;
+}
+
+//text transform
+.ttu {
+  text-transform: uppercase;
+}
+
+.ttn {
+  text-transform: none;
+}
+
+//text decorate
+.tdn {
+  text-decoration: none;
+}
+
+.tdu {
+  text-decoration: underline;
+}
+
+//font styles
+.fsi {
+  font-style: italic;
+}
+
+.fso {
+  font-style: oblique;
+}
+
+$fws: 100, 200, 300, 400, 500, 600, 700, 800, 900;
+
+@each $fw in $fws {
+  .fw#{$fw} {
+    font-weight: $fw;
+  }
+}
+
+//font families
+.ffs {
+  font-family: serif;
+}
+
+.ffss {
+  font-family: sans-serif;
+}
+
+//background color
+.bgc-white {
+  background-color: $color-white;
+}
+
+.bgc-gray {
+  background-color: $color-gray;
+}
+
+.bgc-black {
+  background-color: $color-black;
+}
+
+.bgc-white\:h:hover {
+  background-color: $color-white;
+}
+
+.bgc-gray\:h:hover {
+  background-color: $color-gray;
+}
+
+.bgc-black\:h:hover {
+  background-color: $color-black;
+}
+
+//font color
+.c-white {
+  color: $color-white;
+}
+
+.c-gray {
+  color: $color-gray;
+}
+
+.c-black {
+  color: $color-black;
+}
+
+.c-white\:h:hover {
+  color: $color-white;
+}
+
+.c-gray\:h:hover {
+  color: $color-gray;
+}
+
+.c-black\:h:hover {
+  color: $color-black;
+}
+
+//opacity
+.op0 {
+  opacity: 0;
+}
+
+.op1 {
+  opacity: 1;
+}
+
+//cursor
+.curp {
+  cursor: pointer;
+}
+
+.curc {
+  cursor: crosshair;
+}
+
+.lsn {
+  list-style: none;
+}
+
+//border
+.bdn {
+  border: none;
+}
+
+.bd1-s-white {
+  border: 1px solid $color-white;
+}
+
+.bd1-s-black {
+  border: 1px solid $color-black;
+}
+
+.bd1-s-gray {
+  border: 1px solid $color-gray;
+}
+
+.bt1-s-white {
+  border-top: 1px solid $color-white;
+}
+
+.bb1-s-white {
+  border-bottom: 1px solid $color-white;
+}
+
+.bt1-s-black {
+  border-top: 1px solid $color-black;
+}
+
+.bb1-s-black {
+  border-bottom: 1px solid $color-black;
+}
+
+.bt1-s-gray {
+  border-top: 1px solid $color-gray;
+}
+
+.bb1-s-gray {
+  border-bottom: 1px solid $color-gray;
+}
+
+.br1-s-white {
+  border-right: 1px solid $color-white;
+}
+
+.bl1-s-white {
+  border-left: 1px solid $color-white;
+}
+
+.br1-s-gray {
+  border-right: 1px solid $color-gray;
+}
+
+.bl1-s-gray {
+  border-left: 1px solid $color-gray;
+}
+
+.br1-s-black {
+  border-right: 1px solid $color-black;
+}
+
+.bl1-s-black {
+  border-left: 1px solid $color-black;
+}

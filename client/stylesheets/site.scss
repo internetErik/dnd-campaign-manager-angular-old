@@ -1,0 +1,38 @@
+@import "config/variables";
+
+// like an extension of reset/normalize
+@import "site/defaults";
+
+@import "site/typography";
+
+//susy is recommended for grids
+	//http://susydocs.oddbird.net/en/latest/
+@import "../../node_modules/susy/sass/susy";
+
+//grids depend upon susy
+@import "site/grid";
+
+// like an extension of reset
+@import "site/defaults";
+
+// **********************************************
+// ** below here add as little css as possible **
+// **********************************************
+// This is the css that people using the project will really need
+// to study.  The rest of the project is handled by the 'framework'.
+
+//components scss
+	// This is for honest to goodness components
+		// components are either reused or have special functionality
+		// that makes sense to keep clearly by itself
+//@import "components/...";
+
+//partial scss
+	// Partials just represent a part of a page
+	// these are usually not repeated or they would be components
+//@import "partials/...";
+
+//page scss - should be highest level of override
+	// often nothing or very little will be page specific
+	// overrides for components and partials on particular pages will go here
+//@import "pages/...";

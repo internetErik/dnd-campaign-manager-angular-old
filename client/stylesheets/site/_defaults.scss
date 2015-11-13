@@ -11,6 +11,7 @@ button {
 textarea, 
 input { 
 	outline: none; 
+	font-family: $font-family-mono;
 }
 
 ::-webkit-input-placeholder { /* WebKit browsers */

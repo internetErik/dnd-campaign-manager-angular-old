@@ -4,7 +4,7 @@ html {
 	font-size: 10px;
 }
 body {
-	font-family: sans-serif;
+	font-family: $font-family-text;
 	font-size: $font-size-base;
 	line-height: 1.2; // http://practicaltypography.com/line-spacing.html
 }
@@ -12,29 +12,34 @@ body {
 //modular scale  find new scale on http://www.modularscale.com
 	//base: 10px
 	//ratios: 1.5
-
-.heading1 {
-	font-size: 11.391em;
-}
-
-.heading2 {
-	font-size: 7.594em;
-}
-
-.heading3 {
-	font-size: 5.063em;
-}
-
-.heading4 {
+h1, .heading1 {
 	font-size: 3.375em;
+	font-family: $font-family-heading;
 }
 
-.heading5 {
+h2, .heading2 {
 	font-size: 2.25em;
+	font-family: $font-family-heading;
 }
 
-.heading6 {
+h3, .heading3 {
 	font-size: 1.5em;
+	font-family: $font-family-heading;
+}
+
+h4, .heading4 {
+	font-size: 1em;
+	font-family: $font-family-heading;
+}
+
+h5, .heading5 {
+	font-size: .667em;
+	font-family: $font-family-heading;
+}
+
+h6, .heading6 {
+	font-size: .444em;
+	font-family: $font-family-heading;
 }
 
 a {

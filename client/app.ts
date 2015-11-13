@@ -27,21 +27,25 @@ import {AccountsUI} from 'meteor-accounts-ui';
 })
 @View({
 	template: `
-	<nav>
+	<nav class="h50 posr p0-50">
+		<div class="vertical-align">
 		<span *ng-if="user">
-		<a [router-link]="['/HomePage']">Home</a> |
-		<a [router-link]="['/CampaignList']">Campaigns</a> |
-		<a [router-link]="['/ContentCreator']">Content Creator</a> |
-		<a [router-link]="['/CharacterList']">All Characters</a> |
-		<a [router-link]="['/CombatDisplay']">Combat Display</a> |
+		<a class="tdn" [router-link]="['/HomePage']">Home</a> |
+		<a class="tdn" [router-link]="['/CampaignList']">Campaigns</a> |
+		<a class="tdn" [router-link]="['/ContentCreator']">Content Creator</a> |
+		<a class="tdn" [router-link]="['/CharacterList']">All Characters</a> |
+		<a class="tdn" [router-link]="['/CombatDisplay']">Combat Display</a> |
 		</span>
 		<accounts-ui></accounts-ui>
+		</div>
 	</nav>
-	<div class="sub-menu" *ng-if="campaign">
+	<div class="sub-menu h50 bgc-gray c-white posr p0-50">
+		<span *ng-if="campaign" class="vertical-align dib">
 		Campaign: {{campaign.name}}
-		<a [router-link]="['/CharacterList', {campaignId: campaign._id}]">Characters</a> |
-		<a [router-link]="['/CombatDisplay', {campaignId: campaign._id}]">Combat Display</a> 
-		<button (click)="unselectCampaign()">unselect</button>
+		<button (click)="unselectCampaign()">unselect</button> >
+		<a class="tdn" [router-link]="['/CharacterList', {campaignId: campaign._id}]">Characters</a> |
+		<a class="tdn" [router-link]="['/CombatDisplay', {campaignId: campaign._id}]">Combat Display</a> 
+		</span>
 	</div>
 	<router-outlet></router-outlet>
 	<dice-helper></dice-helper>

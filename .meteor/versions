@@ -33,6 +33,7 @@ ejson@1.0.7
 email@1.0.8
 es5-shim@4.1.14
 fastclick@1.0.7
+fortawesome:fontawesome@4.4.0
 fourseven:scss@3.4.1
 geojson-utils@1.0.4
 hot-code-push@1.0.0
@@ -46,6 +47,7 @@ less@2.5.1
 livedata@1.0.15
 localstorage@1.0.5
 logging@1.0.8
+meta:susy@2.3.3
 meteor@1.1.10
 meteor-base@1.0.1
 minifiers@1.1.7

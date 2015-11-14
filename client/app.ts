@@ -27,7 +27,7 @@ import {AccountsUI} from 'meteor-accounts-ui';
 })
 @View({
 	template: `
-	<nav class="h50 posr p0-50 heading5">
+	<nav class="h70 posr p0-50 heading5">
 		<div class="vertical-align">
 		<span *ng-if="user">
 		<a class="tdn" [router-link]="['/HomePage']">Home</a> |
@@ -39,7 +39,7 @@ import {AccountsUI} from 'meteor-accounts-ui';
 		<accounts-ui></accounts-ui>
 		</div>
 	</nav>
-	<div class="sub-menu bgc-gray c-white posr p0-50 heading5" [class.h50]="campaign">
+	<div class="sub-menu bgc-lightgray posr p0-50 heading5" [class.h50]="campaign">
 		<span *ng-if="campaign" class="vertical-align dib">
 		Campaign: {{campaign.name}}
 		<button (click)="unselectCampaign()">unselect</button> >

@@ -344,6 +344,10 @@ $fws: 100, 200, 300, 400, 500, 600, 700, 800, 900;
   background-color: $color-gray;
 }
 
+.bgc-lightgray {
+  background-color: lightgray;
+}
+
 .bgc-black {
   background-color: $color-black;
 }
@@ -354,6 +358,10 @@ $fws: 100, 200, 300, 400, 500, 600, 700, 800, 900;
 
 .bgc-gray\:h:hover {
   background-color: $color-gray;
+}
+
+.bgc-lightgray\:h:hover {
+  background-color: lightgray;
 }
 
 .bgc-black\:h:hover {

@@ -373,7 +373,7 @@
 		<h3 class="pt20">Spell List</h3>
 		<div *ng-for="#spell of character.spells;#i = index" [class.pt30]="i !== 0">
 			<div class="p10-0">
-				<label>{{ spell.name }}:</label>
+				<label>{{ spell.name }}</label>
 			</div>
 			<div class="p10-0">
 				<label class="w125">Level:</label> {{spell.level}}
@@ -414,7 +414,7 @@
 	<hr>
 	<section class="p20-0 m20-0">
 		<h2>Skills</h2>
-
+		
 		<h3>Skill List</h3>
 		<div *ng-for="#skill of character.skills;#i = index" [class.pt15]="i !== 0">
 			<label>{{ skill.name }} ({{skill.stat}}):</label>

@@ -57,10 +57,6 @@ import {AccountsUI} from 'meteor-accounts-ui';
 @RouteConfig([
 	{
 		path: '/',
-		redirectTo: '/HomePage'
-	},
-	{
-		path: '/home',
 		as: 'HomePage',
 		component: HomePage
 	},

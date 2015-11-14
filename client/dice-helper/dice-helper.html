@@ -1,29 +1,30 @@
-<div class="dice" 
+<div class="dice-helper p20 posf b0 l0 bgc-white bd1-s-black max-width" 
 	[class.hide-dice]="diceHidden">
-	<button (click)="toggleDice();">
+	<button class="p10-0 pl20 pr20" (click)="toggleDice();">
 		<span *ng-if="diceHidden">Show</span>
 		<span *ng-if="!diceHidden">Hide</span>
 	</button>
-	<button (click)="clearRolls()">Clear</button>
-	<button [disabled]="disabled" (click)="roll(2)">d2</button>
-	<button [disabled]="disabled" (click)="roll(4)">d4</button>
-	<button [disabled]="disabled" (click)="roll(6)">d6</button>
-	<button [disabled]="disabled" (click)="roll(8)">d8</button>
-	<button [disabled]="disabled" (click)="roll(10)">d10</button>
-	<button [disabled]="disabled" (click)="roll(12)">d12</button>
-	<button [disabled]="disabled" (click)="roll(20)">d20</button>
-	<button [disabled]="disabled" (click)="roll(100)">d100</button>
+	<button class="p10-0 pl20 pr20" (click)="clearRolls()">Clear</button>
+	<button class="p10-0 pl20 pr20" [disabled]="disabled" (click)="roll(2)">d2</button>
+	<button class="p10-0 pl20 pr20" [disabled]="disabled" (click)="roll(4)">d4</button>
+	<button class="p10-0 pl20 pr20" [disabled]="disabled" (click)="roll(6)">d6</button>
+	<button class="p10-0 pl20 pr20" [disabled]="disabled" (click)="roll(8)">d8</button>
+	<button class="p10-0 pl20 pr20" [disabled]="disabled" (click)="roll(10)">d10</button>
+	<button class="p10-0 pl20 pr20" [disabled]="disabled" (click)="roll(12)">d12</button>
+	<button class="p10-0 pl20 pr20" [disabled]="disabled" (click)="roll(20)">d20</button>
+	<button class="p10-0 pl20 pr20" [disabled]="disabled" (click)="roll(100)">d100</button>
 	Bonus: <input type="number" class="js-bonus-to-roll" value="0" >
-	<br>
+	<div class="p10-0">
 	Current Roll: {{currentRoll}} 
-	<div *ng-if="rollPublic">
+	</div>
+	<div class="p10-0" *ng-if="rollPublic">
 		Last 5 Rolls: 
 		<span *ng-for="#roll of lastRolls; #last = last" [class.critical-roll]="roll.critical">
 			{{roll.result + roll.bonus}} (d{{roll.sides}} + {{roll.bonus}})<span *ng-if="!last">,</span> 
 		</span>
 	</div>
-	<div>
-		<button (click)="togglePublic()">
+	<div class="p20-0">
+		<button class="p10-0 pl20 pr20" (click)="togglePublic()">
 			<span *ng-if="rollPublic">Public</span>
 			<span *ng-if="!rollPublic">Private</span>
 		</button>

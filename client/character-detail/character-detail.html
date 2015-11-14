@@ -1,450 +1,489 @@
 <div>
 	<button (click)="saveCharacter($event)">Save</button> {{saveMessage}}
-	<h2>Name</h2>
-	<div>
-		<h3>
-			{{character.title}} {{character.firstName}} {{character.middleName}} {{character.lastName}}
-		</h3>
-	</div>
-
-	<h2>Religion/Morals</h2>
-	<div class="p10-0">
-		<label for="alignment">Deity</label>
-		<input type="text" [(ng-model)]="character.deity">
-	</div>
-	<div class="p10-0">
-		<label for="alignment">Alignment</label>
-		<input type="text" [(ng-model)]="character.alignment">
-	</div>
-
-	<h2>Biological Information</h2>
-	<div class="p10-0">
-			<label for="race">Race:</label>
+	<section class="p20-0 m20-0">
+		<h1>
+			{{character.title}} 
+			{{character.firstName}} 
+			{{character.middleName}} 
+			{{character.lastName}}
+		</h1>
+	</section>
+	<hr>
+	<section class="p20-0 m20-0">
+		<h2>Religion/Morals</h2>
+		<div class="p10-0">
+			<label for="alignment" class="w125">Deity: </label>
+			<input type="text" [(ng-model)]="character.deity">
+		</div>
+		<div class="p10-0">
+			<label for="alignment" class="w125">Alignment: </label>
+			<input type="text" [(ng-model)]="character.alignment">
+		</div>
+	</section>
+	<hr>
+	<section class="p20-0 m20-0">
+		<h2>Biological Information</h2>
+		<div class="p10-0">
+			<label for="race" class="w125">Race:</label>
 			<input type="text" [(ng-model)]="character.race">
-	</div>
-	<div class="p10-0">
-			<label for="sex">Sex:</label>
+		</div>
+		<div class="p10-0">
+			<label for="sex" class="w125">Sex:</label>
 			<input type="text" [(ng-model)]="character.sex">
-	</div>
-	<div class="p10-0">
-			<label for="height">Height:</label>
+		</div>
+		<div class="p10-0">
+			<label for="height" class="w125">Height:</label>
 			{{character.heightM}} m {{character.heightCm}} cm
-	</div>
-	<div class="p10-0">
-			<label for="weight">Weight:</label>
+		</div>
+		<div class="p10-0">
+			<label for="weight" class="w125">Weight:</label>
 			{{character.weight}} kg
-	</div>
-	<div class="p10-0">
-		<label for="age">Birthday:</label>
-		<input type="text" [(ng-model)]="character.birthday">
-	</div>
-	<div class="p10-0">
-		<label for="age">Age:</label>
-		<input type="number" [(ng-model)]="character.age">
-	</div>
-	<div class="p10-0">
-		<label for="description">Description:</label>
-		<br>
-		<textarea id="description" cols="45" rows="10" [(ng-model)]="character.description"></textarea>
-	</div>
-
-	<h2>Equipment</h2>
-	<div class="p10-0">
-		<label for="inventory">Inventory:</label>
-		<br>
-		<textarea id="inventory" cols="45" rows="10" [(ng-model)]="character.inventory"></textarea>
-	</div>
-	<div class="p10-0">
-		<label for="gold">Bronze:</label>
-		<input type="number" min="0" [(ng-model)]="character.bronze">
-		<label for="gold">Silver:</label>
-		<input type="number" min="0" [(ng-model)]="character.silver">
-		<label for="gold">Gold:</label>
-		<input type="number" min="0" [(ng-model)]="character.gold">
-	</div>
-	
-	<h2>Stats</h2>
-	<div class="p10-0">
-			<label for="str">HP:</label> 
-			{{character.hp + character.hpBonus - character.damage}}
+		</div>
+		<div class="p10-0">
+			<label for="age" class="w125">Birthday:</label>
+			<input type="text" [(ng-model)]="character.birthday">
+		</div>
+		<div class="p10-0">
+			<label for="age" class="w125">Age:</label>
+			<input type="number" min="0" max="9999" [(ng-model)]="character.age">
+		</div>
+		<div class="p10-0">
+			<label for="description" class="w125">Description:</label>
 			<br>
-			Base: <input type="number" [(ng-model)]="character.hp">
-			Damage: <input type="number" [(ng-model)]="character.damage">
-			Bonus: <input type="number" [(ng-model)]="character.hpBonus">
-	</div>
-	<div class="p10-0">
-			<label for="str">Strength:</label> 
-			{{character.str + character.strBonus}}
+			<textarea id="description" cols="45" rows="10" [(ng-model)]="character.description"></textarea>
+		</div>
+	</section>
+	<hr>
+	<section class="p20-0 m20-0">
+		<h2>Equipment</h2>
+		<div class="p10-0">
+			<label for="inventory" class="w125">Inventory:</label>
 			<br>
-			Base: <input type="number" [(ng-model)]="character.str">
-			Bonus: <input type="number" [(ng-model)]="character.strBonus">
-			Tab: {{character.strTab}} 
-			<button (click)="incrementTab('strTab')">+</button>
-			<button (click)="clearTab('strTab')">&times;</button>
-	</div>
-	<div class="p10-0">
-			<label for="int">Intelligence:</label> 
-			{{character.int + character.intBonus}}
+			<textarea id="inventory" cols="45" rows="10" [(ng-model)]="character.inventory"></textarea>
+		</div>
+		<div class="p10-0">
+			<label for="bronze">Bronze:</label>
+			<input id="bronze" type="number" min="0" [(ng-model)]="character.bronze">
+			<label for="silver">Silver:</label>
+			<input id="silver" type="number" min="0" [(ng-model)]="character.silver">
+			<label for="gold">Gold:</label>
+			<input id="gold" type="number" min="0" [(ng-model)]="character.gold">
+		</div>
+	</section>
+	<hr>
+	<section class="p20-0 m20-0">
+		<h2>Stats</h2>
+		<div class="p10-0">
+				<label for="str" class="w125">HP:</label> 
+				{{character.hp + character.hpBonus - character.damage}}
+				<br>
+				Base: <input type="number" min="-100" max="9999" [(ng-model)]="character.hp">
+				Damage: <input type="number" min="0" max="9999" [(ng-model)]="character.damage">
+				Bonus: <input type="number" min="-9999" max="9999" [(ng-model)]="character.hpBonus">
+		</div>
+		<div class="p10-0">
+				<label for="str" class="w125">Strength:</label> 
+				{{character.str + character.strBonus}}
+				<br>
+				Base: <input type="number" min="0" max="100" [(ng-model)]="character.str">
+				Bonus: <input type="number" min="-100" max="100" [(ng-model)]="character.strBonus">
+				Tab: {{character.strTab}} 
+				<button (click)="incrementTab('strTab')">+</button>
+				<button (click)="clearTab('strTab')">&times;</button>
+		</div>
+		<div class="p10-0">
+				<label for="int" class="w125">Intelligence:</label> 
+				{{character.int + character.intBonus}}
+				<br>
+				Base: <input type="number" min="0" max="100" [(ng-model)]="character.int">
+				Bonus: <input type="number" min="-100" max="100" [(ng-model)]="character.intBonus">
+				Tab: {{character.intTab}} 
+				<button (click)="incrementTab('intTab')">+</button>
+				<button (click)="clearTab('intTab')">&times;</button>
+		</div>
+		<div class="p10-0">
+				<label for="wis" class="w125">Wisdom:</label> 
+				{{character.wis + character.wisBonus}}
+				<br>
+				Base: <input type="number" min="0" max="100" [(ng-model)]="character.wis">
+				Bonus: <input type="number" min="-100" max="100" [(ng-model)]="character.wisBonus">
+				Tab: {{character.wisTab}} 
+				<button (click)="incrementTab('wisTab')">+</button>
+				<button (click)="clearTab('wisTab')">&times;</button>
+		</div>
+		<div class="p10-0">
+				<label for="con" class="w125">Constitution:</label> 
+				{{character.con + character.conBonus}}
+				<br>
+				Base: <input type="number" min="0" max="100" [(ng-model)]="character.con">
+				Bonus: <input type="number" min="-100" max="100" [(ng-model)]="character.conBonus">
+				Tab: {{character.conTab}} 
+				<button (click)="incrementTab('conTab')">+</button>
+				<button (click)="clearTab('conTab')">&times;</button>
+		</div>
+		<div class="p10-0">
+				<label for="dex" class="w125">Dexterity:</label> 
+				{{character.dex + character.dexBonus}}
+				<br>
+				Base: <input type="number" min="0" max="100" [(ng-model)]="character.dex">
+				Bonus: <input type="number" min="-100" max="100" [(ng-model)]="character.dexBonus">
+				Tab: {{character.dexTab}} 
+				<button (click)="incrementTab('dexTab')">+</button>
+				<button (click)="clearTab('dexTab')">&times;</button>
+		</div>
+		<div class="p10-0">
+				<label for="cha" class="w125">Charisma:</label> 
+				{{character.cha + character.chaBonus}}
+				<br>
+				Base: <input type="number" min="0" max="100" [(ng-model)]="character.cha">
+				Bonus: <input type="number" min="-100" max="100" [(ng-model)]="character.chaBonus">
+				Tab: {{character.chaTab}} 
+				<button (click)="incrementTab('chaTab')">+</button>
+				<button (click)="clearTab('chaTab')">&times;</button>
+		</div>
+		<div class="p10-0">
+			<label for="movement" class="w125">Movement:</label>
+			{{character.movement + character.movementBonus}}
 			<br>
-			Base: <input type="number" [(ng-model)]="character.int">
-			Bonus: <input type="number" [(ng-model)]="character.intBonus">
-			Tab: {{character.intTab}} 
-			<button (click)="incrementTab('intTab')">+</button>
-			<button (click)="clearTab('intTab')">&times;</button>
-	</div>
-	<div class="p10-0">
-			<label for="wis">Wisdom:</label> 
-			{{character.wis + character.wisBonus}}
+			Base: <input type="number" min="0" max="100" [(ng-model)]="character.movement">
+			Bonus: <input type="number" min="-100" max="100" [(ng-model)]="character.movementBonus">
+		</div>
+		<div class="p10-0">
+				<label for="hitRoll" class="w125">Hit Roll:</label>
+				{{character.hitRoll + character.hitRollBonus}}
+				<br>
+				Base: <input type="number" min="0" max="100" [(ng-model)]="character.hitRoll">
+				Bonus: <input type="number" min="-100" max="100" [(ng-model)]="character.hitRollBonus">
+		</div>
+		<div class="p10-0">
+			<label for="ac" class="w125">Armor Class:</label>
+			{{ character.ac + character.acBonus }}
 			<br>
-			Base: <input type="number" [(ng-model)]="character.wis">
-			Bonus: <input type="number" [(ng-model)]="character.wisBonus">
-			Tab: {{character.wisTab}} 
-			<button (click)="incrementTab('wisTab')">+</button>
-			<button (click)="clearTab('wisTab')">&times;</button>
-	</div>
-	<div class="p10-0">
-			<label for="con">Constitution:</label> 
-			{{character.con + character.conBonus}}
+			Base: <input type="number" min="-100" max="100" [(ng-model)]="character.ac">
+			Bonus: <input type="number" min="-100" max="100" [(ng-model)]="character.acBonus">
+		</div>
+		<div class="p10-0">
+			<label for="ac" class="w125">Evade:</label>
+			{{ character.evade + character.block + character.evadeBonus }}
 			<br>
-			Base: <input type="number" [(ng-model)]="character.con">
-			Bonus: <input type="number" [(ng-model)]="character.conBonus">
-			Tab: {{character.conTab}} 
-			<button (click)="incrementTab('conTab')">+</button>
-			<button (click)="clearTab('conTab')">&times;</button>
-	</div>
-	<div class="p10-0">
-			<label for="dex">Dexterity:</label> 
-			{{character.dex + character.dexBonus}}
-			<br>
-			Base: <input type="number" [(ng-model)]="character.dex">
-			Bonus: <input type="number" [(ng-model)]="character.dexBonus">
-			Tab: {{character.dexTab}} 
-			<button (click)="incrementTab('dexTab')">+</button>
-			<button (click)="clearTab('dexTab')">&times;</button>
-	</div>
-	<div class="p10-0">
-			<label for="cha">Charisma:</label> 
-			{{character.cha + character.chaBonus}}
-			<br>
-			Base: <input type="number" [(ng-model)]="character.cha">
-			Bonus: <input type="number" [(ng-model)]="character.chaBonus">
-			Tab: {{character.chaTab}} 
-			<button (click)="incrementTab('chaTab')">+</button>
-			<button (click)="clearTab('chaTab')">&times;</button>
-	</div>
-	<div class="p10-0">
-		<label for="movement">Movement:</label>
-		{{character.movement + character.movementBonus}}
-		<br>
-		Base: <input type="number" [(ng-model)]="character.movement">
-		Bonus: <input type="number" [(ng-model)]="character.movementBonus">
-	</div>
-	<div class="p10-0">
-			<label for="hitRoll">Hit Roll:</label>
-			{{character.hitRoll + character.hitRollBonus}}
-			<br>
-			Base: <input type="number" [(ng-model)]="character.hitRoll">
-			Bonus: <input type="number" [(ng-model)]="character.hitRollBonus">
-	</div>
-	<div class="p10-0">
-		<label for="ac">Armor Class:</label>
-		{{ character.ac + character.acBonus }}
-		<br>
-		Base: <input type="number" [(ng-model)]="character.ac">
-		Bonus: <input type="number" [(ng-model)]="character.acBonus">
-	</div>
-	<div class="p10-0">
-		<label for="ac">Evade:</label>
-		{{ character.evade + character.block + character.evadeBonus }}
-		<br>
-		Base: <input type="number" [(ng-model)]="character.evade">
-		Block: <input type="number" [(ng-model)]="character.block">
-		Bonus: <input type="number" [(ng-model)]="character.evadeBonus">
-	</div>
-	<h3>Saves</h3>
-	<div class="p10-0">
-			<label for="reflex">Reflex:</label> 
+			Base: <input type="number" min="-100" max="100" [(ng-model)]="character.evade">
+			Block: <input type="number" min="-100" max="100" [(ng-model)]="character.block">
+			Bonus: <input type="number" min="-100" max="100" [(ng-model)]="character.evadeBonus">
+		</div>
+		<h3>Saves</h3>
+		<div class="p10-0">
+			<label for="reflex" class="w125">Reflex:</label> 
 			{{character.reflex + character.reflexBonus}}
 			<br>
-			Base: <input type="number" [(ng-model)]="character.reflex">
-			Bonus: <input type="number" [(ng-model)]="character.reflexBonus">
-	</div>
-	<div class="p10-0">
-			<label for="fortitude">Fortitude:</label>
+			Base: <input type="number" min="-100" max="100" [(ng-model)]="character.reflex">
+			Bonus: <input type="number" min="-100" max="100" [(ng-model)]="character.reflexBonus">
+		</div>
+		<div class="p10-0">
+			<label for="fortitude" class="w125">Fortitude:</label>
 			{{character.fortitude + character.fortitudeBonus}}
 			<br>
-			Base: <input type="number" [(ng-model)]="character.fortitude">
-			Bonus: <input type="number" [(ng-model)]="character.fortitudeBonus">
-	</div>
-	<div class="p10-0">
-			<label for="will">Will:</label>
+			Base: <input type="number" min="-100" max="100" [(ng-model)]="character.fortitude">
+			Bonus: <input type="number" min="-100" max="100" [(ng-model)]="character.fortitudeBonus">
+		</div>
+		<div class="p10-0">
+			<label for="will" class="w125">Will:</label>
 			{{character.will + character.willBonus}}
 			<br>
-			Base: <input type="number" [(ng-model)]="character.will">
-			Bonus: <input type="number" [(ng-model)]="character.willBonus">
-	</div>
-	
-	<h2>Magic</h2>
-	<h3>Effortless Spells</h3>
-	<div class="p10-0">
-		<label for="level0">Level 0:</label>
-			{{character.level0 + character.level0Bonus}}
-			<br>
-			Base: <input type="number" [(ng-model)]="character.level0">
-			Bonus: <input type="number" [(ng-model)]="character.level0Bonus">
-			Tab: {{character.level0Tab}} 
-		<button (click)="incrementTab('level0Tab')">+</button>
-		<button (click)="clearTab('level0Tab')">&times;</button>
-	</div>
-	<div class="p10-0">
-		<label for="level1">Level 1:</label>
-			{{character.level1 + character.level1Bonus}}
-			<br>
-			Base: <input type="number" [(ng-model)]="character.level1">
-			Bonus: <input type="number" [(ng-model)]="character.level1Bonus">
-			Tab: {{character.level1Tab}} 
-		<button (click)="incrementTab('level1Tab')">+</button>
-		<button (click)="clearTab('level1Tab')">&times;</button>
-	</div>
-	<div class="p10-0">
-		<label for="level2">Level 2:</label>
-			{{character.level2 + character.level2Bonus}}
-			<br>
-			Base: <input type="number" [(ng-model)]="character.level2">
-			Bonus: <input type="number" [(ng-model)]="character.level2Bonus">
-			Tab: {{character.level2Tab}} 
-		<button (click)="incrementTab('level2Tab')">+</button>
-		<button (click)="clearTab('level2Tab')">&times;</button>
-	</div>
-	<div class="p10-0">
-		<label for="level3">Level 3:</label>
-			{{character.level3 + character.level3Bonus}}
-			<br>
-			Base: <input type="number" [(ng-model)]="character.level3">
-			Bonus: <input type="number" [(ng-model)]="character.level3Bonus">
-			Tab: {{character.level3Tab}} 
-		<button (click)="incrementTab('level3Tab')">+</button>
-		<button (click)="clearTab('level3Tab')">&times;</button>
-	</div>
-	<div class="p10-0">
-		<label for="level4">Level 4:</label>
-			{{character.level4 + character.level4Bonus}}
-			<br>
-			Base: <input type="number" [(ng-model)]="character.level4">
-			Bonus: <input type="number" [(ng-model)]="character.level4Bonus">
-			Tab: {{character.level4Tab}}
-		<button (click)="incrementTab('level4Tab')">+</button>
-		<button (click)="clearTab('level4Tab')">&times;</button>
-	</div>
-	<div class="p10-0">
-		<label for="level5">Level 5:</label>
-			{{character.level5 + character.level5Bonus}}
-			<br>
-			Base: <input type="number" [(ng-model)]="character.level5">
-			Bonus: <input type="number" [(ng-model)]="character.level5Bonus">
-			Tab: {{character.level5Tab}} 
-		<button (click)="incrementTab('level5Tab')">+</button>
-		<button (click)="clearTab('level5Tab')">&times;</button>
-	</div>
-	<div class="p10-0">
-		<label for="level6">Level 6:</label>
-			{{character.level6 + character.level6Bonus}}
-			<br>
-			Base: <input type="number" [(ng-model)]="character.level6">
-			Bonus: <input type="number" [(ng-model)]="character.level6Bonus">
-			Tab: {{character.level6Tab}}
-		<button (click)="incrementTab('level6Tab')">+</button>
-		<button (click)="clearTab('level6Tab')">&times;</button>
-	</div>
-	<div class="p10-0">
-		<label for="level7">Level 7:</label>
-			{{character.level7 + character.level7Bonus}}
-			<br>
-			Base: <input type="number" [(ng-model)]="character.level7">
-			Bonus: <input type="number" [(ng-model)]="character.level7Bonus">
-			Tab: {{character.level7Tab}} 
-		<button (click)="incrementTab('level7Tab')">+</button>
-		<button (click)="clearTab('level7Tab')">&times;</button>
-	</div>
-	<div class="p10-0">
-		<label for="level8">Level 8:</label>
-			{{character.level8 + character.level8Bonus}}
-			<br>
-			Base: <input type="number" [(ng-model)]="character.level8">
-			Bonus: <input type="number" [(ng-model)]="character.level8Bonus">
-			Tab: {{character.level8Tab}} 
-		<button (click)="incrementTab('level8Tab')">+</button>
-		<button (click)="clearTab('level8Tab')">&times;</button>
-	</div>
-	<div class="p10-0">
-		<label for="level9">Level 9:</label>
-			{{character.level9 + character.level9Bonus}}
-			<br>
-			Base: <input type="number" [(ng-model)]="character.level9">
-			Bonus: <input type="number" [(ng-model)]="character.level9Bonus">
-			Tab: {{character.level9Tab}} 
-		<button (click)="incrementTab('level9Tab')">+</button>
-		<button (click)="clearTab('level9Tab')">&times;</button>
-	</div>
+			Base: <input type="number" min="-100" max="100" [(ng-model)]="character.will">
+			Bonus: <input type="number" min="-100" max="100" [(ng-model)]="character.willBonus">
+		</div>
+	</section>
+	<hr>
+	<section class="p20-0 m20-0">
+		<h2>Magic</h2>
+		<h3>Effortless Spells</h3>
+		<div class="p10-0">
+			<label for="level0" class="w125">Level 0:</label>
+				{{character.level0 + character.level0Bonus}}
+				<br>
+				Base: <input type="number" min="0" max="100" [(ng-model)]="character.level0">
+				Bonus: <input type="number" min="-100" max="100" [(ng-model)]="character.level0Bonus">
+				Tab: {{character.level0Tab}} 
+			<button (click)="incrementTab('level0Tab')">+</button>
+			<button (click)="clearTab('level0Tab')">&times;</button>
+		</div>
+		<div class="p10-0">
+			<label for="level1" class="w125">Level 1:</label>
+				{{character.level1 + character.level1Bonus}}
+				<br>
+				Base: <input type="number" min="0" max="100" [(ng-model)]="character.level1">
+				Bonus: <input type="number" min="-100" max="100" [(ng-model)]="character.level1Bonus">
+				Tab: {{character.level1Tab}} 
+			<button (click)="incrementTab('level1Tab')">+</button>
+			<button (click)="clearTab('level1Tab')">&times;</button>
+		</div>
+		<div class="p10-0">
+			<label for="level2" class="w125">Level 2:</label>
+				{{character.level2 + character.level2Bonus}}
+				<br>
+				Base: <input type="number" min="0" max="100" [(ng-model)]="character.level2">
+				Bonus: <input type="number" min="-100" max="100" [(ng-model)]="character.level2Bonus">
+				Tab: {{character.level2Tab}} 
+			<button (click)="incrementTab('level2Tab')">+</button>
+			<button (click)="clearTab('level2Tab')">&times;</button>
+		</div>
+		<div class="p10-0">
+			<label for="level3" class="w125">Level 3:</label>
+				{{character.level3 + character.level3Bonus}}
+				<br>
+				Base: <input type="number" min="0" max="100" [(ng-model)]="character.level3">
+				Bonus: <input type="number" min="-100" max="100" [(ng-model)]="character.level3Bonus">
+				Tab: {{character.level3Tab}} 
+			<button (click)="incrementTab('level3Tab')">+</button>
+			<button (click)="clearTab('level3Tab')">&times;</button>
+		</div>
+		<div class="p10-0">
+			<label for="level4" class="w125">Level 4:</label>
+				{{character.level4 + character.level4Bonus}}
+				<br>
+				Base: <input type="number" min="0" max="100" [(ng-model)]="character.level4">
+				Bonus: <input type="number" min="-100" max="100" [(ng-model)]="character.level4Bonus">
+				Tab: {{character.level4Tab}}
+			<button (click)="incrementTab('level4Tab')">+</button>
+			<button (click)="clearTab('level4Tab')">&times;</button>
+		</div>
+		<div class="p10-0">
+			<label for="level5" class="w125">Level 5:</label>
+				{{character.level5 + character.level5Bonus}}
+				<br>
+				Base: <input type="number" min="0" max="100" [(ng-model)]="character.level5">
+				Bonus: <input type="number" min="-100" max="100" [(ng-model)]="character.level5Bonus">
+				Tab: {{character.level5Tab}} 
+			<button (click)="incrementTab('level5Tab')">+</button>
+			<button (click)="clearTab('level5Tab')">&times;</button>
+		</div>
+		<div class="p10-0">
+			<label for="level6" class="w125">Level 6:</label>
+				{{character.level6 + character.level6Bonus}}
+				<br>
+				Base: <input type="number" min="0" max="100" [(ng-model)]="character.level6">
+				Bonus: <input type="number" min="-100" max="100" [(ng-model)]="character.level6Bonus">
+				Tab: {{character.level6Tab}}
+			<button (click)="incrementTab('level6Tab')">+</button>
+			<button (click)="clearTab('level6Tab')">&times;</button>
+		</div>
+		<div class="p10-0">
+			<label for="level7" class="w125">Level 7:</label>
+				{{character.level7 + character.level7Bonus}}
+				<br>
+				Base: <input type="number" min="0" max="100" [(ng-model)]="character.level7">
+				Bonus: <input type="number" min="-100" max="100" [(ng-model)]="character.level7Bonus">
+				Tab: {{character.level7Tab}} 
+			<button (click)="incrementTab('level7Tab')">+</button>
+			<button (click)="clearTab('level7Tab')">&times;</button>
+		</div>
+		<div class="p10-0">
+			<label for="level8" class="w125">Level 8:</label>
+				{{character.level8 + character.level8Bonus}}
+				<br>
+				Base: <input type="number" min="0" max="100" [(ng-model)]="character.level8">
+				Bonus: <input type="number" min="-100" max="100" [(ng-model)]="character.level8Bonus">
+				Tab: {{character.level8Tab}} 
+			<button (click)="incrementTab('level8Tab')">+</button>
+			<button (click)="clearTab('level8Tab')">&times;</button>
+		</div>
+		<div class="p10-0">
+			<label for="level9" class="w125">Level 9:</label>
+				{{character.level9 + character.level9Bonus}}
+				<br>
+				Base: <input type="number" min="0" max="100" [(ng-model)]="character.level9">
+				Bonus: <input type="number" min="-100" max="100" [(ng-model)]="character.level9Bonus">
+				Tab: {{character.level9Tab}} 
+			<button (click)="incrementTab('level9Tab')">+</button>
+			<button (click)="clearTab('level9Tab')">&times;</button>
+		</div>
 
-	<h3>Spell Fail Rate</h3>
-	<div class="p10-0">
-		<label for="level0">Level 0:</label>
-		{{character.level0Fail - character.level0FailBonus}}%
-		<br>
-		Base: <input type="number" [(ng-model)]="character.level0Fail" min="0" max="100">%
-		Bonus: <input type="number" [(ng-model)]="character.level0FailBonus" min="0" max="100">%
-	</div>
-	<div class="p10-0">
-		<label for="level0">Level 1:</label>
-		{{character.level1Fail - character.level1FailBonus}}%
-		<br>
-		Base: <input type="number" [(ng-model)]="character.level1Fail" min="0" max="100">%
-		Bonus: <input type="number" [(ng-model)]="character.level1FailBonus" min="0" max="100">%
-	</div>
-	<div class="p10-0">
-		<label for="level0">Level 2:</label>
-		{{character.level2Fail - character.level2FailBonus}}%
-		<br>
-		Base: <input type="number" [(ng-model)]="character.level2Fail" min="0" max="100">%
-		Bonus: <input type="number" [(ng-model)]="character.level2FailBonus" min="0" max="100">%
-	</div>
-	<div class="p10-0">
-		<label for="level0">Level 3:</label>
-		{{character.level3Fail - character.level3FailBonus}}%
-		<br>
-		Base: <input type="number" [(ng-model)]="character.level3Fail" min="0" max="100">%
-		Bonus: <input type="number" [(ng-model)]="character.level3FailBonus" min="0" max="100">%
-	</div>
-	<div class="p10-0">
-		<label for="level0">Level 4:</label>
-		{{character.level4Fail - character.level4FailBonus}}%
-		<br>
-		Base: <input type="number" [(ng-model)]="character.level4Fail" min="0" max="100">%
-		Bonus: <input type="number" [(ng-model)]="character.level4FailBonus" min="0" max="100">%
-	</div>
-	<div class="p10-0">
-		<label for="level0">Level 5:</label>
-		{{character.level5Fail - character.level5FailBonus}}%
-		<br>
-		Base: <input type="number" [(ng-model)]="character.level5Fail" min="0" max="100">%
-		Bonus: <input type="number" [(ng-model)]="character.level5FailBonus" min="0" max="100">%
-	</div>
-	<div class="p10-0">
-		<label for="level0">Level 6:</label>
-		{{character.level6Fail - character.level6FailBonus}}%
-		<br>
-		Base: <input type="number" [(ng-model)]="character.level6Fail" min="0" max="100">%
-		Bonus: <input type="number" [(ng-model)]="character.level6FailBonus" min="0" max="100">%
-	</div>
-	<div class="p10-0">
-		<label for="level0">Level 7:</label>
-		{{character.level7Fail - character.level7FailBonus}}%
-		<br>
-		Base: <input type="number" [(ng-model)]="character.level7Fail" min="0" max="100">%
-		Bonus: <input type="number" [(ng-model)]="character.level7FailBonus" min="0" max="100">%
-	</div>
-	<div class="p10-0">
-		<label for="level0">Level 8:</label>
-		{{character.level8Fail - character.level8FailBonus}}%
-		<br>
-		Base: <input type="number" [(ng-model)]="character.level8Fail" min="0" max="100">%
-		Bonus: <input type="number" [(ng-model)]="character.level8FailBonus" min="0" max="100">%
-	</div>
-	<div class="p10-0">
-		<label for="level0">Level 9:</label>
-		{{character.level9Fail - character.level9FailBonus}}%
-		<br>
-		Base: <input type="number" [(ng-model)]="character.level9Fail" min="0" max="100">%
-		Bonus: <input type="number" [(ng-model)]="character.level9FailBonus" min="0" max="100">%
-	</div>
+		<h3 class="pt20">Spell Fail Rate</h3>
+		<div class="p10-0">
+			<label class="w125">Level 0:</label>
+			{{character.level0Fail - character.level0FailBonus}}%
+			<br>
+			Base: <input type="number" [(ng-model)]="character.level0Fail" min="0" max="100">%
+			Bonus: <input type="number" [(ng-model)]="character.level0FailBonus" min="0" max="100">%
+		</div>
+		<div class="p10-0">
+			<label class="w125">Level 1:</label>
+			{{character.level1Fail - character.level1FailBonus}}%
+			<br>
+			Base: <input type="number" [(ng-model)]="character.level1Fail" min="0" max="100">%
+			Bonus: <input type="number" [(ng-model)]="character.level1FailBonus" min="0" max="100">%
+		</div>
+		<div class="p10-0">
+			<label class="w125">Level 2:</label>
+			{{character.level2Fail - character.level2FailBonus}}%
+			<br>
+			Base: <input type="number" [(ng-model)]="character.level2Fail" min="0" max="100">%
+			Bonus: <input type="number" [(ng-model)]="character.level2FailBonus" min="0" max="100">%
+		</div>
+		<div class="p10-0">
+			<label class="w125">Level 3:</label>
+			{{character.level3Fail - character.level3FailBonus}}%
+			<br>
+			Base: <input type="number" [(ng-model)]="character.level3Fail" min="0" max="100">%
+			Bonus: <input type="number" [(ng-model)]="character.level3FailBonus" min="0" max="100">%
+		</div>
+		<div class="p10-0">
+			<label class="w125">Level 4:</label>
+			{{character.level4Fail - character.level4FailBonus}}%
+			<br>
+			Base: <input type="number" [(ng-model)]="character.level4Fail" min="0" max="100">%
+			Bonus: <input type="number" [(ng-model)]="character.level4FailBonus" min="0" max="100">%
+		</div>
+		<div class="p10-0">
+			<label class="w125">Level 5:</label>
+			{{character.level5Fail - character.level5FailBonus}}%
+			<br>
+			Base: <input type="number" [(ng-model)]="character.level5Fail" min="0" max="100">%
+			Bonus: <input type="number" [(ng-model)]="character.level5FailBonus" min="0" max="100">%
+		</div>
+		<div class="p10-0">
+			<label class="w125">Level 6:</label>
+			{{character.level6Fail - character.level6FailBonus}}%
+			<br>
+			Base: <input type="number" [(ng-model)]="character.level6Fail" min="0" max="100">%
+			Bonus: <input type="number" [(ng-model)]="character.level6FailBonus" min="0" max="100">%
+		</div>
+		<div class="p10-0">
+			<label class="w125">Level 7:</label>
+			{{character.level7Fail - character.level7FailBonus}}%
+			<br>
+			Base: <input type="number" [(ng-model)]="character.level7Fail" min="0" max="100">%
+			Bonus: <input type="number" [(ng-model)]="character.level7FailBonus" min="0" max="100">%
+		</div>
+		<div class="p10-0">
+			<label class="w125">Level 8:</label>
+			{{character.level8Fail - character.level8FailBonus}}%
+			<br>
+			Base: <input type="number" [(ng-model)]="character.level8Fail" min="0" max="100">%
+			Bonus: <input type="number" [(ng-model)]="character.level8FailBonus" min="0" max="100">%
+		</div>
+		<div class="p10-0">
+			<label class="w125">Level 9:</label>
+			{{character.level9Fail - character.level9FailBonus}}%
+			<br>
+			Base: <input type="number" [(ng-model)]="character.level9Fail" min="0" max="100">%
+			Bonus: <input type="number" [(ng-model)]="character.level9FailBonus" min="0" max="100">%
+		</div>
 
-	<h3>Spells</h3>
-	<div *ng-for="#spell of character.spells;#i = index" [class.pt30]="i !== 0">
-		<label>{{ spell.name }}:</label>
-		<br>
-		<label>Level:</label> {{spell.level}}
-		<br>
-		<label>Domain:</label> {{spell.domain}}
-		<br>
-		<label>Description:</label>
-		<br>
-		{{spell.description}}
-		<br>
-		<button (click)="removeSpell($event, spell);">-</button>
-	</div>
-	<h3>Add Spell</h3>
-	<div class="p10-0">
-		<label for="spellName">Name</label>
-		<input id="spellName" type="text" [(ng-model)]="newSpellName">
-		<br>
-		<label>Level</label>
-		<input type="number" min="0" [(ng-model)]="newSpellLevel">
-		<br>
-		<label>Domain</label>
-		<input type="text" [(ng-model)]="newSpellDomain">
-		<br>
-		<label>Description</label> 
-		<br>
-		<textarea [(ng-model)]="newSpellDescription" cols="45" rows="3"></textarea>
-		<br>
-		<button (click)="addSpell($event)">+</button>
-	</div>
-	
-	<h2>Skills</h2>
-	<div *ng-for="#skill of character.skills;#i = index" [class.pt15]="i !== 0">
-		<label>{{ skill.name }} ({{skill.stat}}):</label>
-		<input type="number" value="{{skill.level}}">
-		<button (click)="incrementTab(skill.stat+'Tab')">Use</button>
-		<button (click)="removeSkill($event, skill)">-</button>
-	</div>
-	<h3>Add Skill</h3>
-	<div class="p10-0">
-		<label for="skillName">Name</label>
-		<input id="skillName" type="text" [(ng-model)]="newSkillName">
-		(<select min="0" [(ng-model)]="newSkillStat">
-			<option value="str">Str</option>
-			<option value="int">Int</option>
-			<option value="wis">Wis</option>
-			<option value="con">Con</option>
-			<option value="dex">Dex</option>
-			<option value="cha">Cha</option>
-		</select>)
-		<label for="skillLevel">Level</label>
-		<input type="number" min="0" [(ng-model)]="newSkillLevel">
-		<button (click)="addSkill($event)">+</button>
-	</div>
-	
-	<h2>Feats</h2>
-	<div *ng-for="#feat of character.feats;#i = index" [class.pt30]="i !== 0">
-		<label>{{ feat.name }}:</label> 
-		<br>
-		{{feat.description}}
-		<br>
-		<button (click)="removeFeat($event, feat)">-</button>
-	</div>
-	<h3>Add Feat</h3>
-	<div class="p10-0">
-		<label for="featName">Name</label>
-		<input id="featName" type="text" [(ng-model)]="newFeatName">
-		<br>
-		<label for="featDesc">Description</label> 
-		<br>
-		<textarea cols="45" rows="3" id="featDesc" [(ng-model)]="newFeatDesc"></textarea>
-		<br>
-		<button (click)="addFeat($event)">+</button>
-	</div>
+		<h3 class="pt20">Spell List</h3>
+		<div *ng-for="#spell of character.spells;#i = index" [class.pt30]="i !== 0">
+			<div class="p10-0">
+				<label>{{ spell.name }}:</label>
+			</div>
+			<div class="p10-0">
+				<label class="w125">Level:</label> {{spell.level}}
+			</div>
+			<div class="p10-0">
+				<label class="w125">Domain:</label> {{spell.domain}}
+			</div>
+			<div class="p10-0">
+				<label class="w125">Description:</label>
+				<br>
+				{{spell.description}}
+			</div>
+			<button (click)="removeSpell($event, spell);">-</button>
+		</div>
 
-	<h2>Notes</h2>
-	<div class="p10-0">
-		<textarea cols="45" rows="10" [(ng-model)]="character.notes"></textarea>
-	</div>
-	
-	<h2>Backstory</h2>
-	<div class="p10-0">
-		<textarea cols="45" rows="10" [(ng-model)]="character.backstory"></textarea>
-	</div>
+		<h3 class="pt20">Add Spell</h3>
+		<div class="p10-0">
+			<div class="p10-0">
+				<label for="spellName" class="w125">Name:</label>
+				<input id="spellName" type="text" [(ng-model)]="newSpellName">
+			</div>
+			<div class="p10-0">
+				<label class="w125">Level: </label>
+				<input type="number" min="0" max="9" [(ng-model)]="newSpellLevel">
+			</div>
+			<div class="p10-0">
+				<label class="w125">Domain: </label>
+				<input type="text" [(ng-model)]="newSpellDomain">
+			</div>
+			<div class="p10-0">
+				<label class="w125">Description: </label> 
+				<br>
+				<textarea [(ng-model)]="newSpellDescription" cols="45" rows="3"></textarea>
+			</div>
+			<button (click)="addSpell($event)">+</button>
+		</div>
+	</section>
+	<hr>
+	<section class="p20-0 m20-0">
+		<h2>Skills</h2>
+
+		<h3>Skill List</h3>
+		<div *ng-for="#skill of character.skills;#i = index" [class.pt15]="i !== 0">
+			<label>{{ skill.name }} ({{skill.stat}}):</label>
+			<input type="number" value="{{skill.level}}">
+			<button (click)="incrementTab(skill.stat+'Tab')">Use</button>
+			<button (click)="removeSkill($event, skill)">-</button>
+		</div>
+
+		<h3 class="pt20">Add Skill</h3>
+		<div class="p10-0">
+			<label for="skillName">Name: </label>
+			<input id="skillName" type="text" [(ng-model)]="newSkillName">
+			(<select min="0" [(ng-model)]="newSkillStat">
+				<option value="str">Str</option>
+				<option value="int">Int</option>
+				<option value="wis">Wis</option>
+				<option value="con">Con</option>
+				<option value="dex">Dex</option>
+				<option value="cha">Cha</option>
+			</select>)
+			<label for="skillLevel">Level</label>
+			<input type="number" min="0" [(ng-model)]="newSkillLevel">
+			<button (click)="addSkill($event)">+</button>
+		</div>
+	</section>
+	<hr>
+	<section class="p20-0 m20-0">
+		<h2>Feats</h2>
+
+		<h3>Feat List</h3>
+		<div *ng-for="#feat of character.feats;#i = index" [class.pt30]="i !== 0">
+			<label>{{ feat.name }}:</label> 
+			<button (click)="removeFeat($event, feat)">-</button>
+			<br>
+			{{feat.description}}
+		</div>
+
+		<h3 class="pt20">Add Feat</h3>
+		<div class="p10-0">
+			<label for="featName">Name:</label>
+			<input id="featName" type="text" [(ng-model)]="newFeatName">
+		</div>
+		<div class="p10-0">
+			<label for="featDesc">Description:</label> 
+			<br>
+			<textarea cols="45" rows="3" id="featDesc" [(ng-model)]="newFeatDesc"></textarea>
+		</div>
+		<div class="p10-0">
+			<button (click)="addFeat($event)">+</button>
+		</div>
+	</section>
+	<hr>
+	<section class="p20-0 m20-0">
+		<h2>Notes</h2>
+		<div class="p10-0">
+			<textarea cols="45" rows="10" [(ng-model)]="character.notes"></textarea>
+		</div>
+	</section>
+	<hr>
+	<section class="p20-0 m20-0">
+		<h2>Backstory</h2>
+		<div class="p10-0">
+			<textarea cols="45" rows="10" [(ng-model)]="character.backstory"></textarea>
+		</div>
+	</section>
+
 	<button (click)="saveCharacter($event)">Save</button> {{saveMessage}}
-	<br> <br> <br>
-	<button (click)="deleteCharacter($event)">Delete</button>
+	
+	<div class="p30-0">
+		<button (click)="deleteCharacter($event)">Delete</button>
+	</div>
 </div>

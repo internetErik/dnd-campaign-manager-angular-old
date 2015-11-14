@@ -1,34 +1,36 @@
-<div>
-	<h1>Combat Display</h1>
+<h1>Combat Display</h1>
+<hr>
+<section class="p20-0 m20-0">
 	<h2>Add Combatants</h2>
-	<div>
-		<label for="characterName">Character: </label>
+	<div class="p10-0">
+		<label class="w90" for="characterName">Character: </label>
 		<input id="characterName" type="text" class="js-character">
 		<label for="characterBonus">Bonus: </label>
-		<input id="characterBonus" type="number" class="js-bonus-character">
+		<input id="characterBonus" type="number" min="-100" max="100"  class="js-bonus-character">
 		<button (click)="add('character')">+</button>
 	</div>
-	<div>
-		<label for="enemyName">Enemy: </label>
+	<div class="p10-0">
+		<label class="w90" for="enemyName">Enemy: </label>
 		<input id="enemyName" type="text" class="js-enemy">
 		<label for="enemyBonus">Bonus: </label>
-		<input id="enemyBonus" type="number" class="js-bonus-enemy">
+		<input id="enemyBonus" type="number" min="-100" max="100" class="js-bonus-enemy">
 		<button (click)="add('enemy')">+</button>
 	</div>
-	<button (click)="rollInitiative()">Roll Initiative</button>
+</section>
+<hr>
+<section class="p20-0 m20-0">
 	<h2>Combatants</h2>
+	<button (click)="rollInitiative()">Roll Initiative</button>
 	<ol>
-		<li *ng-for="#character of characters" 
+		<li *ng-for="#character of characters"
 			[class.enemy]="character.type === 'enemy'">
-		{{character.name}} 
-		initiative: {{character.initiative}} | 
-		Bonus: 
-		<input type="number" [(ng-model)]="character.bonus">
-		Rounds Occupied: 
-		<input type="number" [(ng-model)]="character.roundsOccupied">
-		<!-- Rounds Occupied: {{character.roundsOccupied}} -->
-		<!-- <button (click)="occupy(character)">Occupy</button> -->
-		<button (click)="removeCharacter(character)">-</button>
+			{{character.name}} 
+			initiative: {{character.initiative}} | 
+			Bonus: 
+			<input type="number" min="-100" max="100" [(ng-model)]="character.bonus">
+			Rounds Occupied: 
+			<input type="number" min="0" max="100" [(ng-model)]="character.roundsOccupied">
+			<button (click)="removeCharacter(character)">-</button>
 		</li>
 	</ol>
-</div>
+</section>

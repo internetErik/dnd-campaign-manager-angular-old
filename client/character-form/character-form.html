@@ -1,170 +1,198 @@
-<form [ng-form-model]="characterForm" #f="form" (submit)="addCharacter($event, f.value)">
-	<h2>Name</h2>
-	<div>
-			<label for="firstName">First Name*:</label>
+<form [ng-form-model]="characterForm" #f="form" 
+	(submit)="addCharacter($event, f.value)">
+	<h1>Character Creation</h1>
+	<hr>
+	<section class="p20-0 m20-0">
+		<h2>Name</h2>
+		<div class="p10-0">
+			<label for="firstName" class="w125">First Name*:</label>
 			<input id="firstName" type="text" ng-control="firstName">
-	</div>
-	<div>
-			<label for="middleName">Middle Name:</label>
+		</div>
+		<div class="p10-0">
+			<label for="middleName" class="w125">Middle Name:</label>
 			<input id="middleName" type="text" ng-control="middleName">
-	</div>
-	<div>
-			<label for="lastName">Last Name:</label>
+		</div>
+		<div class="p10-0">
+			<label for="lastName" class="w125">Last Name:</label>
 			<input id="lastName" type="text" ng-control="lastName">
-	</div>
-	<div>
-			<label for="title">Title:</label>
+		</div>
+		<div class="p10-0">
+			<label for="title" class="w125">Title:</label>
 			<input id="title" type="text" ng-control="title">
-	</div>
-
-	<h2>Biological Information</h2>
-	<div>
-			<label for="race">Race*:</label>
+		</div>
+	</section>
+	<hr>
+	<section class="p20-0 m20-0">
+		<h2>Biological Information</h2>
+		<div class="p10-0">
+			<label for="race" class="w125">Race*:</label>
 			<input id="race" type="text" ng-control="race">
-	</div>
-	<div>
-			<label for="sex">Sex:</label>
+		</div>
+		<div class="p10-0">
+			<label for="sex" class="w125">Sex:</label>
 			<input id="sex" type="text" ng-control="sex">
-	</div>
-	<div>
-			<label for="height">Height*:</label>
-			<input id="height" type="number" min="0" ng-control="heightM"> 
+		</div>
+		<div class="p10-0">
+			<label for="height" class="w125">Height*:</label>
+			<input id="height" type="number" min="0" max="9999" ng-control="heightM"> 
 			m
 			<input type="number" min="0" max="99" ng-control="heightCm"> 
 			cm
-	</div>
-	<div>
-			<label for="weight">Weight*:</label>
-			<input id="weight" type="number" min="0" ng-control="weight"> kg
-	</div>
-	<div>
-		<label for="birthday">Birthday:</label>
-		<input type="text" ng-control="birthday">
-	</div>
-	<div>
-		<label for="age">Age:</label>
-		<input type="number" min="0" ng-control="age">
-	</div>
-	<div>
-		<label for="description">Description::</label>
-		<br>
-		<textarea id="description" cols="45" rows="3" ng-control="description"></textarea>
-	</div>
+		</div>
+		<div class="p10-0">
+			<label for="weight" class="w125">Weight*:</label>
+			<input id="weight" type="number" min="0" max="9999" ng-control="weight"> kg
+		</div>
+		<div class="p10-0">
+			<label for="birthday" class="w125">Birthday:</label>
+			<input type="text" ng-control="birthday">
+		</div>
+		<div class="p10-0">
+			<label for="age" class="w125">Age:</label>
+			<input type="number" min="0" max="9999" ng-control="age">
+		</div>
+		<div class="p10-0">
+			<label for="description" class="w125">Description:</label>
+			<br>
+			<textarea id="description" cols="45" rows="3" ng-control="description"></textarea>
+		</div>
+	</section>
+	<hr>
+	<section class="p20-0 m20-0">
+		<h2>Stats</h2>
+		<div class="p10-0">
+			<label for="hp" class="w125">HP*:</label>
+			<input id="hp" type="number" min="1" max="9999" ng-control="hp">
+		</div>
+		<div class="p10-0">
+			<label for="str" class="w125">Strength*:</label>
+			<input id="str" type="number" min="0" max="100" ng-control="str">
+		</div>
+		<div class="p10-0">
+			<label for="int" class="w125">Intelligence*:</label>
+			<input id="int" type="number" min="0" max="100" ng-control="int">
+		</div>
+		<div class="p10-0">
+			<label for="wis" class="w125">Wisdom*:</label>
+			<input id="wis" type="number" min="0" max="100" ng-control="wis">
+		</div>
+		<div class="p10-0">
+			<label for="con" class="w125">Constitution*:</label>
+			<input id="con" type="number" min="0" max="100" ng-control="con">
+		</div>
+		<div class="p10-0">
+			<label for="dex" class="w125">Dexterity*:</label>
+			<input id="dex" type="number" min="0" max="100" ng-control="dex">
+		</div>
+		<div class="p10-0">
+			<label for="cha" class="w125">Charisma*:</label>
+			<input id="cha" type="number" min="0" max="100" ng-control="cha">
+		</div>
+		<div class="p10-0">
+			<label for="hitRoll" class="w125">Hit Roll:</label>
+			<input id="hitRoll" type="number" min="0" max="100" ng-control="hitRoll">
+		</div>
+		<div class="p10-0">
 
-	<h2>Stats</h2>
-	<div>
-			<label for="hp">HP*:</label>
-			<input id="hp" type="number" min="1" ng-control="hp">
-	</div>
-	<div>
-			<label for="str">Strength*:</label>
-			<input id="str" type="number" min="0" ng-control="str">
-	</div>
-	<div>
-			<label for="int">Intelligence*:</label>
-			<input id="int" type="number" min="0" ng-control="int">
-	</div>
-	<div>
-			<label for="wis">Wisdom*:</label>
-			<input id="wis" type="number" min="0" ng-control="wis">
-	</div>
-	<div>
-			<label for="con">Constitution*:</label>
-			<input id="con" type="number" min="0" ng-control="con">
-	</div>
-	<div>
-			<label for="dex">Dexterity*:</label>
-			<input id="dex" type="number" min="0" ng-control="dex">
-	</div>
-	<div>
-			<label for="cha">Charisma*:</label>
-			<input id="cha" type="number" min="0" ng-control="cha">
-	</div>
-	<div>
-			<label for="hitRoll">Hit Roll:</label>
-			<input id="hitRoll" type="number" min="0" ng-control="hitRoll">
-	</div>
+		<h3>Saves</h3>
+		<div class="p10-0">
+			<label for="reflex" class="w125">Reflex:</label>
+			<input id="reflex" type="number" min="0" max="100" ng-control="reflex">
+		</div>
+		<div class="p10-0">
+			<label for="fortitude" class="w125">Fortitude:</label>
+			<input id="fortitude" type="number" min="0" max="100" ng-control="fortitude">
+		</div>
+		<div class="p10-0">
+			<label for="will" class="w125">Will:</label>
+			<input id="will" type="number" min="0" max="100" ng-control="will">
+		</div>
+	</section>
+	<hr>
+	<section class="p20-0 m20-0">
+		<h2>Magic</h2>
 
-	<h3>Saves</h3>
-	<div>
-			<label for="reflex">Reflex:</label>
-			<input id="reflex" type="number" min="0" ng-control="reflex">
-	</div>
-	<div>
-			<label for="fortitude">Fortitude:</label>
-			<input id="fortitude" type="number" min="0" ng-control="fortitude">
-	</div>
-	<div>
-			<label for="will">Will:</label>
-			<input id="will" type="number" min="0" ng-control="will">
-	</div>
+		<h3>Spell List</h3>
+		<div *ng-for="#spell of spells" class="p10-0">
+			<div class="p10-0">
+				<label>{{ spell }}</label>
+			</div>
+			<div class="p10-0">
+				<label class="w125">Level:</label>
+				<input type="number" min="0" max="9" id="spellLevel-{{ spell }}" value="0">
+			</div>
+			<div class="p10-0">
+				<label class="w125">Domain:</label>
+				<input type="text" id="spellDomain-{{ spell }}">
+			</div>
+			<div class="p10-0">
+				<label class="w125">Description:</label> 
+				<br>
+				<textarea id="spellDesc-{{spell}}" cols="45" rows="3"></textarea>
+			</div>
+			<button (click)="removeSpell(spell)">-</button>
+		</div>
 
-	<h2>Magic</h2>
-	<h3>Add Spell</h3>
-	<div>
-		<label for="spellName">Name:</label>
-		<input id="spellName" type="text" [(ng-model)]="newSpellName" (keyup.enter)="addSpell($event)">
-		<button (click)="addSpell($event)">+</button>
-	</div>
+		<h3 class="pt20">Add Spell</h3>
+		<div class="p10-0">
+			<label for="spellName">Name:</label>
+			<input id="spellName" type="text" [(ng-model)]="newSpellName" (keyup.enter)="addSpell($event)">
+			<button (click)="addSpell($event)">+</button>
+		</div>
+	</section>
+	<hr>
+	<section class="p20-0 m20-0">
+		<h2>Skills</h2>
 
-	<h3>Spells</h3>
-	<div *ng-for="#spell of spells">
-		<label>{{ spell }}</label>
-		<br>
-		<label>Level:</label>
-		<input type="number" min="0" id="spellLevel-{{ spell }}" value="0">
-		<br>
-		<label>Domain:</label>
-		<input type="text" id="spellDomain-{{ spell }}">
-		<br>
-		<label>Description:</label> 
-		<br>
-		<textarea id="spellDesc-{{spell}}" cols="45" rows="3"></textarea>
-		<button (click)="removeSpell(spell)">-</button>
-	</div>
+		<h3>Skill List</h3>
+		<div *ng-for="#skill of skills" class="p10-0">
+			<label>{{ skill }}</label>
+			(<select min="0" id="skillStat-{{ skill }}">
+				<option value="str">Str</option>
+				<option value="int">Int</option>
+				<option value="wis">Wis</option>
+				<option value="con">Con</option>
+				<option value="dex">Dex</option>
+				<option value="cha">Cha</option>
+			</select>)
+			<label>level:</label>
+			<input type="number" min="0" id="skillLevel-{{ skill }}" value="0">
+			<button (click)="removeSkill(skill)">-</button>
+		</div>
 
-	<h2>Skills</h2>
-	<h3>Add Skill</h3>
-	<div>
-		<label for="skillName">Name:</label>
-		<input id="skillName" type="text" [(ng-model)]="newSkillName" (keyup.enter)="addSkill($event)">
-		<button (click)="addSkill($event)">+</button>
-	</div>
+		<h3 class="pt20">Add Skill</h3>
+		<div class="p10-0">
+			<label for="skillName">Name:</label>
+			<input id="skillName" type="text" [(ng-model)]="newSkillName" 
+				(keyup.enter)="addSkill($event)">
+			<button (click)="addSkill($event)">+</button>
+		</div>
+	</section>
+	<hr>
+	<section class="p20-0 m20-0">
+		<h2>Feats</h2>
 
-	<div *ng-for="#skill of skills">
-		<label>{{ skill }}</label>
-		(<select min="0" id="skillStat-{{ skill }}">
-			<option value="str">Str</option>
-			<option value="int">Int</option>
-			<option value="wis">Wis</option>
-			<option value="con">Con</option>
-			<option value="dex">Dex</option>
-			<option value="cha">Cha</option>
-		</select>)
-		<label>level:</label>
-		<input type="number" min="0" id="skillLevel-{{ skill }}" value="0">
-		<button (click)="removeSkill(skill)">-</button>
-	</div>
+		<h3>Feat List</h3>
+		<div *ng-for="#feat of feats" class="p10-0">
+			<label>{{ feat }}:</label> 
+			<button (click)="removeFeat(feat)">-</button>
+			<br>
+			<textarea cols="45" rows="3" id="feat-{{ feat }}" value=""></textarea>
+		</div>
 
-	<h2>Feats</h2>
-	<h3>Add Feat</h3>
-	<div>
-		<label for="featName">Name:</label>
-		<input id="featName" type="text" [(ng-model)]="newFeatName" (keyup.enter)="addFeat($event)">
-		<button (click)="addFeat($event)">+</button>
-	</div>
-
-	<div *ng-for="#feat of feats">
-		<label>{{ feat }}</label> 
-		<br>
-		<textarea cols="45" rows="3" id="feat-{{ feat }}" value=""></textarea>
-		<br>
-		<button (click)="removeFeat(feat)">-</button>
-	</div>
-
-	<h2>Backstory</h2>
-	<div>
-		<textarea id="backstory" cols="45" rows="10" ng-control="backstory"></textarea>
-	</div>
-	<button>Create Character</button>
+		<h3 class="pt20">Add Feat</h3>
+		<div class="p10-0">
+			<label for="featName">Name:</label>
+			<input id="featName" type="text" [(ng-model)]="newFeatName" (keyup.enter)="addFeat($event)">
+			<button (click)="addFeat($event)">+</button>
+		</div>
+	</section>
+	<hr>
+	<section class="p20-0 m20-0">
+		<h2>Backstory</h2>
+		<div class="p10-0">
+			<textarea id="backstory" cols="45" rows="10" ng-control="backstory"></textarea>
+		</div>
+	</section>
+	<button class="m30-0">Create Character</button>
 </form>

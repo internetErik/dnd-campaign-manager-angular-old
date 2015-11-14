@@ -1,9 +1,10 @@
-<div>
-	<h1>Character List</h1>
-	<div *ng-for="#character of characters">
+<h1><span *ng-if="!campaignId">All</span> Character List</h1>
+<hr>
+<section class="p20-0 m20-0">
+	<div *ng-for="#character of characters" class="p10-0">
 		<a [router-link]="['/CharacterDetail', {characterId: character._id}]">
 			{{character.firstName}} {{character.middleName}} {{character.lastName}}
 		</a>
 	</div>
 	<a [router-link]="['/CharacterForm', {campaignId: campaignId}]"><button>+</button></a>
-</div>
+</section>

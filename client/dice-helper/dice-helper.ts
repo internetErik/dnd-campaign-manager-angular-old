@@ -1,77 +1,93 @@
 /// <reference path="../../typings/angular2-meteor.d.ts" />
 
-import {Component, View, NgFor, NgIf} from 'angular2/angular2';
+import {Component, View, NgFor, NgIf, NgZone} from 'angular2/angular2';
 
 import {simpleRoll} from 'lib/dice';
 
 import {Rolls} from 'collections/rolls';
 
+import {AccountsUI} from 'meteor-accounts-ui';
+
 @Component({
     selector: 'dice-helper'
 })
 @View({
-		templateUrl: 'client/dice-helper/dice-helper.html',
-		directives: [NgFor, NgIf]
+	templateUrl: 'client/dice-helper/dice-helper.html',
+	directives: [NgFor, NgIf]
 })
 export class DiceHelper {
-		currentRoll: string;
-		lastRolls: any;
-		
-		//are the buttons disabled because we are rolling?
-		disabled: boolean;
+	currentRoll: string;
+	lastRolls: any;
+	
+	//are the buttons disabled because we are rolling?
+	disabled: boolean;
 
-		//should these rolls be public or private?
-		rollPublic: boolean;
+	//should these rolls be public or private?
+	rollPublic: boolean;
 
-		//are the dice visible?
-		diceHidden: boolean;
+	//are the dice visible?
+	diceHidden: boolean;
 
-		constructor() {
-				this.currentRoll = '';
-				this.lastRolls = Rolls.find({}, { sort: { createdAt: -1 }, limit: 5 });
-				this.rollPublic = true;
-				this.disabled = false;
-				this.diceHidden = true;
-		}
+	//the current user
+	user: any;
+	//current campaign
+	campaign: any;
 
-		roll(sides) {
-				var bonusInput: HTMLInputElement =
-						<HTMLInputElement>document.querySelector('.js-bonus-to-roll');
-				var bonus: number = parseInt(bonusInput.value) || 0;
-				this.disabled = true;
-				this.currentRoll = '. . . ROLLING! . . .';
-				setTimeout(() => {
-						let result = simpleRoll(sides);
-						this.currentRoll = `${result + bonus} (d${sides} + ${bonus})`;
-						this.disabled = false;
-						if(this.rollPublic)
-							this.insertRoll(result, sides, bonus);
-				}, 250);
-		}
+	dice: number[];
 
-		clearRolls() {
-				this.currentRoll = '';
-				Meteor.call('clearRolls');
-		}
+	constructor(zone: NgZone) {
+		this.currentRoll = '';
+		this.lastRolls = Rolls.find({}, { sort: { createdAt: -1 }, limit: 5 });
+		this.rollPublic = true;
+		this.disabled = false;
+		this.diceHidden = true;
 
-		toggleDice() {
-				this.diceHidden = !this.diceHidden;
-		}
+		this.dice = [2, 4, 6, 8, 10, 12, 20, 100];
 
-		insertRoll(result, sides, bonus) {
-				var roll = { 
-					result: result, 
-					createdAt: Date.now(), 
-					sides: sides, 
-					bonus: bonus, 
-					critical: result === sides 
-				};
+		Tracker.autorun(() => zone.run(() => {
+			this.user = Meteor.user();
+			this.campaign = Session.get('campaign');
+		}));
+	}
 
-				Meteor.call('insertRoll', roll);
-		}
+	roll(sides) {
+		var bonusInput: HTMLInputElement =
+				<HTMLInputElement>document.querySelector('.js-bonus-to-roll');
+		var bonus: number = parseInt(bonusInput.value) || 0;
+		this.disabled = true;
+		this.currentRoll = '. . . ROLLING! . . .';
+		setTimeout(() => {
+			let result = simpleRoll(sides);
+			this.currentRoll = `${result + bonus} (d${sides} + ${bonus})`;
+			this.disabled = false;
+			if(this.rollPublic)
+				this.insertRoll(result, sides, bonus);
+		}, 250);
+	}
 
-		togglePublic() {
-				this.rollPublic = !this.rollPublic;
-		}
+	clearRolls() {
+		this.currentRoll = '';
+		Meteor.call('clearRolls');
+	}
+
+	toggleDice() {
+		this.diceHidden = !this.diceHidden;
+	}
+
+	insertRoll(result, sides, bonus) {
+		var roll = { 
+			result: result, 
+			createdAt: Date.now(), 
+			sides: sides, 
+			bonus: bonus, 
+			critical: result === sides 
+		};
+
+		Meteor.call('insertRoll', roll);
+	}
+
+	togglePublic() {
+		this.rollPublic = !this.rollPublic;
+	}
 
 }

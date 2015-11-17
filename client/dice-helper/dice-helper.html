@@ -5,14 +5,12 @@
 		<span *ng-if="!diceHidden">Hide</span>
 	</button>
 	<button class="p10-0 pl20 pr20" (click)="clearRolls()">Clear</button>
-	<button class="p10-0 pl20 pr20" [disabled]="disabled" (click)="roll(2)">d2</button>
-	<button class="p10-0 pl20 pr20" [disabled]="disabled" (click)="roll(4)">d4</button>
-	<button class="p10-0 pl20 pr20" [disabled]="disabled" (click)="roll(6)">d6</button>
-	<button class="p10-0 pl20 pr20" [disabled]="disabled" (click)="roll(8)">d8</button>
-	<button class="p10-0 pl20 pr20" [disabled]="disabled" (click)="roll(10)">d10</button>
-	<button class="p10-0 pl20 pr20" [disabled]="disabled" (click)="roll(12)">d12</button>
-	<button class="p10-0 pl20 pr20" [disabled]="disabled" (click)="roll(20)">d20</button>
-	<button class="p10-0 pl20 pr20" [disabled]="disabled" (click)="roll(100)">d100</button>
+	<button *ng-for="#die of dice"
+		class="p10-0 pl20 pr20 mr5"
+		[disabled]="disabled"
+		(click)="roll(die)">
+		d{{die}}
+	</button>
 	Bonus: <input type="number" class="js-bonus-to-roll" value="0" >
 	<div class="p10-0">
 	Current Roll: {{currentRoll}} 

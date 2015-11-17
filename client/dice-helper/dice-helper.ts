@@ -60,7 +60,7 @@ export class DiceHelper {
 			let result = simpleRoll(sides);
 			this.currentRoll = `${result + bonus} (d${sides} + ${bonus})`;
 			this.disabled = false;
-			if(this.rollPublic)
+			if(this.rollPublic && this.user && this.campaign)
 				this.insertRoll(result, sides, bonus);
 		}, 250);
 	}

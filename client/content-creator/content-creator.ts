@@ -8,6 +8,8 @@ import {Spells} from 'collections/spells';
 import {Skills} from 'collections/skills';
 import {Feats} from 'collections/feats';
 
+import {RequireUser} from 'meteor-accounts';
+
 @Component({
     selector: 'content-creator'
 })
@@ -15,6 +17,7 @@ import {Feats} from 'collections/feats';
 		templateUrl: 'client/content-creator/content-creator.html',
 		directives: [FORM_DIRECTIVES, NgFor, NgIf]
 })
+@RequireUser()
 export class ContentCreator {
     router: Router;
 

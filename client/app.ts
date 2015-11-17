@@ -40,7 +40,7 @@ import {AccountsUI} from 'meteor-accounts-ui';
 		</div>
 	</nav>
 	<div class="sub-menu bgc-lightgray posr p0-50 heading5" [class.h50]="campaign">
-		<span *ng-if="campaign" class="vertical-align dib">
+		<span *ng-if="user && campaign" class="vertical-align dib">
 		Campaign: {{campaign.name}}
 		<button (click)="unselectCampaign()">unselect</button> >
 		<a class="tdn" [router-link]="['/CharacterList', {campaignId: campaign._id}]">Characters</a> |

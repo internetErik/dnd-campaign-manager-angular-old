@@ -5,6 +5,8 @@ import {Component, View, NgFor, FORM_DIRECTIVES} from 'angular2/angular2';
 
 import {simpleRoll} from 'lib/dice';
 
+import {RequireUser} from 'meteor-accounts';
+
 @Component({
 	selector: 'combat-display'
 })
@@ -12,6 +14,7 @@ import {simpleRoll} from 'lib/dice';
 	templateUrl: 'client/combat-display/combat-display.html',
 	directives: [NgFor, FORM_DIRECTIVES]
 })
+@RequireUser()
 export class CombatDisplay {
 
 	characters: any[];

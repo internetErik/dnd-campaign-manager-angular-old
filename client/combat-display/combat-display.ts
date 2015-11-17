@@ -34,13 +34,18 @@ export class CombatDisplay {
 	
 	constructor(zone: NgZone, params: RouteParams, _router: Router) {
 		this.battleId = params.get('battleId');
+		console.log(this.battleId);
 		this.router = _router;
 
 		Tracker.autorun(() => zone.run(() => {
 			this.campaign = Session.get('campaign');
-			Meteor.subscribe('battles', this.campaign._id);
-
-			this.battle = Battles.findOne({ _id: this.battleId, complete: false }, { sort: { createdAt: -1 }});
+			
+			if (this.campaign) {
+				Meteor.subscribe('battles', this.campaign._id);
+				this.battle = Battles.findOne({ _id: this.battleId });
+			}
+			else
+				this.router.parent.navigate(['/CampaignList']);
 		}));
 	}
 
@@ -90,13 +95,16 @@ export class CombatDisplay {
 	}
 
 	submitAction(combatant, i) {
-		var eAction: HTMLInputElement =
-			<HTMLInputElement>document.querySelector('.js-action-' + i);
+		//combat phase will be advanced on server if this is the last action we are waiting on
+		if (!combatant.actionSubmitted) {
+			let eAction: HTMLInputElement =
+				<HTMLInputElement>document.querySelector('.js-action-' + i);
 
-		if(eAction.value !== '') {
-			combatant.action = eAction.value;
-			combatant.actionSubmitted = true;
-			this.updateBattle()
+			if (eAction.value !== '') {
+				combatant.action = eAction.value;
+				combatant.actionSubmitted = true;
+				this.updateBattle()
+			}
 		}
 	}
 

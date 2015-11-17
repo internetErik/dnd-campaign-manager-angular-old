@@ -36,8 +36,12 @@ export class BattleList {
 
 		Tracker.autorun(() => zone.run(() => {
 			this.campaign = Session.get('campaign');
-			Meteor.subscribe('battles', this.campaign._id);
-			this.battles = Battles.find({ campaignId: this.campaign._id }, { sort: { createdAt: -1 } });
+			if (this.campaign) {
+				Meteor.subscribe('battles', this.campaign._id);
+				this.battles = Battles.find({ campaignId: this.campaign._id }, { sort: { createdAt: -1 } });
+			}
+			else
+				this.router.parent.navigate(['/CampaignList']);
 		}));
 	}
 

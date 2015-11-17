@@ -1,36 +1,79 @@
 <h1>Combat Display</h1>
 <hr>
-<section class="p20-0 m20-0">
+<section class="p20-0 m20-0" *ng-if="battle">
+	
+	<div class="p20-0">
+		<label for="battlename">Battle Name:</label>
+		<input type="text" [(ng-model)]="battle.name"> 
+		<button (click)="updateName()">Update Name</button>
+	</div>
+
 	<h2>Add Combatants</h2>
 	<div class="p10-0">
 		<label class="w90" for="characterName">Character: </label>
 		<input id="characterName" type="text" class="js-character">
 		<label for="characterBonus">Bonus: </label>
 		<input id="characterBonus" type="number" min="-100" max="100"  class="js-bonus-character">
-		<button (click)="add('character')">+</button>
+		<button (click)="addCombatant('character')">+</button>
 	</div>
 	<div class="p10-0">
 		<label class="w90" for="enemyName">Enemy: </label>
 		<input id="enemyName" type="text" class="js-enemy">
 		<label for="enemyBonus">Bonus: </label>
 		<input id="enemyBonus" type="number" min="-100" max="100" class="js-bonus-enemy">
-		<button (click)="add('enemy')">+</button>
+		<button (click)="addCombatant('enemy')">+</button>
+	</div>
+	<button (click)="startBattle()">Start</button>
+	<button (click)="endBattle()">End</button>
+
+	<div *ng-if="battle" class="p20-0">
+		<h3>Combatants:</h3>
+		<ul>
+			<li *ng-for="#c of battle.combatants">{{c.name}}</li>
+		</ul>
 	</div>
 </section>
-<hr>
-<section class="p20-0 m20-0">
+<hr *ng-if="battle && battle.combatPhase !== -1">
+<section class="p20-0 m20-0" *ng-if="battle && battle.combatPhase !== -1">
+	<h2>Combat Phases</h2>
+	<span   [class.c-gray]="battle.combatPhase !== 0">Enter Actions</span>
+	<button [class.c-gray]="battle.combatPhase !== 1" 
+		(click)="rollInitiative()">Roll Initiative</button>
+	<button [class.c-gray]="battle.combatPhase !== 2" 
+		(click)="resolveRound()">Turn Resolved</button>
+
 	<h2>Combatants</h2>
-	<button (click)="rollInitiative()">Roll Initiative</button>
-	<ol>
-		<li *ng-for="#character of characters"
-			[class.enemy]="character.type === 'enemy'">
-			{{character.name}} 
-			initiative: {{character.initiative}} | 
-			Bonus: 
-			<input type="number" min="-100" max="100" [(ng-model)]="character.bonus">
-			Rounds Occupied: 
-			<input type="number" min="0" max="100" [(ng-model)]="character.roundsOccupied">
-			<button (click)="removeCharacter(character)">-</button>
+	<ol *ng-if="battle">
+		<li *ng-for="#combatant of battle.combatants; #i = index"
+			[class.enemy]="combatant.type === 'enemy'"
+			class="mb20 p10-0 bb1-s-black">
+			<h4>{{combatant.name}}</h4>
+			<div *ng-if="battle.combatPhase === 0" class="pb20">
+				<label> Action: </label>
+				<br>
+				<textarea cols="45" rows="3" 
+					[disabled]="combatant.actionSubmitted"
+					class="js-action-{{i}}"></textarea>
+				<br>
+				<button (click)="submitAction(combatant, i)"
+					[disabled]="combatant.actionSubmitted">Submit Action</button>
+			</div>
+			<div>
+				<div *ng-if="battle.combatPhase !== 0">
+					<label>Action:</label>
+					<div class="p10-0">
+					{{combatant.action}}
+					</div>
+				</div>
+				<div>
+				initiative: {{combatant.initiative}} | 
+				Bonus: 
+				<input type="number" min="-100" max="100" [(ng-model)]="combatant.bonus">
+				Rounds Occupied: 
+				<input type="number" min="0" max="100" [(ng-model)]="combatant.roundsOccupied">
+				<button (click)="removeCombatant(combatant)">-</button>
+				</div>
+			</div>
 		</li>
 	</ol>
 </section>

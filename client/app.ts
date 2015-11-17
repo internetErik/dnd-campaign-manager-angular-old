@@ -16,6 +16,7 @@ import {ContentCreator} from 'client/content-creator/content-creator';
 import {CharacterList} from 'client/character-list/character-list';
 import {CharacterForm} from 'client/character-form/character-form';
 import {CharacterDetail} from 'client/character-detail/character-detail';
+import {BattleList} from 'client/battle-list/battle-list';
 import {CombatDisplay} from 'client/combat-display/combat-display';
 
 
@@ -32,8 +33,7 @@ import {AccountsUI} from 'meteor-accounts-ui';
 		<a class="tdn" [router-link]="['/HomePage']">Home</a> |
 		<a class="tdn" [router-link]="['/CampaignList']">Campaigns</a> |
 		<a class="tdn" [router-link]="['/ContentCreator']">Content Creator</a> |
-		<a class="tdn" [router-link]="['/CharacterList']">All Characters</a> |
-		<a class="tdn" [router-link]="['/CombatDisplay']">Combat Display</a>
+		<a class="tdn" [router-link]="['/CharacterList']">All Characters</a>
 		</div>
 	</nav>
 	<accounts-ui></accounts-ui>
@@ -42,7 +42,7 @@ import {AccountsUI} from 'meteor-accounts-ui';
 		Playing: {{campaign.name}}
 		<button (click)="unselectCampaign()">&times;</button> >
 		<a class="tdn" [router-link]="['/CharacterList', {campaignId: campaign._id}]">Characters</a> |
-		<a class="tdn" [router-link]="['/CombatDisplay', {campaignId: campaign._id}]">Combat Display</a> 
+		<a class="tdn" [router-link]="['/BattleList']">Battle List</a>
 		</span>
 		<span *ng-if="!campaign" class="vertical-align dib">
 			No Campaign Selected.
@@ -92,7 +92,12 @@ import {AccountsUI} from 'meteor-accounts-ui';
 		component: CharacterDetail
 	},
 	{
-		path: '/combat',
+		path: '/battle',
+		as: 'BattleList',
+		component: BattleList
+	},
+	{
+		path: '/battle/:battleId',
 		as: 'CombatDisplay',
 		component: CombatDisplay
 	}
@@ -108,7 +113,6 @@ class App {
 		Tracker.autorun(() => zone.run(() => {
 			this.user = Meteor.user();
 			this.campaign = (this.user) ? Session.get('campaign') : null;
-
 		}));
 
 		Meteor.subscribe('campaigns');

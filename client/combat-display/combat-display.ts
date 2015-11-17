@@ -1,9 +1,13 @@
 /// <reference path="../../typings/angular2-meteor.d.ts" />
 /// <reference path="../../typings/meteor-accounts.d.ts" />
 
-import {Component, View, NgFor, FORM_DIRECTIVES} from 'angular2/angular2';
+import {Component, View, NgFor, NgZone, FORM_DIRECTIVES} from 'angular2/angular2';
+
+import {Router, RouteParams} from 'angular2/router';
 
 import {simpleRoll} from 'lib/dice';
+
+import {Battles} from 'collections/battles';
 
 import {RequireUser} from 'meteor-accounts';
 
@@ -16,22 +20,91 @@ import {RequireUser} from 'meteor-accounts';
 })
 @RequireUser()
 export class CombatDisplay {
+	// combat phases
+	//-1 = not started
+	// 0 = decide action
+	// 1 = roll init
+	// 2 = resolve round
+	router: Router;
+	
+	battleId: string;
+	campaign: any;
 
-	characters: any[];
+	battle: any;
+	
+	constructor(zone: NgZone, params: RouteParams, _router: Router) {
+		this.battleId = params.get('battleId');
+		this.router = _router;
 
-	constructor() {
-		this.characters = [];
+		Tracker.autorun(() => zone.run(() => {
+			this.campaign = Session.get('campaign');
+			Meteor.subscribe('battles', this.campaign._id);
+
+			this.battle = Battles.findOne({ _id: this.battleId, complete: false }, { sort: { createdAt: -1 }});
+		}));
+	}
+
+	updateName() {
+		this.updateBattle();
+	}
+
+	addCombatant(type) {
+		var eName: HTMLInputElement =
+			<HTMLInputElement>document.querySelector('.js-' + type);
+		var eBonus: HTMLInputElement =
+			<HTMLInputElement>document.querySelector('.js-bonus-' + type);
+		var name = eName.value;
+		var bonus = parseInt(eBonus.value);
+
+		if (name) {
+			this.battle.combatants.push({
+				name: name,
+				initiative: 0,
+				bonus: bonus || 0,
+				type: type,
+				roundsOccupied: 0,
+				action: '',
+				actionSubmitted: false
+			});
+			this.updateBattle();
+		}
+	}
+
+	removeCombatant(character) {
+		var i = this.battle.combatants.indexOf(character);
+		if (i > -1) {
+			this.battle.combatants.splice(i, 1);
+			this.updateBattle();
+		}
+	}
+
+	startBattle() {
+		if (this.battle.combatants.length > 1) {
+			this.battle.combatPhase = 0;
+			this.updateBattle();
+		}
+	}
+
+	updateBattle() {
+		Meteor.call('updateBattle', this.battle._id, this.battle);
+	}
+
+	submitAction(combatant, i) {
+		var eAction: HTMLInputElement =
+			<HTMLInputElement>document.querySelector('.js-action-' + i);
+
+		if(eAction.value !== '') {
+			combatant.action = eAction.value;
+			combatant.actionSubmitted = true;
+			this.updateBattle()
+		}
 	}
 
 	rollInitiative() {
-		this.characters = this.characters
+		this.battle.combatants = this.battle.combatants
 		.map((c) => { 
-			if (c.roundsOccupied > 0) {
-				c.initiative = 0;
-				c.roundsOccupied--;
-			}
-			else
-				c.initiative = simpleRoll(100) + (c.bonus || 0);
+			c.initiative = (c.roundsOccupied > 0) ?
+				0 : simpleRoll(100) + (c.bonus || 0);
 			return c; 
 		})
 		.sort((a:any, b:any) => {
@@ -42,28 +115,23 @@ export class CombatDisplay {
 			else
 				return 0;
 		});
+		this.battle.combatPhase = 2;
+		this.updateBattle();
 	}
 
-	add(type) {
-		var eName: HTMLInputElement =
-				<HTMLInputElement>document.querySelector('.js-' + type);
-		var eBonus: HTMLInputElement =
-				<HTMLInputElement>document.querySelector('.js-bonus-' + type);
-		var name = eName.value;
-		var bonus = parseInt(eBonus.value);
-		if(name)
-			this.characters.push({ 
-				name: name, 
-				initiative: 0,
-				bonus:  bonus || 0,
-				type: type, 
-				roundsOccupied: 0 
-			});
+	resolveRound() {
+		this.battle.combatPhase = 0;
+		this.battle.combatants.forEach((c) => { 
+			c.action = '';
+			c.actionSubmitted = false; 
+			c.initiative = 0;
+			if(c.roundsOccupied > 0)
+				c.roundsOccupied--;
+		});
+		this.updateBattle();
 	}
 
-	remove(character) {
-		var i = this.characters.indexOf(character);
-		if(i > -1)
-			this.characters.splice(i, 1);
+	endBattle() {
+		Meteor.call('finishBattle', this.battle._id);
 	}
 }

@@ -28,26 +28,27 @@ import {AccountsUI} from 'meteor-accounts-ui';
 @View({
 	template: `
 	<nav class="h70 posr p0-50 heading5">
-		<div class="vertical-align">
-		<span *ng-if="user">
+		<div class="vertical-align" *ng-if="user">
 		<a class="tdn" [router-link]="['/HomePage']">Home</a> |
 		<a class="tdn" [router-link]="['/CampaignList']">Campaigns</a> |
 		<a class="tdn" [router-link]="['/ContentCreator']">Content Creator</a> |
 		<a class="tdn" [router-link]="['/CharacterList']">All Characters</a> |
-		<a class="tdn" [router-link]="['/CombatDisplay']">Combat Display</a> |
-		</span>
-		<accounts-ui></accounts-ui>
+		<a class="tdn" [router-link]="['/CombatDisplay']">Combat Display</a>
 		</div>
 	</nav>
-	<div class="sub-menu bgc-lightgray posr p0-50 heading5" [class.h50]="campaign">
+	<accounts-ui></accounts-ui>
+	<div class="sub-menu bgc-lightgray posr p0-50 heading5 h50">
 		<span *ng-if="user && campaign" class="vertical-align dib">
-		Campaign: {{campaign.name}}
-		<button (click)="unselectCampaign()">unselect</button> >
+		Playing: {{campaign.name}}
+		<button (click)="unselectCampaign()">&times;</button> >
 		<a class="tdn" [router-link]="['/CharacterList', {campaignId: campaign._id}]">Characters</a> |
 		<a class="tdn" [router-link]="['/CombatDisplay', {campaignId: campaign._id}]">Combat Display</a> 
 		</span>
+		<span *ng-if="!campaign" class="vertical-align dib">
+			No Campaign Selected.
+		</span>
 	</div>
-	<div class="p0-50" [class.pt50]="!campaign">
+	<div class="p0-50 pt50">
 	<router-outlet></router-outlet>
 	</div>
 	<dice-helper></dice-helper>
@@ -106,7 +107,8 @@ class App {
 		
 		Tracker.autorun(() => zone.run(() => {
 			this.user = Meteor.user();
-			this.campaign = Session.get('campaign');
+			this.campaign = (this.user) ? Session.get('campaign') : null;
+
 		}));
 
 		Meteor.subscribe('campaigns');

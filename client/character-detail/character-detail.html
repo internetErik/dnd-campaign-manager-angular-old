@@ -98,7 +98,7 @@
 	</section>
 	<hr>
 	<section class="p20-0 m20-0">
-		<h2>Stats</h2>
+		<h2>General Attributes</h2>
 		<div class="p10-0">
 				<label for="str" class="w125">HP:</label> 
 				{{character.hp + character.hpBonus - character.damage}}
@@ -167,35 +167,6 @@
 				<button (click)="incrementTab('chaTab')">+</button>
 				<button (click)="clearTab('chaTab')">&times;</button>
 		</div>
-		<div class="p10-0">
-			<label for="movement" class="w125">Movement:</label>
-			{{character.movement + character.movementBonus}}
-			<br>
-			Base: <input type="number" min="0" max="100" [(ng-model)]="character.movement">
-			Bonus: <input type="number" min="-100" max="100" [(ng-model)]="character.movementBonus">
-		</div>
-		<div class="p10-0">
-				<label for="hitRoll" class="w125">Hit Roll:</label>
-				{{character.hitRoll + character.hitRollBonus}}
-				<br>
-				Base: <input type="number" min="0" max="100" [(ng-model)]="character.hitRoll">
-				Bonus: <input type="number" min="-100" max="100" [(ng-model)]="character.hitRollBonus">
-		</div>
-		<div class="p10-0">
-			<label for="ac" class="w125">Armor Class:</label>
-			{{ character.ac + character.acBonus }}
-			<br>
-			Base: <input type="number" min="-100" max="100" [(ng-model)]="character.ac">
-			Bonus: <input type="number" min="-100" max="100" [(ng-model)]="character.acBonus">
-		</div>
-		<div class="p10-0">
-			<label for="ac" class="w125">Evade:</label>
-			{{ character.evade + character.block + character.evadeBonus }}
-			<br>
-			Base: <input type="number" min="-100" max="100" [(ng-model)]="character.evade">
-			Block: <input type="number" min="-100" max="100" [(ng-model)]="character.block">
-			Bonus: <input type="number" min="-100" max="100" [(ng-model)]="character.evadeBonus">
-		</div>
 		<h3>Saves</h3>
 		<div class="p10-0">
 			<label for="reflex" class="w125">Reflex:</label> 
@@ -217,6 +188,39 @@
 			<br>
 			Base: <input type="number" min="-100" max="100" [(ng-model)]="character.will">
 			Bonus: <input type="number" min="-100" max="100" [(ng-model)]="character.willBonus">
+		</div>
+	</section>
+	<hr>
+	<section class="p20-0 m20-0">
+		<h2>Combat Attributes</h2>
+		<div class="p10-0">
+			<label for="hitRoll" class="w125">Hit Roll:</label>
+			{{ getHitRoll() }}
+			<br>
+			Base: <input type="number" min="0" max="100" [(ng-model)]="character.hitRoll">
+			Bonus: <input type="number" min="-100" max="100" [(ng-model)]="character.hitRollBonus">
+		</div>
+		<div class="p10-0">
+			<label for="movement" class="w125">Movement:</label>
+			{{character.movement + character.movementBonus}}
+			<br>
+			Base: <input type="number" min="0" max="100" [(ng-model)]="character.movement">
+			Bonus: <input type="number" min="-100" max="100" [(ng-model)]="character.movementBonus">
+		</div>
+		<div class="p10-0">
+			<label for="ac" class="w125">Armor Class:</label>
+			{{ character.ac + character.acBonus }}
+			<br>
+			Base: <input type="number" min="-100" max="100" [(ng-model)]="character.ac">
+			Bonus: <input type="number" min="-100" max="100" [(ng-model)]="character.acBonus">
+		</div>
+		<div class="p10-0">
+			<label for="ac" class="w125">Evade:</label>
+			{{ character.evade + character.block + character.evadeBonus }}
+			<br>
+			Base: <input type="number" min="-100" max="100" [(ng-model)]="character.evade">
+			Block: <input type="number" min="-100" max="100" [(ng-model)]="character.block">
+			Bonus: <input type="number" min="-100" max="100" [(ng-model)]="character.evadeBonus">
 		</div>
 	</section>
 	<hr>

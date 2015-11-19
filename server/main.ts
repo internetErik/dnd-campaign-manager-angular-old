@@ -64,15 +64,6 @@ Meteor.methods({
 	removeCampaign: function(_id) {
 		Campaigns.remove({ _id: _id });
 	},
-	insertCharacter: function(character) {
-		return Characters.insert(character);
-	},
-	updateCharacter: function(_id, character) {
-		return Characters.update({ _id: _id }, character);
-	},
-	removeCharacter: function(_id) {
-		Characters.remove({ _id: _id });
-	},
 	insertSpell: function(spell) { 
 		return Spells.insert(spell);
 	},

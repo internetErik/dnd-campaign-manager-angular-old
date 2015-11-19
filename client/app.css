@@ -6,7 +6,6 @@ accounts-ui {
     height: 300px;
     overflow: hidden;
     padding: 30px;
-    background-color: white;
 }
 .ng-invalid {
 	border: 1px solid red;

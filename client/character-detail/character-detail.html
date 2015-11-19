@@ -1,12 +1,38 @@
 <div>
 	<button (click)="saveCharacter($event)">Save</button> {{saveMessage}}
 	<section class="p20-0 m20-0">
+		<h2>Name</h2>
 		<h1>
 			{{character.title}} 
 			{{character.firstName}} 
 			{{character.middleName}} 
 			{{character.lastName}}
+			({{character.characterType}})
 		</h1>
+
+		<div class="p10-0">
+			<label for="firstName" class="w125">First Name*:</label>
+			<input id="firstName" type="text" [(ng-model)]="character.firstName">
+		</div>
+		<div class="p10-0">
+			<label for="middleName" class="w125">Middle Name:</label>
+			<input id="middleName" type="text" [(ng-model)]="character.middleName">
+		</div>
+		<div class="p10-0">
+			<label for="lastName" class="w125">Last Name:</label>
+			<input id="lastName" type="text" [(ng-model)]="character.lastName">
+		</div>
+		<div class="p10-0">
+			<label for="title" class="w125">Title:</label>
+			<input id="title" type="text" [(ng-model)]="character.title">
+		</div>
+		<div class="p10-0">
+			<label for="characterType" class="w125">Character Type: </label>
+			<select id="characterType" [(ng-model)]="character.characterType">
+				<option value="PC">PC</option>
+				<option value="NPC">NPC</option>
+			</select>
+		</div>
 	</section>
 	<hr>
 	<section class="p20-0 m20-0">

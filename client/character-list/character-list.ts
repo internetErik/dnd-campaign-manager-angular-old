@@ -18,13 +18,18 @@ import {RequireUser} from 'meteor-accounts';
 })
 @RequireUser()
 export class CharacterList {
-	characters: Mongo.Cursor<Object>;
+	pcs: Mongo.Cursor<Object>;
+	npcs: Mongo.Cursor<Object>;
 	campaignId: string;
 
 	constructor(zone: NgZone, params: RouteParams) {
 		this.campaignId = params.get('campaignId');
-		this.characters = (this.campaignId) ?
-			Characters.find({ campaignId: this.campaignId }) :
-			Characters.find({});
+		this.pcs = (this.campaignId) ?
+			Characters.find({ campaignId: this.campaignId, characterType: 'PC' }) :
+			Characters.find({ characterType: 'PC' });
+
+		this.npcs = (this.campaignId) ?
+			Characters.find({ campaignId: this.campaignId, characterType: 'NPC' }) :
+			Characters.find({ characterType: 'NPC' });
 	}
 }

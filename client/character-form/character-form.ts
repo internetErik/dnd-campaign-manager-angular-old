@@ -82,48 +82,6 @@ export class CharacterForm {
 		this.router = _router;
 	}
 
-	addSpell(e) {
-		e.preventDefault();
-		if (this.newSpellName && this.spells.indexOf(this.newSpellName) === -1) {
-			this.spells.push(this.newSpellName);
-			this.newSpellName = '';
-		}
-	}
-
-	removeSpell(spell) {
-		var i = this.spells.indexOf(spell);
-		if (i > -1)
-			this.spells.splice(i, 1);
-	}
-
-	addSkill(e) {
-		e.preventDefault();
-		if(this.newSkillName && this.skills.indexOf(this.newSkillName) === -1) {
-			this.skills.push(this.newSkillName);
-			this.newSkillName = '';
-		}
-	}
-
-	removeSkill(skill) {
-		var i = this.skills.indexOf(skill);
-		if (i > -1)
-				this.skills.splice(i, 1);
-	}
-
-	addFeat(e) {
-		e.preventDefault();
-		if (this.newFeatName && this.feats.indexOf(this.newFeatName) === -1) {
-			this.feats.push(this.newFeatName);
-			this.newFeatName = '';
-		}
-	}
-
-	removeFeat(feat) {
-		var i = this.feats.indexOf(feat);
-		if (i > -1)
-			this.feats.splice(i, 1);
-	}
-
 	/**
 	 * addCharacter
 	 *
@@ -136,57 +94,8 @@ export class CharacterForm {
 		e.preventDefault();
 
 		if (this.characterForm.valid) {
-			let spells = [],
-				skills = [],
-				feats = [],
-				_id, //id returned from insert
+			let _id, //id returned from insert
 				c; //the character we are inserting
-
-			//build spell data
-			if (this.spells.length > 0) {
-				spells = this.spells.map((spell) => {
-					let eLev: HTMLInputElement =
-							<HTMLInputElement>document.querySelector('#spellLevel-' + spell);
-					let eDesc: HTMLInputElement =
-							<HTMLInputElement>document.querySelector('#spellDesc-' + spell);
-					let eDomain: HTMLInputElement =
-							<HTMLInputElement>document.querySelector('#spellDomain-' + spell);
-					return { 
-						name: spell.toLowerCase(), 
-						level: eLev.value, 
-						domain: eDomain.value, 
-						description: eDesc.value 
-					};
-				})
-			}
-
-			//build skill data
-			if (this.skills.length > 0) {
-				skills = this.skills.map((skill) => {
-					let eLev: HTMLInputElement =
-							<HTMLInputElement>document.querySelector('#skillLevel-' + skill);
-					let eStat: HTMLInputElement =
-							<HTMLInputElement>document.querySelector('#skillStat-' + skill);
-					return { 
-						name: skill.toLowerCase(), 
-						level: eLev.value, 
-						stat: eStat.value, 
-						tab: 0 
-					};
-				})
-			}
-
-			//build feat data
-			if (this.feats.length > 0) {
-				feats = this.feats.map((feat) => {
-					let ele: HTMLInputElement =
-							<HTMLInputElement>document.querySelector('#feat-' + feat);
-					return { 
-						name: feat.toLowerCase(), 
-						description: ele.value 
-					};
-				});
-			}
 
 			c = {
 				campaignId: this.campaignId,
@@ -300,9 +209,9 @@ export class CharacterForm {
 				level9Tab: 0,
 				notes: '',
 				backstory: character.backstory,
-				spells: spells,
-				skills: skills,
-				feats: feats
+				spells: [],
+				skills: [],
+				feats: []
 			};
 
 			Meteor.call('insertCharacter', c, (e, r) => {

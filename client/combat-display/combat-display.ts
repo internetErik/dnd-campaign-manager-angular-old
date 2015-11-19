@@ -95,7 +95,8 @@ export class CombatDisplay {
 	}
 
 	submitAction(combatant, i) {
-		//combat phase will be advanced on server if this is the last action we are waiting on
+		//combat phase will be advanced on server if this is the last action 
+		//we are waiting on
 		if (!combatant.actionSubmitted) {
 			let eAction: HTMLInputElement =
 				<HTMLInputElement>document.querySelector('.js-action-' + i);
@@ -103,6 +104,7 @@ export class CombatDisplay {
 			if (eAction.value !== '') {
 				combatant.action = eAction.value;
 				combatant.actionSubmitted = true;
+				eAction.value = '';
 				this.updateBattle()
 			}
 		}

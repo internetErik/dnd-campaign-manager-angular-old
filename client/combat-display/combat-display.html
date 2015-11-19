@@ -53,7 +53,7 @@
 				<br>
 				<textarea cols="45" rows="3" 
 					[disabled]="combatant.actionSubmitted"
-					class="js-action-{{i}}"></textarea>
+					class="js-action js-action-{{i}}"></textarea>
 				<br>
 				<button (click)="submitAction(combatant, i)"
 					[disabled]="combatant.actionSubmitted">Submit Action</button>

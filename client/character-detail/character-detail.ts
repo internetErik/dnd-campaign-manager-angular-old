@@ -74,101 +74,109 @@ export class CharacterDetail {
 		this.updateCharacter();
     }
 
-		addSpell(e) {
-			e.preventDefault();
-			if (this.newSpellName && this.character.spells.indexOf(this.newSpellName) === -1) {
-				if(this.newSpellLevel >= 0 && this.newSpellDomain && this.newSpellDescription) {
-					let spell = { 
-						name: this.newSpellName.toLowerCase(), 
-						level: this.newSpellLevel, 
-						domain: this.newSpellDomain, 
-						description: this.newSpellDescription
-					};
-					this.character.spells.push(spell);
-					this.newSpellName = '';
-					this.newSpellLevel = 0;
-					this.newSpellDomain = '';
-					this.newSpellDescription = '';
-					this.updateCharacter();
-				}
-			}
-		}
+    getCasterLevel() {
+		var spellLevel = 9;
+		for (; spellLevel >= 0; spellLevel--)
+			if (this.character['level' + spellLevel] > 0)
+				break;
+		return spellLevel + 1;
+    }
 
-		removeSpell(e, spell) {
-			e.preventDefault();
-			var i = this.character.spells.indexOf(spell);
-			if (i > -1) {
-				this.character.spells.splice(i, 1);
+	addSpell(e) {
+		e.preventDefault();
+		if (this.newSpellName && this.character.spells.indexOf(this.newSpellName) === -1) {
+			if(this.newSpellLevel >= 0 && this.newSpellDomain && this.newSpellDescription) {
+				let spell = { 
+					name: this.newSpellName.toLowerCase(), 
+					level: this.newSpellLevel, 
+					domain: this.newSpellDomain, 
+					description: this.newSpellDescription
+				};
+				this.character.spells.push(spell);
+				this.newSpellName = '';
+				this.newSpellLevel = 0;
+				this.newSpellDomain = '';
+				this.newSpellDescription = '';
 				this.updateCharacter();
 			}
 		}
+	}
 
-		addSkill(e) {
-			e.preventDefault();
-			if (this.newSkillName && this.character.skills.indexOf(this.newSkillName) === -1) {
-				if (this.newSkillLevel && this.newSkillStat) {
-					let skill = {
-						name: this.newSkillName.toLowerCase(), 
-						level: this.newSkillLevel, 
-						stat: this.newSkillStat
-					};
-					this.character.skills.push(skill);
-					this.newSkillName = '';
-					this.newSkillStat = '';
-					this.newSkillLevel = 0;
-					this.updateCharacter();
-				}
-			}
-		}
-
-		removeSkill(e, skill) {
-			e.preventDefault()
-			var i = this.character.skills.indexOf(skill);
-			if (i > -1) {
-				this.character.skills.splice(i, 1);
-				this.updateCharacter();
-			}
-		}
-
-		addFeat(e) {
-			e.preventDefault();
-			if (this.newFeatName && this.character.feats.indexOf(this.newFeatName) === -1) {
-				if(this.newFeatDesc) {
-					this.character.feats.push({
-						name: this.newFeatName.toLowerCase(), 
-						description: this.newFeatDesc
-					});
-					this.newFeatName = '';
-					this.newFeatDesc = '';
-					this.updateCharacter();
-				}
-			}
-		}
-
-		removeFeat(e, feat) {
-			e.preventDefault();
-			var i = this.character.feats.indexOf(feat);
-			if (i > -1) {
-				this.character.feats.splice(i, 1);
-				this.updateCharacter();
-			}
-		}
-
-		saveCharacter(e) {
-			e.preventDefault();
+	removeSpell(e, spell) {
+		e.preventDefault();
+		var i = this.character.spells.indexOf(spell);
+		if (i > -1) {
+			this.character.spells.splice(i, 1);
 			this.updateCharacter();
 		}
+	}
 
-		updateCharacter() {
-			this.saveMessage = "saving . . .";
-			Meteor.call('updateCharacter', this.character._id, this.character, (e, r) => {
-				this.saveMessage = 'saved successfully!';
-				if (e) {
-					this.saveMessage = 'Error saving character!';
-					console.log("Error updating character:", e);
-				}
-				else
-					setTimeout(() => { this.saveMessage = '' }, 500);
-			});
+	addSkill(e) {
+		e.preventDefault();
+		if (this.newSkillName && this.character.skills.indexOf(this.newSkillName) === -1) {
+			if (this.newSkillLevel && this.newSkillStat) {
+				let skill = {
+					name: this.newSkillName.toLowerCase(), 
+					level: this.newSkillLevel, 
+					stat: this.newSkillStat
+				};
+				this.character.skills.push(skill);
+				this.newSkillName = '';
+				this.newSkillStat = '';
+				this.newSkillLevel = 0;
+				this.updateCharacter();
+			}
 		}
+	}
+
+	removeSkill(e, skill) {
+		e.preventDefault()
+		var i = this.character.skills.indexOf(skill);
+		if (i > -1) {
+			this.character.skills.splice(i, 1);
+			this.updateCharacter();
+		}
+	}
+
+	addFeat(e) {
+		e.preventDefault();
+		if (this.newFeatName && this.character.feats.indexOf(this.newFeatName) === -1) {
+			if(this.newFeatDesc) {
+				this.character.feats.push({
+					name: this.newFeatName.toLowerCase(), 
+					description: this.newFeatDesc
+				});
+				this.newFeatName = '';
+				this.newFeatDesc = '';
+				this.updateCharacter();
+			}
+		}
+	}
+
+	removeFeat(e, feat) {
+		e.preventDefault();
+		var i = this.character.feats.indexOf(feat);
+		if (i > -1) {
+			this.character.feats.splice(i, 1);
+			this.updateCharacter();
+		}
+	}
+
+	saveCharacter(e) {
+		e.preventDefault();
+		this.updateCharacter();
+	}
+
+	updateCharacter() {
+		this.saveMessage = "saving . . .";
+		Meteor.call('updateCharacter', this.character._id, this.character, (e, r) => {
+			this.saveMessage = 'saved successfully!';
+			if (e) {
+				this.saveMessage = 'Error saving character!';
+				console.log("Error updating character:", e);
+			}
+			else
+				setTimeout(() => { this.saveMessage = '' }, 500);
+		});
+	}
 }

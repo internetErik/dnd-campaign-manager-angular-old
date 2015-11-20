@@ -1,6 +1,6 @@
 <div>
-	<button (click)="saveCharacter($event)">Save</button> {{saveMessage}}
 	<section class="p20-0 m20-0">
+		<a id="name"></a>
 		<h2>Name</h2>
 		<h1>
 			{{character.title}} 
@@ -36,6 +36,7 @@
 	</section>
 	<hr>
 	<section class="p20-0 m20-0">
+		<a id="religion"></a>
 		<h2>Religion/Morals</h2>
 		<div class="p10-0">
 			<label for="alignment" class="w125">Deity: </label>
@@ -48,6 +49,7 @@
 	</section>
 	<hr>
 	<section class="p20-0 m20-0">
+		<a id="biological"></a>
 		<h2>Biological Information</h2>
 		<div class="p10-0">
 			<label for="race" class="w125">Race:</label>
@@ -81,12 +83,14 @@
 	</section>
 	<hr>
 	<section class="p20-0 m20-0">
+		<a id="equipment"></a>
 		<h2>Equipment</h2>
 		<div class="p10-0">
 			<label for="inventory" class="w125">Inventory:</label>
 			<br>
 			<textarea id="inventory" cols="45" rows="10" [(ng-model)]="character.inventory"></textarea>
 		</div>
+		<h3>Money</h3>
 		<div class="p10-0">
 			<label for="bronze">Bronze:</label>
 			<input id="bronze" type="number" min="0" [(ng-model)]="character.bronze">
@@ -98,6 +102,7 @@
 	</section>
 	<hr>
 	<section class="p20-0 m20-0">
+		<a id="general"></a>
 		<h2>General Attributes</h2>
 		<div class="p10-0">
 				<label for="str" class="w125">HP:</label> 
@@ -192,6 +197,7 @@
 	</section>
 	<hr>
 	<section class="p20-0 m20-0">
+		<a id="combat"></a>
 		<h2>Combat Attributes</h2>
 		<div class="p10-0">
 			<label for="hitRoll" class="w125">Hit Roll:</label>
@@ -225,6 +231,7 @@
 	</section>
 	<hr>
 	<section class="p20-0 m20-0">
+		<a id="magic"></a>
 		<h2>Magic</h2>
 		<h3>Caster Level: {{ getCasterLevel() }}</h3>
 		<h3>Effortless Spells</h3>
@@ -444,8 +451,8 @@
 	</section>
 	<hr>
 	<section class="p20-0 m20-0">
+		<a id="skills"></a>
 		<h2>Skills</h2>
-		
 		<h3>Skill List</h3>
 		<div *ng-for="#skill of character.skills;#i = index" [class.pt15]="i !== 0">
 			<label>{{ skill.name }} ({{skill.stat}}):</label>
@@ -473,8 +480,8 @@
 	</section>
 	<hr>
 	<section class="p20-0 m20-0">
+		<a id="feats"></a>
 		<h2>Feats</h2>
-
 		<h3>Feat List</h3>
 		<div *ng-for="#feat of character.feats;#i = index" [class.pt30]="i !== 0">
 			<label>{{ feat.name }}:</label> 
@@ -499,6 +506,7 @@
 	</section>
 	<hr>
 	<section class="p20-0 m20-0">
+		<a id="notes"></a>
 		<h2>Notes</h2>
 		<div class="p10-0">
 			<textarea cols="45" rows="10" [(ng-model)]="character.notes"></textarea>
@@ -506,15 +514,31 @@
 	</section>
 	<hr>
 	<section class="p20-0 m20-0">
+		<a id="backstory"></a>
 		<h2>Backstory</h2>
 		<div class="p10-0">
 			<textarea cols="45" rows="10" [(ng-model)]="character.backstory"></textarea>
 		</div>
 	</section>
 
-	<button (click)="saveCharacter($event)">Save</button> {{saveMessage}}
-	
 	<div class="p30-0">
 		<button (click)="deleteCharacter($event)">Delete</button>
 	</div>
+</div>
+<div class="jump-menu p10 r0 vertical-align-fixed bgc-white bd1-s-black">
+	<ul>
+		<li class="p5-0"><a href="#name">Name</a></li>
+		<li class="p5-0"><a href="#religion">Religion/Morals</a></li>
+		<li class="p5-0"><a href="#biological">Biological Information</a></li>
+		<li class="p5-0"><a href="#equipment">Equipment</a></li>
+		<li class="p5-0"><a href="#general">General Attributes</a></li>
+		<li class="p5-0"><a href="#combat">Combat Attributes</a></li>
+		<li class="p5-0"><a href="#magic">Magic</a></li>
+		<li class="p5-0"><a href="#skills">Skills</a></li>
+		<li class="p5-0"><a href="#feats">Feats</a></li>
+		<li class="p5-0"><a href="#notes">Notes</a></li>
+		<li class="p5-0"><a href="#backstory">Backstory</a></li>
+	</ul>
+	<button (click)="saveCharacter($event)">Save</button> {{saveMessage}}
+	
 </div>

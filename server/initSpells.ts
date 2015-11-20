@@ -1143,7 +1143,9 @@ export function initSpells() {
          }
       ];
 
-      for (let i = 0; i < spells.length; i++)
-        Spells.insert(spells[i]);
+      for (let i = 0; i < spells.length; i++) {
+          spells[i].name = spells[i].name.toLowerCase();
+          Spells.insert(spells[i]);
+      }
    }
 }

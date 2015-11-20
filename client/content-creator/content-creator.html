@@ -3,56 +3,185 @@
 	<hr>
 	<section class="p20-0 m20-0">
 		<h2>Spells</h2>
+
+		<h3>Add Spell</h3>
+		<div class="p10-0">
+			<label class="w125" for="spellName">Name: </label>
+			<input id="spellName" type="text" 
+				[class.ng-invalid]="invalidSpellName"
+				[(ng-model)]="newSpellName"
+				(keyup)="checkSpellName($event)">
+		</div>
+		<div class="p10-0">
+			<label class="w125" for="spellLevel">Level: </label>
+			<input type="number" min="0" max="9" id="spellLevel" 
+				[(ng-model)]="newSpellLevel">
+		</div>
+		<div class="p10-0">
+			<label class="w125" for="school">School: </label>
+			<select id="school" [(ng-model)]="newSpellSchool">
+				<option selected="selected" value="Abjuration">Abjuration</option>
+				<option value="Conjuration">Conjuration</option>
+				<option value="Divination">Divination</option>
+				<option value="Enchantment">Enchantment</option>
+				<option value="Evocation">Evocation</option>
+				<option value="Illusion">Illusion</option>
+				<option value="Necromancy">Necromancy</option>
+				<option value="Transmutation">Transmutation</option>
+				<option value="Universal">Universal</option>
+			</select>
+		</div>
+		<div class="p10-0">
+			<label class="w125" for="range">Range: </label>
+			<input type="text" id="range" [(ng-model)]="newSpellRange">
+		</div>
+		<div class="p10-0">
+			<label class="w125" for="duration">Duration: </label>
+			<input type="text" id="duration" [(ng-model)]="newSpellDuration">
+		</div>
+		<div class="p10-0">
+			<label class="w125" for="components">Components: </label>
+			<input type="text" id="components" [(ng-model)]="newSpellComponents">
+		</div>
+		<div class="p10-0">
+			<label class="w125" for="castingTime">Casting Time: </label>
+			<input type="text" id="castingTime" [(ng-model)]="newSpellCastingTime">
+		</div>
+		<div class="p10-0">
+			<label class="w125" for="spellDescription">Description: </label> 
+			<br>
+			<textarea id="spellDescription" cols="45" rows="3"
+				[(ng-model)]="newSpellDescription"></textarea>
+		</div>
+		<div class="p10-0">
+			<button (click)="addSpell($event)">+</button>
+		</div>
+
+		<h3>All Spells</h3>
+		<div class="p20-0">
+			<h4>Sort</h4>
+			<button class="p5-0 pl20 pr20" (click)="sortSpellAZ()">Alphabet</button> 
+			<button class="p5-0 pl20 pr20" (click)="sortSpellLevel()">Spell Level</button> 
+			<button class="p5-0 pl20 pr20" (click)="sortSpellSchool()">School</button>
+		</div>
+		<div class="p20-0">
+			<h4>Filter</h4>
+			<h5>Level</h5>
+			<div class="p5-0">
+				<button class="p5-0 pl20 pr20" (click)="filterSpellLevel(-1)">clear</button>
+			</div>
+
+			<div class="p5-0">
+				<button class="p5-0 pl20 pr20" (click)="filterSpellLevel(0)">0</button>
+				<button class="p5-0 pl20 pr20" (click)="filterSpellLevel(1)">1</button>
+				<button class="p5-0 pl20 pr20" (click)="filterSpellLevel(2)">2</button>
+				<button class="p5-0 pl20 pr20" (click)="filterSpellLevel(3)">3</button>
+				<button class="p5-0 pl20 pr20" (click)="filterSpellLevel(4)">4</button>
+			</div>
+			
+			<div class="p5-0">
+				<button class="p5-0 pl20 pr20" (click)="filterSpellLevel(5)">5</button>
+				<button class="p5-0 pl20 pr20" (click)="filterSpellLevel(6)">6</button>
+				<button class="p5-0 pl20 pr20" (click)="filterSpellLevel(7)">7</button>
+				<button class="p5-0 pl20 pr20" (click)="filterSpellLevel(8)">8</button>
+				<button class="p5-0 pl20 pr20" (click)="filterSpellLevel(9)">9</button>
+			</div>
+		</div>
+		<div class="p20-0">
+			<h5>Name</h5>
+
+			<div class="p5-0">
+				<button class="p5-0 pl20 pr20" (click)="filterSpellAZ('')">clear</button>
+			</div>
+			
+			<div class="p5-0">
+				<button class="p5-0 pl20 pr20" (click)="filterSpellAZ('a')">a</button>
+				<button class="p5-0 pl20 pr20" (click)="filterSpellAZ('b')">b</button>
+				<button class="p5-0 pl20 pr20" (click)="filterSpellAZ('c')">c</button>
+				<button class="p5-0 pl20 pr20" (click)="filterSpellAZ('d')">d</button>
+				<button class="p5-0 pl20 pr20" (click)="filterSpellAZ('e')">e</button>
+				<button class="p5-0 pl20 pr20" (click)="filterSpellAZ('f')">f</button>
+				<button class="p5-0 pl20 pr20" (click)="filterSpellAZ('g')">g</button>
+				<button class="p5-0 pl20 pr20" (click)="filterSpellAZ('h')">h</button>
+				<button class="p5-0 pl20 pr20" (click)="filterSpellAZ('i')">i</button>
+				<button class="p5-0 pl20 pr20" (click)="filterSpellAZ('j')">j</button>
+			</div>
+			
+			<div class="p5-0">
+				<button class="p5-0 pl20 pr20" (click)="filterSpellAZ('k')">k</button>
+				<button class="p5-0 pl20 pr20" (click)="filterSpellAZ('l')">l</button>
+				<button class="p5-0 pl20 pr20" (click)="filterSpellAZ('m')">m</button>
+				<button class="p5-0 pl20 pr20" (click)="filterSpellAZ('n')">n</button>
+				<button class="p5-0 pl20 pr20" (click)="filterSpellAZ('o')">o</button>
+				<button class="p5-0 pl20 pr20" (click)="filterSpellAZ('p')">p</button>
+				<button class="p5-0 pl20 pr20" (click)="filterSpellAZ('q')">q</button>
+				<button class="p5-0 pl20 pr20" (click)="filterSpellAZ('r')">r</button>
+				<button class="p5-0 pl20 pr20" (click)="filterSpellAZ('s')">s</button>
+				<button class="p5-0 pl20 pr20" (click)="filterSpellAZ('t')">t</button>
+			</div>
+			
+			<div class="p5-0">
+				<button class="p5-0 pl20 pr20" (click)="filterSpellAZ('u')">u</button>
+				<button class="p5-0 pl20 pr20" (click)="filterSpellAZ('v')">v</button>
+				<button class="p5-0 pl20 pr20" (click)="filterSpellAZ('w')">w</button>
+				<button class="p5-0 pl20 pr20" (click)="filterSpellAZ('x')">x</button>
+				<button class="p5-0 pl20 pr20" (click)="filterSpellAZ('y')">y</button>
+				<button class="p5-0 pl20 pr20" (click)="filterSpellAZ('z')">z</button>
+			</div>
+		</div>
+		<div class="p20-0">
+			<h5>School</h5>
+
+			<div class="p5-0">
+				<button class="p5-0 pl20 pr20" (click)="filterSpellSchool('')">clear</button>
+			</div>
+			
+			<div class="p5-0">
+				<button class="p5-0 pl20 pr20" 
+					(click)="filterSpellSchool('Abjuration')">Abjuration</button>
+				<button class="p5-0 pl20 pr20" 
+					(click)="filterSpellSchool('Conjuration')">Conjuration</button>
+				<button class="p5-0 pl20 pr20" 
+					(click)="filterSpellSchool('Divination')">Divination</button>
+			</div>
+			
+			<div class="p5-0">
+				<button class="p5-0 pl20 pr20" 
+					(click)="filterSpellSchool('Enchantment')">Enchantment</button>
+				<button class="p5-0 pl20 pr20" 
+					(click)="filterSpellSchool('Evocation')">Evocation</button>
+				<button class="p5-0 pl20 pr20" 
+					(click)="filterSpellSchool('Illusion')">Illusion</button>
+			</div>
+			
+			<div class="p5-0">
+				<button class="p5-0 pl20 pr20" 
+					(click)="filterSpellSchool('Necromancy')">Necromancy</button>
+				<button class="p5-0 pl20 pr20" 
+					(click)="filterSpellSchool('Transmutation')">Transmutation</button>
+				<button class="p5-0 pl20 pr20" 
+					(click)="filterSpellSchool('Universal')">Universal</button>
+			</div>
+		</div>
 		<div *ng-for="#spell of spells;#i = index" [class.pt30]="i !== 0">
-			<h4>{{ spell.name }}:</h4>
-			<label>Level:</label> {{spell.level}}
+			<h5 class="ttc">{{ spell.name }}</h5>
+			<label class="w125">Level:</label> {{spell.level}}
 			<br>
-			<label>Domain:</label> {{spell.domain}}
+			<label class="w125">School:</label> {{spell.school}}
 			<br>
-			<label>Description:</label>
+			<label class="w125">Range:</label> {{spell.range}}
+			<br>
+			<label class="w125">Duration:</label> {{spell.duration}}
+			<br>
+			<label class="w125">Components:</label> {{spell.components}}
+			<br>
+			<label class="w125">Casting Time:</label> {{spell.castingTime}}
+			<br>
+			<label class="w125">Description:</label>
 			<br>
 			{{spell.description}}
 			<br>
 			<button (click)="removeSpell($event, spell);">-</button>
-		</div>
-		<h3>Add Spell</h3>
-		<div class="p10-0">
-			<label class="w100" for="spellName">Name: </label>
-			<input id="spellName" type="text" 
-				[(ng-model)]="newSpellName"
-				(keyup)="checkSpellName()">
-		</div>
-		<div class="p10-0">
-			<label class="w100" for="spellLevel">Level: </label>
-			<input type="number" min="0" max="9" id="spellLevel" class="w100" [(ng-model)]="newSpellLevel">
-		</div>
-		<div class="p10-0">
-			<label class="w100" for="school">School: </label>
-			<input type="text" id="school" [(ng-model)]="newSpellSchool">
-		</div>
-		<div class="p10-0">
-			<label class="w100" for="range">Range: </label>
-			<input type="text" id="range" [(ng-model)]="newSpellRange">
-		</div>
-		<div class="p10-0">
-			<label class="w100" for="duration">Duration: </label>
-			<input type="text" id="duration" [(ng-model)]="newSpellDuration">
-		</div>
-		<div class="p10-0">
-			<label class="w100" for="components">Components: </label>
-			<input type="text" id="components" [(ng-model)]="newSpellComponents">
-		</div>
-		<div class="p10-0">
-			<label class="w100" for="castingTime">Casting Time: </label>
-			<input type="text" id="castingTime" [(ng-model)]="newSpellCastingTime">
-		</div>
-		<div class="p10-0">
-			<label class="w100" for="spellDescription">Description: </label> 
-			<br>
-			<textarea id="spellDescription" [(ng-model)]="newSpellDescription" cols="45" rows="3"></textarea>
-		</div>
-		<div class="p10-0">
-			<button (click)="addSpell($event)">+</button>
 		</div>
 	</section>
 	<hr>	

@@ -1,4 +1,5 @@
-import {loadCharacters} from 'server/loadCharacters';
+import {initCharacters} from 'server/initCharacters';
+import {initSpells} from 'server/initSpells';
 
 import {Characters} from 'collections/characters';
 import {Campaigns} from 'collections/campaigns';
@@ -12,10 +13,11 @@ import {Battles} from 'collections/battles';
 Meteor.startup(function() { 
 	//for some reason if we don't do something with the DBS on start, 
 	//they won't show on the front end
-	loadCharacters();
+	initCharacters();
+	initSpells();
+	
 	Campaigns.find().count();
 	Rolls.find().count();
-	Spells.find().count();
 	Skills.find().count();
 	Feats.find().count();
 	Monsters.find().count();

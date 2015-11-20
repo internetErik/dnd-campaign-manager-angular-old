@@ -1,9 +1,9 @@
 import {Characters} from 'collections/characters';
 
-export function loadCharacters() {
+export function initCharacters() {
   if (Characters.find().count() === 0) {
 
-    var characters = [
+    let characters = [
         {
 						"firstName": "Bill",
 						"middleName": "",
@@ -137,8 +137,7 @@ export function loadCharacters() {
 				}
     ];
 
-    for (var i = 0; i < characters.length; i++) {
+    for (let i = 0; i < characters.length; i++)
         Characters.insert(characters[i]);
-    }
   }
 };

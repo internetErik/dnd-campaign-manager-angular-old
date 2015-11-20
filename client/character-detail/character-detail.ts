@@ -77,18 +77,17 @@ export class CharacterDetail {
     getHitRoll() {
 		var hr = this.character.hitRoll + this.character.hitRollBonus;
 		var attacks = [];
-		var i, j;
 
 		if (hr > 6) {
-			for (i = 0; hr > 0;) {
-				for (j = 0; j < 6 && hr > 0; j++ , hr--)
+			for (let i = 0; hr > 0;) {
+				for (let j = 0; j < 6 && hr > 0; j++ , hr--)
 					;
 				attacks.push(j);
 				if (attacks.length === 6 && attacks[5] === 6)
 					break;
 			}
 
-			for (i = 0; hr > 0; i++, hr--)
+			for (let i = 0; hr > 0; i++, hr--)
 				attacks[i % 6]++;
 
 			return `+${attacks.join(' / +')} (${attacks.length} attacks)`;

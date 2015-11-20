@@ -27,7 +27,11 @@ export class ContentCreator {
 
 		newSpellName: string;
 		newSpellLevel: number;
-		newSpellDomain: string;
+		newSpellSchool: string;
+		newSpellRange: string;
+		newSpellDuration: string;
+		newSpellComponents: string;
+		newSpellCastingTime: string;
 		newSpellDescription: string;
 
 		newSkillName: string;
@@ -43,21 +47,29 @@ export class ContentCreator {
 				this.feats = Feats.find();
 		}
 
+		checkSpellName(e: Event) {
+			console.log(e);
+		}
+
 		addSpell(e: Event) {
 				e.preventDefault();
 				if (this.newSpellName && !Spells.findOne({ name: this.newSpellName })) {
-						if (this.newSpellLevel && this.newSpellDomain && this.newSpellDescription) {
+						if (this.newSpellLevel && this.newSpellSchool && this.newSpellDescription) {
 								let spell = { 
-									name: this.newSpellName.toLowerCase(), 
-									level: this.newSpellLevel, 
-									domain: this.newSpellDomain, 
-									description: this.newSpellDescription
+									name        : this.newSpellName.toLowerCase(),
+									level       : this.newSpellLevel,
+									school      : this.newSpellSchool,
+									range       : this.newSpellRange,
+									duration    : this.newSpellDuration,
+									components  : this.newSpellComponents,
+									castingTime : this.newSpellCastingTime,
+									description : this.newSpellDescription
 								};
 
 								Meteor.call('insertSpell', spell);
 								this.newSpellName = '';
 								this.newSpellLevel = 0;
-								this.newSpellDomain = '';
+								this.newSpellSchool = '';
 								this.newSpellDescription = '';
 						}
 				}

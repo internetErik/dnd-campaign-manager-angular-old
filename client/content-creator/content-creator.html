@@ -18,15 +18,33 @@
 		<h3>Add Spell</h3>
 		<div class="p10-0">
 			<label class="w100" for="spellName">Name: </label>
-			<input id="spellName" type="text" [(ng-model)]="newSpellName">
+			<input id="spellName" type="text" 
+				[(ng-model)]="newSpellName"
+				(keyup)="checkSpellName()">
 		</div>
 		<div class="p10-0">
 			<label class="w100" for="spellLevel">Level: </label>
 			<input type="number" min="0" max="9" id="spellLevel" class="w100" [(ng-model)]="newSpellLevel">
 		</div>
 		<div class="p10-0">
-			<label class="w100" for="domain">Domain: </label>
-			<input type="text" id="domain" [(ng-model)]="newSpellDomain">
+			<label class="w100" for="school">School: </label>
+			<input type="text" id="school" [(ng-model)]="newSpellSchool">
+		</div>
+		<div class="p10-0">
+			<label class="w100" for="range">Range: </label>
+			<input type="text" id="range" [(ng-model)]="newSpellRange">
+		</div>
+		<div class="p10-0">
+			<label class="w100" for="duration">Duration: </label>
+			<input type="text" id="duration" [(ng-model)]="newSpellDuration">
+		</div>
+		<div class="p10-0">
+			<label class="w100" for="components">Components: </label>
+			<input type="text" id="components" [(ng-model)]="newSpellComponents">
+		</div>
+		<div class="p10-0">
+			<label class="w100" for="castingTime">Casting Time: </label>
+			<input type="text" id="castingTime" [(ng-model)]="newSpellCastingTime">
 		</div>
 		<div class="p10-0">
 			<label class="w100" for="spellDescription">Description: </label> 

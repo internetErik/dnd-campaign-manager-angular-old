@@ -1,5 +1,7 @@
 import {initCharacters} from 'server/initCharacters';
 import {initSpells} from 'server/initSpells';
+import {initSkills} from 'server/initSkills';
+import {initFeats} from 'server/initFeats';
 
 import {Characters} from 'collections/characters';
 import {Campaigns} from 'collections/campaigns';
@@ -15,11 +17,11 @@ Meteor.startup(function() {
 	//they won't show on the front end
 	initCharacters();
 	initSpells();
+	initSkills();
+	initFeats();
 	
 	Campaigns.find().count();
 	Rolls.find().count();
-	Skills.find().count();
-	Feats.find().count();
 	Monsters.find().count();
 	Battles.find().count();
 });

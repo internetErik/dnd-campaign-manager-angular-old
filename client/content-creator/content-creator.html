@@ -89,9 +89,19 @@
 		<h2>Feats</h2>
 		<ul class="pb20">
 			<li *ng-for="#feat of feats;#i = index" [class.pt30]="i !== 0">
-				<label>{{ feat.name }}:</label> 
+				<h5>{{ feat.name }}</h5>
+				<label>Prerequisites:</label>
+				{{feat.prerequisite}}
 				<br>
-				{{feat.description}}
+				<label>Benefit:</label>
+				<br>
+				{{feat.benefit}}
+				<br>
+				<label>Normal: </label>
+				{{feat.normal}}
+				<br>
+				<label>Special: </label>
+				{{feat.special}}
 				<br>
 				<button (click)="removeFeat($event, feat)">-</button>
 			</li>

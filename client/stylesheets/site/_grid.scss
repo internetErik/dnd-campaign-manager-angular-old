@@ -1,3 +1,5 @@
 .grid-container {
-	@include container($width-wrapper);
+	// @include container($width-wrapper);
+	max-width: 1024px;
+	margin: 0 auto;
 }

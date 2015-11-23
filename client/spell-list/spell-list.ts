@@ -29,8 +29,8 @@ export class SpellList {
 	constructor() {
 		this.spellSort = 'level'; //options: 'az', 'level', 'school'
 		this.spellSortDirAZ = 1;
-		this.spellSortDirLevel = -1;
-		this.spellSortDirSchool = -1;
+		this.spellSortDirLevel = 1;
+		this.spellSortDirSchool = 1;
 		this.spellFilterAZ = '';
 		this.spellFilterLevel = -1;
 		this.spellFilterSchool = '';
@@ -87,7 +87,7 @@ export class SpellList {
 
 	getSpells() {
 		var queryObj = {},
-			sortObj = { sort: { level: -1 } };
+			sortObj = { sort: { level: 1 } };
 
 		if (this.spellFilterLevel >= 0)
 			queryObj.level = this.spellFilterLevel;
@@ -97,11 +97,11 @@ export class SpellList {
 			queryObj.school = this.spellFilterSchool;
 
 		if (this.spellSort === 'az')
-			sortObj = { sort: { name: this.spellSortDirAZ, level: -1 } };
+			sortObj = { sort: { name: this.spellSortDirAZ, level: 1 } };
 		else if (this.spellSort === 'level')
-			sortObj = { sort: { level: this.spellSortDirLevel } };
+			sortObj = { sort: { level: this.spellSortDirLevel, name: 1 } };
 		else if (this.spellSort === 'school')
-			sortObj = { sort: { school: this.spellSortDirSchool, level: -1 } };
+			sortObj = { sort: { school: this.spellSortDirSchool, level: 1 } };
 
 		this.spells = Spells.find(queryObj, sortObj);
 	}

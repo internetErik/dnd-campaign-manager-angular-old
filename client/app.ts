@@ -48,8 +48,8 @@ import {AccountsUI} from 'meteor-accounts-ui';
 			No Campaign Selected.
 		</span>
 	</div>
-	<div class="p0-50 pt50">
-	<router-outlet></router-outlet>
+	<div class="p0-20 pt50 grid-container">
+		<router-outlet></router-outlet>
 	</div>
 	<dice-helper></dice-helper>
 	`,

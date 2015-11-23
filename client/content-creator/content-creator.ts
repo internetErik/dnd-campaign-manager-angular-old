@@ -27,6 +27,8 @@ export class ContentCreator {
 	skills: Mongo.Cursor<Object>;
 	feats: Mongo.Cursor<Object>;
 
+	currentTab: string;
+
 	newSpellName: string;
 	invalidSpellName: boolean;
 	newSpellLevel: number;
@@ -41,13 +43,19 @@ export class ContentCreator {
 	newSkillStat: string;
 
 	newFeatName: string;
-	newFeatDesc: string;
+	newFeatPrerequisite: string;
+	newFeatBenefit: string;
+	newFeatNormal: string;
+	newFeatSpecial: string;
 
 	constructor(_router: Router) {
 		this.router = _router;
 		this.skills = Skills.find();
 		this.feats = Feats.find();
+
+		this.currentTab = 'spells';
 		
+		//for adding a new spell
 		this.invalidSpellName = false;
 		this.newSpellSchool = 'Abjuration';
 	}
@@ -108,10 +116,13 @@ export class ContentCreator {
 	addFeat(e: Event) {
 		e.preventDefault();
 		if (this.newFeatName && !Feats.findOne({ name: this.newFeatName })) {
-			if (this.newFeatDesc) {
+			if (this.newFeatBenefit) {
 				Meteor.call('insertFeat', { 
 					name: this.newFeatName.toLowerCase(), 
-					description: this.newFeatDesc 
+					prerequisite: this.newFeatPrerequisite,
+					benefit: this.newFeatBenefit,
+					normal: this.newFeatNormal,
+					special: this.newFeatSpecial
 				});
 				this.newFeatName = '';
 				this.newFeatDesc = '';

@@ -7,10 +7,10 @@
 
 //susy is recommended for grids
 	//http://susydocs.oddbird.net/en/latest/
-// @import "/{meta:susy}/susy";
+// @import "susy/sass/susy";
 
 //grids depend upon susy
-// @import "site/grid";
+@import "site/grid";
 
 // like an extension of reset
 @import "site/defaults";

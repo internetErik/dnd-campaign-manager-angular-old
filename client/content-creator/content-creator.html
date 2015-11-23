@@ -1,7 +1,14 @@
 <div>
 	<h1>Content Creator</h1>
+	<button  class="p5-0 pl20 pr20" [class.c-gray]="currentTab !== 'spells'" 
+		(click)="currentTab = 'spells'">Spells</button>
+	<button  class="p5-0 pl20 pr20" [class.c-gray]="currentTab !== 'skills'" 
+		(click)="currentTab = 'skills'">Skills</button>
+	<button  class="p5-0 pl20 pr20" [class.c-gray]="currentTab !== 'feats'" 
+		(click)="currentTab = 'feats'">Feats</button>
 	<hr>
-	<section class="p20-0 m20-0">
+
+	<section class="p20-0 m20-0" *ng-if="currentTab === 'spells'">
 		<h2>Spells</h2>
 
 		<h3>Add Spell</h3>
@@ -60,15 +67,9 @@
 		<h3>All Spells</h3>
 		<spell-list></spell-list>
 	</section>
-	<hr>	
-	<section class="p20-0 m20-0">
+
+	<section class="p20-0 m20-0" *ng-if="currentTab === 'skills'">
 		<h2>Skills</h2>
-		<ul class="pb20">
-			<li *ng-for="#skill of skills;#i = index" [class.pt15]="i !== 0">
-				{{ skill.name }} ({{skill.stat}})
-				<button (click)="removeSkill($event, skill)">-</button>
-			</li>
-		</ul>
 		<h3>Add Skill</h3>
 		<div class="p10-0">
 			<label for="skillName">Name</label>
@@ -83,41 +84,71 @@
 			</select>)
 			<button (click)="addSkill($event)">+</button>
 		</div>
-	</section>
-	<hr>
-	<section class="p20-0 m20-0">
-		<h2>Feats</h2>
+		<h3>Skill List</h3>
 		<ul class="pb20">
-			<li *ng-for="#feat of feats;#i = index" [class.pt30]="i !== 0">
-				<h5>{{ feat.name }}</h5>
-				<label>Prerequisites:</label>
-				{{feat.prerequisite}}
-				<br>
-				<label>Benefit:</label>
-				<br>
-				{{feat.benefit}}
-				<br>
-				<label>Normal: </label>
-				{{feat.normal}}
-				<br>
-				<label>Special: </label>
-				{{feat.special}}
-				<br>
-				<button (click)="removeFeat($event, feat)">-</button>
+			<li *ng-for="#skill of skills;#i = index" [class.pt15]="i !== 0">
+				{{ skill.name }} ({{skill.stat}})
+				<button (click)="removeSkill($event, skill)">-</button>
 			</li>
 		</ul>
+	</section>
+
+	<section class="p20-0 m20-0" *ng-if="currentTab === 'feats'">
+		<h2>Feats</h2>
 		<h3>Add Feat</h3>
 		<div class="p10-0">
 			<label for="featName">Name: </label>
-			<input id="featName" type="text" [(ng-model)]="newFeatName">
+			<input id="featName" type="text" 
+				[(ng-model)]="newFeatName">
 		</div>
 		<div class="p10-0">
-			<label for="featDesc">Description: </label> 
+			<label for="featPrereq">Prerequisite: </label>
+			<input id="featPrereq" type="text" 
+				[(ng-model)]="newFeatPrerequisite">
+		</div>
+		<div class="p10-0">
+			<label for="featBenefit">Benefit: </label> 
 			<br>
-			<textarea cols="45" rows="3" id="featDesc" [(ng-model)]="newFeatDesc"></textarea>
+			<textarea cols="45" rows="3" id="featDesc" 
+				[(ng-model)]="newFeatDesc"></textarea>
+		</div>
+		<div class="p10-0">
+			<label for="featNormal">Normal: </label> 
+			<br>
+			<textarea cols="45" rows="3" id="featNormal" 
+				[(ng-model)]="newFeatNormal"></textarea>
+		</div>
+		<div class="p10-0">
+			<label for="featSpecial">Special: </label> 
+			<br>
+			<textarea cols="45" rows="3" id="featSpecial" 
+				[(ng-model)]="newFeatSpecial"></textarea>
 		</div>
 		<div class="p10-0">
 			<button (click)="addFeat($event)">+</button>
 		</div>
+		<h3>Feat List</h3>
+		<ul class="pb20">
+			<li *ng-for="#feat of feats;#i = index" [class.pt30]="i !== 0">
+				<h5>{{ feat.name }}</h5>
+				<div class="p10-0" *ng-if="feat.prerequisite">
+					<label>Prerequisites:</label>
+					{{feat.prerequisite}}
+				</div>
+				<div class="p10-0">
+					<label>Benefit:</label>
+					<br>
+					{{feat.benefit}}
+				</div>
+				<div class="p10-0" *ng-if="feat.normal">
+					<label>Normal: </label>
+					{{feat.normal}}</div>
+				<div class="p10-0" *ng-if="feat.special">
+					<label>Special: </label>
+					{{feat.special}}
+				</div>
+				<button (click)="removeFeat($event, feat)">-</button>
+			</li>
+		</ul>
 	</section>
 </div>

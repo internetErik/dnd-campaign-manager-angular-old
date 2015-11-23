@@ -1,7 +1,7 @@
 /// <reference path="../../typings/angular2-meteor.d.ts" />
 /// <reference path="../../typings/meteor-accounts.d.ts" />
 
-import {Component, View, NgFor, NgZone, FORM_DIRECTIVES} from 'angular2/angular2';
+import {Component, View, NgZone} from 'angular2/angular2';
 
 import {Router, RouteParams} from 'angular2/router';
 
@@ -15,8 +15,7 @@ import {RequireUser} from 'meteor-accounts';
 	selector: 'combat-display'
 })
 @View({
-	templateUrl: 'client/combat-display/combat-display.html',
-	directives: [NgFor, FORM_DIRECTIVES]
+	templateUrl: 'client/combat-display/combat-display.html'
 })
 @RequireUser()
 export class CombatDisplay {

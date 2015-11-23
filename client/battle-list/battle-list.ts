@@ -1,7 +1,7 @@
 /// <reference path="../../typings/angular2-meteor.d.ts" />
 /// <reference path="../../typings/meteor-accounts.d.ts" />
 
-import {Component, View, NgFor, NgZone, FORM_DIRECTIVES} from 'angular2/angular2';
+import {Component, View, NgZone} from 'angular2/angular2';
 
 import {RouterLink, Router, RouteParams} from 'angular2/router';
 
@@ -14,7 +14,7 @@ import {RequireUser} from 'meteor-accounts';
 })
 @View({
 	templateUrl: 'client/battle-list/battle-list.html',
-	directives: [NgFor, RouterLink]
+	directives: [RouterLink]
 })
 @RequireUser()
 export class BattleList {

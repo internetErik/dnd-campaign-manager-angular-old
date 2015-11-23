@@ -1,6 +1,6 @@
 /// <reference path="../../typings/angular2-meteor.d.ts" />
 
-import {Component, View, NgFor, NgIf, FORM_DIRECTIVES} from 'angular2/angular2';
+import {Component, View} from 'angular2/angular2';
 
 import {Router} from 'angular2/router';
 
@@ -17,7 +17,7 @@ import {RequireUser} from 'meteor-accounts';
 })
 @View({
 		templateUrl: 'client/content-creator/content-creator.html',
-		directives: [FORM_DIRECTIVES, NgFor, NgIf, SpellList]
+		directives: [SpellList]
 })
 @RequireUser()
 export class ContentCreator {

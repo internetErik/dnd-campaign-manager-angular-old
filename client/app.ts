@@ -1,7 +1,7 @@
 /// <reference path="../typings/angular2-meteor.d.ts" />
 /// <reference path="../typings/meteor-accounts-ui.d.ts" />
 
-import {Component, View, NgIf, NgZone, provide} from 'angular2/angular2';
+import {Component, View, NgZone, provide} from 'angular2/angular2';
 
 import {ROUTER_PROVIDERS, ROUTER_DIRECTIVES, RouteConfig, APP_BASE_HREF, Router} 
 	from 'angular2/router';
@@ -53,7 +53,7 @@ import {AccountsUI} from 'meteor-accounts-ui';
 	</div>
 	<dice-helper></dice-helper>
 	`,
-	directives: [ROUTER_DIRECTIVES, NgIf, DiceHelper, AccountsUI]
+	directives: [ROUTER_DIRECTIVES, DiceHelper, AccountsUI]
 })
 @RouteConfig([
 	{

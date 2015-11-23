@@ -1,6 +1,6 @@
 /// <reference path="../../typings/angular2-meteor.d.ts" />
 
-import {Component, View, NgFor, NgIf, NgZone} from 'angular2/angular2';
+import {Component, View, NgZone} from 'angular2/angular2';
 
 import {simpleRoll} from 'lib/dice';
 
@@ -12,8 +12,7 @@ import {AccountsUI} from 'meteor-accounts-ui';
     selector: 'dice-helper'
 })
 @View({
-	templateUrl: 'client/dice-helper/dice-helper.html',
-	directives: [NgFor, NgIf]
+	templateUrl: 'client/dice-helper/dice-helper.html'
 })
 export class DiceHelper {
 	currentRoll: string;

@@ -1,6 +1,6 @@
 /// <reference path="../../typings/angular2-meteor.d.ts" />
 
-import {Component, View, NgFor, NgIf} from 'angular2/angular2';
+import {Component, View} from 'angular2/angular2';
 
 import {Router} from 'angular2/router';
 
@@ -12,7 +12,6 @@ import {Spells} from 'collections/spells';
 })
 @View({
 	templateUrl: 'client/spell-list/spell-list.html',
-	directives: [NgFor, NgIf]
 })
 export class SpellList {
 	spells: Mongo.Cursor<Object>;

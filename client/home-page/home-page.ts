@@ -1,5 +1,5 @@
 /// <reference path="../../typings/angular2-meteor.d.ts" />
-import {Component, View, NgFor} from 'angular2/angular2';
+import {Component, View} from 'angular2/angular2';
 
 import {RouterLink, Router} from 'angular2/router';
 
@@ -7,13 +7,13 @@ import {RouterLink, Router} from 'angular2/router';
 	selector: 'home-page'
 })
 @View({
-		templateUrl: '/client/home-page/home-page.html',
-		directives: [RouterLink]
+	templateUrl: '/client/home-page/home-page.html',
+	directives: [RouterLink]
 })
 export class HomePage {
-		router: Router;
+	router: Router;
 
-		constructor(_router: Router) {
-				this.router = _router;
-		}
+	constructor(_router: Router) {
+			this.router = _router;
+	}
 }

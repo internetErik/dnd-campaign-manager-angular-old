@@ -1,9 +1,9 @@
 /// <reference path="../../typings/angular2-meteor.d.ts" />
 /// <reference path="../../typings/meteor-accounts.d.ts" />
 
-import {Component, View, NgFor, NgIf} from 'angular2/angular2';
+import {Component, View} from 'angular2/angular2';
 
-import {FORM_DIRECTIVES, FormBuilder, Control, ControlGroup, Validators} from 'angular2/angular2';
+import {FormBuilder, Control, ControlGroup, Validators} from 'angular2/angular2';
 
 import {RouteParams, Router} from 'angular2/router';
 
@@ -13,8 +13,7 @@ import {RequireUser} from 'meteor-accounts';
 
 @Component({
     selector: 'character-detail',
-    templateUrl: 'client/character-detail/character-detail.html',
-    directives: [FORM_DIRECTIVES, NgFor, NgIf]
+    templateUrl: 'client/character-detail/character-detail.html'
 })
 // @View({
 // })
@@ -23,23 +22,24 @@ export class CharacterDetail {
     character: any;
     router: Router;
 
-		newSpellName: string;
-		newSpellLevel: number;
-		newSpellDomain: string;
-		newSpellDescription: string;
+	newSpellName: string;
+	newSpellLevel: number;
+	newSpellDomain: string;
+	newSpellDescription: string;
 
-		newSkillName: string;
-		newSkillStat: string;
-		newSkillLevel: number;
+	newSkillName: string;
+	newSkillStat: string;
+	newSkillLevel: number;
 
-		newFeatName: string;
-		newFeatDesc: string;
+	newFeatName: string;
+	newFeatDesc: string;
 
-		saveMessage: string;
+	saveMessage: string;
 
-		constructor(_router: Router, params: RouteParams) {
+	constructor(_router: Router, params: RouteParams) {
         var characterId = params.get('characterId');
         this.router = _router;
+
 		this.character = Characters.findOne({ _id: characterId });
 
 		this.newSpellName = '';

@@ -2,10 +2,10 @@
 	(submit)="addCharacter($event, f.value)">
 	<h1>Character Creation</h1>
 	<hr>
-	<section class="p20-0 m20-0">
+	<section class="p20-0 m20-0" *ng-if="currentUser.dm">
 		<label for="characterType" class="w125">Character Type: </label>
 		<select id="characterType" ng-control="characterType">
-			<option default value="PC">PC</option>
+			<option selected="selected" value="PC">PC</option>
 			<option value="NPC">NPC</option>
 		</select>
 	</section>

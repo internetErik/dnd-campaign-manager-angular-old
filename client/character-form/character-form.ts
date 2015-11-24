@@ -17,6 +17,7 @@ import {RequireUser} from 'meteor-accounts';
 })
 @RequireUser()
 export class CharacterForm {
+	currentUser: any;
 	characterForm: ControlGroup;
 	router: Router;
 	campaignId: string;
@@ -30,6 +31,8 @@ export class CharacterForm {
 
 	constructor(_router: Router, params: RouteParams) {
 		var fb = new FormBuilder();
+
+		this.currentUser = Meteor.user();
 
 		this.campaignId = params.get('campaignId');
 
@@ -95,9 +98,13 @@ export class CharacterForm {
 
 		if (this.characterForm.valid) {
 			let _id, //id returned from insert
+				userId,
 				c; //the character we are inserting
+			if (Meteor.user())
+				userId = Meteor.user()._id;
 
 			c = {
+				userId: userId,
 				campaignId: this.campaignId,
 				firstName: character.firstName,
 				middleName: character.middleName,

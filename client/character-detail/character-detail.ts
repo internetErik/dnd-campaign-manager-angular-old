@@ -22,6 +22,8 @@ export class CharacterDetail {
     character: any;
     router: Router;
 
+    currentUser: any;
+
 	newSpellName: string;
 	newSpellLevel: number;
 	newSpellDomain: string;
@@ -39,6 +41,8 @@ export class CharacterDetail {
 	constructor(_router: Router, params: RouteParams) {
         var characterId = params.get('characterId');
         this.router = _router;
+
+        this.currentUser = Meteor.user();
 
 		this.character = Characters.findOne({ _id: characterId });
 

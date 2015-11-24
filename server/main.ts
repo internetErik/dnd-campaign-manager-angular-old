@@ -58,6 +58,14 @@ Meteor.publish('battles', function() {
 	return Battles.find();
 });
 
+Meteor.publish('userData', function() {
+	var currentUser;
+	currentUser = this.userId;
+	return (currentUser) ?
+		Meteor.users.find({ _id: currentUser }, {fields: { emails: 1, dm: 1 } })
+		: this.ready();
+});
+
 Meteor.methods({
 	insertCampaign: function(campaign) {
 		return Campaigns.insert(campaign);

@@ -115,6 +115,7 @@ class App {
 		this.router = _router;
 		
 		Tracker.autorun(() => zone.run(() => {
+			Meteor.subscribe('userData');
 			this.user = Meteor.user();
 			this.campaign = (this.user) ? Session.get('campaign') : null;
 		}));

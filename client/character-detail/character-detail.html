@@ -26,7 +26,7 @@
 			<label for="title" class="w125">Title:</label>
 			<input id="title" type="text" [(ng-model)]="character.title">
 		</div>
-		<div class="p10-0">
+		<div class="p10-0" *ng-if="currentUser.dm">
 			<label for="characterType" class="w125">Character Type: </label>
 			<select id="characterType" [(ng-model)]="character.characterType">
 				<option value="PC">PC</option>
@@ -521,7 +521,7 @@
 		</div>
 	</section>
 
-	<div class="p30-0">
+	<div class="p30-0" *ng-if="currentUser._id === character.userId">
 		<button (click)="deleteCharacter($event)">Delete</button>
 	</div>
 </div>

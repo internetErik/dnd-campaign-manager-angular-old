@@ -1,4 +1,5 @@
 /// <reference path="../../typings/angular2-meteor.d.ts" />
+/// <reference path="../../typings/meteor-accounts-ui.d.ts" />
 
 import {Component, View, NgZone} from 'angular2/angular2';
 
@@ -28,9 +29,11 @@ export class DiceHelper {
 	diceHidden: boolean;
 
 	//the current user
-	user: any;
+	currentUser: any;
 	//current campaign
 	campaign: any;
+	//current character
+	character: any;
 
 	dice: number[];
 
@@ -44,8 +47,9 @@ export class DiceHelper {
 		this.dice = [2, 4, 6, 8, 10, 12, 20, 100];
 
 		Tracker.autorun(() => zone.run(() => {
-			this.user = Meteor.user();
+			this.currentUser = Meteor.user();
 			this.campaign = Session.get('campaign');
+			this.character = Session.get('character');
 		}));
 	}
 
@@ -59,7 +63,7 @@ export class DiceHelper {
 			let result = simpleRoll(sides);
 			this.currentRoll = `${result + bonus} (d${sides} + ${bonus})`;
 			this.disabled = false;
-			if(this.rollPublic && this.user && this.campaign)
+			if(this.rollPublic && this.currentUser && this.campaign)
 				this.insertRoll(result, sides, bonus);
 		}, 250);
 	}

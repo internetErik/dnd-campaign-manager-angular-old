@@ -21,8 +21,10 @@ export class CharacterList {
 	pcs: Mongo.Cursor<Object>;
 	npcs: Mongo.Cursor<Object>;
 	campaignId: string;
+	currentUser: any;
 
 	constructor(zone: NgZone, params: RouteParams) {
+		this.currentUser = Meteor.user();
 		this.campaignId = params.get('campaignId');
 		this.pcs = (this.campaignId) ?
 			Characters.find({ campaignId: this.campaignId, characterType: 'PC' }) :
@@ -31,5 +33,9 @@ export class CharacterList {
 		this.npcs = (this.campaignId) ?
 			Characters.find({ campaignId: this.campaignId, characterType: 'NPC' }) :
 			Characters.find({ characterType: 'NPC' });
+	}
+
+	selectCharacter(character) {
+		Session.set('character', character);
 	}
 }

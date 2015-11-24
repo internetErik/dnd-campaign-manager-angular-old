@@ -15,7 +15,7 @@
 	<div class="p10-0">
 	Current Roll: {{currentRoll}} 
 	</div>
-	<div *ng-if="user && campaign">
+	<div *ng-if="currentUser && campaign">
 		<div class="p10-0" *ng-if="rollPublic">
 			Last 5 Rolls: 
 			<span *ng-for="#roll of lastRolls; #last = last" 

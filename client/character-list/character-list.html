@@ -6,6 +6,8 @@
 		<a [router-link]="['/CharacterDetail', {characterId: character._id}]">
 			{{character.firstName}} {{character.middleName}} {{character.lastName}}
 		</a>
+		<button *ng-if="currentUser._id === character.userId"
+			(click)="selectCharacter(character)">Select</button>
 	</div>
 	<h2>NPCs</h2>
 	<div *ng-for="#character of npcs" class="p10-0">

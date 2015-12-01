@@ -6,5 +6,6 @@
 			{{campaign.name}}</a>
 		<button (click)="deleteCampaign($event, campaign)">-</button>
 	</div>
-	<a [router-link]="['/CampaignForm']"><button>+</button></a>
+	<a *ng-if="currentUser.dm"
+		[router-link]="['/CampaignForm']"><button>+</button></a>
 </section>

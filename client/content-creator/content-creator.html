@@ -6,6 +6,8 @@
 		(click)="currentTab = 'skills'">Skills</button>
 	<button  class="p5-0 pl20 pr20" [class.c-gray]="currentTab !== 'feats'" 
 		(click)="currentTab = 'feats'">Feats</button>
+	<!-- <button  class="p5-0 pl20 pr20" [class.c-gray]="currentTab !== 'monsters'" 
+		(click)="currentTab = 'monsters'">Monsters</button> -->
 	<hr>
 
 	<section class="p20-0 m20-0" *ng-if="currentTab === 'spells'">
@@ -150,5 +152,15 @@
 				<button (click)="removeFeat($event, feat)">-</button>
 			</li>
 		</ul>
+	</section>
+
+	<section class="p20-0 m20-0" *ng-if="currentTab === 'monsters'">
+		<h2>Monsters</h2>
+
+		<h3>Add Monster</h3>
+		<monster-form></monster-form>
+		
+		<h3>Monster list</h3>
+
 	</section>
 </div>

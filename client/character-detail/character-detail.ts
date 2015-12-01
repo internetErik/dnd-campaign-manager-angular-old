@@ -8,6 +8,9 @@ import {FormBuilder, Control, ControlGroup, Validators} from 'angular2/angular2'
 import {RouteParams, Router} from 'angular2/router';
 
 import {Characters} from 'collections/characters';
+import {Spells} from 'collections/spells';
+import {Skills} from 'collections/skills';
+import {Feats} from 'collections/feats';
 
 import {RequireUser} from 'meteor-accounts';
 
@@ -38,6 +41,10 @@ export class CharacterDetail {
 
 	saveMessage: string;
 
+	spells: any[];
+	skills: any[];
+	feats: any[];
+
 	constructor(_router: Router, params: RouteParams) {
         var characterId = params.get('characterId');
         this.router = _router;
@@ -58,6 +65,10 @@ export class CharacterDetail {
 		this.newFeatName = '';
 
 		this.saveMessage = '';
+
+		this.spells = Spells.find({});
+		this.skills = Skills.find({});
+		this.feats = Feats.find({});
     }
 
     deleteCharacter(e) {

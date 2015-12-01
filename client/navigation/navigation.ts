@@ -50,6 +50,7 @@ export class Navigation {
 	router: Router;
 
 	constructor(_router: Router, zone: NgZone) {
+		this.router = _router;
 		Tracker.autorun(() => zone.run(() => {
 			this.currentUser = Meteor.user();
 			this.campaign = (this.currentUser) ? Session.get('campaign') : null;
@@ -58,7 +59,13 @@ export class Navigation {
 	}
 
 	unselectCampaign() {
+		Session.set('character', null);
 		Session.set('campaign', null);
 		this.router.navigate(['/CampaignList']);
+	}
+
+	unselectCharacter() {
+		Session.set('character', null);
+		this.router.navigate(['/CharacterList', {campaignId: this.campaign._id}]);
 	}
 }

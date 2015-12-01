@@ -16,9 +16,13 @@ import {RequireUser} from 'meteor-accounts';
 @RequireUser()
 export class CampaignList {
 	campaigns: Mongo.Cursor<Object>;
+	currentUser: any;
 
 	constructor() {
 		this.campaigns = Campaigns.find({});
+		Tracker.autorun(() => zone.run(() => {
+			this.currentUser = Meteor.user();
+		}));
 	}
 
 	deleteCampaign(e, campaign) {

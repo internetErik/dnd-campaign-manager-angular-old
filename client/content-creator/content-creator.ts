@@ -1,4 +1,5 @@
 /// <reference path="../../typings/angular2-meteor.d.ts" />
+/// <reference path="../../typings/meteor-accounts.d.ts" />
 
 import {Component, View} from 'angular2/angular2';
 
@@ -10,14 +11,16 @@ import {Feats} from 'collections/feats';
 
 import {SpellList} from 'client/spell-list/spell-list';
 
+import {MonsterForm} from 'client/monster-form/monster-form';
+
 import {RequireUser} from 'meteor-accounts';
 
 @Component({
     selector: 'content-creator'
 })
 @View({
-		templateUrl: 'client/content-creator/content-creator.html',
-		directives: [SpellList]
+	templateUrl: 'client/content-creator/content-creator.html',
+	directives: [SpellList, MonsterForm]
 })
 @RequireUser()
 export class ContentCreator {
@@ -125,7 +128,7 @@ export class ContentCreator {
 					special: this.newFeatSpecial
 				});
 				this.newFeatName = '';
-				this.newFeatDesc = '';
+				// this.newFeatDesc = '';
 			}
 		}
 	}

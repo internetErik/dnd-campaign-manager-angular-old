@@ -29,9 +29,12 @@ import {DiceHelper} from 'client/dice-helper/dice-helper';
 })
 @View({
 	template: `
+	<div class="bgc-lightgray posf z0 max-width max-height"></div>
 	<navigation></navigation>
-	<div class="p0-20 pt50 grid-container">
-		<router-outlet></router-outlet>
+	<div class="mt20 posr">
+		<div class="bgc-white p50 grid-container add-shadow">
+			<router-outlet></router-outlet>
+		</div>
 	</div>
 	<dice-helper></dice-helper>
 	`,

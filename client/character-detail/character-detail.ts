@@ -41,9 +41,9 @@ export class CharacterDetail {
 
 	saveMessage: string;
 
-	spells: any[];
-	skills: any[];
-	feats: any[];
+	spells: Mongo.Cursor<Object>;
+	skills: Mongo.Cursor<Object>;
+	feats: Mongo.Cursor<Object>;
 
 	constructor(_router: Router, params: RouteParams) {
         var characterId = params.get('characterId');
@@ -75,6 +75,7 @@ export class CharacterDetail {
 		e.preventDefault();
 		if(confirm(`Are you sure you want to delete this character?`)) {
 			Meteor.call('removeCharacter', this.character._id);
+			Session.set('character', null);
 			this.router.parent.navigate(['/CharacterList']);
 		}
     }
@@ -94,8 +95,9 @@ export class CharacterDetail {
 		var attacks = [];
 
 		if (hr > 6) {
+			let j = 0;
 			for (let i = 0; hr > 0;) {
-				for (let j = 0; j < 6 && hr > 0; j++ , hr--)
+				for (j = 0; j < 6 && hr > 0; j++ , hr--)
 					;
 				attacks.push(j);
 				if (attacks.length === 6 && attacks[5] === 6)

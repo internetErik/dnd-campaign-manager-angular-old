@@ -12,7 +12,7 @@ import {AccountsUI} from 'meteor-accounts-ui';
 })
 @View({
 	template: `
-	<nav class="h70 posr p0-50 heading5">
+	<nav class="bgc-white h70 posr p0-50 heading5 z1">
 		<div class="vertical-align" *ng-if="currentUser">
 		<a class="tdn" [router-link]="['/HomePage']">Home</a> |
 		<a class="tdn" [router-link]="['/CampaignList']">Campaigns</a> |
@@ -23,14 +23,14 @@ import {AccountsUI} from 'meteor-accounts-ui';
 		</div>
 	</nav>
 	<accounts-ui></accounts-ui>
-	<div class="sub-menu bgc-lightgray posr p0-50 heading5 h50">
+	<div class="sub-menu bgc-black c-white posr p0-50 heading5 h50 z1">
 		<span *ng-if="currentUser && campaign" class="vertical-align dib">
 		Playing: {{campaign.name}}
-		<button (click)="unselectCampaign()">&times;</button>
+		<button class="c-white bd1-s-white" (click)="unselectCampaign()">&times;</button>
 		<span *ng-if="character">
 			as 
 			<a class="tdn" [router-link]="['/CharacterDetail', {characterId: character._id}]">{{ character.firstName }}</a>
-			<button (click)="unselectCharacter()">&times;</button>
+			<button class="c-white bd1-s-white" (click)="unselectCharacter()">&times;</button>
 		</span>
 		>
 		<a class="tdn" [router-link]="['/CharacterList', {campaignId: campaign._id}]">Characters</a> |

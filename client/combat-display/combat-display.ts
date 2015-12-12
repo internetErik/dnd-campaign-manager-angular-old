@@ -1,8 +1,7 @@
 /// <reference path="../../typings/angular2-meteor.d.ts" />
 /// <reference path="../../typings/meteor-accounts.d.ts" />
 
-import {Component, View, NgZone} from 'angular2/angular2';
-
+import {Component, NgZone} from 'angular2/core';
 import {Router, RouteParams} from 'angular2/router';
 
 import {simpleRoll} from 'lib/dice';
@@ -12,9 +11,7 @@ import {Battles} from 'collections/battles';
 import {RequireUser} from 'meteor-accounts';
 
 @Component({
-	selector: 'combat-display'
-})
-@View({
+	selector: 'combat-display',
 	templateUrl: 'client/combat-display/combat-display.html'
 })
 @RequireUser()

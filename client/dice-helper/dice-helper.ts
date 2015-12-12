@@ -1,7 +1,7 @@
 /// <reference path="../../typings/angular2-meteor.d.ts" />
 /// <reference path="../../typings/meteor-accounts-ui.d.ts" />
 
-import {Component, View, NgZone} from 'angular2/angular2';
+import {Component, NgZone} from 'angular2/core';
 
 import {simpleRoll} from 'lib/dice';
 
@@ -10,9 +10,7 @@ import {Rolls} from 'collections/rolls';
 import {AccountsUI} from 'meteor-accounts-ui';
 
 @Component({
-    selector: 'dice-helper'
-})
-@View({
+    selector: 'dice-helper',
 	templateUrl: 'client/dice-helper/dice-helper.html'
 })
 export class DiceHelper {

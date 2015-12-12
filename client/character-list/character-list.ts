@@ -1,7 +1,7 @@
 /// <reference path="../../typings/angular2-meteor.d.ts" />
 /// <reference path="../../typings/meteor-accounts.d.ts" />
 
-import {Component, View, NgZone} from 'angular2/angular2';
+import {Component, NgZone} from 'angular2/core';
 
 import {Characters} from 'collections/characters';
 
@@ -10,9 +10,7 @@ import {RouterLink, RouteParams} from 'angular2/router';
 import {RequireUser} from 'meteor-accounts';
 
 @Component({
-    selector: 'character-list'
-})
-@View({
+    selector: 'character-list',
     templateUrl: 'client/character-list/character-list.html',
     directives: [RouterLink]
 })

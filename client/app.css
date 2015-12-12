@@ -1,12 +1,22 @@
 accounts-ui {
 	position: absolute;
     right: 0;
-    width: 290px;
+    width: 300px;
     top: 0;
-    height: 300px;
-    overflow: hidden;
     padding: 30px;
 }
+
+#login-dropdown-list {
+	/*height: 300px;*/
+}
+
+.login-form {
+	padding: 10px;
+	position: relative;
+	box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.2);
+	background-color: #fff;
+}
+
 .ng-invalid {
 	border: 1px solid red;
 }

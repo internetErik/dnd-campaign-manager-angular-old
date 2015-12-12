@@ -1,19 +1,9 @@
 /// <reference path="../../typings/angular2-meteor.d.ts" />
-import {Component, View} from 'angular2/angular2';
 
-import {RouterLink, Router} from 'angular2/router';
+import {Component} from 'angular2/core';
 
 @Component({
-	selector: 'home-page'
+	selector: 'home-page',
+	templateUrl: '/client/home-page/home-page.html'
 })
-@View({
-	templateUrl: '/client/home-page/home-page.html',
-	directives: [RouterLink]
-})
-export class HomePage {
-	router: Router;
-
-	constructor(_router: Router) {
-			this.router = _router;
-	}
-}
+export class HomePage {}

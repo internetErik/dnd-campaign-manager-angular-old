@@ -1,8 +1,7 @@
 /// <reference path="../../typings/angular2-meteor.d.ts" />
 /// <reference path="../../typings/meteor-accounts.d.ts" />
 
-import {Component, View} from 'angular2/angular2';
-
+import {Component} from 'angular2/core';
 import {Router} from 'angular2/router';
 
 import {Spells} from 'collections/spells';
@@ -16,9 +15,7 @@ import {MonsterForm} from 'client/monster-form/monster-form';
 import {RequireUser} from 'meteor-accounts';
 
 @Component({
-    selector: 'content-creator'
-})
-@View({
+    selector: 'content-creator',
 	templateUrl: 'client/content-creator/content-creator.html',
 	directives: [SpellList, MonsterForm]
 })

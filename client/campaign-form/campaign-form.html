@@ -1,9 +1,9 @@
-<form [ng-form-model]="campaignForm" #f="form" (submit)="addCampaign($event, f.value)">
+<form [ngFormModel]="campaignForm" #f="ngForm" (submit)="addCampaign($event, f.value)">
 	<h1>Create Campaign</h1>
 	<hr>
 	<section class="p20-0 m20-0">
 		<label for="name">Name:</label>
-		<input id="name" type="text" ng-control="name">
+		<input id="name" type="text" ngControl="name">
 	</section>
 	<button>Create Campaign</button>
 </form>

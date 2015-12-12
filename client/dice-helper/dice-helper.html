@@ -1,11 +1,11 @@
 <div class="dice-helper p20 posf b0 l0 bgc-white add-shadow max-width" 
 	[class.hide-dice]="diceHidden">
 	<button class="p10-0 pl20 pr20" (click)="toggleDice();">
-		<span *ng-if="diceHidden">Show</span>
-		<span *ng-if="!diceHidden">Hide</span>
+		<span *ngIf="diceHidden">Show</span>
+		<span *ngIf="!diceHidden">Hide</span>
 	</button>
 	<button class="p10-0 pl20 pr20" (click)="clearRolls()">Clear</button>
-	<button *ng-for="#die of dice"
+	<button *ngFor="#die of dice"
 		class="p10-0 pl20 pr20 mr5"
 		[disabled]="disabled"
 		(click)="roll(die)">
@@ -15,18 +15,18 @@
 	<div class="p10-0">
 	Current Roll: {{currentRoll}} 
 	</div>
-	<div *ng-if="currentUser && campaign">
-		<div class="p10-0" *ng-if="rollPublic">
+	<div *ngIf="currentUser && campaign">
+		<div class="p10-0" *ngIf="rollPublic">
 			Last 5 Rolls: 
-			<span *ng-for="#roll of lastRolls; #last = last" 
+			<span *ngFor="#roll of lastRolls; #last = last" 
 				[class.critical-roll]="roll.critical">
-				{{roll.result + roll.bonus}} (d{{roll.sides}} + {{roll.bonus}})<span *ng-if="!last">,</span> 
+				{{roll.result + roll.bonus}} (d{{roll.sides}} + {{roll.bonus}})<span *ngIf="!last">,</span> 
 			</span>
 		</div>
 		<div class="p20-0">
 			<button class="p10-0 pl20 pr20" (click)="togglePublic()">
-				<span *ng-if="rollPublic">Private</span>
-				<span *ng-if="!rollPublic">Public</span>
+				<span *ngIf="rollPublic">Private</span>
+				<span *ngIf="!rollPublic">Public</span>
 			</button>
 		</div>
 	</div>

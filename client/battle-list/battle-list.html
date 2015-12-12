@@ -3,10 +3,10 @@
 <section class="p20-0 m20-0">
 	<h2>All Battles for {{campaign.name}}:</h2>
 	<button (click)="addBattle()">New Battle</button>
-	<div *ng-for="#b of battles" class="p10-0">
-		<a [router-link]="['/CombatDisplay', {battleId: b._id}]">
+	<div *ngFor="#b of battles" class="p10-0">
+		<a [routerLink]="['/CombatDisplay', {battleId: b._id}]">
 			{{b.name}} 
-			<span *ng-if="b.complete">(complete)</span>
+			<span *ngIf="b.complete">(complete)</span>
 		</a>
 	</div>
 </section>

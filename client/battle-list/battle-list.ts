@@ -1,7 +1,7 @@
 /// <reference path="../../typings/angular2-meteor.d.ts" />
 /// <reference path="../../typings/meteor-accounts.d.ts" />
 
-import {Component, View, NgZone} from 'angular2/angular2';
+import {Component, NgZone} from 'angular2/core';
 
 import {RouterLink, Router, RouteParams} from 'angular2/router';
 
@@ -10,9 +10,7 @@ import {Battles} from 'collections/battles';
 import {RequireUser} from 'meteor-accounts';
 
 @Component({
-	selector: 'battle-list'
-})
-@View({
+	selector: 'battle-list',
 	templateUrl: 'client/battle-list/battle-list.html',
 	directives: [RouterLink]
 })

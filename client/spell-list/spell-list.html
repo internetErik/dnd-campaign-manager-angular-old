@@ -6,20 +6,20 @@
 </div>
 <div class="p20-0">
 	<h4>Filter</h4>
-	<div class="p10-0" *ng-if="spellFilterAZ || spellFilterLevel >= 0 || spellFilterSchool">
+	<div class="p10-0" *ngIf="spellFilterAZ || spellFilterLevel >= 0 || spellFilterSchool">
 		Filtering on:
 		<span class="p5 bgc-lightgray" 
-			*ng-if="spellFilterAZ">
+			*ngIf="spellFilterAZ">
 			Letter ({{ spellFilterAZ }})
 			<span class="ml10 curp p5 c-white bgc-black" (click)="filterSpellAZ('')">&times;</span>
 		</span>
 		<span class="p5 bgc-lightgray" 
-			*ng-if="spellFilterLevel >= 0">
+			*ngIf="spellFilterLevel >= 0">
 			Level {{ spellFilterLevel }}
 			<span class="ml10 curp p5 c-white bgc-black" (click)="filterSpellLevel(-1)">&times;</span>
 		</span> 
 		<span class="p5 bgc-lightgray" 
-			*ng-if="spellFilterSchool">
+			*ngIf="spellFilterSchool">
 			School ({{ spellFilterSchool }})
 			<span class="ml10 curp p5 c-white bgc-black" (click)="filterSpellSchool('')">&times;</span>
 		</span>
@@ -120,7 +120,7 @@
 			(click)="filterSpellSchool('Universal')">Universal</button>
 	</div>
 </div>
-<div *ng-for="#spell of spells;#i = index" [class.pt30]="i !== 0">
+<div *ngFor="#spell of spells;#i = index" [class.pt30]="i !== 0">
 	<h5 class="ttc">{{ spell.name }}</h5>
 	<label class="w125">Level:</label> {{spell.level}}
 	<br>

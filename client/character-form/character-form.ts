@@ -1,8 +1,8 @@
 /// <reference path="../../typings/angular2-meteor.d.ts" />
 /// <reference path="../../typings/meteor-accounts.d.ts" />
 
-import {Component, View} from 'angular2/angular2';
-import {FormBuilder, Control, ControlGroup, Validators} from 'angular2/angular2';
+import {Component} from 'angular2/core';
+import {FormBuilder, Control, ControlGroup, Validators} from 'angular2/common';
 import {Router, RouteParams} from 'angular2/router';
 
 import {Characters} from 'collections/characters';
@@ -10,9 +10,7 @@ import {Characters} from 'collections/characters';
 import {RequireUser} from 'meteor-accounts';
 
 @Component({
-	selector: 'character-form'
-})
-@View({
+	selector: 'character-form',
 	templateUrl: 'client/character-form/character-form.html'
 })
 @RequireUser()

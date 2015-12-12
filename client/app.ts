@@ -1,9 +1,9 @@
 /// <reference path="../typings/angular2-meteor.d.ts" />
 /// <reference path="../typings/meteor-accounts-ui.d.ts" />
 
-import {Component, View, provide} from 'angular2/angular2';
+import {Component, provide} from 'angular2/core';
 
-import {ROUTER_PROVIDERS, ROUTER_DIRECTIVES, RouteConfig, APP_BASE_HREF, Router} 
+import {ROUTER_PROVIDERS, ROUTER_DIRECTIVES, RouteConfig, APP_BASE_HREF} 
 	from 'angular2/router';
 
 import {bootstrap} from 'angular2-meteor';
@@ -25,15 +25,13 @@ import {CombatDisplay} from 'client/combat-display/combat-display';
 import {DiceHelper} from 'client/dice-helper/dice-helper';
 
 @Component({
-    selector: 'app'
-})
-@View({
+    selector: 'app',
 	template: `
-	<div class="bgc-lightgray posf z0 max-width max-height"></div>
+	<div class="bgc-lightgray posf max-width max-height"></div>
 	<navigation></navigation>
 	<div class="mt20 posr">
 		<div class="bgc-white p50 grid-container add-shadow">
-			<router-outlet></router-outlet>
+			<routerOutlet></routerOutlet>
 		</div>
 	</div>
 	<dice-helper></dice-helper>
@@ -43,51 +41,51 @@ import {DiceHelper} from 'client/dice-helper/dice-helper';
 @RouteConfig([
 	{
 		path: '/',
-		redirectTo: 'HomePage'
+		redirectTo: '/home'
 	},
 	{
 		path: '/home',
-		as: 'HomePage',
+		name: 'HomePage',
 		component: HomePage
 	},
 	{
 		path: '/campaign',
-		as: 'CampaignList',
+		name: 'CampaignList',
 		component: CampaignList
 	},
     {
 		path: '/campaign/add',
-		as: 'CampaignForm',
+		name: 'CampaignForm',
 		component: CampaignForm
     },
     {
 		path: '/content-create',
-		as: 'ContentCreator',
+		name: 'ContentCreator',
 		component: ContentCreator
     },
 	{
 		path: '/character',
-		as: 'CharacterList',
+		name: 'CharacterList',
 		component: CharacterList
 	},
 	{
 		path: '/character/add',
-		as: 'CharacterForm',
+		name: 'CharacterForm',
 		component: CharacterForm
 	},
 	{
 		path: '/character/:characterId',
-		as: 'CharacterDetail',
+		name: 'CharacterDetail',
 		component: CharacterDetail
 	},
 	{
 		path: '/battle',
-		as: 'BattleList',
+		name: 'BattleList',
 		component: BattleList
 	},
 	{
 		path: '/battle/:battleId',
-		as: 'CombatDisplay',
+		name: 'CombatDisplay',
 		component: CombatDisplay
 	}
 ])

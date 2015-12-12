@@ -1,46 +1,14 @@
 /// <reference path="../../typings/angular2-meteor.d.ts" />
 /// <reference path="../../typings/meteor-accounts-ui.d.ts" />
 
-import {Component, View, NgZone} from 'angular2/angular2';
-
+import {Component, NgZone} from 'angular2/core';
 import {RouterLink, Router} from 'angular2/router';
 
 import {AccountsUI} from 'meteor-accounts-ui';
 
 @Component({
-    selector: 'navigation'
-})
-@View({
-	template: `
-	<nav class="bgc-white h70 posr p0-50 heading5 z1">
-		<div class="vertical-align" *ng-if="currentUser">
-		<a class="tdn" [router-link]="['/HomePage']">Home</a> |
-		<a class="tdn" [router-link]="['/CampaignList']">Campaigns</a> |
-		<a class="tdn" [router-link]="['/ContentCreator']">Content Creator</a>
-		<span *ng-if="currentUser.dm"> |
-		<a class="tdn" [router-link]="['/CharacterList']">All Characters</a>
-		</span>
-		</div>
-	</nav>
-	<accounts-ui></accounts-ui>
-	<div class="sub-menu bgc-black c-white posr p0-50 heading5 h50 z1">
-		<span *ng-if="currentUser && campaign" class="vertical-align dib">
-		Playing: {{campaign.name}}
-		<button class="c-white bd1-s-white" (click)="unselectCampaign()">&times;</button>
-		<span *ng-if="character">
-			as 
-			<a class="tdn" [router-link]="['/CharacterDetail', {characterId: character._id}]">{{ character.firstName }}</a>
-			<button class="c-white bd1-s-white" (click)="unselectCharacter()">&times;</button>
-		</span>
-		>
-		<a class="tdn" [router-link]="['/CharacterList', {campaignId: campaign._id}]">Characters</a> |
-		<a class="tdn" [router-link]="['/BattleList']">Battle List</a>
-		</span>
-		<span *ng-if="!campaign" class="vertical-align dib">
-			No Campaign Selected.
-		</span>
-	</div>
-	`,
+    selector: 'navigation',
+	templateUrl: 'client/navigation/navigation.html',
 	directives: [RouterLink, AccountsUI]
 })
 export class Navigation {

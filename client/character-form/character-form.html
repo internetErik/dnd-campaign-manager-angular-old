@@ -1,10 +1,10 @@
-<form [ng-form-model]="characterForm" #f="form" 
+<form [ngFormModel]="characterForm" #f="ngForm" 
 	(submit)="addCharacter($event, f.value)">
 	<h1>Character Creation</h1>
 	<hr>
-	<section class="p20-0 m20-0" *ng-if="currentUser.dm">
+	<section class="p20-0 m20-0" *ngIf="currentUser.dm">
 		<label for="characterType" class="w125">Character Type: </label>
-		<select id="characterType" ng-control="characterType">
+		<select id="characterType" ngControl="characterType">
 			<option selected="selected" value="PC">PC</option>
 			<option value="NPC">NPC</option>
 		</select>
@@ -13,19 +13,19 @@
 		<h2>Name</h2>
 		<div class="p10-0">
 			<label for="firstName" class="w125">First Name*:</label>
-			<input id="firstName" type="text" ng-control="firstName">
+			<input id="firstName" type="text" ngControl="firstName">
 		</div>
 		<div class="p10-0">
 			<label for="middleName" class="w125">Middle Name:</label>
-			<input id="middleName" type="text" ng-control="middleName">
+			<input id="middleName" type="text" ngControl="middleName">
 		</div>
 		<div class="p10-0">
 			<label for="lastName" class="w125">Last Name:</label>
-			<input id="lastName" type="text" ng-control="lastName">
+			<input id="lastName" type="text" ngControl="lastName">
 		</div>
 		<div class="p10-0">
 			<label for="title" class="w125">Title:</label>
-			<input id="title" type="text" ng-control="title">
+			<input id="title" type="text" ngControl="title">
 		</div>
 	</section>
 	<hr>
@@ -33,35 +33,35 @@
 		<h2>Biological Information</h2>
 		<div class="p10-0">
 			<label for="race" class="w125">Race*:</label>
-			<input id="race" type="text" ng-control="race">
+			<input id="race" type="text" ngControl="race">
 		</div>
 		<div class="p10-0">
 			<label for="sex" class="w125">Sex:</label>
-			<input id="sex" type="text" ng-control="sex">
+			<input id="sex" type="text" ngControl="sex">
 		</div>
 		<div class="p10-0">
 			<label for="height" class="w125">Height*:</label>
-			<input id="height" type="number" min="0" max="9999" ng-control="heightM"> 
+			<input id="height" type="number" min="0" max="9999" ngControl="heightM"> 
 			m
-			<input type="number" min="0" max="99" ng-control="heightCm"> 
+			<input type="number" min="0" max="99" ngControl="heightCm"> 
 			cm
 		</div>
 		<div class="p10-0">
 			<label for="weight" class="w125">Weight*:</label>
-			<input id="weight" type="number" min="0" max="9999" ng-control="weight"> kg
+			<input id="weight" type="number" min="0" max="9999" ngControl="weight"> kg
 		</div>
 		<div class="p10-0">
 			<label for="birthday" class="w125">Birthday:</label>
-			<input type="text" ng-control="birthday">
+			<input type="text" ngControl="birthday">
 		</div>
 		<div class="p10-0">
 			<label for="age" class="w125">Age:</label>
-			<input type="number" min="0" max="9999" ng-control="age">
+			<input type="number" min="0" max="9999" ngControl="age">
 		</div>
 		<div class="p10-0">
 			<label for="description" class="w125">Description:</label>
 			<br>
-			<textarea id="description" cols="45" rows="3" ng-control="description"></textarea>
+			<textarea id="description" cols="45" rows="3" ngControl="description"></textarea>
 		</div>
 	</section>
 	<hr>
@@ -69,57 +69,57 @@
 		<h2>Stats</h2>
 		<div class="p10-0">
 			<label for="hp" class="w125">HP*:</label>
-			<input id="hp" type="number" min="1" max="9999" ng-control="hp">
+			<input id="hp" type="number" min="1" max="9999" ngControl="hp">
 		</div>
 		<div class="p10-0">
 			<label for="str" class="w125">Strength*:</label>
-			<input id="str" type="number" min="0" max="100" ng-control="str">
+			<input id="str" type="number" min="0" max="100" ngControl="str">
 		</div>
 		<div class="p10-0">
 			<label for="int" class="w125">Intelligence*:</label>
-			<input id="int" type="number" min="0" max="100" ng-control="int">
+			<input id="int" type="number" min="0" max="100" ngControl="int">
 		</div>
 		<div class="p10-0">
 			<label for="wis" class="w125">Wisdom*:</label>
-			<input id="wis" type="number" min="0" max="100" ng-control="wis">
+			<input id="wis" type="number" min="0" max="100" ngControl="wis">
 		</div>
 		<div class="p10-0">
 			<label for="con" class="w125">Constitution*:</label>
-			<input id="con" type="number" min="0" max="100" ng-control="con">
+			<input id="con" type="number" min="0" max="100" ngControl="con">
 		</div>
 		<div class="p10-0">
 			<label for="dex" class="w125">Dexterity*:</label>
-			<input id="dex" type="number" min="0" max="100" ng-control="dex">
+			<input id="dex" type="number" min="0" max="100" ngControl="dex">
 		</div>
 		<div class="p10-0">
 			<label for="cha" class="w125">Charisma*:</label>
-			<input id="cha" type="number" min="0" max="100" ng-control="cha">
+			<input id="cha" type="number" min="0" max="100" ngControl="cha">
 		</div>
 		<div class="p10-0">
 			<label for="hitRoll" class="w125">Hit Roll:</label>
-			<input id="hitRoll" type="number" min="0" max="100" ng-control="hitRoll">
+			<input id="hitRoll" type="number" min="0" max="100" ngControl="hitRoll">
 		</div>
 		<div class="p10-0">
 
 		<h3>Saves</h3>
 		<div class="p10-0">
 			<label for="reflex" class="w125">Reflex:</label>
-			<input id="reflex" type="number" min="0" max="100" ng-control="reflex">
+			<input id="reflex" type="number" min="0" max="100" ngControl="reflex">
 		</div>
 		<div class="p10-0">
 			<label for="fortitude" class="w125">Fortitude:</label>
-			<input id="fortitude" type="number" min="0" max="100" ng-control="fortitude">
+			<input id="fortitude" type="number" min="0" max="100" ngControl="fortitude">
 		</div>
 		<div class="p10-0">
 			<label for="will" class="w125">Will:</label>
-			<input id="will" type="number" min="0" max="100" ng-control="will">
+			<input id="will" type="number" min="0" max="100" ngControl="will">
 		</div>
 	</section>
 	<hr>
 	<section class="p20-0 m20-0">
 		<h2>Backstory</h2>
 		<div class="p10-0">
-			<textarea id="backstory" cols="45" rows="10" ng-control="backstory"></textarea>
+			<textarea id="backstory" cols="45" rows="10" ngControl="backstory"></textarea>
 		</div>
 	</section>
 	<button class="m30-0">Create Character</button>

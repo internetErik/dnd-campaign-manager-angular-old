@@ -1,10 +1,10 @@
 <h1>Combat Display</h1>
 <hr>
-<section class="p20-0 m20-0" *ng-if="battle">
+<section class="p20-0 m20-0" *ngIf="battle">
 	
 	<div class="p20-0">
 		<label for="battlename">Battle Name:</label>
-		<input type="text" [(ng-model)]="battle.name"> 
+		<input type="text" [(ngModel)]="battle.name"> 
 		<button (click)="updateName()">Update Name</button>
 	</div>
 
@@ -26,15 +26,15 @@
 	<button (click)="startBattle()">Start</button>
 	<button (click)="endBattle()">End</button>
 
-	<div *ng-if="battle" class="p20-0">
+	<div *ngIf="battle" class="p20-0">
 		<h3>Combatants:</h3>
 		<ul>
-			<li *ng-for="#c of battle.combatants">{{c.name}}</li>
+			<li *ngFor="#c of battle.combatants">{{c.name}}</li>
 		</ul>
 	</div>
 </section>
-<hr *ng-if="battle && battle.combatPhase !== -1">
-<section class="p20-0 m20-0" *ng-if="battle && battle.combatPhase !== -1">
+<hr *ngIf="battle && battle.combatPhase !== -1">
+<section class="p20-0 m20-0" *ngIf="battle && battle.combatPhase !== -1">
 	<h2>Combat Phases</h2>
 	<span   [class.c-gray]="battle.combatPhase !== 0">Enter Actions</span>
 	<button [class.c-gray]="battle.combatPhase !== 1" 
@@ -43,12 +43,12 @@
 		(click)="resolveRound()">Turn Resolved</button>
 
 	<h2>Combatants</h2>
-	<ol *ng-if="battle">
-		<li *ng-for="#combatant of battle.combatants; #i = index"
+	<ol *ngIf="battle">
+		<li *ngFor="#combatant of battle.combatants; #i = index"
 			[class.enemy]="combatant.type === 'enemy'"
 			class="mb20 p10-0 bb1-s-black">
 			<h4>{{combatant.name}}</h4>
-			<div *ng-if="battle.combatPhase === 0" class="pb20">
+			<div *ngIf="battle.combatPhase === 0" class="pb20">
 				<label> Action: </label>
 				<br>
 				<textarea cols="45" rows="3" 
@@ -59,7 +59,7 @@
 					[disabled]="combatant.actionSubmitted">Submit Action</button>
 			</div>
 			<div>
-				<div *ng-if="battle.combatPhase !== 0">
+				<div *ngIf="battle.combatPhase !== 0">
 					<label>Action:</label>
 					<div class="p10-0">
 					{{combatant.action}}
@@ -68,9 +68,9 @@
 				<div>
 				initiative: {{combatant.initiative}} | 
 				Bonus: 
-				<input type="number" min="-100" max="100" [(ng-model)]="combatant.bonus">
+				<input type="number" min="-100" max="100" [(ngModel)]="combatant.bonus">
 				Rounds Occupied: 
-				<input type="number" min="0" max="100" [(ng-model)]="combatant.roundsOccupied">
+				<input type="number" min="0" max="100" [(ngModel)]="combatant.roundsOccupied">
 				<button (click)="removeCombatant(combatant)">-</button>
 				</div>
 			</div>

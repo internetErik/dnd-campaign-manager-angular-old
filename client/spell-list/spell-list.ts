@@ -1,17 +1,14 @@
 /// <reference path="../../typings/angular2-meteor.d.ts" />
 
-import {Component, View} from 'angular2/angular2';
-
+import {Component} from 'angular2/core';
 import {Router} from 'angular2/router';
 
 import {Spells} from 'collections/spells';
 
 @Component({
     selector: 'spell-list',
-    inputs: ['characterId']
-})
-@View({
-	templateUrl: 'client/spell-list/spell-list.html',
+    inputs: ['characterId'],
+	templateUrl: 'client/spell-list/spell-list.html'
 })
 export class SpellList {
 	spells: Mongo.Cursor<Object>;
@@ -85,8 +82,8 @@ export class SpellList {
 	}
 
 	getSpells() {
-		var queryObj = {},
-			sortObj = { sort: { level: 1 } };
+		var queryObj :any = {},
+			sortObj :any = { sort: { level: 1 } };
 
 		if (this.spellFilterLevel >= 0)
 			queryObj.level = this.spellFilterLevel;

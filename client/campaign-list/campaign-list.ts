@@ -1,24 +1,22 @@
 /// <reference path="../../typings/angular2-meteor.d.ts" />
-/// <reference path="../../typings/meteor-accounts-ui.d.ts" />
+/// <reference path="../../typings/meteor-accounts.d.ts" />
 
-import {Component, View, NgFor} from 'angular2/angular2';
+import {Component, NgZone} from 'angular2/core';
 import {RouterLink} from 'angular2/router';
 import {Campaigns} from 'collections/campaigns';
 import {RequireUser} from 'meteor-accounts';
 
 @Component({
-	selector: 'campaign-list'
-})
-@View({
+	selector: 'campaign-list',
 	templateUrl: 'client/campaign-list/campaign-list.html',
-	directives: [NgFor, RouterLink]
+	directives: [RouterLink]
 })
 @RequireUser()
 export class CampaignList {
 	campaigns: Mongo.Cursor<Object>;
 	currentUser: any;
 
-	constructor() {
+	constructor(zone: NgZone) {
 		this.campaigns = Campaigns.find({});
 		Tracker.autorun(() => zone.run(() => {
 			this.currentUser = Meteor.user();

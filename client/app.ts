@@ -31,7 +31,7 @@ import {DiceHelper} from 'client/dice-helper/dice-helper';
 	<navigation></navigation>
 	<div class="mt20 posr">
 		<div class="bgc-white p50 grid-container add-shadow">
-			<routerOutlet></routerOutlet>
+			<router-outlet></router-outlet>
 		</div>
 	</div>
 	<dice-helper></dice-helper>

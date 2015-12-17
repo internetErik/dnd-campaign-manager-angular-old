@@ -31,8 +31,6 @@ export class AccountsModal {
 			}, { validator: this.matchingPasswords })
 		});
 
-		window.lf = this.loginForm;
-
 		Tracker.autorun(() => zone.run(() => {
 			this.currentUser = Meteor.user();
 		}));
@@ -50,7 +48,7 @@ export class AccountsModal {
 			null : { invalidEmail: true };
 	}
 
-	matchingPasswords(group: ControlGroup) {
+	matchingPasswords(group: any) {
 		var pw1 = group.controls.password.value;
 		var pw2 = group.controls.rePassword.value;
 		return (pw1 === pw2) ? null : { passwordMismatch: true };
@@ -71,10 +69,10 @@ export class AccountsModal {
 		event.preventDefault();
 
 		if (this.registerForm.valid) {
-			let c = this.registerForm.controls
+			let c: any = this.registerForm.controls
 			Accounts.createUser({
-				email: c.email.value,
-				password: c.matchingPasswords.controls.password.value
+					email: c.email.value,
+					password: c.matchingPasswords.controls.password.value
 				}, 
 				(err) => { if (err) alert(err); });
 		}

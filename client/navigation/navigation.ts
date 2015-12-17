@@ -1,5 +1,4 @@
 /// <reference path="../../typings/angular2-meteor.d.ts" />
-/// <reference path="../../typings/meteor-accounts-ui.d.ts" />
 
 import {Component, NgZone} from 'angular2/core';
 import {RouterLink, Router} from 'angular2/router';

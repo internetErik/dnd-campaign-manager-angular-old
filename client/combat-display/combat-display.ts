@@ -30,6 +30,7 @@ export class CombatDisplay {
 	
 	constructor(zone: NgZone, params: RouteParams, _router: Router) {
 		this.battleId = params.get('battleId');
+		console.log(this.battleId);
 		this.router = _router;
 
 		Tracker.autorun(() => zone.run(() => {

@@ -6,6 +6,11 @@
 			{{campaign.name}}</a>
 		<button (click)="deleteCampaign($event, campaign)">-</button>
 	</div>
-	<a *ngIf="currentUser.dm"
-		[routerLink]="['/CampaignForm']"><button>+</button></a>
+
+	<div *ngIf="campaigns.length === 0">
+		No Campaigns :( <br>
+		Why not start one!
+	</div>
+
+	<a [routerLink]="['/CampaignForm']"><button>+</button></a>
 </section>

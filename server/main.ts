@@ -26,20 +26,16 @@ Meteor.startup(function() {
 	Battles.find().count();
 });
 
+Meteor.publish('battles', function() {
+	return Battles.find();
+});
+
 Meteor.publish('campaigns', function() {
 	return Campaigns.find({});
 });
 
 Meteor.publish('characters', function() {
 	return Characters.find({});
-});
-
-Meteor.publish('spells', function() {
-	return Spells.find({});
-});
-
-Meteor.publish('skills', function() {
-	return Skills.find({});
 });
 
 Meteor.publish('feats', function() {
@@ -54,59 +50,10 @@ Meteor.publish('rolls', function() {
 	return Rolls.find({});
 });
 
-Meteor.publish('battles', function() {
-	return Battles.find();
+Meteor.publish('skills', function() {
+	return Skills.find({});
 });
 
-Meteor.publish('userData', function() {
-	var currentUser;
-	currentUser = this.userId;
-	return (currentUser) ?
-		Meteor.users.find({ _id: currentUser }, {fields: { emails: 1, dm: 1 } })
-		: this.ready();
+Meteor.publish('spells', function() {
+	return Spells.find({});
 });
-
-Meteor.methods({
-	insertCampaign: function(campaign) {
-		return Campaigns.insert(campaign);
-	},
-	updateCampaign: function(_id, campaign) {
-		return Campaigns.update({ _id: _id }, campaign);
-	},
-	removeCampaign: function(_id) {
-		Campaigns.remove({ _id: _id });
-	},
-	insertSpell: function(spell) { 
-		return Spells.insert(spell);
-	},
-	updateSpell: function(_id, spell) { 
-		return Spells.update({ _id: _id }, spell);
-	},
-	removeSpell: function(_id) {
-		Spells.remove({ _id: _id });
-	},
-	insertSkill: function(skill) { 
-		return Skills.insert(skill);
-	},
-	updateSkill: function(_id, skill) { 
-		return Skills.update({ _id: _id }, skill);
-	},
-	removeSkill: function(_id) {
-		Skills.remove({ _id: _id });
-	},
-	insertFeat: function(feat) { 
-		return Feats.insert(feat);
-	},
-	updateFeat: function(_id, feat) {
-		return Feats.update({ _id: _id }, feat);
-	},
-	removeFeat: function(_id, feat) {
-		Feats.remove({ _id: _id });
-	},
-	insertRoll : function(roll){
-		return Rolls.insert(roll);
-	},
-	clearRolls : function(){
-		Rolls.remove({});
-	}
-})

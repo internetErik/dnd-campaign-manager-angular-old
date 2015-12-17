@@ -1,0 +1,95 @@
+<div class="dib posr">
+	
+	<span *ngIf="currentUser">
+		{{currentUser.emails[0].address}}
+		<button (click)="logout()">&times;</button>
+	</span>
+	<span *ngIf="!currentUser">
+		<span class="curp" (click)="modalOpen = !modalOpen">
+			Sign In
+			<i *ngIf="!modalOpen" class="fa fa-angle-down"></i>
+			<i *ngIf="modalOpen" class="fa fa-angle-up"></i>
+		</span>
+
+		<div class="posa z1 bgc-white p20 add-shadow"
+			[class.dn]="!modalOpen">
+			<button class="posa t5 r5 border-circle" 
+				(click)="modalOpen = false">&times;</button>
+			
+			<form [ngFormModel]="loginForm" (submit)="login($event)" 
+				*ngIf="modalState === 'login'">
+				<div class="p10">
+					<label for="email">E-Mail:</label>
+					<input class="w200" id="email" type="text"
+						placeholder="email@example.com"
+						ngControl="email">
+				</div>
+				<div class="p10">
+					<label for="password">Password:</label>
+					<input class="w200" id="password" type="password" 
+						ngControl="password">
+				</div>
+				<div *ngIf="loginForm.dirty">
+					<div class="fz12 color-red p5-0" 
+						*ngIf="loginForm.controls.email.errors">
+						Invalid E-Mail.
+					</div>
+					<div class="fz12 color-red p5-0" 
+						*ngIf="loginForm.controls.password.errors">
+						Password is required.
+					</div>
+				</div>
+				<div class="p10">
+					<button class="p0-10 pt5 pb5">Login</button>
+					<span class="tdu fr curp" 
+						(click)="modalState = 'register'">Register</span>
+				</div>
+			</form>
+
+			<form [ngFormModel]="registerForm" (submit)="register($event)" 
+				*ngIf="modalState === 'register'">
+				<div class="p10">
+					<label for="email">E-Mail:</label>
+					<input class="w200" id="email" type="text" 
+						placeholder="email@example.com"
+						ngControl="email">
+				</div>
+				<div ngControlGroup="matchingPasswords">
+					<div class="p10">
+						<label for="password">Password:</label>
+						<input class="w200" id="password" type="password"
+							ngControl="password">
+					</div>
+					<div class="p10">
+						<label for="repassword">Re-Enter Password:</label>
+						<input class="w200" id="repassword" type="password"
+							ngControl="rePassword">
+					</div>
+				</div>
+				<div *ngIf="registerForm.dirty">
+					<div class="fz12 color-red p5-0" 
+						*ngIf="registerForm.controls.email.errors">
+						Invalid E-Mail.
+					</div>
+					<div class="fz12 color-red p5-0" 
+						*ngIf="registerForm.controls.matchingPasswords.errors">
+						Passwords do not match.
+					</div>
+					<div class="fz12 color-red p5-0" 
+						*ngIf="registerForm.controls.matchingPasswords.controls.password.errors">
+						Password is required.
+					</div>
+					<div class="fz12 color-red p5-0" 
+						*ngIf="registerForm.controls.matchingPasswords.controls.rePassword.errors">
+						Matching Password is required.
+					</div>
+				</div>
+				<div class="p10">
+					<button class="p0-10 pt5 pb5">Register</button>
+					<span class="tdu fr curp" 
+						(click)="modalState = 'login'">Login</span>
+				</div>
+			</form>
+		</div>
+	</span>
+</div>

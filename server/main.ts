@@ -104,7 +104,10 @@ Meteor.methods({
 		Feats.remove({ _id: _id });
 	},
 	insertRoll : function(roll){
-		return Rolls.insert(roll);
+		if(roll) {
+			roll.createdAt = Date.now();
+			return Rolls.insert(roll);
+		}
 	},
 	clearRolls : function(){
 		Rolls.remove({});

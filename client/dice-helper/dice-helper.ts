@@ -1,13 +1,10 @@
 /// <reference path="../../typings/angular2-meteor.d.ts" />
-/// <reference path="../../typings/meteor-accounts-ui.d.ts" />
 
 import {Component, NgZone} from 'angular2/core';
 
 import {simpleRoll} from 'lib/dice';
 
 import {Rolls} from 'collections/rolls';
-
-import {AccountsUI} from 'meteor-accounts-ui';
 
 @Component({
     selector: 'dice-helper',
@@ -77,8 +74,7 @@ export class DiceHelper {
 
 	insertRoll(result, sides, bonus) {
 		var roll = { 
-			result: result, 
-			createdAt: Date.now(), 
+			result: result,  
 			sides: sides, 
 			bonus: bonus, 
 			critical: result === sides 

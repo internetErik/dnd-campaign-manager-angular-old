@@ -14,13 +14,11 @@ import {HomePage} from 'client/home-page/home-page';
 import {CampaignList} from 'client/campaign-list/campaign-list';
 import {CampaignForm} from 'client/campaign-form/campaign-form';
 import {ContentCreator} from 'client/content-creator/content-creator';
-
 import {CharacterList} from 'client/character-list/character-list';
 import {CharacterForm} from 'client/character-form/character-form';
 import {CharacterDetail} from 'client/character-detail/character-detail';
 import {BattleList} from 'client/battle-list/battle-list';
 import {CombatDisplay} from 'client/combat-display/combat-display';
-
 
 import {DiceHelper} from 'client/dice-helper/dice-helper';
 
@@ -41,10 +39,6 @@ import {DiceHelper} from 'client/dice-helper/dice-helper';
 @RouteConfig([
 	{
 		path: '/',
-		redirectTo: '/home'
-	},
-	{
-		path: '/home',
 		name: 'HomePage',
 		component: HomePage
 	},

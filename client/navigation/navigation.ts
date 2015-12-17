@@ -1,15 +1,14 @@
 /// <reference path="../../typings/angular2-meteor.d.ts" />
-/// <reference path="../../typings/meteor-accounts-ui.d.ts" />
 
 import {Component, NgZone} from 'angular2/core';
 import {RouterLink, Router} from 'angular2/router';
 
-import {AccountsUI} from 'meteor-accounts-ui';
+import {AccountsModal} from 'client/accounts-modal/accounts-modal';
 
 @Component({
     selector: 'navigation',
 	templateUrl: 'client/navigation/navigation.html',
-	directives: [RouterLink, AccountsUI]
+	directives: [RouterLink, AccountsModal]
 })
 export class Navigation {
 	currentUser: any;

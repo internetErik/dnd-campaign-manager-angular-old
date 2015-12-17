@@ -26,7 +26,7 @@ import {DiceHelper} from 'client/dice-helper/dice-helper';
     selector: 'app',
 	template: `
 	<div class="bgc-lightgray posf max-width max-height"></div>
-	<navigation></navigation>
+	<navigation class="add-shadow"></navigation>
 	<div class="mt20 posr">
 		<div class="bgc-white p50 grid-container add-shadow">
 			<router-outlet></router-outlet>

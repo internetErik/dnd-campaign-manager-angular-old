@@ -185,20 +185,14 @@
 	background:transparent;
 }
 
-.add-shadow\:a:after {
-	position: absolute;
-	background: transparent;
-	width: 100%;
-	max-width: 1024px;
-	height: 100%;
-	content: '';
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	box-shadow: 0 0 10px 0px #000;
-	z-index: 0;
+.add-shadow {
+	box-shadow: 0 0 10px 0px $color-black;
 }
 
-.add-shadow {
-	box-shadow: 0 0 10px 0px #000;
+.add-bottom-shadow {
+	box-shadow: 0 10px 20px 0px $color-gray;
+}
+
+.color-red {
+	color: $color-red;
 }

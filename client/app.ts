@@ -41,10 +41,6 @@ import {DiceHelper} from 'client/dice-helper/dice-helper';
 @RouteConfig([
 	{
 		path: '/',
-		redirectTo: '/home'
-	},
-	{
-		path: '/home',
 		name: 'HomePage',
 		component: HomePage
 	},

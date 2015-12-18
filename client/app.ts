@@ -1,5 +1,4 @@
 /// <reference path="../typings/angular2-meteor.d.ts" />
-/// <reference path="../typings/meteor-accounts-ui.d.ts" />
 
 import {Component, provide} from 'angular2/core';
 
@@ -85,15 +84,5 @@ import {DiceHelper} from 'client/dice-helper/dice-helper';
 		component: CombatDisplay
 	}
 ])
-class App { 
-	constructor() {		
-		Meteor.subscribe('userData');
-		Meteor.subscribe('campaigns');
-		Meteor.subscribe('characters');
-		Meteor.subscribe('spells');
-		Meteor.subscribe('skills');
-		Meteor.subscribe('feats');
-		Meteor.subscribe('rolls');
-	}
-}
+class App {}
 bootstrap(App, [ROUTER_PROVIDERS, provide(APP_BASE_HREF, { useValue: '/' })]);

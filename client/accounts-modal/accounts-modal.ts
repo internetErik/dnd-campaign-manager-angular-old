@@ -4,13 +4,14 @@ import {Component, NgZone} from 'angular2/core';
 
 import {FormBuilder, Control, ControlGroup, Validators} from 'angular2/common';
 
+import {InjectUser} from 'meteor-accounts';
+
 @Component({
 	selector: 'accounts-modal',
 	templateUrl: 'client/accounts-modal/accounts-modal.html'
 })
+@InjectUser('currentUser')
 export class AccountsModal {
-	currentUser: any;
-
 	loginForm: ControlGroup;
 	registerForm: ControlGroup;
 
@@ -31,10 +32,6 @@ export class AccountsModal {
 				rePassword: ["", Validators.required]
 			}, { validator: this.matchingPasswords })
 		});
-
-		Tracker.autorun(() => zone.run(() => {
-			this.currentUser = Meteor.user();
-		}));
 	}
 
 	logout() {

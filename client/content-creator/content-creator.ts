@@ -12,7 +12,7 @@ import {SpellList} from 'client/spell-list/spell-list';
 
 import {MonsterForm} from 'client/monster-form/monster-form';
 
-import {RequireUser} from 'meteor-accounts';
+import {RequireUser, InjectUser} from 'meteor-accounts';
 
 @Component({
     selector: 'content-creator',
@@ -20,6 +20,7 @@ import {RequireUser} from 'meteor-accounts';
 	directives: [SpellList, MonsterForm]
 })
 @RequireUser()
+@InjectUser('currentUser')
 export class ContentCreator {
     router: Router;
 

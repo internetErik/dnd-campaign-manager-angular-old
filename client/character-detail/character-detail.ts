@@ -10,7 +10,9 @@ import {Spells} from 'collections/spells';
 import {Skills} from 'collections/skills';
 import {Feats} from 'collections/feats';
 
-import {RequireUser} from 'meteor-accounts';
+import {RequireUser, InjectUser} from 'meteor-accounts';
+
+import {MeteorComponent} from 'angular2-meteor';
 
 @Component({
     selector: 'character-detail',
@@ -19,7 +21,8 @@ import {RequireUser} from 'meteor-accounts';
 // @View({
 // })
 @RequireUser()
-export class CharacterDetail {
+@InjectUser('currentUser')
+export class CharacterDetail extends MeteorComponent {
     character: any;
     router: Router;
 
@@ -44,12 +47,13 @@ export class CharacterDetail {
 	feats: Mongo.Cursor<Object>;
 
 	constructor(_router: Router, params: RouteParams) {
+		super()
+
         var characterId = params.get('characterId');
-        this.router = _router;
 
-        this.currentUser = Meteor.user();
-
-		this.character = Characters.findOne({ _id: characterId });
+        this.subscribe('characters', () => {
+			this.character = Characters.findOne({ _id: characterId });
+        });
 
 		this.newSpellName = '';
 		this.newSpellLevel = 0;
@@ -67,6 +71,8 @@ export class CharacterDetail {
 		this.spells = Spells.find({});
 		this.skills = Skills.find({});
 		this.feats = Feats.find({});
+		
+        this.router = _router;
     }
 
     deleteCharacter(e) {

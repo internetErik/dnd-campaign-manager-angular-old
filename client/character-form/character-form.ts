@@ -7,15 +7,15 @@ import {Router, RouteParams} from 'angular2/router';
 
 import {Characters} from 'collections/characters';
 
-import {RequireUser} from 'meteor-accounts';
+import {RequireUser, InjectUser} from 'meteor-accounts';
 
 @Component({
 	selector: 'character-form',
 	templateUrl: 'client/character-form/character-form.html'
 })
 @RequireUser()
+@InjectUser('currentUser')
 export class CharacterForm {
-	currentUser: any;
 	characterForm: ControlGroup;
 	router: Router;
 	campaignId: string;
@@ -29,8 +29,6 @@ export class CharacterForm {
 
 	constructor(_router: Router, params: RouteParams) {
 		var fb = new FormBuilder();
-
-		this.currentUser = Meteor.user();
 
 		this.campaignId = params.get('campaignId');
 
@@ -55,20 +53,6 @@ export class CharacterForm {
 			con: [10, Validators.required],
 			dex: [10, Validators.required],
 			cha: [10, Validators.required],
-			hitRoll: [0],
-			reflex: [0],
-			fortitude: [0],
-			will: [0],
-			level0: [0],
-			level1: [0],
-			level2: [0],
-			level3: [0],
-			level4: [0],
-			level5: [0],
-			level6: [0],
-			level7: [0],
-			level8: [0],
-			level9: [0],
 			backstory: ['']
 		});
 
@@ -146,7 +130,7 @@ export class CharacterForm {
 				chaTab: 0,
 				movement: 2,
 				movementBonus: 0,
-				hitRoll: character.hitRoll,
+				hitRoll: 0,
 				hitRollBonus: 0,
 				hitRollTab: 0,
 				ac: 0,
@@ -154,15 +138,6 @@ export class CharacterForm {
 				evade: 0,
 				block: 0,
 				evadeBonus: 0,
-				reflex: character.reflex,
-				fortitude: character.fortitude,
-				will: character.will,
-				reflexBonus: 0,
-				fortitudeBonus: 0,
-				willBonus: 0,
-				reflexTab: 0,
-				fortitudeTab: 0,
-				willTab: 0,
 				level0: 0,
 				level1: 0,
 				level2: 0,
@@ -222,7 +197,7 @@ export class CharacterForm {
 
 			Meteor.call('insertCharacter', c, (e, r) => {
 				if (e)
-					console.log("error inserting?", e);
+					console.log("Error inserting character: ", e);
 				else
 					this.router.parent.navigate(['/CharacterDetail', { characterId: r }]);
 			});

@@ -26,7 +26,7 @@
 			<label for="title" class="w125">Title:</label>
 			<input id="title" type="text" [(ngModel)]="character.title">
 		</div>
-		<div class="p10-0" *ngIf="currentUser.dm">
+		<div class="p10-0">
 			<label for="characterType" class="w125">Character Type: </label>
 			<select id="characterType" [(ngModel)]="character.characterType">
 				<option value="PC">PC</option>
@@ -171,28 +171,6 @@
 				Tab: {{character.chaTab}} 
 				<button (click)="incrementTab('chaTab')">+</button>
 				<button (click)="clearTab('chaTab')">&times;</button>
-		</div>
-		<h3>Saves</h3>
-		<div class="p10-0">
-			<label for="reflex" class="w125">Reflex:</label> 
-			{{character.reflex + character.reflexBonus}}
-			<br>
-			Base: <input type="number" min="-100" max="100" [(ngModel)]="character.reflex">
-			Bonus: <input type="number" min="-100" max="100" [(ngModel)]="character.reflexBonus">
-		</div>
-		<div class="p10-0">
-			<label for="fortitude" class="w125">Fortitude:</label>
-			{{character.fortitude + character.fortitudeBonus}}
-			<br>
-			Base: <input type="number" min="-100" max="100" [(ngModel)]="character.fortitude">
-			Bonus: <input type="number" min="-100" max="100" [(ngModel)]="character.fortitudeBonus">
-		</div>
-		<div class="p10-0">
-			<label for="will" class="w125">Will:</label>
-			{{character.will + character.willBonus}}
-			<br>
-			Base: <input type="number" min="-100" max="100" [(ngModel)]="character.will">
-			Bonus: <input type="number" min="-100" max="100" [(ngModel)]="character.willBonus">
 		</div>
 	</section>
 	<hr>

@@ -4,7 +4,10 @@
 import {Component, NgZone} from 'angular2/core';
 import {RouterLink} from 'angular2/router';
 import {Campaigns} from 'collections/campaigns';
-import {RequireUser} from 'meteor-accounts';
+
+import {RequireUser, InjectUser} from 'meteor-accounts';
+
+import {MeteorComponent} from 'angular2-meteor';
 
 @Component({
 	selector: 'campaign-list',
@@ -12,15 +15,17 @@ import {RequireUser} from 'meteor-accounts';
 	directives: [RouterLink]
 })
 @RequireUser()
-export class CampaignList {
-	campaigns: Mongo.Cursor<Object>;
+@InjectUser('currentUser')
+export class CampaignList extends MeteorComponent {
+	campaigns: Mongo.Cursor<any>;
 	currentUser: any;
 
 	constructor(zone: NgZone) {
-		this.campaigns = Campaigns.find({});
-		Tracker.autorun(() => zone.run(() => {
-			this.currentUser = Meteor.user();
-		}));
+		super();
+
+		this.subscribe('campaigns', () => {
+			this.campaigns = Campaigns.find({},{sort: {createDate: -1}});
+		});
 	}
 
 	deleteCampaign(e, campaign) {

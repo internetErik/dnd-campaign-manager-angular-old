@@ -2,7 +2,7 @@
 	(submit)="addCharacter($event, f.value)">
 	<h1>Character Creation</h1>
 	<hr>
-	<section class="p20-0 m20-0" *ngIf="currentUser.dm">
+	<section class="p20-0 m20-0">
 		<label for="characterType" class="w125">Character Type: </label>
 		<select id="characterType" ngControl="characterType">
 			<option selected="selected" value="PC">PC</option>
@@ -94,25 +94,6 @@
 		<div class="p10-0">
 			<label for="cha" class="w125">Charisma*:</label>
 			<input id="cha" type="number" min="0" max="100" ngControl="cha">
-		</div>
-		<div class="p10-0">
-			<label for="hitRoll" class="w125">Hit Roll:</label>
-			<input id="hitRoll" type="number" min="0" max="100" ngControl="hitRoll">
-		</div>
-		<div class="p10-0">
-
-		<h3>Saves</h3>
-		<div class="p10-0">
-			<label for="reflex" class="w125">Reflex:</label>
-			<input id="reflex" type="number" min="0" max="100" ngControl="reflex">
-		</div>
-		<div class="p10-0">
-			<label for="fortitude" class="w125">Fortitude:</label>
-			<input id="fortitude" type="number" min="0" max="100" ngControl="fortitude">
-		</div>
-		<div class="p10-0">
-			<label for="will" class="w125">Will:</label>
-			<input id="will" type="number" min="0" max="100" ngControl="will">
 		</div>
 	</section>
 	<hr>

@@ -5,7 +5,7 @@ import {Component} from 'angular2/core';
 import {FormBuilder, Control, ControlGroup, Validators} from 'angular2/common';
 import {Router, RouteParams} from 'angular2/router';
 
-import {Characters} from 'collections/characters';
+import {Characters} from 'lib/collections/characters';
 
 import {RequireUser, InjectUser} from 'meteor-accounts';
 
@@ -38,7 +38,7 @@ export class CharacterForm {
 			lastName: [''],
 			title: [''],
 			characterType: ['PC', Validators.required],
-			race: ['', Validators.required],
+			race: [''],
 			sex: [''],
 			heightM: [1, Validators.required],
 			heightCm: [50, Validators.required],

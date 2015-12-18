@@ -5,10 +5,10 @@ import {Component} from 'angular2/core';
 import {FormBuilder, Control, ControlGroup, Validators} from 'angular2/common';
 import {RouteParams, Router} from 'angular2/router';
 
-import {Characters} from 'collections/characters';
-import {Spells} from 'collections/spells';
-import {Skills} from 'collections/skills';
-import {Feats} from 'collections/feats';
+import {Characters} from 'lib/collections/characters';
+import {Spells} from 'lib/collections/spells';
+import {Skills} from 'lib/collections/skills';
+import {Feats} from 'lib/collections/feats';
 
 import {RequireUser, InjectUser} from 'meteor-accounts';
 
@@ -18,15 +18,13 @@ import {MeteorComponent} from 'angular2-meteor';
     selector: 'character-detail',
     templateUrl: 'client/character-detail/character-detail.html'
 })
-// @View({
-// })
 @RequireUser()
 @InjectUser('currentUser')
 export class CharacterDetail extends MeteorComponent {
-    character: any;
+    currentUser: any;
     router: Router;
 
-    currentUser: any;
+    character: any;
 
 	newSpellName: string;
 	newSpellLevel: number;
@@ -47,13 +45,23 @@ export class CharacterDetail extends MeteorComponent {
 	feats: Mongo.Cursor<Object>;
 
 	constructor(_router: Router, params: RouteParams) {
-		super()
+		super();
 
         var characterId = params.get('characterId');
 
-        this.subscribe('characters', () => {
+        this.subscribe('character', () => {
 			this.character = Characters.findOne({ _id: characterId });
-        });
+        }, true);
+
+        this.subscribe('spells', () => { 
+			this.spells = Spells.find({});
+        }, true);
+        this.subscribe('skills', () => { 
+			this.skills = Skills.find({});
+        }, true);
+        this.subscribe('feats', () => { 
+			this.feats = Feats.find({});
+        }, true);
 
 		this.newSpellName = '';
 		this.newSpellLevel = 0;
@@ -68,10 +76,6 @@ export class CharacterDetail extends MeteorComponent {
 
 		this.saveMessage = '';
 
-		this.spells = Spells.find({});
-		this.skills = Skills.find({});
-		this.feats = Feats.find({});
-		
         this.router = _router;
     }
 

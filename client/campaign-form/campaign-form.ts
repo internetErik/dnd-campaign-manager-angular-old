@@ -6,9 +6,10 @@ import {FormBuilder, Control, ControlGroup, Validators} from 'angular2/common';
 
 import {Router} from 'angular2/router';
 
-import {Campaigns} from 'collections/campaigns';
+import {Campaigns} from 'lib/collections/campaigns';
 
 import {RequireUser, InjectUser} from 'meteor-accounts';
+import {MeteorComponent} from 'angular2-meteor';
 
 @Component({
 	selector: 'campaign-form',
@@ -16,12 +17,13 @@ import {RequireUser, InjectUser} from 'meteor-accounts';
 })
 @RequireUser()
 @InjectUser('currentUser')
-export class CampaignForm {
+export class CampaignForm extends MeteorComponent {
 	campaignForm: ControlGroup;
 	router: Router;
 	currentUser: any;
 
 	constructor(zone: NgZone, _router: Router) {
+		super();
 		var fb = new FormBuilder();
 		this.campaignForm = fb.group({
 			name: ['', Validators.required]
@@ -33,7 +35,7 @@ export class CampaignForm {
 	addCampaign(e, campaign) {
 
 		if(this.campaignForm.valid) {		
-			Meteor.call('insertCampaign', campaign, (e, r) => {
+			this.call('insertCampaign', campaign, (e, r) => {
 				if(e)
 					console.log("Error creating campaign: ", e);
 				else

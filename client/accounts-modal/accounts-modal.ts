@@ -1,4 +1,5 @@
 /// <reference path="../../typings/angular2-meteor.d.ts" />
+/// <reference path="../../typings/meteor-accounts.d.ts" />
 
 import {Component, NgZone} from 'angular2/core';
 
@@ -12,6 +13,7 @@ import {InjectUser} from 'meteor-accounts';
 })
 @InjectUser('currentUser')
 export class AccountsModal {
+	currentUser: any;
 	loginForm: ControlGroup;
 	registerForm: ControlGroup;
 

@@ -4,9 +4,9 @@
 import {Component} from 'angular2/core';
 import {Router} from 'angular2/router';
 
-import {Spells} from 'collections/spells';
-import {Skills} from 'collections/skills';
-import {Feats} from 'collections/feats';
+import {Spells} from 'lib/collections/spells';
+import {Skills} from 'lib/collections/skills';
+import {Feats} from 'lib/collections/feats';
 
 import {SpellList} from 'client/spell-list/spell-list';
 

@@ -1,21 +1,21 @@
-import {initCharacters} from 'server/init/initCharacters';
 import {initSpells} from 'server/init/initSpells';
 import {initSkills} from 'server/init/initSkills';
 import {initFeats} from 'server/init/initFeats';
 
-import {Characters} from 'collections/characters';
-import {Campaigns} from 'collections/campaigns';
-import {Rolls} from 'collections/rolls';
-import {Spells} from 'collections/spells';
-import {Skills} from 'collections/skills';
-import {Feats} from 'collections/feats';
-import {Monsters} from 'collections/monsters';
-import {Battles} from 'collections/battles';
+import {Characters} from 'lib/collections/characters';
+import {Campaigns} from 'lib/collections/campaigns';
+import {Rolls} from 'lib/collections/rolls';
+import {Spells} from 'lib/collections/spells';
+import {Skills} from 'lib/collections/skills';
+import {Feats} from 'lib/collections/feats';
+import {Monsters} from 'lib/collections/monsters';
+import {Battles} from 'lib/collections/battles';
 
 Meteor.startup(function() { 
 	//for some reason if we don't do something with the DBS on start, 
 	//they won't show on the front end
-	initCharacters();
+	Campaigns.find().count();
+	Characters.find().count();
 	initSpells();
 	initSkills();
 	initFeats();
@@ -31,6 +31,10 @@ Meteor.publish('campaigns', function() {
 
 Meteor.publish('characters', function() {
 	return Characters.find();
+});
+
+Meteor.publish('character', function(characterId) {
+	return Characters.find({_id: characterId});
 });
 
 Meteor.publish('feats', function() {

@@ -7,21 +7,25 @@ import {FormBuilder, Control, ControlGroup, Validators} from 'angular2/common';
 
 import {InjectUser} from 'meteor-accounts';
 
+import {MeteorComponent} from 'angular2-meteor';
+
 @Component({
 	selector: 'accounts-modal',
 	templateUrl: 'client/accounts-modal/accounts-modal.html'
 })
 @InjectUser('currentUser')
-export class AccountsModal {
+export class AccountsModal extends MeteorComponent {
 	currentUser: any;
 	loginForm: ControlGroup;
 	registerForm: ControlGroup;
-
+	
 	//state
 	modalOpen: boolean = false;
 	modalState: string = 'login'; //login, register
 
 	constructor(fb: FormBuilder, zone: NgZone) {
+		super();
+		
 		this.loginForm = fb.group({
 			email: ["", this.validEmail],
 			password: ["", Validators.required]

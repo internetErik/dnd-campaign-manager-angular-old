@@ -5,7 +5,7 @@ import {Component, provide} from 'angular2/core';
 import {ROUTER_PROVIDERS, ROUTER_DIRECTIVES, RouteConfig, APP_BASE_HREF} 
 	from 'angular2/router';
 
-import {bootstrap, MeteorComponent} from 'angular2-meteor';
+import {bootstrap} from 'angular2-meteor';
 
 import {Navigation} from 'client/navigation/navigation';
 
@@ -39,7 +39,8 @@ import {DiceHelper} from 'client/dice-helper/dice-helper';
 	{
 		path: '/',
 		name: 'HomePage',
-		component: HomePage
+		component: HomePage,
+		useAsDefault: true
 	},
 	{
 		path: '/campaign',
@@ -82,18 +83,5 @@ import {DiceHelper} from 'client/dice-helper/dice-helper';
 		component: CombatDisplay
 	}
 ])
-class App extends MeteorComponent {
-
-	constructor() {
-		super();
-		this.subscribe('battles');
-		this.subscribe('campaigns');
-		this.subscribe('characters');
-		this.subscribe('feats');
-		this.subscribe('monsters');
-		this.subscribe('rolls');
-		this.subscribe('spells');
-		this.subscribe('spells');
-	}
-}
+class App {}
 bootstrap(App, [ROUTER_PROVIDERS, provide(APP_BASE_HREF, { useValue: '/' })]);

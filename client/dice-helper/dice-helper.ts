@@ -1,4 +1,5 @@
 /// <reference path="../../typings/angular2-meteor.d.ts" />
+/// <reference path="../../typings/meteor-accounts.d.ts" />
 
 import {Component, NgZone} from 'angular2/core';
 
@@ -6,23 +7,28 @@ import {simpleRoll} from 'lib/dice';
 
 import {Rolls} from 'lib/collections/rolls';
 
+import {InjectUser} from 'meteor-accounts';
+
+import {MeteorComponent} from 'angular2-meteor';
+
 @Component({
     selector: 'dice-helper',
 	templateUrl: 'client/dice-helper/dice-helper.html'
 })
-export class DiceHelper {
-	currentRoll: string;
+@InjectUser('currentUser')
+export class DiceHelper extends MeteorComponent {
+	currentRoll: string = '';
 	lastRolls: any;
-	
+
+	rollBonus: number = 0;
 	//are the buttons disabled because we are rolling?
-	disabled: boolean;
-
+	disabled: boolean = false;
 	//should these rolls be public or private?
-	rollPublic: boolean;
-
+	rollPublic: boolean = true;
 	//are the dice visible?
-	diceHidden: boolean;
-
+	diceHidden: boolean = true;
+	dice: number[] = [2, 4, 6, 8, 10, 12, 20, 100];
+	
 	//the current user
 	currentUser: any;
 	//current campaign
@@ -30,46 +36,34 @@ export class DiceHelper {
 	//current character
 	character: any;
 
-	dice: number[];
-
 	constructor(zone: NgZone) {
-		this.currentRoll = '';
-		this.lastRolls = Rolls.find({}, { sort: { createdAt: -1 }, limit: 5 });
-		this.rollPublic = true;
-		this.disabled = false;
-		this.diceHidden = true;
+		super();
 
-		this.dice = [2, 4, 6, 8, 10, 12, 20, 100];
+		this.subscribe('rolls', () => {
+			this.lastRolls = Rolls.find({}, { sort: { createdDate: -1 }, limit: 5 });
+		});
 
 		Tracker.autorun(() => zone.run(() => {
-			this.currentUser = Meteor.user();
 			this.campaign = Session.get('campaign');
 			this.character = Session.get('character');
 		}));
 	}
 
 	roll(sides) {
-		var bonusInput: HTMLInputElement =
-				<HTMLInputElement>document.querySelector('.js-bonus-to-roll');
-		var bonus: number = parseInt(bonusInput.value) || 0;
 		this.disabled = true;
 		this.currentRoll = '. . . ROLLING! . . .';
 		setTimeout(() => {
 			let result = simpleRoll(sides);
-			this.currentRoll = `${result + bonus} (d${sides} + ${bonus})`;
+			this.currentRoll = `${result + this.rollBonus} (d${sides} + ${this.rollBonus})`;
 			this.disabled = false;
 			if(this.rollPublic && this.currentUser && this.campaign)
-				this.insertRoll(result, sides, bonus);
+				this.insertRoll(result, sides, this.rollBonus);
 		}, 250);
 	}
 
 	clearRolls() {
 		this.currentRoll = '';
 		Meteor.call('clearRolls');
-	}
-
-	toggleDice() {
-		this.diceHidden = !this.diceHidden;
 	}
 
 	insertRoll(result, sides, bonus) {
@@ -82,9 +76,4 @@ export class DiceHelper {
 
 		Meteor.call('insertRoll', roll);
 	}
-
-	togglePublic() {
-		this.rollPublic = !this.rollPublic;
-	}
-
 }

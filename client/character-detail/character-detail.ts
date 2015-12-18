@@ -2,7 +2,6 @@
 /// <reference path="../../typings/meteor-accounts.d.ts" />
 
 import {Component} from 'angular2/core';
-import {FormBuilder, Control, ControlGroup, Validators} from 'angular2/common';
 import {RouteParams, Router} from 'angular2/router';
 
 import {Characters} from 'lib/collections/characters';
@@ -49,18 +48,20 @@ export class CharacterDetail extends MeteorComponent {
 
         var characterId = params.get('characterId');
 
-        this.subscribe('character', () => {
-			this.character = Characters.findOne({ _id: characterId });
+        this.subscribe('character', characterId, () => {
+			this.character = Characters.findOne();
         }, true);
 
         this.subscribe('spells', () => { 
-			this.spells = Spells.find({});
+			this.spells = Spells.find();
         }, true);
+
         this.subscribe('skills', () => { 
-			this.skills = Skills.find({});
+			this.skills = Skills.find();
         }, true);
+        
         this.subscribe('feats', () => { 
-			this.feats = Feats.find({});
+			this.feats = Feats.find();
         }, true);
 
 		this.newSpellName = '';
@@ -82,7 +83,7 @@ export class CharacterDetail extends MeteorComponent {
     deleteCharacter(e) {
 		e.preventDefault();
 		if(confirm(`Are you sure you want to delete this character?`)) {
-			Meteor.call('removeCharacter', this.character._id);
+			this.call('removeCharacter', this.character._id);
 			Session.set('character', null);
 			this.router.parent.navigate(['/CharacterList']);
 		}
@@ -216,7 +217,7 @@ export class CharacterDetail extends MeteorComponent {
 
 	updateCharacter() {
 		this.saveMessage = "saving . . .";
-		Meteor.call('updateCharacter', this.character._id, this.character, (e, r) => {
+		this.call('updateCharacter', this.character._id, this.character, (e, r) => {
 			this.saveMessage = 'saved successfully!';
 			if (e) {
 				this.saveMessage = 'Error saving character!';

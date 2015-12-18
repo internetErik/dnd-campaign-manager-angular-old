@@ -1,6 +1,6 @@
 <div class="dice-helper p20 posf b0 l0 bgc-white add-shadow max-width" 
 	[class.hide-dice]="diceHidden">
-	<button class="p10-0 pl20 pr20" (click)="toggleDice();">
+	<button class="p10-0 pl20 pr20" (click)="diceHidden = !diceHidden">
 		<span *ngIf="diceHidden">Show</span>
 		<span *ngIf="!diceHidden">Hide</span>
 	</button>
@@ -11,7 +11,7 @@
 		(click)="roll(die)">
 		d{{die}}
 	</button>
-	Bonus: <input type="number" class="js-bonus-to-roll" value="0" >
+	Bonus: <input type="number" [(ngModel)]="rollBonus" value="0" >
 	<div class="p10-0">
 	Current Roll: {{currentRoll}} 
 	</div>
@@ -24,7 +24,7 @@
 			</span>
 		</div>
 		<div class="p20-0">
-			<button class="p10-0 pl20 pr20" (click)="togglePublic()">
+			<button class="p10-0 pl20 pr20" (click)="rollPublic = !rollPublic">
 				<span *ngIf="rollPublic">Private</span>
 				<span *ngIf="!rollPublic">Public</span>
 			</button>

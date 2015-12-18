@@ -23,7 +23,7 @@ export class CampaignList extends MeteorComponent {
 	constructor(zone: NgZone) {
 		super();
 		this.subscribe('campaigns', () => {
-			this.campaigns = Campaigns.find({},{sort: {createDate: -1}});
+			this.campaigns = Campaigns.find();
 		}, true);
 	}
 

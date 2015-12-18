@@ -21,16 +21,14 @@ export class DiceHelper extends MeteorComponent {
 	lastRolls: any;
 
 	rollBonus: number = 0;
-	
 	//are the buttons disabled because we are rolling?
-	disabled: boolean;
-
+	disabled: boolean = false;
 	//should these rolls be public or private?
-	rollPublic: boolean;
-
+	rollPublic: boolean = true;
 	//are the dice visible?
-	diceHidden: boolean;
-
+	diceHidden: boolean = true;
+	dice: number[] = [2, 4, 6, 8, 10, 12, 20, 100];
+	
 	//the current user
 	currentUser: any;
 	//current campaign
@@ -38,19 +36,12 @@ export class DiceHelper extends MeteorComponent {
 	//current character
 	character: any;
 
-	dice: number[];
-
 	constructor(zone: NgZone) {
 		super();
+
 		this.subscribe('rolls', () => {
 			this.lastRolls = Rolls.find({}, { sort: { createdDate: -1 }, limit: 5 });
 		});
-
-		this.rollPublic = true;
-		this.disabled = false;
-		this.diceHidden = true;
-
-		this.dice = [2, 4, 6, 8, 10, 12, 20, 100];
 
 		Tracker.autorun(() => zone.run(() => {
 			this.campaign = Session.get('campaign');
@@ -75,10 +66,6 @@ export class DiceHelper extends MeteorComponent {
 		Meteor.call('clearRolls');
 	}
 
-	toggleDice() {
-		this.diceHidden = !this.diceHidden;
-	}
-
 	insertRoll(result, sides, bonus) {
 		var roll = { 
 			result: result, 
@@ -89,9 +76,4 @@ export class DiceHelper extends MeteorComponent {
 
 		Meteor.call('insertRoll', roll);
 	}
-
-	togglePublic() {
-		this.rollPublic = !this.rollPublic;
-	}
-
 }

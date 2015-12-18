@@ -1,12 +1,11 @@
 /// <reference path="../typings/angular2-meteor.d.ts" />
-/// <reference path="../typings/meteor-accounts-ui.d.ts" />
 
 import {Component, provide} from 'angular2/core';
 
 import {ROUTER_PROVIDERS, ROUTER_DIRECTIVES, RouteConfig, APP_BASE_HREF} 
 	from 'angular2/router';
 
-import {bootstrap} from 'angular2-meteor';
+import {bootstrap, MeteorComponent} from 'angular2-meteor';
 
 import {Navigation} from 'client/navigation/navigation';
 
@@ -83,15 +82,18 @@ import {DiceHelper} from 'client/dice-helper/dice-helper';
 		component: CombatDisplay
 	}
 ])
-class App { 
-	constructor() {		
-		Meteor.subscribe('userData');
-		Meteor.subscribe('campaigns');
-		Meteor.subscribe('characters');
-		Meteor.subscribe('spells');
-		Meteor.subscribe('skills');
-		Meteor.subscribe('feats');
-		Meteor.subscribe('rolls');
+class App extends MeteorComponent {
+
+	constructor() {
+		super();
+		this.subscribe('battles');
+		this.subscribe('campaigns');
+		this.subscribe('characters');
+		this.subscribe('feats');
+		this.subscribe('monsters');
+		this.subscribe('rolls');
+		this.subscribe('spells');
+		this.subscribe('spells');
 	}
 }
 bootstrap(App, [ROUTER_PROVIDERS, provide(APP_BASE_HREF, { useValue: '/' })]);

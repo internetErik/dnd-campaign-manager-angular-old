@@ -4,7 +4,7 @@ import {Component, NgZone} from 'angular2/core';
 
 import {simpleRoll} from 'lib/dice';
 
-import {Rolls} from 'collections/rolls';
+import {Rolls} from 'lib/collections/rolls';
 
 @Component({
     selector: 'dice-helper',

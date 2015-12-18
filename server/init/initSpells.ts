@@ -1,4 +1,4 @@
-import {Spells} from 'collections/spells';
+import {Spells} from 'lib/collections/spells';
 
 export function initSpells() {
    if (Spells.find().count() === 0) {

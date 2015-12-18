@@ -2,10 +2,12 @@
 <hr>
 <section class="p20-0 m20-0">
 	<div *ngFor="#campaign of campaigns" class="p10-0">
-		<a href="javascript:void(0)" (click)="selectCampaign(campaign)">
-			{{campaign.name}}</a>
+		<a href="javascript:void(0)" 
+			(click)="selectCampaign(campaign)">
+			{{campaign.name}}
+		</a>
 		<button (click)="deleteCampaign($event, campaign)">-</button>
 	</div>
-	<a *ngIf="currentUser.dm"
-		[routerLink]="['/CampaignForm']"><button>+</button></a>
+
+	<a [routerLink]="['/CampaignForm']"><button>+</button></a>
 </section>

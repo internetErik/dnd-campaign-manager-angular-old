@@ -1,15 +1,19 @@
 /// <reference path="../../typings/angular2-meteor.d.ts" />
+/// <reference path="../../typings/meteor-accounts.d.ts" />
 
 import {Component, NgZone} from 'angular2/core';
 import {RouterLink, Router} from 'angular2/router';
 
 import {AccountsModal} from 'client/accounts-modal/accounts-modal';
 
+import {InjectUser} from 'meteor-accounts';
+
 @Component({
     selector: 'navigation',
 	templateUrl: 'client/navigation/navigation.html',
 	directives: [RouterLink, AccountsModal]
 })
+@InjectUser('currentUser')
 export class Navigation {
 	currentUser: any;
 	campaign: any;
@@ -20,7 +24,6 @@ export class Navigation {
 		this.router = _router;
 
 		Tracker.autorun(() => zone.run(() => {
-			this.currentUser = Meteor.user();
 			this.campaign = (this.currentUser) ? Session.get('campaign') : null;
 			this.character = Session.get('character');
 		}));

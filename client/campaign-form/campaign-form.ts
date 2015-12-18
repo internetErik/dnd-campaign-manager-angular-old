@@ -1,26 +1,29 @@
 /// <reference path="../../typings/angular2-meteor.d.ts" />
 /// <reference path="../../typings/meteor-accounts.d.ts" />
 
-import {Component} from 'angular2/core';
+import {Component, NgZone} from 'angular2/core';
 import {FormBuilder, Control, ControlGroup, Validators} from 'angular2/common';
 
 import {Router} from 'angular2/router';
 
-import {Campaigns} from 'collections/campaigns';
+import {Campaigns} from 'lib/collections/campaigns';
 
-
-import {RequireUser} from 'meteor-accounts';
+import {RequireUser, InjectUser} from 'meteor-accounts';
+import {MeteorComponent} from 'angular2-meteor';
 
 @Component({
 	selector: 'campaign-form',
 	templateUrl: 'client/campaign-form/campaign-form.html'
 })
 @RequireUser()
-export class CampaignForm {
+@InjectUser('currentUser')
+export class CampaignForm extends MeteorComponent {
 	campaignForm: ControlGroup;
 	router: Router;
+	currentUser: any;
 
-	constructor(_router: Router) {
+	constructor(zone: NgZone, _router: Router) {
+		super();
 		var fb = new FormBuilder();
 		this.campaignForm = fb.group({
 			name: ['', Validators.required]
@@ -31,16 +34,13 @@ export class CampaignForm {
 
 	addCampaign(e, campaign) {
 
-		if(this.campaignForm.valid) {
-			Meteor.call('insertCampaign', campaign, (e, r) => {
-			if(e)
-				console.log("Error creating campaign: ", e);
-			else
-				this.router.parent.navigate(['/CampaignList']);
+		if(this.campaignForm.valid) {		
+			this.call('insertCampaign', campaign, (e, r) => {
+				if(e)
+					console.log("Error creating campaign: ", e);
+				else
+					this.router.parent.navigate(['/CampaignList']);
 			});
 		}
-		else
-			console.log("form not valid");
-
 	}
 }

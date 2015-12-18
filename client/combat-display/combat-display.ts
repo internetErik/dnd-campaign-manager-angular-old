@@ -6,7 +6,7 @@ import {Router, RouteParams} from 'angular2/router';
 
 import {simpleRoll} from 'lib/dice';
 
-import {Battles} from 'collections/battles';
+import {Battles} from 'lib/collections/battles';
 
 import {RequireUser} from 'meteor-accounts';
 

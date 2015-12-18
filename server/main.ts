@@ -1,115 +1,58 @@
-import {initCharacters} from 'server/initCharacters';
-import {initSpells} from 'server/initSpells';
-import {initSkills} from 'server/initSkills';
-import {initFeats} from 'server/initFeats';
+import {initSpells} from 'server/init/initSpells';
+import {initSkills} from 'server/init/initSkills';
+import {initFeats} from 'server/init/initFeats';
 
-import {Characters} from 'collections/characters';
-import {Campaigns} from 'collections/campaigns';
-import {Rolls} from 'collections/rolls';
-import {Spells} from 'collections/spells';
-import {Skills} from 'collections/skills';
-import {Feats} from 'collections/feats';
-import {Monsters} from 'collections/monsters';
-import {Battles} from 'collections/battles';
+import {Characters} from 'lib/collections/characters';
+import {Campaigns} from 'lib/collections/campaigns';
+import {Rolls} from 'lib/collections/rolls';
+import {Spells} from 'lib/collections/spells';
+import {Skills} from 'lib/collections/skills';
+import {Feats} from 'lib/collections/feats';
+import {Monsters} from 'lib/collections/monsters';
+import {Battles} from 'lib/collections/battles';
 
 Meteor.startup(function() { 
 	//for some reason if we don't do something with the DBS on start, 
 	//they won't show on the front end
-	initCharacters();
+	Campaigns.find().count();
+	Characters.find().count();
 	initSpells();
 	initSkills();
 	initFeats();
-	
-	Campaigns.find().count();
-	Rolls.find().count();
-	Monsters.find().count();
-	Battles.find().count();
-});
-
-Meteor.publish('campaigns', function() {
-	return Campaigns.find({});
-});
-
-Meteor.publish('characters', function() {
-	return Characters.find({});
-});
-
-Meteor.publish('spells', function() {
-	return Spells.find({});
-});
-
-Meteor.publish('skills', function() {
-	return Skills.find({});
-});
-
-Meteor.publish('feats', function() {
-	return Feats.find({});
-});
-
-Meteor.publish('monsters', function() {
-	return Monsters.find({});
-});
-
-Meteor.publish('rolls', function() {
-	return Rolls.find({});
 });
 
 Meteor.publish('battles', function() {
 	return Battles.find();
 });
 
-Meteor.publish('userData', function() {
-	var currentUser;
-	currentUser = this.userId;
-	return (currentUser) ?
-		Meteor.users.find({ _id: currentUser }, {fields: { emails: 1, dm: 1 } })
-		: this.ready();
+Meteor.publish('campaigns', function() {
+	return Campaigns.find();
 });
 
-Meteor.methods({
-	insertCampaign: function(campaign) {
-		return Campaigns.insert(campaign);
-	},
-	updateCampaign: function(_id, campaign) {
-		return Campaigns.update({ _id: _id }, campaign);
-	},
-	removeCampaign: function(_id) {
-		Campaigns.remove({ _id: _id });
-	},
-	insertSpell: function(spell) { 
-		return Spells.insert(spell);
-	},
-	updateSpell: function(_id, spell) { 
-		return Spells.update({ _id: _id }, spell);
-	},
-	removeSpell: function(_id) {
-		Spells.remove({ _id: _id });
-	},
-	insertSkill: function(skill) { 
-		return Skills.insert(skill);
-	},
-	updateSkill: function(_id, skill) { 
-		return Skills.update({ _id: _id }, skill);
-	},
-	removeSkill: function(_id) {
-		Skills.remove({ _id: _id });
-	},
-	insertFeat: function(feat) { 
-		return Feats.insert(feat);
-	},
-	updateFeat: function(_id, feat) {
-		return Feats.update({ _id: _id }, feat);
-	},
-	removeFeat: function(_id, feat) {
-		Feats.remove({ _id: _id });
-	},
-	insertRoll : function(roll){
-		if(roll) {
-			roll.createdAt = Date.now();
-			return Rolls.insert(roll);
-		}
-	},
-	clearRolls : function(){
-		Rolls.remove({});
-	}
-})
+Meteor.publish('characters', function() {
+	return Characters.find();
+});
+
+Meteor.publish('character', function(characterId) {
+	return Characters.find({_id: characterId});
+});
+
+Meteor.publish('feats', function() {
+	return Feats.find();
+});
+
+Meteor.publish('monsters', function() {
+	return Monsters.find();
+});
+
+Meteor.publish('rolls', function() {
+	return Rolls.find();
+});
+
+Meteor.publish('skills', function() {
+	return Skills.find();
+});
+
+Meteor.publish('spells', function() {
+	return Spells.find();
+});

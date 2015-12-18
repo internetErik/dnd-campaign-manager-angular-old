@@ -5,25 +5,26 @@ import {Component} from 'angular2/core';
 import {FormBuilder, Control, ControlGroup, Validators} from 'angular2/common';
 import {RouteParams, Router} from 'angular2/router';
 
-import {Characters} from 'collections/characters';
-import {Spells} from 'collections/spells';
-import {Skills} from 'collections/skills';
-import {Feats} from 'collections/feats';
+import {Characters} from 'lib/collections/characters';
+import {Spells} from 'lib/collections/spells';
+import {Skills} from 'lib/collections/skills';
+import {Feats} from 'lib/collections/feats';
 
-import {RequireUser} from 'meteor-accounts';
+import {RequireUser, InjectUser} from 'meteor-accounts';
+
+import {MeteorComponent} from 'angular2-meteor';
 
 @Component({
     selector: 'character-detail',
     templateUrl: 'client/character-detail/character-detail.html'
 })
-// @View({
-// })
 @RequireUser()
-export class CharacterDetail {
-    character: any;
+@InjectUser('currentUser')
+export class CharacterDetail extends MeteorComponent {
+    currentUser: any;
     router: Router;
 
-    currentUser: any;
+    character: any;
 
 	newSpellName: string;
 	newSpellLevel: number;
@@ -44,12 +45,23 @@ export class CharacterDetail {
 	feats: Mongo.Cursor<Object>;
 
 	constructor(_router: Router, params: RouteParams) {
+		super();
+
         var characterId = params.get('characterId');
-        this.router = _router;
 
-        this.currentUser = Meteor.user();
+        this.subscribe('character', () => {
+			this.character = Characters.findOne({ _id: characterId });
+        }, true);
 
-		this.character = Characters.findOne({ _id: characterId });
+        this.subscribe('spells', () => { 
+			this.spells = Spells.find({});
+        }, true);
+        this.subscribe('skills', () => { 
+			this.skills = Skills.find({});
+        }, true);
+        this.subscribe('feats', () => { 
+			this.feats = Feats.find({});
+        }, true);
 
 		this.newSpellName = '';
 		this.newSpellLevel = 0;
@@ -64,9 +76,7 @@ export class CharacterDetail {
 
 		this.saveMessage = '';
 
-		this.spells = Spells.find({});
-		this.skills = Skills.find({});
-		this.feats = Feats.find({});
+        this.router = _router;
     }
 
     deleteCharacter(e) {

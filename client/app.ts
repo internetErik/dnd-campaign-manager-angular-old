@@ -41,7 +41,8 @@ import {DiceHelper} from 'client/dice-helper/dice-helper';
 	{
 		path: '/',
 		name: 'HomePage',
-		component: HomePage
+		component: HomePage,
+		useAsDefault: true
 	},
 	{
 		path: '/campaign',

@@ -9,18 +9,15 @@ import {Battles} from 'lib/collections/battles';
 
 import {RequireUser} from 'meteor-accounts';
 
+import {MeteorComponent} from 'angular2-meteor';
+
 @Component({
 	selector: 'battle-list',
 	templateUrl: 'client/battle-list/battle-list.html',
 	directives: [RouterLink]
 })
 @RequireUser()
-export class BattleList {
-	// combat phases
-	//-1 = not started
-	// 0 = decide action
-	// 1 = roll init
-	// 2 = resolve round
+export class BattleList extends MeteorComponent {
 	router: Router;
 	battleId: string;
 
@@ -29,18 +26,23 @@ export class BattleList {
 	battles: Mongo.Cursor<Object>;
 
 	constructor(zone: NgZone, params: RouteParams, _router: Router) {
+		super();
 		this.battleId = params.get('battleId');
+
 		this.router = _router;
 
 		Tracker.autorun(() => zone.run(() => {
 			this.campaign = Session.get('campaign');
+		}));
+
+		this.subscribe('battles', () => { 
 			if (this.campaign) {
 				Meteor.subscribe('battles', this.campaign._id);
 				this.battles = Battles.find({ campaignId: this.campaign._id }, { sort: { createdAt: -1 } });
 			}
 			else
 				this.router.parent.navigate(['/CampaignList']);
-		}));
+		}, true);
 	}
 
 	addBattle() {

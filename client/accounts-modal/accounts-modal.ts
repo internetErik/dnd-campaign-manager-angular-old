@@ -18,7 +18,7 @@ export class AccountsModal extends MeteorComponent {
 	currentUser: any;
 	loginForm: ControlGroup;
 	registerForm: ControlGroup;
-
+	
 	//state
 	modalOpen: boolean = false;
 	modalState: string = 'login'; //login, register

@@ -10,12 +10,14 @@ import {Battles} from 'lib/collections/battles';
 
 import {RequireUser} from 'meteor-accounts';
 
+import {MeteorComponent} from 'angular2-meteor';
+
 @Component({
 	selector: 'combat-display',
 	templateUrl: 'client/combat-display/combat-display.html'
 })
 @RequireUser()
-export class CombatDisplay {
+export class CombatDisplay extends MeteorComponent {
 	// combat phases
 	//-1 = not started
 	// 0 = decide action
@@ -29,24 +31,27 @@ export class CombatDisplay {
 	battle: any;
 	
 	constructor(zone: NgZone, params: RouteParams, _router: Router) {
+		super();
+
 		this.battleId = params.get('battleId');
-		console.log(this.battleId);
+		
 		this.router = _router;
 
 		Tracker.autorun(() => zone.run(() => {
 			this.campaign = Session.get('campaign');
-			
-			if (this.campaign) {
-				Meteor.subscribe('battles', this.campaign._id);
+		}));
+
+		this.subscribe('battles', () => { 
+			if (this.campaign)
 				this.battle = Battles.findOne({ _id: this.battleId });
-			}
 			else
 				this.router.parent.navigate(['/CampaignList']);
-		}));
+		}, true);
 	}
 
 	updateName() {
-		this.updateBattle();
+		if(this.battle.name != '')
+			this.updateBattle();
 	}
 
 	addCombatant(type) {

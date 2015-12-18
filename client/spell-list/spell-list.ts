@@ -1,35 +1,30 @@
 /// <reference path="../../typings/angular2-meteor.d.ts" />
 
 import {Component} from 'angular2/core';
-import {Router} from 'angular2/router';
 
 import {Spells} from 'lib/collections/spells';
+
+import {MeteorComponent} from 'angular2-meteor';
 
 @Component({
     selector: 'spell-list',
     inputs: ['characterId'],
 	templateUrl: 'client/spell-list/spell-list.html'
 })
-export class SpellList {
+export class SpellList extends MeteorComponent {
 	spells: Mongo.Cursor<Object>;
 
-	spellSort: string;
-	spellSortDirAZ: number;
-	spellSortDirLevel: number;
-	spellSortDirSchool: number;
+	spellSort: string = 'level';//options: 'az', 'level', 'school'
+	spellSortDirAZ: number = 1;
+	spellSortDirLevel: number = 1;
+	spellSortDirSchool: number = 1;
 
-	spellFilterAZ: string;
-	spellFilterLevel: number;
-	spellFilterSchool: string;
+	spellFilterAZ: string = '';
+	spellFilterLevel: number = -1;
+	spellFilterSchool: string = '';
 
 	constructor() {
-		this.spellSort = 'level'; //options: 'az', 'level', 'school'
-		this.spellSortDirAZ = 1;
-		this.spellSortDirLevel = 1;
-		this.spellSortDirSchool = 1;
-		this.spellFilterAZ = '';
-		this.spellFilterLevel = -1;
-		this.spellFilterSchool = '';
+		super();
 		this.getSpells();
 	}
 
@@ -82,8 +77,13 @@ export class SpellList {
 	}
 
 	getSpells() {
-		var queryObj :any = {},
-			sortObj :any = { sort: { level: 1 } };
+		this.subscribe('spells', () => { 
+			this.spells = Spells.find(this.buildQuery(), this.buildSort());
+		}, true);
+	}
+
+	buildQuery(): Object {
+		var queryObj: any = {};
 
 		if (this.spellFilterLevel >= 0)
 			queryObj.level = this.spellFilterLevel;
@@ -92,6 +92,12 @@ export class SpellList {
 		if (this.spellFilterSchool !== '')
 			queryObj.school = this.spellFilterSchool;
 
+		return queryObj;
+	}
+
+	buildSort(): Object {
+		var sortObj: any = { sort: { level: 1 } };
+
 		if (this.spellSort === 'az')
 			sortObj = { sort: { name: this.spellSortDirAZ, level: 1 } };
 		else if (this.spellSort === 'level')
@@ -99,6 +105,7 @@ export class SpellList {
 		else if (this.spellSort === 'school')
 			sortObj = { sort: { school: this.spellSortDirSchool, level: 1 } };
 
-		this.spells = Spells.find(queryObj, sortObj);
+		return sortObj;
+
 	}
 }

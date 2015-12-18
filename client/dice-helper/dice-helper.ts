@@ -1,5 +1,5 @@
 /// <reference path="../../typings/angular2-meteor.d.ts" />
-/// <reference path="../../typings/meteor-accounts-ui.d.ts" />
+/// <reference path="../../typings/meteor-accounts.d.ts" />
 
 import {Component, NgZone} from 'angular2/core';
 

@@ -19,6 +19,7 @@ import {MeteorComponent} from 'angular2-meteor';
 @RequireUser()
 @InjectUser('currentUser')
 export class CharacterList extends MeteorComponent {
+	currentUser: any;
 	pcs: Mongo.Cursor<Object>;
 	npcs: Mongo.Cursor<Object>;
 	campaignId: string;

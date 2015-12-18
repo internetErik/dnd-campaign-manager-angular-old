@@ -14,6 +14,8 @@ import {MonsterForm} from 'client/monster-form/monster-form';
 
 import {RequireUser, InjectUser} from 'meteor-accounts';
 
+import {MeteorComponent} from 'angular2-meteor';
+
 @Component({
     selector: 'content-creator',
 	templateUrl: 'client/content-creator/content-creator.html',
@@ -21,19 +23,19 @@ import {RequireUser, InjectUser} from 'meteor-accounts';
 })
 @RequireUser()
 @InjectUser('currentUser')
-export class ContentCreator {
+export class ContentCreator extends MeteorComponent {
+	currentUser: any;
     router: Router;
 
-	spells: Mongo.Cursor<Object>;
 	skills: Mongo.Cursor<Object>;
 	feats: Mongo.Cursor<Object>;
 
-	currentTab: string;
+	currentTab: string = 'spells';
 
 	newSpellName: string;
-	invalidSpellName: boolean;
-	newSpellLevel: number;
-	newSpellSchool: string;
+	invalidSpellName: boolean = false;
+	newSpellLevel: number = 0;
+	newSpellSchool: string = 'Abjuration';
 	newSpellRange: string;
 	newSpellDuration: string;
 	newSpellComponents: string;
@@ -50,15 +52,17 @@ export class ContentCreator {
 	newFeatSpecial: string;
 
 	constructor(_router: Router) {
-		this.router = _router;
-		this.skills = Skills.find();
-		this.feats = Feats.find();
+		super();
 
-		this.currentTab = 'spells';
-		
-		//for adding a new spell
-		this.invalidSpellName = false;
-		this.newSpellSchool = 'Abjuration';
+		this.router = _router;
+
+		this.subscribe('skills', () => {
+			this.skills = Skills.find();
+		}, true);
+
+		this.subscribe('feats', () => {
+			this.feats = Feats.find();
+		}, true);		
 	}
 
 	checkSpellName(e: Event) {

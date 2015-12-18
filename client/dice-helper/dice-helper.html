@@ -11,7 +11,7 @@
 		(click)="roll(die)">
 		d{{die}}
 	</button>
-	Bonus: <input type="number" class="js-bonus-to-roll" value="0" >
+	Bonus: <input type="number" [(ngModel)]="rollBonus" value="0" >
 	<div class="p10-0">
 	Current Roll: {{currentRoll}} 
 	</div>

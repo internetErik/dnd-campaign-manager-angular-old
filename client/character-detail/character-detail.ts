@@ -54,13 +54,15 @@ export class CharacterDetail extends MeteorComponent {
         }, true);
 
         this.subscribe('spells', () => { 
-			this.spells = Spells.find({});
+			this.spells = Spells.find();
         }, true);
+
         this.subscribe('skills', () => { 
-			this.skills = Skills.find({});
+			this.skills = Skills.find();
         }, true);
+        
         this.subscribe('feats', () => { 
-			this.feats = Feats.find({});
+			this.feats = Feats.find();
         }, true);
 
 		this.newSpellName = '';

@@ -8,24 +8,29 @@ import {AccountsModal} from 'client/accounts-modal/accounts-modal';
 
 import {InjectUser} from 'meteor-accounts';
 
+import {MeteorComponent} from 'angular2-meteor';
+
 @Component({
     selector: 'navigation',
 	templateUrl: 'client/navigation/navigation.html',
 	directives: [RouterLink, AccountsModal]
 })
 @InjectUser('currentUser')
-export class Navigation {
+export class Navigation extends MeteorComponent {
 	currentUser: any;
 	campaign: any;
 	character: any;
 	router: Router;
 
 	constructor(_router: Router, zone: NgZone) {
-		this.router = _router;
+		super();
+
 		Tracker.autorun(() => zone.run(() => {
 			this.campaign = (this.currentUser) ? Session.get('campaign') : null;
 			this.character = Session.get('character');
 		}));
+		
+		this.router = _router;
 	}
 
 	unselectCampaign() {

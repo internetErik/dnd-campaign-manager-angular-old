@@ -1,10 +1,10 @@
-/// <reference path="../../typings/angular2-meteor.d.ts" />
-/// <reference path="../../typings/meteor-accounts.d.ts" />
+/// <reference path="../../../typings/angular2-meteor.d.ts" />
+/// <reference path="../../../typings/meteor-accounts.d.ts" />
 
 import {Component, NgZone} from 'angular2/core';
 import {RouterLink, Router} from 'angular2/router';
 
-import {AccountsModal} from 'client/accounts-modal/accounts-modal';
+import {AccountsModal} from 'client/components/accounts-modal/accounts-modal';
 
 import {InjectUser} from 'meteor-accounts';
 
@@ -12,7 +12,7 @@ import {MeteorComponent} from 'angular2-meteor';
 
 @Component({
     selector: 'navigation',
-	templateUrl: 'client/navigation/navigation.html',
+	templateUrl: 'client/components/navigation/navigation.html',
 	directives: [RouterLink, AccountsModal]
 })
 @InjectUser('currentUser')

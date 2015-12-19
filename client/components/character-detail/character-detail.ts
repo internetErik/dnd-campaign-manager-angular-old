@@ -1,5 +1,5 @@
-/// <reference path="../../typings/angular2-meteor.d.ts" />
-/// <reference path="../../typings/meteor-accounts.d.ts" />
+/// <reference path="../../../typings/angular2-meteor.d.ts" />
+/// <reference path="../../../typings/meteor-accounts.d.ts" />
 
 import {Component} from 'angular2/core';
 import {RouteParams, Router} from 'angular2/router';
@@ -15,7 +15,7 @@ import {MeteorComponent} from 'angular2-meteor';
 
 @Component({
     selector: 'character-detail',
-    templateUrl: 'client/character-detail/character-detail.html'
+    templateUrl: 'client/components/character-detail/character-detail.html'
 })
 @RequireUser()
 @InjectUser('currentUser')

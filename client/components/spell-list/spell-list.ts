@@ -1,4 +1,4 @@
-/// <reference path="../../typings/angular2-meteor.d.ts" />
+/// <reference path="../../../typings/angular2-meteor.d.ts" />
 
 import {Component} from 'angular2/core';
 
@@ -9,7 +9,7 @@ import {MeteorComponent} from 'angular2-meteor';
 @Component({
     selector: 'spell-list',
     inputs: ['spells'],
-	templateUrl: 'client/spell-list/spell-list.html'
+	templateUrl: 'client/components/spell-list/spell-list.html'
 })
 export class SpellList {
 	spells: Mongo.Cursor<Object>;

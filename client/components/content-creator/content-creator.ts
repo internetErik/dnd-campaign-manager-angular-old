@@ -1,5 +1,5 @@
-/// <reference path="../../typings/angular2-meteor.d.ts" />
-/// <reference path="../../typings/meteor-accounts.d.ts" />
+/// <reference path="../../../typings/angular2-meteor.d.ts" />
+/// <reference path="../../../typings/meteor-accounts.d.ts" />
 
 import {Component} from 'angular2/core';
 import {Router} from 'angular2/router';
@@ -8,10 +8,10 @@ import {Spells} from 'lib/collections/spells';
 import {Skills} from 'lib/collections/skills';
 import {Feats} from 'lib/collections/feats';
 
-import {SpellList} from 'client/spell-list/spell-list';
-import {SpellFilter} from 'client/spell-filter/spell-filter';
+import {SpellList} from 'client/components/spell-list/spell-list';
+import {SpellFilter} from 'client/components/spell-filter/spell-filter';
 
-import {MonsterForm} from 'client/monster-form/monster-form';
+import {MonsterForm} from 'client/components/monster-form/monster-form';
 
 import {RequireUser, InjectUser} from 'meteor-accounts';
 
@@ -19,7 +19,7 @@ import {MeteorComponent} from 'angular2-meteor';
 
 @Component({
     selector: 'content-creator',
-	templateUrl: 'client/content-creator/content-creator.html',
+	templateUrl: 'client/components/content-creator/content-creator.html',
 	directives: [SpellFilter, SpellList, MonsterForm]
 })
 @RequireUser()

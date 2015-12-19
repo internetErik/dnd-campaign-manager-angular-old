@@ -1,5 +1,5 @@
-/// <reference path="../../typings/angular2-meteor.d.ts" />
-/// <reference path="../../typings/meteor-accounts.d.ts" />
+/// <reference path="../../../typings/angular2-meteor.d.ts" />
+/// <reference path="../../../typings/meteor-accounts.d.ts" />
 
 import {Component, NgZone} from 'angular2/core';
 
@@ -13,7 +13,7 @@ import {MeteorComponent} from 'angular2-meteor';
 
 @Component({
 	selector: 'battle-list',
-	templateUrl: 'client/battle-list/battle-list.html',
+	templateUrl: 'client/components/battle-list/battle-list.html',
 	directives: [RouterLink]
 })
 @RequireUser()

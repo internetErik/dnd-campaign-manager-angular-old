@@ -7,21 +7,21 @@ import {ROUTER_PROVIDERS, ROUTER_DIRECTIVES, RouteConfig, APP_BASE_HREF}
 
 import {bootstrap} from 'angular2-meteor';
 
-import {Navigation} from 'client/navigation/navigation';
+import {Navigation} from 'client/components/navigation/navigation';
 
-import {HomePage} from 'client/home-page/home-page';
-import {CampaignList} from 'client/campaign-list/campaign-list';
-import {CampaignForm} from 'client/campaign-form/campaign-form';
-import {ContentCreator} from 'client/content-creator/content-creator';
+import {HomePage} from 'client/components/home-page/home-page';
+import {CampaignList} from 'client/components/campaign-list/campaign-list';
+import {CampaignForm} from 'client/components/campaign-form/campaign-form';
+import {ContentCreator} from 'client/components/content-creator/content-creator';
 
-import {CharacterList} from 'client/character-list/character-list';
-import {CharacterForm} from 'client/character-form/character-form';
-import {CharacterDetail} from 'client/character-detail/character-detail';
-import {BattleList} from 'client/battle-list/battle-list';
-import {CombatDisplay} from 'client/combat-display/combat-display';
+import {CharacterList} from 'client/components/character-list/character-list';
+import {CharacterForm} from 'client/components/character-form/character-form';
+import {CharacterDetail} from 'client/components/character-detail/character-detail';
+import {BattleList} from 'client/components/battle-list/battle-list';
+import {CombatDisplay} from 'client/components/combat-display/combat-display';
 
 
-import {DiceHelper} from 'client/dice-helper/dice-helper';
+import {DiceHelper} from 'client/components/dice-helper/dice-helper';
 
 @Component({
     selector: 'app',

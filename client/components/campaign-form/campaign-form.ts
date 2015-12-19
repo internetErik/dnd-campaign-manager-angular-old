@@ -1,5 +1,5 @@
-/// <reference path="../../typings/angular2-meteor.d.ts" />
-/// <reference path="../../typings/meteor-accounts.d.ts" />
+/// <reference path="../../../typings/angular2-meteor.d.ts" />
+/// <reference path="../../../typings/meteor-accounts.d.ts" />
 
 import {Component, NgZone} from 'angular2/core';
 import {FormBuilder, Control, ControlGroup, Validators} from 'angular2/common';
@@ -13,7 +13,7 @@ import {MeteorComponent} from 'angular2-meteor';
 
 @Component({
 	selector: 'campaign-form',
-	templateUrl: 'client/campaign-form/campaign-form.html'
+	templateUrl: 'client/components/campaign-form/campaign-form.html'
 })
 @RequireUser()
 @InjectUser('currentUser')

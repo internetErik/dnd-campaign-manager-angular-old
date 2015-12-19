@@ -1,5 +1,5 @@
-/// <reference path="../../typings/angular2-meteor.d.ts" />
-/// <reference path="../../typings/meteor-accounts.d.ts" />
+/// <reference path="../../../typings/angular2-meteor.d.ts" />
+/// <reference path="../../../typings/meteor-accounts.d.ts" />
 
 import {Component} from 'angular2/core';
 import {FormBuilder, Control, ControlGroup, Validators} from 'angular2/common';
@@ -11,7 +11,7 @@ import {RequireUser, InjectUser} from 'meteor-accounts';
 
 @Component({
 	selector: 'character-form',
-	templateUrl: 'client/character-form/character-form.html'
+	templateUrl: 'client/components/character-form/character-form.html'
 })
 @RequireUser()
 @InjectUser('currentUser')

@@ -1,5 +1,5 @@
-/// <reference path="../../typings/angular2-meteor.d.ts" />
-/// <reference path="../../typings/meteor-accounts.d.ts" />
+/// <reference path="../../../typings/angular2-meteor.d.ts" />
+/// <reference path="../../../typings/meteor-accounts.d.ts" />
 
 import {Component, NgZone} from 'angular2/core';
 import {Router, RouteParams} from 'angular2/router';
@@ -14,7 +14,7 @@ import {MeteorComponent} from 'angular2-meteor';
 
 @Component({
 	selector: 'combat-display',
-	templateUrl: 'client/combat-display/combat-display.html'
+	templateUrl: 'client/components/combat-display/combat-display.html'
 })
 @RequireUser()
 export class CombatDisplay extends MeteorComponent {

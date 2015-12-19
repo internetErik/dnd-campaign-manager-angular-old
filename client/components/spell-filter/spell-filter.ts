@@ -1,10 +1,10 @@
-/// <reference path="../../typings/angular2-meteor.d.ts" />
+/// <reference path="../../../typings/angular2-meteor.d.ts" />
 
 import {Component, EventEmitter} from 'angular2/core';
 
 @Component({
 	selector: 'spell-filter',
-	templateUrl: '/client/spell-filter/spell-filter.html',
+	templateUrl: 'client/components/spell-filter/spell-filter.html',
 	inputs: ['spells'],
 	outputs: ['sortChanged', 'filterChanged']
 })

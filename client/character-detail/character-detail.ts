@@ -25,19 +25,21 @@ export class CharacterDetail extends MeteorComponent {
 
     character: any;
 
-	newSpellName: string;
-	newSpellLevel: number;
-	newSpellDomain: string;
-	newSpellDescription: string;
+	newSpellName: string = '';
+	newSpellLevel: number = 0;
+	newSpellDomain: string = '';
+	newSpellDescription: string = '';
 
-	newSkillName: string;
-	newSkillStat: string;
-	newSkillLevel: number;
+	newSkillName: string = '';
+	newSkillStat: string = '';
+	newSkillLevel: number = 0;
 
-	newFeatName: string;
-	newFeatDesc: string;
+	newFeatName: string = '';
+	newFeatDesc: string = '';
 
-	saveMessage: string;
+	saveMessage: string = '';
+
+	selectedSpell: string;
 
 	spells: Mongo.Cursor<Object>;
 	skills: Mongo.Cursor<Object>;
@@ -63,19 +65,6 @@ export class CharacterDetail extends MeteorComponent {
         this.subscribe('feats', () => { 
 			this.feats = Feats.find();
         }, true);
-
-		this.newSpellName = '';
-		this.newSpellLevel = 0;
-		this.newSpellDomain = '';
-		this.newSpellDescription = '';
-		
-		this.newSkillName = '';
-		this.newSkillStat = '';
-		this.newSkillLevel = 0;
-
-		this.newFeatName = '';
-
-		this.saveMessage = '';
 
         this.router = _router;
     }

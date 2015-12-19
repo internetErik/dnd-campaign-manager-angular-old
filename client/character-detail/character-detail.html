@@ -185,11 +185,12 @@
 			Bonus: <input type="number" min="-100" max="100" [(ngModel)]="character.hitRollBonus">
 		</div>
 		<div class="p10-0">
-			<label for="movement" class="w125">Movement:</label>
-			{{character.movement + character.movementBonus}}
+			<label for="ac" class="w125">Evade:</label>
+			{{ character.evade + character.block + character.evadeBonus }}
 			<br>
-			Base: <input type="number" min="0" max="100" [(ngModel)]="character.movement">
-			Bonus: <input type="number" min="-100" max="100" [(ngModel)]="character.movementBonus">
+			Base: <input type="number" min="-100" max="100" [(ngModel)]="character.evade">
+			Block: <input type="number" min="-100" max="100" [(ngModel)]="character.block">
+			Bonus: <input type="number" min="-100" max="100" [(ngModel)]="character.evadeBonus">
 		</div>
 		<div class="p10-0">
 			<label for="ac" class="w125">Armor Class:</label>
@@ -199,12 +200,11 @@
 			Bonus: <input type="number" min="-100" max="100" [(ngModel)]="character.acBonus">
 		</div>
 		<div class="p10-0">
-			<label for="ac" class="w125">Evade:</label>
-			{{ character.evade + character.block + character.evadeBonus }}
+			<label for="movement" class="w125">Movement:</label>
+			{{character.movement + character.movementBonus}}
 			<br>
-			Base: <input type="number" min="-100" max="100" [(ngModel)]="character.evade">
-			Block: <input type="number" min="-100" max="100" [(ngModel)]="character.block">
-			Bonus: <input type="number" min="-100" max="100" [(ngModel)]="character.evadeBonus">
+			Base: <input type="number" min="0" max="100" [(ngModel)]="character.movement">
+			Bonus: <input type="number" min="-100" max="100" [(ngModel)]="character.movementBonus">
 		</div>
 	</section>
 	<hr>
@@ -382,11 +382,18 @@
 			<label class="w125">Level 9:</label>
 			{{character.level9Fail - character.level9FailBonus}}%
 			<br>
-			Base: <input type="number" [(ngModel)]="character.level9Fail" min="0" max="100">%
-			Bonus: <input type="number" [(ngModel)]="character.level9FailBonus" min="0" max="100">%
+			Base: <input type="number" 
+				[(ngModel)]="character.level9Fail" min="0" max="100">%
+			Bonus: <input type="number" 
+				[(ngModel)]="character.level9FailBonus" min="0" max="100">%
 		</div>
 
 		<h3 class="pt20">Spell List</h3>
+		<select [(ngModel)]="selectedSpell">
+			<option *ngFor="#spell of spells" value="{{spell._id}}">
+				{{spell.name}}
+			</option>
+		</select>
 		<div *ngFor="#spell of character.spells;#i = index" [class.pt30]="i !== 0">
 			<div class="p10-0">
 				<label>{{ spell.name }}</label>

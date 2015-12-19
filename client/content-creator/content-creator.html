@@ -12,7 +12,6 @@
 			(click)="currentTab = 'monsters'">Monsters</button> -->
 	</section>
 	<hr>
-
 	<section class="p20-0 m20-0" *ngIf="currentTab === 'spells'">
 		<h2>Spells</h2>
 
@@ -70,7 +69,11 @@
 		</div>
 
 		<h3>All Spells</h3>
-		<spell-list></spell-list>
+		<spell-filter [spells]="spells" 
+			(sortChanged)="sortSpells($event)" 
+			(filterChanged)="filterSpells($event)"></spell-filter>
+			
+		<spell-list [spells]="spells"></spell-list>
 	</section>
 
 	<section class="p20-0 m20-0" *ngIf="currentTab === 'skills'">

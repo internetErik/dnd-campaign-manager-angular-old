@@ -9,6 +9,7 @@ import {Skills} from 'lib/collections/skills';
 import {Feats} from 'lib/collections/feats';
 
 import {SpellList} from 'client/spell-list/spell-list';
+import {SpellFilter} from 'client/spell-filter/spell-filter';
 
 import {MonsterForm} from 'client/monster-form/monster-form';
 
@@ -19,7 +20,7 @@ import {MeteorComponent} from 'angular2-meteor';
 @Component({
     selector: 'content-creator',
 	templateUrl: 'client/content-creator/content-creator.html',
-	directives: [SpellList, MonsterForm]
+	directives: [SpellFilter, SpellList, MonsterForm]
 })
 @RequireUser()
 @InjectUser('currentUser')
@@ -27,6 +28,7 @@ export class ContentCreator extends MeteorComponent {
 	currentUser: any;
     router: Router;
 
+    spells: Mongo.Cursor<Object>;
 	skills: Mongo.Cursor<Object>;
 	feats: Mongo.Cursor<Object>;
 
@@ -51,6 +53,9 @@ export class ContentCreator extends MeteorComponent {
 	newFeatNormal: string;
 	newFeatSpecial: string;
 
+	filterQuery: any = {};
+	sortQuery: any = {};
+
 	constructor(_router: Router) {
 		super();
 
@@ -63,10 +68,13 @@ export class ContentCreator extends MeteorComponent {
 		this.subscribe('feats', () => {
 			this.feats = Feats.find();
 		}, true);		
+
+		this.getSpells();
 	}
 
 	checkSpellName(e: Event) {
-		this.invalidSpellName = Spells.find({ name: this.newSpellName.toLowerCase() }).count() > 0;
+		this.invalidSpellName = 
+			Spells.find({ name: this.newSpellName.toLowerCase() }).count() > 0;
 	}
 
 	addSpell(e: Event) {
@@ -138,5 +146,21 @@ export class ContentCreator extends MeteorComponent {
 	removeFeat(e: Event, feat) {
 		e.preventDefault();
 		Meteor.call('removeFeat', feat._id );
+	}
+
+	sortSpells(sortQuery) {
+		this.sortQuery = sortQuery;
+		this.getSpells();
+	}
+
+	filterSpells(filterQuery) {
+		this.filterQuery = filterQuery;
+		this.getSpells();
+	}
+
+	getSpells() {
+		this.subscribe('spells', () => {
+			this.spells = Spells.find(this.filterQuery, this.sortQuery);
+		}, true);
 	}
 }

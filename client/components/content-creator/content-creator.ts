@@ -101,9 +101,9 @@ export class ContentCreator extends MeteorComponent {
 		}
 	}
 
-	removeSpell(e: Event, spell) {
-		e.preventDefault();
-		Meteor.call('removeSpell', spell._id);
+	removeSpell(spell) {
+		if (confirm(`Are you sure you want to delete ${spell.name}?`))
+			Meteor.call('removeSpell', spell._id);
 	}
 
 	addSkill(e: Event) {

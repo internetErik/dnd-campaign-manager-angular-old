@@ -389,11 +389,6 @@
 		</div>
 
 		<h3 class="pt20">Spell List</h3>
-		<select [(ngModel)]="selectedSpell">
-			<option *ngFor="#spell of spells" value="{{spell._id}}">
-				{{spell.name}}
-			</option>
-		</select>
 		<div *ngFor="#spell of character.spells;#i = index" [class.pt30]="i !== 0">
 			<div class="p10-0">
 				<label>{{ spell.name }}</label>
@@ -409,30 +404,18 @@
 				<br>
 				{{spell.description}}
 			</div>
-			<button (click)="removeSpell($event, spell);">-</button>
+			<button (click)="unlearnSpell($event, spell);">-</button>
 		</div>
 
 		<h3 class="pt20">Add Spell</h3>
-		<div class="p10-0">
-			<div class="p10-0">
-				<label for="spellName" class="w125">Name:</label>
-				<input id="spellName" type="text" [(ngModel)]="newSpellName">
-			</div>
-			<div class="p10-0">
-				<label class="w125">Level: </label>
-				<input type="number" min="0" max="9" [(ngModel)]="newSpellLevel">
-			</div>
-			<div class="p10-0">
-				<label class="w125">Domain: </label>
-				<input type="text" [(ngModel)]="newSpellDomain">
-			</div>
-			<div class="p10-0">
-				<label class="w125">Description: </label> 
-				<br>
-				<textarea [(ngModel)]="newSpellDescription" cols="45" rows="3"></textarea>
-			</div>
-			<button (click)="addSpell($event)">+</button>
-		</div>
+		<section>
+			<spell-filter [spells]="spells" 
+				(sortChanged)="sortSpells($event)" 
+				(filterChanged)="filterSpells($event)"></spell-filter>
+				
+			<spell-list [spells]="spells" [spellsSelectable]="true"
+				(spellSelected)="learnSpell($event)"></spell-list>
+		</section>
 	</section>
 	<hr>
 	<section class="p20-0 m20-0">

@@ -13,9 +13,13 @@ import {RequireUser, InjectUser} from 'meteor-accounts';
 
 import {MeteorComponent} from 'angular2-meteor';
 
+import {SpellList} from 'client/components/spell-list/spell-list';
+import {SpellFilter} from 'client/components/spell-filter/spell-filter';
+
 @Component({
     selector: 'character-detail',
-    templateUrl: 'client/components/character-detail/character-detail.html'
+    templateUrl: 'client/components/character-detail/character-detail.html',
+    directives: [SpellList, SpellFilter]
 })
 @RequireUser()
 @InjectUser('currentUser')
@@ -44,6 +48,9 @@ export class CharacterDetail extends MeteorComponent {
 	spells: Mongo.Cursor<Object>;
 	skills: Mongo.Cursor<Object>;
 	feats: Mongo.Cursor<Object>;
+
+	filterQuery: any = {};
+	sortQuery: any = {};
 
 	constructor(_router: Router, params: RouteParams) {
 		super();
@@ -139,30 +146,12 @@ export class CharacterDetail extends MeteorComponent {
 		}
 	}
 
-	removeSpell(e, spell) {
+	unlearnSpell(e, spell) {
 		e.preventDefault();
 		var i = this.character.spells.indexOf(spell);
 		if (i > -1) {
 			this.character.spells.splice(i, 1);
 			this.updateCharacter();
-		}
-	}
-
-	addSkill(e) {
-		e.preventDefault();
-		if (this.newSkillName && this.character.skills.indexOf(this.newSkillName) === -1) {
-			if (this.newSkillLevel && this.newSkillStat) {
-				let skill = {
-					name: this.newSkillName.toLowerCase(), 
-					level: this.newSkillLevel, 
-					stat: this.newSkillStat
-				};
-				this.character.skills.push(skill);
-				this.newSkillName = '';
-				this.newSkillStat = '';
-				this.newSkillLevel = 0;
-				this.updateCharacter();
-			}
 		}
 	}
 
@@ -215,5 +204,28 @@ export class CharacterDetail extends MeteorComponent {
 			else
 				setTimeout(() => { this.saveMessage = '' }, 500);
 		});
+	}
+
+
+
+	sortSpells(sortQuery) {
+		this.sortQuery = sortQuery;
+		this.getSpells();
+	}
+
+	filterSpells(filterQuery) {
+		this.filterQuery = filterQuery;
+		this.getSpells();
+	}
+
+	getSpells() {
+		this.subscribe('spells', () => {
+			this.spells = Spells.find(this.filterQuery, this.sortQuery);
+		}, true);
+	}
+
+	learnSpell(spell) {
+		this.character.spells.push(spell);
+		this.updateCharacter();
 	}
 }

@@ -73,7 +73,9 @@
 			(sortChanged)="sortSpells($event)" 
 			(filterChanged)="filterSpells($event)"></spell-filter>
 			
-		<spell-list [spells]="spells"></spell-list>
+		<spell-list [spells]="spells" [spellsRemovable]="true"
+			(spellRemoved)="removeSpell($event)"
+			></spell-list>
 	</section>
 
 	<section class="p20-0 m20-0" *ngIf="currentTab === 'skills'">

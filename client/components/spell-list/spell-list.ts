@@ -2,10 +2,6 @@
 
 import {Component, EventEmitter} from 'angular2/core';
 
-import {Spells} from 'lib/collections/spells';
-
-import {MeteorComponent} from 'angular2-meteor';
-
 @Component({
     selector: 'spell-list',
     inputs: ['spells', 'spellsSelectable', 'spellsRemovable'],

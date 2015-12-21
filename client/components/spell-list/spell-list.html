@@ -16,14 +16,8 @@
 	<br>
 	{{spell.description}}
 	<br>
-	<button 
-		*ngIf="spellsRemovable" 
-		(click)="removeSpell($event, spell)">
-		-
-	</button>
-	<button 
-		*ngIf="spellsSelectable" 
-		(click)="selectSpell($event, spell)">
-		select
-	</button>
+	<button *ngIf="spellsRemovable" 
+		(click)="removeSpell($event, spell)">-</button>
+	<button *ngIf="spellsSelectable" 
+		(click)="selectSpell($event, spell)">select</button>
 </div>

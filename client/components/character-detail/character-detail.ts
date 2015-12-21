@@ -55,6 +55,8 @@ export class CharacterDetail extends MeteorComponent {
 
 	filterQuery: any = {};
 	sortQuery: any = {};
+	showSpellModal: boolean = false;
+
 
 	constructor(_router: Router, params: RouteParams) {
 		super();

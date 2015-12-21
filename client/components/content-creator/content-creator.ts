@@ -6,10 +6,14 @@ import {Router} from 'angular2/router';
 
 import {Spells} from 'lib/collections/spells';
 import {Skills} from 'lib/collections/skills';
-import {Feats} from 'lib/collections/feats';
+import {Feats}  from 'lib/collections/feats';
 
 import {SpellList} from 'client/components/spell-list/spell-list';
 import {SpellFilter} from 'client/components/spell-filter/spell-filter';
+
+import {SkillList} from 'client/components/skill-list/skill-list';
+
+import {FeatList} from 'client/components/feat-list/feat-list';
 
 import {MonsterForm} from 'client/components/monster-form/monster-form';
 
@@ -20,7 +24,7 @@ import {MeteorComponent} from 'angular2-meteor';
 @Component({
     selector: 'content-creator',
 	templateUrl: 'client/components/content-creator/content-creator.html',
-	directives: [SpellFilter, SpellList, MonsterForm]
+	directives: [SpellFilter, SpellList, MonsterForm, SkillList, FeatList]
 })
 @RequireUser()
 @InjectUser('currentUser')
@@ -121,31 +125,36 @@ export class ContentCreator extends MeteorComponent {
 		}
 	}
 
-	removeSkill(e: Event, skill) {
-		e.preventDefault();
-		Meteor.call('removeSkill', skill._id );
+	removeSkill(skill) {
+		if(confirm(`Are you sure you want to delete ${skill.name}`))
+			Meteor.call('removeSkill', skill._id );
 	}
 
 	addFeat(e: Event) {
 		e.preventDefault();
+		console.log(e);
 		if (this.newFeatName && !Feats.findOne({ name: this.newFeatName })) {
 			if (this.newFeatBenefit) {
-				Meteor.call('insertFeat', { 
-					name: this.newFeatName.toLowerCase(), 
+				let feat = {
+					name: this.newFeatName.toLowerCase(),
 					prerequisite: this.newFeatPrerequisite,
 					benefit: this.newFeatBenefit,
 					normal: this.newFeatNormal,
 					special: this.newFeatSpecial
-				});
+				};
+				Meteor.call('insertFeat', feat);
 				this.newFeatName = '';
-				// this.newFeatDesc = '';
+				this.newFeatPrerequisite = '';
+				this.newFeatBenefit = '';
+				this.newFeatNormal = '';
+				this.newFeatSpecial = '';
 			}
 		}
 	}
 
-	removeFeat(e: Event, feat) {
-		e.preventDefault();
-		Meteor.call('removeFeat', feat._id );
+	removeFeat(feat) {
+		if(confirm(`Are you sure you want to remove ${feat.name}`))
+			Meteor.call('removeFeat', feat._id );
 	}
 
 	sortSpells(sortQuery) {

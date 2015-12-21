@@ -95,12 +95,9 @@
 			<button (click)="addSkill($event)">+</button>
 		</div>
 		<h3>Skill List</h3>
-		<ul class="pb20">
-			<li *ngFor="#skill of skills;#i = index" [class.pt15]="i !== 0">
-				{{ skill.name }} ({{skill.stat}})
-				<button (click)="removeSkill($event, skill)">-</button>
-			</li>
-		</ul>
+		<skill-list [skills]="skills" 
+			[skillsRemovable]="true"
+			(skillRemoved)="removeSkill($event)"></skill-list>
 	</section>
 
 	<section class="p20-0 m20-0" *ngIf="currentTab === 'feats'">
@@ -119,8 +116,8 @@
 		<div class="p10-0">
 			<label for="featBenefit">Benefit: </label> 
 			<br>
-			<textarea cols="45" rows="3" id="featDesc" 
-				[(ngModel)]="newFeatDesc"></textarea>
+			<textarea cols="45" rows="3" id="featBenefit" 
+				[(ngModel)]="newFeatBenefit"></textarea>
 		</div>
 		<div class="p10-0">
 			<label for="featNormal">Normal: </label> 
@@ -137,29 +134,11 @@
 		<div class="p10-0">
 			<button (click)="addFeat($event)">+</button>
 		</div>
+
 		<h3>Feat List</h3>
-		<ul class="pb20">
-			<li *ngFor="#feat of feats;#i = index" [class.pt30]="i !== 0">
-				<h5>{{ feat.name }}</h5>
-				<div class="p10-0" *ngIf="feat.prerequisite">
-					<label>Prerequisites:</label>
-					{{feat.prerequisite}}
-				</div>
-				<div class="p10-0">
-					<label>Benefit:</label>
-					<br>
-					{{feat.benefit}}
-				</div>
-				<div class="p10-0" *ngIf="feat.normal">
-					<label>Normal: </label>
-					{{feat.normal}}</div>
-				<div class="p10-0" *ngIf="feat.special">
-					<label>Special: </label>
-					{{feat.special}}
-				</div>
-				<button (click)="removeFeat($event, feat)">-</button>
-			</li>
-		</ul>
+		<feat-list [feats]="feats"
+			[featsRemovable]="true"
+			(featRemoved)="removeFeat($event)"></feat-list>
 	</section>
 
 	<section class="p20-0 m20-0" *ngIf="currentTab === 'monsters'">

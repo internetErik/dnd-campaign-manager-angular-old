@@ -396,15 +396,8 @@
 		<spell-list [spells]="characterSpells" [spellsRemovable]="true"
 				(spellRemoved)="unlearnSpell($event)"></spell-list>
 
-		<h3 class="pt20">Add Spell</h3>
-		<section>
-			<spell-filter [spells]="spells" 
-				(sortChanged)="sortAllSpells($event)" 
-				(filterChanged)="filterAllSpells($event)"></spell-filter>
-				
-			<spell-list [spells]="spells" [spellsSelectable]="true"
-				(spellSelected)="learnSpell($event)"></spell-list>
-		</section>
+		<button (click)="showSpellModal = true">Add Spells</button>
+
 	</section>
 	<hr>
 	<section class="p20-0 m20-0">
@@ -482,6 +475,17 @@
 		<button (click)="deleteCharacter($event)">Delete</button>
 	</div>
 </div>
+
+<section [class.dn]="!showSpellModal" class="posf t0 l0 max-height max-width oh bgc-white">
+	<button (click)="showSpellModal = false">&times;</button>
+	<spell-filter [spells]="spells" 
+		(sortChanged)="sortAllSpells($event)" 
+		(filterChanged)="filterAllSpells($event)"></spell-filter>
+		
+	<spell-list [spells]="spells" [spellsSelectable]="true"
+		(spellSelected)="learnSpell($event)"></spell-list>
+</section>
+
 <div class="jump-menu p10 r0 vertical-align-fixed bgc-white add-shadow">
 	<ul>
 		<li class="p5-0"><a href="#name">Name</a></li>

@@ -1,0 +1,25 @@
+<ul class="pb20">
+	<li *ngFor="#feat of feats;#i = index" [class.pt30]="i !== 0">
+		<h5>{{ feat.name }}</h5>
+		<div class="p10-0" *ngIf="feat.prerequisite">
+			<label>Prerequisites:</label>
+			{{feat.prerequisite}}
+		</div>
+		<div class="p10-0">
+			<label>Benefit:</label>
+			<br>
+			{{feat.benefit}}
+		</div>
+		<div class="p10-0" *ngIf="feat.normal">
+			<label>Normal: </label>
+			{{feat.normal}}</div>
+		<div class="p10-0" *ngIf="feat.special">
+			<label>Special: </label>
+			{{feat.special}}
+		</div>
+		<button *ngIf="featsRemovable"
+			(click)="removeFeat($event, feat)">-</button>
+		<button *ngIf="featsSelectable"
+			(click)="selectFeat($event, feat)">select</button>
+	</li>
+</ul>

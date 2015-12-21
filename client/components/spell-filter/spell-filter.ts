@@ -73,19 +73,6 @@ export class SpellFilter {
 		this.buildQuery();
 	}
 
-	buildQuery() {
-		var queryObj: any = {};
-
-		if (this.spellFilterLevel >= 0)
-			queryObj.level = this.spellFilterLevel;
-		if (this.spellFilterAZ !== '')
-			queryObj.name = RegExp(`^${this.spellFilterAZ}`);
-		if (this.spellFilterSchool !== '')
-			queryObj.school = this.spellFilterSchool;
-
-		this.filterChanged.emit(queryObj);
-	}
-
 	buildSort() {
 		var sortObj: any = { sort: { level: 1 } };
 
@@ -97,6 +84,20 @@ export class SpellFilter {
 			sortObj = { sort: { school: this.spellSortDirSchool, level: 1 } };
 
 		this.sortChanged.emit(sortObj);
+	}
 
+	buildQuery() {
+		var queryObj: any = {};
+
+		if (this.spellFilterAZ !== '')
+			queryObj.name = RegExp(`^${this.spellFilterAZ}`);
+
+		if (this.spellFilterLevel >= 0)
+			queryObj.level = this.spellFilterLevel;
+		
+		if (this.spellFilterSchool !== '')
+			queryObj.school = this.spellFilterSchool;
+
+		this.filterChanged.emit(queryObj);
 	}
 }

@@ -389,29 +389,18 @@
 		</div>
 
 		<h3 class="pt20">Spell List</h3>
-		<div *ngFor="#spell of character.spells;#i = index" [class.pt30]="i !== 0">
-			<div class="p10-0">
-				<label>{{ spell.name }}</label>
-			</div>
-			<div class="p10-0">
-				<label class="w125">Level:</label> {{spell.level}}
-			</div>
-			<div class="p10-0">
-				<label class="w125">Domain:</label> {{spell.domain}}
-			</div>
-			<div class="p10-0">
-				<label class="w125">Description:</label>
-				<br>
-				{{spell.description}}
-			</div>
-			<button (click)="unlearnSpell($event, spell);">-</button>
-		</div>
+		<spell-filter [spells]="characterSpells" 
+			(sortChanged)="sortLearnedSpells($event)" 
+			(filterChanged)="filterLearnedSpells($event)"></spell-filter>
+			
+		<spell-list [spells]="characterSpells" [spellsRemovable]="true"
+				(spellRemoved)="unlearnSpell($event)"></spell-list>
 
 		<h3 class="pt20">Add Spell</h3>
 		<section>
 			<spell-filter [spells]="spells" 
-				(sortChanged)="sortSpells($event)" 
-				(filterChanged)="filterSpells($event)"></spell-filter>
+				(sortChanged)="sortAllSpells($event)" 
+				(filterChanged)="filterAllSpells($event)"></spell-filter>
 				
 			<spell-list [spells]="spells" [spellsSelectable]="true"
 				(spellSelected)="learnSpell($event)"></spell-list>

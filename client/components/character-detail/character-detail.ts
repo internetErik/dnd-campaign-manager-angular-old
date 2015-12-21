@@ -49,6 +49,10 @@ export class CharacterDetail extends MeteorComponent {
 	skills: Mongo.Cursor<Object>;
 	feats: Mongo.Cursor<Object>;
 
+	characterSpells: any[];
+
+	learnedSortQuery: any = { name: 1 };
+
 	filterQuery: any = {};
 	sortQuery: any = {};
 
@@ -59,6 +63,7 @@ export class CharacterDetail extends MeteorComponent {
 
         this.subscribe('character', characterId, () => {
 			this.character = Characters.findOne();
+			this.characterSpells = this.character.spells;
         }, true);
 
         this.subscribe('spells', () => { 
@@ -146,8 +151,7 @@ export class CharacterDetail extends MeteorComponent {
 		}
 	}
 
-	unlearnSpell(e, spell) {
-		e.preventDefault();
+	unlearnSpell(spell) {
 		var i = this.character.spells.indexOf(spell);
 		if (i > -1) {
 			this.character.spells.splice(i, 1);
@@ -206,19 +210,56 @@ export class CharacterDetail extends MeteorComponent {
 		});
 	}
 
+	sortLearnedSpells(sortQuery) { 
+		var field, direction;
+
+		if(sortQuery)
+			this.learnedSortQuery = sortQuery.sort;
+
+		for(let x in this.learnedSortQuery) {
+			field = x;
+			direction = this.learnedSortQuery[x];
+			break;
+		}
+
+		this.characterSpells = this.characterSpells.sort((a, b) => {
+			if (a[field] > b[field])
+				return direction;
+			if (a[field] < b[field])
+				return -1 * direction;
+			return 0;
+		});
+	}
+	
+	filterLearnedSpells(filterQuery) { 
+		var tmp = this.character.spells,
+			field;
+
+		for(field in filterQuery) {
+			tmp = tmp.filter((spell) => {
+				if (field === 'name')
+					return filterQuery.name.test(spell.name);
+				else
+					return (spell[field] === filterQuery[field]) ? true : false;
+			});
+		}
+		this.characterSpells = tmp;
+
+		this.sortLearnedSpells(void(0));
+	}
 
 
-	sortSpells(sortQuery) {
+	sortAllSpells(sortQuery) {
 		this.sortQuery = sortQuery;
-		this.getSpells();
+		this.getAllSpells();
 	}
 
-	filterSpells(filterQuery) {
+	filterAllSpells(filterQuery) {
 		this.filterQuery = filterQuery;
-		this.getSpells();
+		this.getAllSpells();
 	}
 
-	getSpells() {
+	getAllSpells() {
 		this.subscribe('spells', () => {
 			this.spells = Spells.find(this.filterQuery, this.sortQuery);
 		}, true);

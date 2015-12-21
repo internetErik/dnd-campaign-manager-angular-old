@@ -1,0 +1,153 @@
+<div>
+	<h1>Content Creator</h1>
+	<hr>
+	<section class="p20-0 m20-0">
+		<button  class="p5-0 pl20 pr20" [class.c-gray]="currentTab !== 'spells'" 
+			(click)="currentTab = 'spells'">Spells</button>
+		<button  class="p5-0 pl20 pr20" [class.c-gray]="currentTab !== 'skills'" 
+			(click)="currentTab = 'skills'">Skills</button>
+		<button  class="p5-0 pl20 pr20" [class.c-gray]="currentTab !== 'feats'" 
+			(click)="currentTab = 'feats'">Feats</button>
+		<!-- <button  class="p5-0 pl20 pr20" [class.c-gray]="currentTab !== 'monsters'" 
+			(click)="currentTab = 'monsters'">Monsters</button> -->
+	</section>
+	<hr>
+	<section class="p20-0 m20-0" *ngIf="currentTab === 'spells'">
+		<h2>Spells</h2>
+
+		<h3>Add Spell</h3>
+		<div class="p10-0">
+			<label class="w125" for="spellName">Name: </label>
+			<input id="spellName" type="text" 
+				[class.ng-invalid]="invalidSpellName"
+				[(ngModel)]="newSpellName"
+				(keyup)="checkSpellName($event)">
+		</div>
+		<div class="p10-0">
+			<label class="w125" for="spellLevel">Level: </label>
+			<input type="number" min="0" max="9" id="spellLevel" 
+				[(ngModel)]="newSpellLevel">
+		</div>
+		<div class="p10-0">
+			<label class="w125" for="school">School: </label>
+			<select id="school" [(ngModel)]="newSpellSchool">
+				<option selected="selected" value="Abjuration">Abjuration</option>
+				<option value="Conjuration">Conjuration</option>
+				<option value="Divination">Divination</option>
+				<option value="Enchantment">Enchantment</option>
+				<option value="Evocation">Evocation</option>
+				<option value="Illusion">Illusion</option>
+				<option value="Necromancy">Necromancy</option>
+				<option value="Transmutation">Transmutation</option>
+				<option value="Universal">Universal</option>
+			</select>
+		</div>
+		<div class="p10-0">
+			<label class="w125" for="range">Range: </label>
+			<input type="text" id="range" [(ngModel)]="newSpellRange">
+		</div>
+		<div class="p10-0">
+			<label class="w125" for="duration">Duration: </label>
+			<input type="text" id="duration" [(ngModel)]="newSpellDuration">
+		</div>
+		<div class="p10-0">
+			<label class="w125" for="components">Components: </label>
+			<input type="text" id="components" [(ngModel)]="newSpellComponents">
+		</div>
+		<div class="p10-0">
+			<label class="w125" for="castingTime">Casting Time: </label>
+			<input type="text" id="castingTime" [(ngModel)]="newSpellCastingTime">
+		</div>
+		<div class="p10-0">
+			<label class="w125" for="spellDescription">Description: </label> 
+			<br>
+			<textarea id="spellDescription" cols="45" rows="3"
+				[(ngModel)]="newSpellDescription"></textarea>
+		</div>
+		<div class="p10-0">
+			<button (click)="addSpell($event)">+</button>
+		</div>
+
+		<h3>All Spells</h3>
+		<spell-filter [spells]="spells" 
+			(sortChanged)="sortSpells($event)" 
+			(filterChanged)="filterSpells($event)"></spell-filter>
+			
+		<spell-list [spells]="spells" [spellsRemovable]="true"
+			(spellRemoved)="removeSpell($event)"
+			></spell-list>
+	</section>
+
+	<section class="p20-0 m20-0" *ngIf="currentTab === 'skills'">
+		<h2>Skills</h2>
+		<h3>Add Skill</h3>
+		<div class="p10-0">
+			<label for="skillName">Name</label>
+			<input id="skillName" type="text" [(ngModel)]="newSkillName">
+			(<select min="0" [(ngModel)]="newSkillStat">
+				<option value="str">Str</option>
+				<option value="int">Int</option>
+				<option value="wis">Wis</option>
+				<option value="con">Con</option>
+				<option value="dex">Dex</option>
+				<option value="cha">Cha</option>
+			</select>)
+			<button (click)="addSkill($event)">+</button>
+		</div>
+		<h3>Skill List</h3>
+		<skill-list [skills]="skills" 
+			[skillsRemovable]="true"
+			(skillRemoved)="removeSkill($event)"></skill-list>
+	</section>
+
+	<section class="p20-0 m20-0" *ngIf="currentTab === 'feats'">
+		<h2>Feats</h2>
+		<h3>Add Feat</h3>
+		<div class="p10-0">
+			<label for="featName" class="w125">Name: </label>
+			<input id="featName" type="text" 
+				[(ngModel)]="newFeatName">
+		</div>
+		<div class="p10-0">
+			<label for="featPrereq" class="w125">Prerequisite: </label>
+			<input id="featPrereq" type="text" 
+				[(ngModel)]="newFeatPrerequisite">
+		</div>
+		<div class="p10-0">
+			<label for="featBenefit">Benefit: </label> 
+			<br>
+			<textarea cols="45" rows="3" id="featBenefit" 
+				[(ngModel)]="newFeatBenefit"></textarea>
+		</div>
+		<div class="p10-0">
+			<label for="featNormal">Normal: </label> 
+			<br>
+			<textarea cols="45" rows="3" id="featNormal" 
+				[(ngModel)]="newFeatNormal"></textarea>
+		</div>
+		<div class="p10-0">
+			<label for="featSpecial">Special: </label> 
+			<br>
+			<textarea cols="45" rows="3" id="featSpecial" 
+				[(ngModel)]="newFeatSpecial"></textarea>
+		</div>
+		<div class="p10-0">
+			<button (click)="addFeat($event)">+</button>
+		</div>
+
+		<h3>Feat List</h3>
+		<feat-list [feats]="feats"
+			[featsRemovable]="true"
+			(featRemoved)="removeFeat($event)"></feat-list>
+	</section>
+
+	<section class="p20-0 m20-0" *ngIf="currentTab === 'monsters'">
+		<h2>Monsters</h2>
+
+		<h3>Add Monster</h3>
+		<monster-form></monster-form>
+		
+		<h3>Monster list</h3>
+
+	</section>
+</div>

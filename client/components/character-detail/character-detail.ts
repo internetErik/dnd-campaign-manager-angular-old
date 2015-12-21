@@ -16,10 +16,14 @@ import {MeteorComponent} from 'angular2-meteor';
 import {SpellList} from 'client/components/spell-list/spell-list';
 import {SpellFilter} from 'client/components/spell-filter/spell-filter';
 
+import {SkillList} from 'client/components/skill-list/skill-list';
+
+import {FeatList} from 'client/components/feat-list/feat-list';
+
 @Component({
     selector: 'character-detail',
     templateUrl: 'client/components/character-detail/character-detail.html',
-    directives: [SpellList, SpellFilter]
+    directives: [SpellList, SpellFilter, SkillList, FeatList]
 })
 @RequireUser()
 @InjectUser('currentUser')
@@ -55,8 +59,10 @@ export class CharacterDetail extends MeteorComponent {
 
 	filterQuery: any = {};
 	sortQuery: any = {};
-	showSpellModal: boolean = false;
 
+	showSpellModal: boolean = false;
+	showSkillModal: boolean = false;
+	showFeatModal: boolean = false;
 
 	constructor(_router: Router, params: RouteParams) {
 		super();
@@ -81,25 +87,6 @@ export class CharacterDetail extends MeteorComponent {
         }, true);
 
         this.router = _router;
-    }
-
-    deleteCharacter(e) {
-		e.preventDefault();
-		if(confirm(`Are you sure you want to delete this character?`)) {
-			this.call('removeCharacter', this.character._id);
-			Session.set('character', null);
-			this.router.parent.navigate(['/CharacterList']);
-		}
-    }
-
-    incrementTab(tabName) {
-		this.character[tabName] += 1;
-		this.updateCharacter();
-    }
-
-    clearTab(tabName) {
-		this.character[tabName] = 0;
-		this.updateCharacter();
     }
 
     getHitRoll() {
@@ -133,24 +120,9 @@ export class CharacterDetail extends MeteorComponent {
 		return spellLevel + 1;
     }
 
-	addSpell(e) {
-		e.preventDefault();
-		if (this.newSpellName && this.character.spells.indexOf(this.newSpellName) === -1) {
-			if(this.newSpellLevel >= 0 && this.newSpellDomain && this.newSpellDescription) {
-				let spell = { 
-					name: this.newSpellName.toLowerCase(), 
-					level: this.newSpellLevel, 
-					domain: this.newSpellDomain, 
-					description: this.newSpellDescription
-				};
-				this.character.spells.push(spell);
-				this.newSpellName = '';
-				this.newSpellLevel = 0;
-				this.newSpellDomain = '';
-				this.newSpellDescription = '';
-				this.updateCharacter();
-			}
-		}
+	learnSpell(spell) {
+		this.character.spells.push(spell);
+		this.updateCharacter();
 	}
 
 	unlearnSpell(spell) {
@@ -161,8 +133,12 @@ export class CharacterDetail extends MeteorComponent {
 		}
 	}
 
-	removeSkill(e, skill) {
-		e.preventDefault()
+	learnSkill(skill) {
+		this.character.skills.push(skill);
+		this.updateCharacter();
+	}
+
+	unlearnSkill(skill) {
 		var i = this.character.skills.indexOf(skill);
 		if (i > -1) {
 			this.character.skills.splice(i, 1);
@@ -170,23 +146,12 @@ export class CharacterDetail extends MeteorComponent {
 		}
 	}
 
-	addFeat(e) {
-		e.preventDefault();
-		if (this.newFeatName && this.character.feats.indexOf(this.newFeatName) === -1) {
-			if(this.newFeatDesc) {
-				this.character.feats.push({
-					name: this.newFeatName.toLowerCase(), 
-					description: this.newFeatDesc
-				});
-				this.newFeatName = '';
-				this.newFeatDesc = '';
-				this.updateCharacter();
-			}
-		}
+	learnFeat(feat) {
+		this.character.feats.push(feat);
+		this.updateCharacter();
 	}
 
-	removeFeat(e, feat) {
-		e.preventDefault();
+	unlearnFeat(feat) {
 		var i = this.character.feats.indexOf(feat);
 		if (i > -1) {
 			this.character.feats.splice(i, 1);
@@ -267,8 +232,12 @@ export class CharacterDetail extends MeteorComponent {
 		}, true);
 	}
 
-	learnSpell(spell) {
-		this.character.spells.push(spell);
-		this.updateCharacter();
-	}
+    deleteCharacter(e) {
+		e.preventDefault();
+		if (confirm(`Are you sure you want to delete this character?`)) {
+			this.call('removeCharacter', this.character._id);
+			Session.set('character', null);
+			this.router.parent.navigate(['/CharacterList']);
+		}
+    }
 }

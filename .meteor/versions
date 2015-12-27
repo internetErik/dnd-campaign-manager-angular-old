@@ -6,7 +6,7 @@ babel-runtime@0.1.4
 barbatus:angular2@0.7.3
 barbatus:ng2-compilers@0.1.1
 barbatus:ng2-meteor-accounts@0.1.4
-barbatus:ts-compilers@0.1.9_4
+barbatus:ts-compilers@0.1.9_5
 barbatus:typescript@0.1.3_3
 base64@1.0.4
 binary-heap@1.0.4
@@ -73,7 +73,7 @@ systemjs:systemjs@0.18.4
 tracker@1.0.9
 ui@1.0.8
 underscore@1.0.4
-urigo:angular2-meteor@0.3.4_1
+urigo:angular2-meteor@0.3.5
 url@1.0.5
 webapp@1.2.3
 webapp-hashing@1.0.5

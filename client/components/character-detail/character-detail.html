@@ -339,7 +339,7 @@
 			Bonus: <input type="number" 
 				[(ngModel)]="character.level9FailBonus" min="0" max="100">%
 		</div>
-
+		<a id="spelllist"></a>
 		<h3 class="pt20">Spell List</h3>
 		<spell-filter [spells]="characterSpells" 
 			(sortChanged)="sortLearnedSpells($event)" 
@@ -396,8 +396,9 @@
 </div>
 
 <section [class.dn]="!showSpellModal" 
-	class="posf t0 l0 max-height max-width oh bgc-white">
-	<button (click)="showSpellModal = false">&times;</button>
+	class="p20 oa bgc-white h80% w80% add-shadow transform-center-fixed z1">
+	<button class="posf t0 r0 border-circle" 
+		(click)="showSpellModal = false">&times;</button>
 	<spell-filter [spells]="spells" 
 		(sortChanged)="sortAllSpells($event)" 
 		(filterChanged)="filterAllSpells($event)"></spell-filter>
@@ -407,15 +408,17 @@
 </section>
 
 <section [class.dn]="!showSkillModal" 
-	class="posf t0 l0 max-height max-width oh bgc-white">
-	<button (click)="showSkillModal = false">&times;</button>
+	class="p20 oa bgc-white h80% w80% add-shadow transform-center-fixed z1">
+	<button class="posf t0 r0 border-circle" 
+		(click)="showSkillModal = false">&times;</button>
 	<skill-list [skills]="skills" [skillsSelectable]="true"
 		(skillSelected)="learnSkill($event)"></skill-list>
 </section>
 
 <section [class.dn]="!showFeatModal" 
-	class="posf t0 l0 max-height max-width oh bgc-white">
-	<button (click)="showFeatModal = false">&times;</button>
+	class="p20 oa bgc-white h80% w80% add-shadow transform-center-fixed z1">
+	<button class="posf t0 r0 border-circle" 
+		(click)="showFeatModal = false">&times;</button>
 	<feat-list [feats]="feats" [featsSelectable]="true"
 		(featSelected)="learnFeat($event)"></feat-list>
 </section>
@@ -429,6 +432,7 @@
 		<li class="p5-0"><a href="#general">General Attributes</a></li>
 		<li class="p5-0"><a href="#combat">Combat Attributes</a></li>
 		<li class="p5-0"><a href="#magic">Magic</a></li>
+		<li class="p5-0 pl10"><a href="#spelllist">Spell List</a></li>
 		<li class="p5-0"><a href="#skills">Skills</a></li>
 		<li class="p5-0"><a href="#feats">Feats</a></li>
 		<li class="p5-0"><a href="#notes">Notes</a></li>

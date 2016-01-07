@@ -8,28 +8,13 @@
 		<button (click)="updateName()">Update Name</button>
 	</div>
 
-	<h2>Add Combatants</h2>
-	<div class="p10-0">
-		<label class="w90" for="characterName">Character: </label>
-		<input id="characterName" type="text" class="js-character">
-		<label for="characterBonus">Bonus: </label>
-		<input id="characterBonus" type="number" min="-100" max="100"  class="js-bonus-character">
-		<button (click)="addCombatant('character')">+</button>
-	</div>
-	<div class="p10-0">
-		<label class="w90" for="enemyName">Enemy: </label>
-		<input id="enemyName" type="text" class="js-enemy">
-		<label for="enemyBonus">Bonus: </label>
-		<input id="enemyBonus" type="number" min="-100" max="100" class="js-bonus-enemy">
-		<button (click)="addCombatant('enemy')">+</button>
-	</div>
-	<button (click)="startBattle()">Start</button>
-	<button (click)="endBattle()">End</button>
+	<combat-initializer
+		(combatantsAdded)="addCombatants($event)"></combat-initializer>
 
 	<div *ngIf="battle" class="p20-0">
 		<h3>Combatants:</h3>
 		<ul>
-			<li *ngFor="#c of battle.combatants">{{c.name}}</li>
+			<li *ngFor="#c of battle.combatants">{{ c.name }} (bonus: {{c.bonus}})</li>
 		</ul>
 	</div>
 </section>
@@ -44,35 +29,36 @@
 
 	<h2>Combatants</h2>
 	<ol *ngIf="battle">
-		<li *ngFor="#combatant of battle.combatants; #i = index"
+		<li *ngFor="#combatant of battle.combatants"
 			[class.enemy]="combatant.type === 'enemy'"
 			class="mb20 p10-0 bb1-s-black">
-			<h4>{{combatant.name}}</h4>
-			<div *ngIf="battle.combatPhase === 0" class="pb20">
-				<label> Action: </label>
-				<br>
-				<textarea cols="45" rows="3" 
-					[disabled]="combatant.actionSubmitted"
-					class="js-action js-action-{{i}}"></textarea>
-				<br>
-				<button (click)="submitAction(combatant, i)"
-					[disabled]="combatant.actionSubmitted">Submit Action</button>
+			
+			<h4>{{ combatant.name }}</h4>
+
+			<combat-action-input 
+				*ngIf="battle.combatPhase === 0"
+				(actionSubmitted)="submitAction($event, combatant)"
+				(actionUnsubmitted)="unsubmitAction(combatant)"></combat-action-input>
+
+			<div *ngIf="battle.combatPhase !== 0">
+				<label>Action:</label>
+				<div class="p10-0">
+					{{ combatant.action }}
+				</div>
 			</div>
+
 			<div>
-				<div *ngIf="battle.combatPhase !== 0">
-					<label>Action:</label>
-					<div class="p10-0">
-					{{combatant.action}}
-					</div>
-				</div>
-				<div>
-				initiative: {{combatant.initiative}} | 
+				initiative: {{ combatant.initiative }} | 
+				
 				Bonus: 
-				<input type="number" min="-100" max="100" [(ngModel)]="combatant.bonus">
+				<input type="number" min="-100" max="100" 
+					[(ngModel)]="combatant.bonus">
+				
 				Rounds Occupied: 
-				<input type="number" min="0" max="100" [(ngModel)]="combatant.roundsOccupied">
-				<button (click)="removeCombatant(combatant)">-</button>
-				</div>
+				<input type="number" min="0" max="100" 
+					[(ngModel)]="combatant.roundsOccupied">
+
+				<button (click)="removeCombatant(combatant)">remove</button>
 			</div>
 		</li>
 	</ol>

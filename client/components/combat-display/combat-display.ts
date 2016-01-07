@@ -9,8 +9,14 @@ import {RequireUser} from 'meteor-accounts';
 
 import {MeteorComponent} from 'angular2-meteor';
 
+import {CombatInitializer} 
+	from 'client/components/combat-initializer/combat-initializer';
+import {CombatActionInput} 
+	from 'client/components/combat-action-input/combat-action-input';
+
 @Component({
 	selector: 'combat-display',
+	directives: [CombatInitializer, CombatActionInput],
 	templateUrl: 'client/components/combat-display/combat-display.html'
 })
 @RequireUser()
@@ -51,26 +57,9 @@ export class CombatDisplay extends MeteorComponent {
 			this.updateBattle();
 	}
 
-	addCombatant(type) {
-		var eName: HTMLInputElement =
-			<HTMLInputElement>document.querySelector('.js-' + type);
-		var eBonus: HTMLInputElement =
-			<HTMLInputElement>document.querySelector('.js-bonus-' + type);
-		var name = eName.value;
-		var bonus = parseInt(eBonus.value);
-
-		if (name) {
-			this.battle.combatants.push({
-				name: name,
-				initiative: 0,
-				bonus: bonus || 0,
-				type: type,
-				roundsOccupied: 0,
-				action: '',
-				actionSubmitted: false
-			});
-			this.updateBattle();
-		}
+	addCombatants(combatants: any[]) {
+		this.battle.combatants = this.battle.combatants.concat(combatants);
+		this.updateBattle();
 	}
 
 	removeCombatant(character) {
@@ -92,20 +81,20 @@ export class CombatDisplay extends MeteorComponent {
 		Meteor.call('updateBattle', this.battle._id, this.battle);
 	}
 
-	submitAction(combatant, i) {
+	submitAction(action: string, combatant: any) {
 		//combat phase will be advanced on server if this is the last action 
 		//we are waiting on
 		if (!combatant.actionSubmitted) {
-			let eAction: HTMLInputElement =
-				<HTMLInputElement>document.querySelector('.js-action-' + i);
-
-			if (eAction.value !== '') {
-				combatant.action = eAction.value;
-				combatant.actionSubmitted = true;
-				eAction.value = '';
-				this.updateBattle()
-			}
+			combatant.action = action;
+			combatant.actionSubmitted = true;
+			this.updateBattle();
 		}
+	}
+
+	unsubmitAction(combatant: any) {
+		combatant.action = null;
+		combatant.actionSubmitted = false;
+		this.updateBattle();
 	}
 
 	rollInitiative() {

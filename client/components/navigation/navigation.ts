@@ -1,6 +1,3 @@
-/// <reference path="../../../typings/angular2-meteor.d.ts" />
-/// <reference path="../../../typings/meteor-accounts.d.ts" />
-
 import {Component, NgZone} from 'angular2/core';
 import {RouterLink, Router} from 'angular2/router';
 
@@ -34,13 +31,13 @@ export class Navigation extends MeteorComponent {
 	}
 
 	unselectCampaign() {
+		this.router.navigate(['/CampaignList']);
 		Session.set('character', null);
 		Session.set('campaign', null);
-		this.router.navigate(['/CampaignList']);
 	}
 
 	unselectCharacter() {
-		Session.set('character', null);
 		this.router.navigate(['/CharacterList', {campaignId: this.campaign._id}]);
+		Session.set('character', null);
 	}
 }

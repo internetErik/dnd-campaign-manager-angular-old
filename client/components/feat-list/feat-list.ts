@@ -1,5 +1,3 @@
-/// <reference path="../../../typings/angular2-meteor.d.ts" />
-
 import {Component, EventEmitter} from 'angular2/core';
 
 @Component({

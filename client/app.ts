@@ -1,5 +1,3 @@
-/// <reference path="../typings/angular2-meteor.d.ts" />
-
 import {Component, provide} from 'angular2/core';
 
 import {ROUTER_PROVIDERS, ROUTER_DIRECTIVES, RouteConfig, APP_BASE_HREF} 

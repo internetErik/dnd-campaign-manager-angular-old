@@ -1,5 +1,3 @@
-/// <reference path="../../typings/angular2-meteor.d.ts" />
-
 export var Battles = new Mongo.Collection('battles');
 
 Meteor.methods({

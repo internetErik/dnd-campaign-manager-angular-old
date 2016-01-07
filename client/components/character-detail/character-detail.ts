@@ -1,6 +1,3 @@
-/// <reference path="../../../typings/angular2-meteor.d.ts" />
-/// <reference path="../../../typings/meteor-accounts.d.ts" />
-
 import {Component} from 'angular2/core';
 import {RouteParams, Router} from 'angular2/router';
 

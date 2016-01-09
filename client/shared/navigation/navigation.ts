@@ -1,14 +1,15 @@
 import {Component, NgZone} from 'angular2/core';
 import {RouterLink, Router} from 'angular2/router';
 
-import {AccountsModal} from 'client/shared/accounts-modal/accounts-modal';
+import {AccountsModal} 
+	from 'client/shared/navigation/accounts-modal/accounts-modal';
 
 import {InjectUser} from 'meteor-accounts';
 
 import {MeteorComponent} from 'angular2-meteor';
 
 @Component({
-    selector: 'navigation',
+  selector: 'navigation',
 	templateUrl: 'client/shared/navigation/navigation.html',
 	directives: [RouterLink, AccountsModal]
 })

@@ -10,10 +10,10 @@ import {RequireUser} from 'meteor-accounts';
 import {MeteorComponent} from 'angular2-meteor';
 
 import {CombatInitializer} 
-	from 'client/components/combat-initializer/combat-initializer';
+	from 'client/pages/combat-display/combat-initializer/combat-initializer';
 import {CombatActionInput} 
-	from 'client/components/combat-action-input/combat-action-input';
-
+	from 'client/pages/combat-display/combat-action-input/combat-action-input';
+	
 @Component({
 	selector: 'combat-display',
 	directives: [CombatInitializer, CombatActionInput],

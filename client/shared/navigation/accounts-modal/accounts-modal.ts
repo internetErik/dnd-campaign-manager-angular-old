@@ -1,6 +1,7 @@
 import {Component, NgZone} from 'angular2/core';
 
-import {FormBuilder, Control, ControlGroup, Validators} from 'angular2/common';
+import {FormBuilder, Control, ControlGroup, Validators} 
+	from 'angular2/common';
 
 import {InjectUser} from 'meteor-accounts';
 
@@ -8,7 +9,7 @@ import {MeteorComponent} from 'angular2-meteor';
 
 @Component({
 	selector: 'accounts-modal',
-	templateUrl: 'client/shared/accounts-modal/accounts-modal.html'
+	templateUrl: 'client/shared/navigation/accounts-modal/accounts-modal.html'
 })
 @InjectUser('currentUser')
 export class AccountsModal extends MeteorComponent {

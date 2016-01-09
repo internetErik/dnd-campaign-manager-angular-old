@@ -17,7 +17,7 @@ import {CombatActionInput}
 @Component({
 	selector: 'combat-display',
 	directives: [CombatInitializer, CombatActionInput],
-	templateUrl: 'client/components/combat-display/combat-display.html'
+	templateUrl: 'client/pages/combat-display/combat-display.html'
 })
 @RequireUser()
 export class CombatDisplay extends MeteorComponent {

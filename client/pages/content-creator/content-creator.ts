@@ -7,11 +7,8 @@ import {Feats}  from 'lib/collections/feats';
 
 import {SpellList} from 'client/components/spell-list/spell-list';
 import {SpellFilter} from 'client/components/spell-filter/spell-filter';
-
 import {SkillList} from 'client/components/skill-list/skill-list';
-
 import {FeatList} from 'client/components/feat-list/feat-list';
-
 import {MonsterForm} from 'client/components/monster-form/monster-form';
 
 import {RequireUser, InjectUser} from 'meteor-accounts';
@@ -20,7 +17,7 @@ import {MeteorComponent} from 'angular2-meteor';
 
 @Component({
     selector: 'content-creator',
-	templateUrl: 'client/components/content-creator/content-creator.html',
+	templateUrl: 'client/pages/content-creator/content-creator.html',
 	directives: [SpellFilter, SpellList, MonsterForm, SkillList, FeatList]
 })
 @RequireUser()

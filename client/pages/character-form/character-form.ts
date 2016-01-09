@@ -8,7 +8,7 @@ import {RequireUser, InjectUser} from 'meteor-accounts';
 
 @Component({
 	selector: 'character-form',
-	templateUrl: 'client/components/character-form/character-form.html'
+	templateUrl: 'client/pages/character-form/character-form.html'
 })
 @RequireUser()
 @InjectUser('currentUser')

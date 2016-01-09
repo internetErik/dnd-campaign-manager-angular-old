@@ -8,7 +8,7 @@ import {MeteorComponent} from 'angular2-meteor';
 
 @Component({
 	selector: 'campaign-list',
-	templateUrl: 'client/components/campaign-list/campaign-list.html',
+	templateUrl: 'client/pages/campaign-list/campaign-list.html',
 	directives: [RouterLink]
 })
 @RequireUser()

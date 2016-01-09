@@ -10,7 +10,7 @@ import {MeteorComponent} from 'angular2-meteor';
 
 @Component({
 	selector: 'campaign-form',
-	templateUrl: 'client/components/campaign-form/campaign-form.html'
+	templateUrl: 'client/pages/campaign-form/campaign-form.html'
 })
 @RequireUser()
 @InjectUser('currentUser')

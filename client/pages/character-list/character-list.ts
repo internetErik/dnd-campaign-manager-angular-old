@@ -10,7 +10,7 @@ import {MeteorComponent} from 'angular2-meteor';
 
 @Component({
     selector: 'character-list',
-    templateUrl: 'client/components/character-list/character-list.html',
+    templateUrl: 'client/pages/character-list/character-list.html',
     directives: [RouterLink]
 })
 @RequireUser()

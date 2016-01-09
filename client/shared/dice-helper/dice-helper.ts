@@ -10,7 +10,7 @@ import {MeteorComponent} from 'angular2-meteor';
 
 @Component({
     selector: 'dice-helper',
-	templateUrl: 'client/components/dice-helper/dice-helper.html'
+	templateUrl: 'client/shared/dice-helper/dice-helper.html'
 })
 @InjectUser('currentUser')
 export class DiceHelper extends MeteorComponent {

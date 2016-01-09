@@ -8,7 +8,7 @@ import {MeteorComponent} from 'angular2-meteor';
 
 @Component({
 	selector: 'accounts-modal',
-	templateUrl: 'client/components/accounts-modal/accounts-modal.html'
+	templateUrl: 'client/shared/accounts-modal/accounts-modal.html'
 })
 @InjectUser('currentUser')
 export class AccountsModal extends MeteorComponent {

@@ -19,7 +19,7 @@ import {FeatList} from 'client/components/feat-list/feat-list';
 
 @Component({
     selector: 'character-detail',
-    templateUrl: 'client/components/character-detail/character-detail.html',
+    templateUrl: 'client/pages/character-detail/character-detail.html',
     directives: [SpellList, SpellFilter, SkillList, FeatList]
 })
 @RequireUser()

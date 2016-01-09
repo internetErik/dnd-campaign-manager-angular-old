@@ -27,7 +27,7 @@ export class CombatActionInput {
 	emitEvent(e) {
 		e.preventDefault();
 		if (this.submitted) {
-			this.actionUnsubmitted.emit();
+			this.actionUnsubmitted.emit(void(0));
 			this.submitted = false;
 		}
 		else if(this.action !== '') {

@@ -2,14 +2,15 @@ import {Component, EventEmitter} from 'angular2/core';
 
 @Component({
 	selector: 'combat-initializer',
-	outputs: ['combatantsAdded'],
+  inputs: ['combatants'],
+	outputs: ['combatantsAdded', 'removeCombatant', 'startTriggered'],
 	template: `
 	<h2>Add Combatants</h2>
 	<div class="p10-0">
 		<label class="w90" for="characterName">Character: </label>
 		<input id="characterName" type="text" [(ngModel)]="characterName">
 		<label for="characterMultiplier"> &times; </label>
-		<input id="characterMultiplier" type="number" min="1" max="100" [(ngModel)]="characterMultiplier">
+		<input id="characterMultiplier" type="number" value="1" min="1" max="100" [(ngModel)]="characterMultiplier">
 		<label for="characterBonus">Bonus: </label>
 		<input id="characterBonus" type="number" min="-100" max="100" [(ngModel)]="characterBonus">
 		<button (click)="addCharacter()">+</button>
@@ -18,16 +19,28 @@ import {Component, EventEmitter} from 'angular2/core';
 		<label class="w90" for="enemyName">Enemy: </label>
 		<input id="enemyName" type="text"  [(ngModel)]="enemyName">
 		<label for="enemyMultiplier"> &times; </label>
-		<input id="enemyMultiplier" type="number" min="1" max="100" [(ngModel)]="enemyMultiplier">
+		<input id="enemyMultiplier" type="number" value="1" min="1" max="100" [(ngModel)]="enemyMultiplier">
 		<label for="enemyBonus">Bonus: </label>
 		<input id="enemyBonus" type="number" min="-100" max="100" [(ngModel)]="enemyBonus">
 		<button (click)="addEnemy()">+</button>
 	</div>
-	<button (click)="startBattle()">Start</button>
-	<button (click)="endBattle()">End</button>
-	`
+  <div class="p20-0">
+    <h3>Combatants:</h3>
+    <ul>
+      <li *ngFor="#combatant of combatants">
+      {{ combatant.name }} (bonus: {{combatant.bonus}})
+      <button (click)="removeCombatant(c)">-</button>
+      </li>
+    </ul>
+  </div>
+  <button 
+    *ngIf="combatants.length > 1" 
+    (click)="startBattle()">Start</button>
+  `
 })
 export class CombatInitializer {
+  combatants: any[];
+
 	characterName: string;
 	characterBonus: number;
 	characterMultiplier: number;
@@ -36,6 +49,8 @@ export class CombatInitializer {
 	enemyMultiplier: number;
 
 	combatantsAdded: EventEmitter<any> = new EventEmitter();
+  removeCombatant: EventEmitter<any> = new EventEmitter();
+  startTriggered: EventEmitter<any> = new EventEmitter();
 
 	addCharacter() {
 		if (this.characterName !== '') {
@@ -85,4 +100,12 @@ export class CombatInitializer {
 			}];
 		this.combatantsAdded.emit(combatants);
 	}
+
+  removeCombatants(combatant) {
+    this.removeCombatant.emit(combatant);
+  }
+
+  startBattle() {
+    this.startTriggered.emit(void(0))
+  }
 }

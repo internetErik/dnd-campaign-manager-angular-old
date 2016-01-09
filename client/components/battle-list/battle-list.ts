@@ -35,7 +35,8 @@ export class BattleList extends MeteorComponent {
 		this.subscribe('battles', () => { 
 			if (this.campaign) {
 				Meteor.subscribe('battles', this.campaign._id);
-				this.battles = Battles.find({ campaignId: this.campaign._id }, { sort: { createdAt: -1 } });
+				this.battles = Battles.find({ campaignId: this.campaign._id }, 
+					{ sort: { createdDate: 1 } });
 			}
 			else
 				this.router.parent.navigate(['/CampaignList']);

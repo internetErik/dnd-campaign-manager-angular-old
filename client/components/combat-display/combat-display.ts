@@ -57,6 +57,11 @@ export class CombatDisplay extends MeteorComponent {
 			this.updateBattle();
 	}
 
+	deleteBattle() {
+		Meteor.call('removeBattle', this.battle._id);
+		this.router.parent.navigate(['/BattleList']);
+	}
+
 	addCombatants(combatants: any[]) {
 		this.battle.combatants = this.battle.combatants.concat(combatants);
 		this.updateBattle();
@@ -75,6 +80,10 @@ export class CombatDisplay extends MeteorComponent {
 			this.battle.combatPhase = 0;
 			this.updateBattle();
 		}
+	}
+
+	endBattle() {
+		Meteor.call('finishBattle', this.battle._id);
 	}
 
 	updateBattle() {
@@ -126,9 +135,5 @@ export class CombatDisplay extends MeteorComponent {
 				c.roundsOccupied--;
 		});
 		this.updateBattle();
-	}
-
-	endBattle() {
-		Meteor.call('finishBattle', this.battle._id);
 	}
 }

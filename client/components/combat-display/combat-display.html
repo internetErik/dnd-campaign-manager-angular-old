@@ -7,21 +7,23 @@
 		<input type="text" [(ngModel)]="battle.name"> 
 		<button (click)="updateName()">Update Name</button>
 	</div>
+	<div class="p20-0">
+		<button (click)="deleteBattle()">Delete Battle</button>
+	</div>
 
 	<combat-initializer
-		(combatantsAdded)="addCombatants($event)"></combat-initializer>
+		[combatants]="battle.combatants"
+		(combatantsAdded)="addCombatants($event)"
+		(removeCombatant)="removeCombatant($event)"
+		(startTriggered)="startBattle()"></combat-initializer>
 
-	<div *ngIf="battle" class="p20-0">
-		<h3>Combatants:</h3>
-		<ul>
-			<li *ngFor="#c of battle.combatants">{{ c.name }} (bonus: {{c.bonus}})</li>
-		</ul>
-	</div>
 </section>
+
 <hr *ngIf="battle && battle.combatPhase !== -1">
+
 <section class="p20-0 m20-0" *ngIf="battle && battle.combatPhase !== -1">
 	<h2>Combat Phases</h2>
-	<span   [class.c-gray]="battle.combatPhase !== 0">Enter Actions</span>
+	<span [class.c-gray]="battle.combatPhase !== 0">Enter Actions</span>
 	<button [class.c-gray]="battle.combatPhase !== 1" 
 		(click)="rollInitiative()">Roll Initiative</button>
 	<button [class.c-gray]="battle.combatPhase !== 2" 

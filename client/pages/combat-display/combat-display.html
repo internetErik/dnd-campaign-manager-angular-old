@@ -1,15 +1,11 @@
 <h1>Combat Display</h1>
 <hr>
 <section class="p20-0 m20-0" *ngIf="battle">
-	
-	<div class="p20-0">
-		<label for="battlename">Battle Name:</label>
-		<input type="text" [(ngModel)]="battle.name"> 
-		<button (click)="updateName()">Update Name</button>
-	</div>
-	<div class="p20-0">
-		<button (click)="deleteBattle()">Delete Battle</button>
-	</div>
+
+	<battle-form 
+		[battle]="battle"
+		(nameUpdated)="updateName($event)"
+		(deleteBattle)="deleteBattle()"></battle-form>
 
 	<combat-initializer
 		[combatants]="battle.combatants"

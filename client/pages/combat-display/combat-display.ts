@@ -6,17 +6,17 @@ import {simpleRoll} from 'lib/dice';
 import {Battles} from 'lib/collections/battles';
 
 import {RequireUser} from 'meteor-accounts';
-
 import {MeteorComponent} from 'angular2-meteor';
-
+import {BattleForm}
+	from 'client/pages/combat-display/battle-form/battle-form';
 import {CombatInitializer} 
 	from 'client/pages/combat-display/combat-initializer/combat-initializer';
 import {CombatActionInput} 
 	from 'client/pages/combat-display/combat-action-input/combat-action-input';
-	
+
 @Component({
 	selector: 'combat-display',
-	directives: [CombatInitializer, CombatActionInput],
+	directives: [BattleForm, CombatInitializer, CombatActionInput],
 	templateUrl: 'client/pages/combat-display/combat-display.html'
 })
 @RequireUser()
@@ -52,8 +52,8 @@ export class CombatDisplay extends MeteorComponent {
 		}, true);
 	}
 
-	updateName() {
-		if(this.battle.name != '')
+	updateName(name) {
+			this.battle.name = name;
 			this.updateBattle();
 	}
 

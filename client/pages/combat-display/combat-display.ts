@@ -31,7 +31,7 @@ export class CombatDisplay extends MeteorComponent {
 	battleId: string;
 	campaign: any;
 
-	battle: any;
+	battle: any = {};
 	
 	constructor(zone: NgZone, params: RouteParams, _router: Router) {
 		super();

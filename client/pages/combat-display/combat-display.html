@@ -14,10 +14,11 @@
 		(startTriggered)="startBattle()"></combat-initializer>
 
 </section>
+	
+<div *ngIf="battle">
+<hr *ngIf="battle.combatPhase !== -1">
 
-<hr *ngIf="battle && battle.combatPhase !== -1">
-
-<section class="p20-0 m20-0" *ngIf="battle && battle.combatPhase !== -1">
+<section class="p20-0 m20-0" *ngIf="battle.combatPhase !== -1">
 	<h2>Combat Phases</h2>
 	<span [class.c-gray]="battle.combatPhase !== 0">Enter Actions</span>
 	<button [class.c-gray]="battle.combatPhase !== 1" 
@@ -60,4 +61,6 @@
 			</div>
 		</li>
 	</ol>
+
 </section>
+</div>

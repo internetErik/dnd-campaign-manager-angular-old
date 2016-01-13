@@ -5,8 +5,8 @@ import {CombatantList}
   from 'client/pages/combat-display/combat-initializer/combatant-list/combatant-list';
 @Component({
 	selector: 'combat-initializer',
-  inputs: ['combatants'],
-	outputs: ['combatantsAdded', 'removeCombatant', 'startTriggered'],
+  inputs: ['combatants', 'localControlled'],
+	outputs: ['combatantsAdded', 'removeCombatant', 'startTriggered', 'combatantControlled', 'combatantReleased'],
   directives: [CombatantAdder, CombatantList],
 	template: `
 	<h2>Add Combatants</h2>
@@ -15,7 +15,10 @@ import {CombatantList}
 
   <combatant-list 
     [combatants]="combatants"
-    (removeCombatant)="remove($event)"></combatant-list>
+    [localControlled]="localControlled"
+    (removeCombatant)="remove($event)"
+    (combatantControlled)="controlCombatant($event)"
+    (combatantReleased)="releaseCombatant($event)"></combatant-list>
   
   <button 
     *ngIf="combatants && combatants.length > 1" 
@@ -24,10 +27,13 @@ import {CombatantList}
 })
 export class CombatInitializer {
   combatants: any[];
+  localControlled: any[] = [];
 
 	combatantsAdded: EventEmitter<any> = new EventEmitter();
   removeCombatant: EventEmitter<any> = new EventEmitter();
   startTriggered: EventEmitter<any> = new EventEmitter();
+  combatantControlled: EventEmitter<any> = new EventEmitter();
+  combatantReleased: EventEmitter<any> = new EventEmitter();
 
   remove(combatant) {
     this.removeCombatant.emit(combatant);
@@ -39,5 +45,13 @@ export class CombatInitializer {
 
   startBattle() {
     this.startTriggered.emit(void(0))
+  }
+
+  controlCombatant(combatant) {
+    this.combatantControlled.emit(combatant);
+  }
+
+  releaseCombatant(combatant) {
+    this.combatantReleased.emit(combatant);
   }
 }

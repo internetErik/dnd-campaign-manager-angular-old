@@ -1,10 +1,46 @@
 import {Component, EventEmitter} from 'angular2/core';
 
 @Component({
-    selector: 'feat-list',
-    inputs: ['feats', 'featsSelectable', 'featsRemovable'],
-    outputs: ['featSelected', 'featRemoved'],
-	templateUrl: 'client/components/feat-list/feat-list.html'
+  selector: 'feat-list',
+  inputs: ['feats', 'featsSelectable', 'featsRemovable'],
+  outputs: ['featSelected', 'featRemoved'],
+	template: `
+	<ul class="pb20">
+		<li 
+			*ngFor="#feat of feats;#i = index" 
+			[class.pt30]="i !== 0">
+			<h5>{{ feat.name }}</h5>
+			<div 
+				*ngIf="feat.prerequisite"
+				class="p10-0">
+				<label>Prerequisites:</label>
+				{{feat.prerequisite}}
+			</div>
+			<div class="p10-0">
+				<label>Benefit:</label>
+				<br>
+				{{feat.benefit}}
+			</div>
+			<div 
+				*ngIf="feat.normal"
+				class="p10-0">
+				<label>Normal: </label>
+				{{feat.normal}}</div>
+			<div 
+				*ngIf="feat.special"
+				class="p10-0">
+				<label>Special: </label>
+				{{feat.special}}
+			</div>
+			<button 
+				*ngIf="featsRemovable"
+				(click)="removeFeat($event, feat)">-</button>
+			<button 
+				*ngIf="featsSelectable"
+				(click)="selectFeat($event, feat)">select</button>
+		</li>
+	</ul>
+	`
 })
 export class FeatList {
 	feats: Mongo.Cursor<Object>;

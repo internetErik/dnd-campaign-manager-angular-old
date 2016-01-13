@@ -5,7 +5,7 @@ Meteor.methods({
 		roll.CreateDate = Date.now();
 		return Rolls.insert(roll);
 	},
-	clearRolls: function() {
-		Rolls.remove({});
+	clearRolls: function(campaignId) {
+		Rolls.remove({campaignId: campaignId});
 	}
 });

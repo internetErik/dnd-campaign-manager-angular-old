@@ -3,6 +3,7 @@ import {CombatantAdder}
   from 'client/pages/combat-display/combat-initializer/combatant-adder/combatant-adder';  
 import {CombatantList}
   from 'client/pages/combat-display/combat-initializer/combatant-list/combatant-list';
+  
 @Component({
 	selector: 'combat-initializer',
   inputs: ['combatants', 'localControlled'],

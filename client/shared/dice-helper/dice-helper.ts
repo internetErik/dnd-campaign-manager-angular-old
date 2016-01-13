@@ -9,8 +9,46 @@ import {InjectUser} from 'meteor-accounts';
 import {MeteorComponent} from 'angular2-meteor';
 
 @Component({
-    selector: 'dice-helper',
-	templateUrl: 'client/shared/dice-helper/dice-helper.html'
+  selector: 'dice-helper',
+	template: `
+	<div class="dice-helper p20 posf b0 l0 bgc-white add-shadow max-width" 
+		[class.hide-dice]="diceHidden">
+		<button class="p10-0 pl20 pr20" (click)="diceHidden = !diceHidden">
+			<span *ngIf="diceHidden">Show</span>
+			<span *ngIf="!diceHidden">Hide</span>
+		</button>
+		<button class="p10-0 pl20 pr20" 
+			[disabled]="!campaign"
+			(click)="clearRolls()">Clear</button>
+		<button *ngFor="#die of dice"
+			class="p10-0 pl20 pr20 mr5"
+			[disabled]="disabled"
+			(click)="roll(die)">
+			d{{die}}
+		</button>
+		Bonus: <input type="number" [(ngModel)]="rollBonus" value="0" >
+		<div class="p10-0">
+		Current Roll: {{currentRoll}} 
+		</div>
+		<div *ngIf="currentUser && campaign">
+			<div class="p10-0" *ngIf="rollPublic">
+				Last 5 Rolls: 
+				<span *ngFor="#roll of lastRolls; #last = last" 
+					[class.critical-roll]="roll.critical">
+					{{roll.result + roll.bonus}} (d{{roll.sides}} + {{roll.bonus}})<span *ngIf="!last">,</span> 
+				</span>
+			</div>
+			<div class="p20-0">
+				<button class="p10-0 pl20 pr20" 
+					[disabled]="!campaign"
+					(click)="rollPublic = !rollPublic">
+					<span *ngIf="rollPublic">Private</span>
+					<span *ngIf="!rollPublic">Public</span>
+				</button>
+			</div>
+		</div>
+	</div>
+	`
 })
 @InjectUser('currentUser')
 export class DiceHelper extends MeteorComponent {
@@ -36,13 +74,18 @@ export class DiceHelper extends MeteorComponent {
 	constructor(zone: NgZone) {
 		super();
 
-		this.subscribe('rolls', () => {
-			this.lastRolls = Rolls.find({}, { sort: { createdDate: -1 }, limit: 5 });
-		});
+		
+		var handle = this.subscribe('rolls');
 
 		Tracker.autorun(() => zone.run(() => {
 			this.campaign = Session.get('campaign');
 			this.character = Session.get('character');
+	
+			if(handle.ready() && this.campaign)
+				this.lastRolls = 
+					Rolls.find({campaignId: this.campaign._id }, 
+						{ sort: { createDate: -1 }, limit: 5 });
+
 		}));
 	}
 
@@ -54,17 +97,18 @@ export class DiceHelper extends MeteorComponent {
 			this.currentRoll = `${result + this.rollBonus} (d${sides} + ${this.rollBonus})`;
 			this.disabled = false;
 			if(this.rollPublic && this.currentUser && this.campaign)
-				this.insertRoll(result, sides, this.rollBonus);
+				this.insertRoll(this.campaign, result, sides, this.rollBonus);
 		}, 250);
 	}
 
 	clearRolls() {
-		this.currentRoll = '';
-		Meteor.call('clearRolls');
+		if(this.campaign)
+			Meteor.call('clearRolls', this.campaign._id);
 	}
 
-	insertRoll(result, sides, bonus) {
+	insertRoll(campaign, result, sides, bonus) {
 		var roll = { 
+			campaignId: campaign._id,
 			result: result, 
 			sides: sides, 
 			bonus: bonus, 

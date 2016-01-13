@@ -1,6 +1,6 @@
 import {Component, EventEmitter} from 'angular2/core';
 import {CombatActionInput} 
-  from 'client/pages/combat-display/combat-action-input/combat-action-input';
+  from 'client/pages/combat-display/combat-actions/combat-action-input/combat-action-input';
 
 import {simpleRoll} from 'lib/dice';
 
@@ -10,18 +10,14 @@ import {simpleRoll} from 'lib/dice';
   outputs: ['battleModified'],
   directives: [CombatActionInput],
   template: `
-
   <section class="p20-0 m20-0" *ngIf="battle.combatPhase !== -1">
   <h2>Combatants</h2>
   <ol>
-    <li 
-      *ngFor="#combatant of battle.combatants"
-      [class.enemy]="combatant.type === 'enemy'"
-      class="mb20 p10-0">
-      
+    <li *ngFor="#combatant of battle.combatants">
       <div 
         *ngIf="battle.combatPhase === 1 || combatantIsControlled(combatant)"
-        class=" bb1-s-black">
+        [class.enemy]="combatant.type === 'enemy'"
+        class="bb1-s-black mb20">
 
         <h4>{{ combatant.name }}</h4>
 
@@ -55,20 +51,9 @@ import {simpleRoll} from 'lib/dice';
     </li>
   </ol>
   </section>
-  <section class="jump-menu p10 r0 vertical-align-fixed bgc-white add-shadow">
-    <h5>Combat Phases</h5>
-    <span [class.c-gray]="battle.combatPhase !== 0">Enter Actions</span>
-    <button [class.c-gray]="battle.combatPhase !== 1" 
-      (click)="resolveRound()">Turn Resolved</button>
-  </section>
   `
 })
 export class CombatActions {
-  // combat phases
-  //-1 = not started
-  // 0 = decide action
-  // 1 = resolve round
-
   battle: any;
   battleModified: EventEmitter<any> = new EventEmitter();
   localControlled: any[] = [];
@@ -97,19 +82,7 @@ export class CombatActions {
     this.battleModified.emit(void(0));
   }
 
-  resolveRound() {
-    this.battle.combatPhase = 0;
-    this.battle.combatants.forEach((c) => { 
-      c.action = '';
-      c.actionSubmitted = false; 
-      c.initiative = 0;
-      if(c.roundsOccupied > 0)
-        c.roundsOccupied--;
-    });
-    this.battleModified.emit(void(0));
-  }
-
-  combatantIsControlled(combatant) {
+  combatantIsControlled(combatant): boolean {
     return this.localControlled.some((c) => c.name === combatant.name );
   }
 }

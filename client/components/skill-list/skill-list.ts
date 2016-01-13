@@ -1,10 +1,24 @@
 import {Component, EventEmitter} from 'angular2/core';
 
 @Component({
-    selector: 'skill-list',
-    inputs: ['skills', 'skillsSelectable', 'skillsRemovable'],
-    outputs: ['skillSelected', 'skillRemoved'],
-	templateUrl: 'client/components/skill-list/skill-list.html'
+  selector: 'skill-list',
+  inputs: ['skills', 'skillsSelectable', 'skillsRemovable'],
+  outputs: ['skillSelected', 'skillRemoved'],
+	template: `
+	<ul class="pb20">
+		<li 
+			*ngFor="#skill of skills; #i = index" 
+			[class.pt15]="i !== 0">
+			{{ skill.name }} ({{skill.stat}})
+			<button 
+				*ngIf="skillsRemovable"
+				(click)="removeSkill($event, skill)">-</button>
+			<button 
+				*ngIf="skillsSelectable"
+				(click)="selectSkill($event, skill)">select</button>
+		</li>
+	</ul>
+	`
 })
 export class SkillList {
 	skills: Mongo.Cursor<Object>;

@@ -11,15 +11,18 @@ import {CombatInitializer}
 	from 'client/pages/combat-display/combat-initializer/combat-initializer';
 import {CombatActions}
 	from 'client/pages/combat-display/combat-actions/combat-actions';
+import {CombatPhase}
+	from 'client/pages/combat-display/combat-phase/combat-phase';
 
 @Component({
 	selector: 'combat-display',
-	directives: [BattleForm, CombatInitializer, CombatActions],
+	directives: [BattleForm, CombatInitializer, CombatActions, CombatPhase],
 	template: `
 	<h1>Combat Display</h1>
 	<hr>
-	<section class="p20-0 m20-0" *ngIf="battle">
-
+	<section 
+		*ngIf="battle"
+		class="p20-0 m20-0">
 		<battle-form 
 			[battle]="battle"
 			(nameUpdated)="updateName($event)"
@@ -36,11 +39,15 @@ import {CombatActions}
 	</section>
 		
 	<div *ngIf="battle">
-		<hr *ngIf="battle.combatPhase !== -1">
+		<hr *ngIf="battle && battle.combatPhase !== -1">
 		<combat-actions
 			[battle]="battle"
 			[localControlled]="localControlled"
 			(battleModified)="updateBattle()"></combat-actions>
+
+		<combat-phase
+			[battle]="battle"
+			(roundResolved)="roundResolved()"></combat-phase>
 	</div>
 	`
 })
@@ -101,6 +108,17 @@ export class CombatDisplay extends MeteorComponent {
 		}
 	}
 
+	roundResolved() {
+    this.battle.combatPhase = 0;
+    this.battle.combatants.forEach((c) => { 
+      c.action = '';
+      c.actionSubmitted = false; 
+      c.initiative = 0;
+      if(c.roundsOccupied > 0)
+        c.roundsOccupied--;
+    });
+	}
+
 	endBattle() {
 		Meteor.call('finishBattle', this.battle._id);
 	}
@@ -114,7 +132,7 @@ export class CombatDisplay extends MeteorComponent {
   }
 
   releaseCombatant(combatant) {
-    var i = this.localControlled.indexOf(combatant)
+    var i = this.localControlled.indexOf(combatant);
     if(i > -1)
     	this.localControlled.splice(i, 1);
   }

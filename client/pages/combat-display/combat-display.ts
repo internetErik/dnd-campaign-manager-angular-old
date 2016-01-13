@@ -26,16 +26,20 @@ import {CombatActions}
 			(battleDeleted)="deleteBattle()"></battle-form>
 
 		<combat-initializer
+			[localControlled]="localControlled"
 			[combatants]="battle.combatants"
 			(combatantsAdded)="addCombatants($event)"
 			(removeCombatant)="removeCombatant($event)"
-			(startTriggered)="startBattle()"></combat-initializer>
+			(startTriggered)="startBattle()"
+	    (combatantControlled)="controlCombatant($event)"
+	    (combatantReleased)="releaseCombatant($event)"></combat-initializer>
 	</section>
 		
 	<div *ngIf="battle">
 		<hr *ngIf="battle.combatPhase !== -1">
 		<combat-actions
 			[battle]="battle"
+			[localControlled]="localControlled"
 			(battleModified)="updateBattle()"></combat-actions>
 	</div>
 	`
@@ -48,6 +52,7 @@ export class CombatDisplay extends MeteorComponent {
 	campaign: any;
 
 	battle: any;
+	localControlled: any[] = [];
 	
 	constructor(zone: NgZone, params: RouteParams, _router: Router) {
 		super();
@@ -77,6 +82,10 @@ export class CombatDisplay extends MeteorComponent {
 		Meteor.call('removeBattle', this.battle._id);
 	}
 
+	addCombatants(combatants) {
+		this.battle.combatants = this.battle.combatants.concat(combatants);
+	}
+
 	removeCombatant(character) {
 		var i = this.battle.combatants.indexOf(character);
 		if (i > -1) {
@@ -99,4 +108,14 @@ export class CombatDisplay extends MeteorComponent {
 	updateBattle() {
 		Meteor.call('updateBattle', this.battle._id, this.battle);
 	}
+
+  controlCombatant(combatant) {
+    this.localControlled.push(combatant);
+  }
+
+  releaseCombatant(combatant) {
+    var i = this.localControlled.indexOf(combatant)
+    if(i > -1)
+    	this.localControlled.splice(i, 1);
+  }
 }

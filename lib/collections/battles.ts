@@ -1,3 +1,5 @@
+import {simpleRoll} from 'lib/dice';
+
 export var Battles = new Mongo.Collection('battles');
 
 Meteor.methods({
@@ -10,8 +12,27 @@ Meteor.methods({
 		}
 	},
 	updateBattle: function(_id, battle) {
-		if (battle.combatPhase === 0 && battle.combatants.every((c) => c.actionSubmitted || c.roundsOccupied > 0 )) {
+		//if everyone has submitted their action, we roll for their initiative
+		if (battle.combatPhase === 0 && 
+			battle.combatants.every((c) => c.actionSubmitted || c.roundsOccupied > 0 )) {
 			//see if we need to advance to 1
+
+			//the sorting is too much to do on the server. Should sort on the client
+	    battle.combatants = battle.combatants
+		    .map((c) => { 
+		      c.initiative = (c.roundsOccupied > 0) ?
+		        0 : simpleRoll(100) + (c.bonus || 0);
+		      return c; 
+		    })
+		    .sort((a:any, b:any) => {
+		      if (a.initiative > b.initiative)
+		        return -1;
+		      else if (a.initiative < b.initiative)
+		        return 1;
+		      else
+		        return 0;
+		    });
+
 			battle.combatPhase = 1;
 		}
 		

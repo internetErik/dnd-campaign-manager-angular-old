@@ -70,23 +70,34 @@ export class DiceHelper extends MeteorComponent {
 	campaign: any;
 	//current character
 	character: any;
+	zone: NgZone;
 
-	constructor(zone: NgZone) {
+	constructor(_zone: NgZone) {
 		super();
+		this.zone = _zone;
 
-		
-		var handle = this.subscribe('rolls');
-
-		Tracker.autorun(() => zone.run(() => {
+		Tracker.autorun(() => this.zone.run(() => {
 			this.campaign = Session.get('campaign');
 			this.character = Session.get('character');
-	
-			if(handle.ready() && this.campaign)
-				this.lastRolls = 
-					Rolls.find({campaignId: this.campaign._id }, 
-						{ sort: { createDate: -1 }, limit: 5 });
-
+			this.subscribeToRolls();
 		}));
+	}
+
+	subscribeToRolls() {
+		if(this.campaign) {
+			let handle = this.subscribe('rolls');
+
+			Tracker.autorun(() => this.zone.run(() => {
+				this.campaign = Session.get('campaign');
+				this.character = Session.get('character');
+		
+				if(handle.ready() && this.campaign)
+					this.lastRolls = 
+						Rolls.find({campaignId: this.campaign._id }, 
+							{ sort: { createDate: -1 }, limit: 5 });
+
+			}));
+		}
 	}
 
 	roll(sides) {

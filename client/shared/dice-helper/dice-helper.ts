@@ -34,7 +34,7 @@ import {MeteorComponent} from 'angular2-meteor';
 			<div class="p10-0" *ngIf="rollPublic">
 				Last 5 Rolls: 
 				<span *ngFor="#roll of lastRolls; #last = last" 
-					[class.critical-roll]="roll.critical">
+					[class.critical-roll]="roll.result === roll.sides">
 					{{roll.result + roll.bonus}} (d{{roll.sides}} + {{roll.bonus}})<span *ngIf="!last">,</span> 
 				</span>
 			</div>
@@ -70,34 +70,20 @@ export class DiceHelper extends MeteorComponent {
 	campaign: any;
 	//current character
 	character: any;
-	zone: NgZone;
 
-	constructor(_zone: NgZone) {
+	constructor(zone: NgZone) {
 		super();
-		this.zone = _zone;
 
-		Tracker.autorun(() => this.zone.run(() => {
-			this.campaign = Session.get('campaign');
-			this.character = Session.get('character');
-			this.subscribeToRolls();
-		}));
-	}
-
-	subscribeToRolls() {
-		if(this.campaign) {
-			let handle = this.subscribe('rolls');
-
-			Tracker.autorun(() => this.zone.run(() => {
-				this.campaign = Session.get('campaign');
-				this.character = Session.get('character');
+		let handle = this.subscribe('rolls');
 		
-				if(handle.ready() && this.campaign)
-					this.lastRolls = 
-						Rolls.find({campaignId: this.campaign._id }, 
-							{ sort: { createDate: -1 }, limit: 5 });
+		Tracker.autorun(() => zone.run(() => {
+			this.campaign = Session.get('campaign');
 
-			}));
-		}
+			if(handle.ready())
+				this.lastRolls = 
+					Rolls.find({campaignId: this.campaign._id }, 
+						{ sort: { createDate: -1 }, limit: 5 });
+		}));
 	}
 
 	roll(sides) {
@@ -122,8 +108,7 @@ export class DiceHelper extends MeteorComponent {
 			campaignId: campaign._id,
 			result: result, 
 			sides: sides, 
-			bonus: bonus, 
-			critical: result === sides 
+			bonus: bonus
 		};
 
 		Meteor.call('insertRoll', roll);

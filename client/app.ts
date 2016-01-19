@@ -7,6 +7,7 @@ import {bootstrap} from 'angular2-meteor';
 
 import {Navigation} from 'client/shared/navigation/navigation';
 import {DiceHelper} from 'client/shared/dice-helper/dice-helper';
+import {CommandPalette} from 'client/shared/command-palette/command-palette';
 
 import {HomePage} from 'client/pages/home-page/home-page';
 import {CampaignList} from 'client/pages/campaign-list/campaign-list';
@@ -23,6 +24,7 @@ import {CombatDisplay} from 'client/pages/combat-display/combat-display';
 @Component({
     selector: 'app',
 	template: `
+	<command-palette></command-palette>
 	<div class="bgc-lightgray posf max-width max-height"></div>
 	<navigation class="add-shadow"></navigation>
 	<div class="mt20 posr">
@@ -32,7 +34,7 @@ import {CombatDisplay} from 'client/pages/combat-display/combat-display';
 	</div>
 	<dice-helper></dice-helper>
 	`,
-	directives: [ROUTER_DIRECTIVES, Navigation, DiceHelper]
+	directives: [ROUTER_DIRECTIVES, Navigation, DiceHelper, CommandPalette]
 })
 @RouteConfig([
 	{

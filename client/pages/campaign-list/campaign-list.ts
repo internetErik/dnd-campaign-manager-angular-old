@@ -26,9 +26,8 @@ export class CampaignList extends MeteorComponent {
 
 	deleteCampaign(e, campaign) {
 		e.preventDefault();
-		if (confirm(`Are you sure you want to delete this campaign?`)) {
+		if (confirm(`Are you sure you want to delete this campaign?`))
 			this.call('removeCampaign', campaign._id);
-		}
 	}
 
 	selectCampaign(campaign) {

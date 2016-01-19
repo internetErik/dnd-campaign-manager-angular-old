@@ -3,7 +3,7 @@ import {Component, EventEmitter} from 'angular2/core';
 @Component({
   selector: 'combat-phase',
   inputs: ['battle'],
-  outputs: ['roudResolved'],
+  outputs: ['roundResolved'],
   template: `
   <section
     *ngIf="battle"

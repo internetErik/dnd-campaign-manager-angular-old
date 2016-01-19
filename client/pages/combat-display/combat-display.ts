@@ -69,8 +69,8 @@ export class CombatDisplay extends MeteorComponent {
 		var handle = this.subscribe('battles', this.campaign._id);
 		
 		this.autorun(() => {
-			if(handle.ready())
-					this.battle = Battles.findOne({_id: this.battleId});
+        if (handle.ready())
+          this.battle = Battles.findOne({ _id: this.battleId });	
 		}, true);
 	}
 

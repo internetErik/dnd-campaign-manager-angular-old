@@ -13,6 +13,16 @@ import {Router} from 'angular2/router';
           (keyup)="keyboardEvent($event)"
           class="js-command-palette-input max-width h40 p0-20 fz18"/>
       </form>
+      <section 
+        *ngIf="commands.length > 0"
+        class="posa t100 l0 max-width bgc-white add-shadow">
+        <div
+          *ngFor="#command of commands"
+          (click)="command.command()"
+          class="p20 bb1-s-black">
+          {{command.text}}
+        </div>
+      </section>
     </section>
   `
 })
@@ -22,9 +32,8 @@ export class CommandPalette {
   router: Router;
   input: any;
 
-  commands: any[] = [
-    { text: 'characters', command: function() { this.router.navigate('/CharacterList'); } }
-  ];
+  possibleCommands: any[] = [];
+  commands: any[] = [];
   
   constructor(_router: Router) {
     this.router = _router;
@@ -33,6 +42,10 @@ export class CommandPalette {
     
     document.querySelector('body')
       .addEventListener('keyup', this.togglePalette.bind(this));
+    
+    this.possibleCommands = [
+        { text: 'characters', command: () => { this.router.navigate('/CharacterList'); } }
+    ];
   }
 
   togglePalette(e: any) {
@@ -48,9 +61,10 @@ export class CommandPalette {
 
   keyboardEvent(e) {
     e.preventDefault();
+    this.commands = this.possibleCommands
+        .filter((i) => this.command.toLowerCase() === i.text);
   }
 
   performCommand() {
-    console.log(this.command);
   }
 }

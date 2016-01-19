@@ -10,8 +10,13 @@ import {simpleRoll} from 'lib/dice';
   outputs: ['battleModified'],
   directives: [CombatActionInput],
   template: `
-  <section class="p20-0 m20-0" *ngIf="battle.combatPhase !== -1">
+  <section 
+    *ngIf="battle.combatPhase !== -1"
+    class="p20-0 m20-0">
   <h2>Combatants</h2>
+  <div *ngIf="localControlled.length === 0">
+    You aren't controlling any characters! You'd better select some above.
+  </div>
   <ol>
     <li *ngFor="#combatant of battle.combatants">
       <div 

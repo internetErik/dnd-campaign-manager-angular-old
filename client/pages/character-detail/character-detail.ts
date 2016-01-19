@@ -25,10 +25,10 @@ import {FeatList} from 'client/components/feat-list/feat-list';
 @RequireUser()
 @InjectUser('currentUser')
 export class CharacterDetail extends MeteorComponent {
-    currentUser: any;
-    router: Router;
+  currentUser: any;
+  router: Router;
 
-    character: any;
+  character: any;
 
 	newSpellName: string = '';
 	newSpellLevel: number = 0;

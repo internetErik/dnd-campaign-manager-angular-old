@@ -1,11 +1,11 @@
 export var Rolls = new Mongo.Collection('rolls');
 
 Meteor.methods({
-	insertRoll: function(roll) {
+	insertRoll: (roll) => {
 		roll.createDate = Date.now();
 		return Rolls.insert(roll);
 	},
-	clearRolls: function(campaignId) {
+	clearRolls: (campaignId) => {
 		Rolls.remove({campaignId: campaignId});
 	}
 });

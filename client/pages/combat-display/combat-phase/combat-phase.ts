@@ -5,7 +5,9 @@ import {Component, EventEmitter} from 'angular2/core';
   inputs: ['battle'],
   outputs: ['roudResolved'],
   template: `
-  <section class="jump-menu p10 r0 vertical-align-fixed bgc-white add-shadow">
+  <section
+    *ngIf="battle"
+    class="jump-menu p10 r0 vertical-align-fixed bgc-white add-shadow">
     <h5>Combat Phases</h5>
     <span [class.c-gray]="battle.combatPhase !== 0">Enter Actions</span>
     <button 

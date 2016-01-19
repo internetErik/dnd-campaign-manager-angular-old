@@ -1,4 +1,4 @@
-import {Component, NgZone} from 'angular2/core';
+import {Component} from 'angular2/core';
 import {Router, RouteParams} from 'angular2/router';
 
 import {Battles} from 'lib/collections/battles';
@@ -36,10 +36,8 @@ import {CombatPhase}
 			(startTriggered)="startBattle()"
 	    (combatantControlled)="controlCombatant($event)"
 	    (combatantReleased)="releaseCombatant($event)"></combat-initializer>
-	</section>
 		
-	<div *ngIf="battle">
-		<hr *ngIf="battle && battle.combatPhase !== -1">
+		<hr>
 		<combat-actions
 			[battle]="battle"
 			[localControlled]="localControlled"
@@ -48,35 +46,32 @@ import {CombatPhase}
 		<combat-phase
 			[battle]="battle"
 			(roundResolved)="roundResolved()"></combat-phase>
-	</div>
+			
+	</section>
 	`
 })
 @RequireUser()
 export class CombatDisplay extends MeteorComponent {
 	router: Router;
 	
-	battleId: string;
 	campaign: any;
-
+	battleId: string;
 	battle: any;
+	//characters being controlled by user
 	localControlled: any[] = [];
-	
-	constructor(zone: NgZone, params: RouteParams, _router: Router) {
+
+	constructor(params: RouteParams, _router: Router) {
 		super();
 		this.router = _router;
-
 		this.battleId = params.get('battleId');
 		this.campaign = Session.get('campaign');
-		
-		var handle = this.subscribe('battles');
 
-		Tracker.autorun(() => zone.run(() => {
+		var handle = this.subscribe('battles', this.campaign._id);
+		
+		this.autorun(() => {
 			if(handle.ready())
-				if (this.campaign)
-					this.battle = Battles.findOne({ _id: this.battleId });
-				else
-					this.router.parent.navigate(['/CampaignList']);
-		}));
+					this.battle = Battles.findOne({_id: this.battleId});
+		}, true);
 	}
 
 	updateName(name) {
@@ -91,6 +86,7 @@ export class CombatDisplay extends MeteorComponent {
 
 	addCombatants(combatants) {
 		this.battle.combatants = this.battle.combatants.concat(combatants);
+		this.updateBattle();
 	}
 
 	removeCombatant(character) {

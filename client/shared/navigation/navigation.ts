@@ -1,4 +1,4 @@
-import {Component, NgZone} from 'angular2/core';
+import {Component} from 'angular2/core';
 import {RouterLink, Router} from 'angular2/router';
 
 import {AccountsModal} 
@@ -62,13 +62,13 @@ export class Navigation extends MeteorComponent {
 	character: any;
 	router: Router;
 
-	constructor(_router: Router, zone: NgZone) {
+	constructor(_router: Router) {
 		super();
 
-		Tracker.autorun(() => zone.run(() => {
+		this.autorun(() => {
 			this.campaign = (this.currentUser) ? Session.get('campaign') : null;
 			this.character = Session.get('character');
-		}));
+		}, true);
 		
 		this.router = _router;
 	}

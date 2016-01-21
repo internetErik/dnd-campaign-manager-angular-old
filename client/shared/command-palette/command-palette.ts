@@ -2,8 +2,8 @@ import {Component} from 'angular2/core';
 import {Router} from 'angular2/router';
 
 @Component({
-  selector: 'command-palette',
-  template: `
+    selector: 'command-palette',
+    template: `
     <section 
       class="t50 w50% p20 horizontal-align-fixed add-shadow z1 bgc-white dn"
       [class.db]="visible">
@@ -44,7 +44,7 @@ export class CommandPalette {
       .addEventListener('keyup', this.togglePalette.bind(this));
     
     this.possibleCommands = [
-        { text: 'characters', command: () => { this.router.navigate('/CharacterList'); } }
+        { text: 'characters', command: () => this.router.navigate('/CharacterList') }
     ];
   }
 

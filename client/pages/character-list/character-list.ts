@@ -1,11 +1,7 @@
 import {Component, NgZone} from 'angular2/core';
-
 import {Characters} from 'lib/collections/characters';
-
 import {RouterLink, RouteParams} from 'angular2/router';
-
 import {RequireUser, InjectUser} from 'meteor-accounts';
-
 import {MeteorComponent} from 'angular2-meteor';
 
 @Component({
@@ -21,7 +17,7 @@ export class CharacterList extends MeteorComponent {
 	npcs: Mongo.Cursor<Object>;
 	campaignId: string;
 
-	constructor(zone: NgZone, params: RouteParams) {
+	constructor(params: RouteParams) {
 		super();
 
 		this.campaignId = params.get('campaignId');

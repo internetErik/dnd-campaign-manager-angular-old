@@ -44,7 +44,10 @@ export class CommandPalette {
       .addEventListener('keyup', this.togglePalette.bind(this));
     
     this.possibleCommands = [
-        { text: 'characters', command: () => this.router.navigate('/CharacterList') }
+        { 
+          text: 'characters', 
+          command: () => this.router.navigate('/CharacterList') 
+        }
     ];
   }
 

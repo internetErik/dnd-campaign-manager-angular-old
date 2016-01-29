@@ -16,8 +16,7 @@ import {MeteorComponent} from 'angular2-meteor';
 		<div class="vertical-align" *ngIf="currentUser">
 			<a class="tdn" [routerLink]="['/HomePage']">Home</a> |
 			<a class="tdn" [routerLink]="['/CampaignList']">Campaigns</a> |
-			<a class="tdn" [routerLink]="['/ContentCreator']">Content Creator</a> |
-			<a class="tdn" [routerLink]="['/CharacterList']">All Characters</a>
+			<a class="tdn" [routerLink]="['/ContentCreator']">Content Creator</a>
 		</div>
 	</nav>
 

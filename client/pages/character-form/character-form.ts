@@ -1,9 +1,7 @@
 import {Component} from 'angular2/core';
 import {FormBuilder, Control, ControlGroup, Validators} from 'angular2/common';
-import {Router, RouteParams} from 'angular2/router';
-
+import {Router} from 'angular2/router';
 import {Characters} from 'lib/collections/characters';
-
 import {RequireUser, InjectUser} from 'meteor-accounts';
 
 @Component({
@@ -15,7 +13,7 @@ import {RequireUser, InjectUser} from 'meteor-accounts';
 export class CharacterForm {
 	characterForm: ControlGroup;
 	router: Router;
-	campaignId: string;
+	campaign: any;
 
 	newSpellName: string;
 	newSkillName: string;
@@ -24,10 +22,10 @@ export class CharacterForm {
 	skills: string[];
 	feats: string[];
 
-	constructor(_router: Router, params: RouteParams) {
+	constructor(_router: Router) {
 		var fb = new FormBuilder();
 
-		this.campaignId = params.get('campaignId');
+		this.campaign = Session.get('campaign');
 
 		this.characterForm = fb.group({
 			firstName: ['', Validators.required],
@@ -56,7 +54,6 @@ export class CharacterForm {
 		this.newSpellName = '';
 		this.newSkillName = '';
 		this.newFeatName = '';
-
 		this.spells = [];
 		this.skills = [];
 		this.feats = [];
@@ -75,7 +72,7 @@ export class CharacterForm {
 	addCharacter(e, character: any) {
 		e.preventDefault();
 
-		if (this.characterForm.valid) {
+		if (this.characterForm.valid && this.campaign) {
 			let _id, //id returned from insert
 				userId,
 				c; //the character we are inserting
@@ -84,7 +81,7 @@ export class CharacterForm {
 
 			c = {
 				userId: userId,
-				campaignId: this.campaignId,
+				campaignId: this.campaign._id,
 				firstName: character.firstName,
 				middleName: character.middleName,
 				lastName: character.lastName,

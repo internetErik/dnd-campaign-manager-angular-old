@@ -1,6 +1,13 @@
 <h1><span *ngIf="!campaignId">All</span> Character List</h1>
 <hr>
 <section class="p20-0 m20-0">
+	<a [routerLink]="['/CharacterForm', {campaignId: campaignId}]"
+		*ngIf="campaignId">
+		<button>Add Character</button>
+	</a>
+</section>
+<hr>
+<section class="p20-0 m20-0">
 	<h2>PCs</h2>
 	<div *ngFor="#character of pcs" class="p10-0">
 		<a [routerLink]="['/CharacterDetail', {characterId: character._id}]">
@@ -18,8 +25,4 @@
 			{{character.firstName}} {{character.middleName}} {{character.lastName}}
 		</a>
 	</div>
-	<a [routerLink]="['/CharacterForm', {campaignId: campaignId}]"
-		*ngIf="campaignId">
-		<button>+</button>
-	</a>
 </section>

@@ -76,7 +76,7 @@ export class Navigation extends MeteorComponent {
 	}
 
 	unselectCharacter() {
-		this.router.navigate(['/CharacterList', {campaignId: this.campaign._id}]);
+		this.router.navigate(['/CharacterList']);
 		Session.set('character', null);
 	}
 }

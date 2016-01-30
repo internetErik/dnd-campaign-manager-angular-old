@@ -63,19 +63,20 @@ export class CommandPalette extends MeteorComponent {
     super();
     this.router = _router;
     this.autorun(() => {
-        this.campaign = Session.get('campaign');
-        this.character = Session.get('character');
-        this.subscribe('characters', () => {
-          this.character = Characters.find({ campaignId: this.campaign._id });
-        }, true);
-    });
+      this.campaign = Session.get('campaign');
+      this.character = Session.get('character');
+      this.subscribe('characters', () => {
+        this.character = Characters.find({ campaignId: this.campaign._id });
+      }, true);
+    }, true);
     
     document.querySelector('body')
       .addEventListener('keyup', this.togglePalette.bind(this));
   }
 
   togglePalette(e: any) {
-    var input = document.querySelector('.js-command-palette-input');
+    var input: HTMLInputElement = 
+      <HTMLInputElement> document.querySelector('.js-command-palette-input');
 
     if (e.ctrlKey && e.altKey && e.keyCode == 80) {
       this.visible = !this.visible;

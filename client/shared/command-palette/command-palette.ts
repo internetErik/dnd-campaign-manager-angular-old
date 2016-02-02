@@ -38,25 +38,36 @@ export class CommandPalette extends MeteorComponent {
   characters: Mongo.Cursor<Object>;
 
   possibleCommands: any[] = [
-      {
-        text: 'Campaigns',
-        command: () => this.router.navigate(['/CampaignList'])
-      },
-      {
-        text: 'Content Creator',
-        command: () => this.router.navigate(['/ContentCreator'])
-      },
-      {
-        text: 'Characters',
-        condition: () =>  this.campaign,
-        command: () => this.router.navigate(['/CharacterList'])
-      },
-      {
-        text: 'Battles',
-        condition: () => this.campaign,
-        command: () => this.router.navigate(['/BattleList'])
-      }
-    ];
+    {
+      text: 'Campaigns',
+      command: () => this.router.navigate(['/CampaignList'])
+    },
+    {
+      text: 'Content Creator',
+      command: () => this.router.navigate(['/ContentCreator'])
+    },
+    {
+      text: 'Characters',
+      condition: () => this.campaign,
+      command: () => this.router.navigate(['/CharacterList'])
+    },
+    {
+      text: 'Battles',
+      condition: () => this.campaign,
+      command: () => this.router.navigate(['/BattleList'])
+    }
+  ];
+
+  characterCommands: any[] = [
+    {
+      text: 'Character Detail',
+      condition: () => this.character,
+      command: () => this.router.navigate(['/CharacterDetail', {characterId: this.character._id}])
+    }
+  ];
+
+  charactersCommands: any[] = [];
+
   commands: any[] = [];
   
   constructor(_router: Router) {
@@ -65,13 +76,23 @@ export class CommandPalette extends MeteorComponent {
     this.autorun(() => {
       this.campaign = Session.get('campaign');
       this.character = Session.get('character');
-      this.subscribe('characters', () => {
-        this.character = Characters.find({ campaignId: this.campaign._id });
-      }, true);
+      if(this.campaign)
+        this.subscribe('characters', () => {
+          this.characters = Characters.find({ campaignId: this.campaign._id });
+          this.charactersCommands = 
+            this.characters.map(this._charactersFunctionFactory);
+        }, true);
     }, true);
     
     document.querySelector('body')
       .addEventListener('keyup', this.togglePalette.bind(this));
+  }
+
+  _charactersFunctionFactory(character) {
+    return {
+      text: `Character Detail - ${character.firstName} ${character.lastName}`,
+      command: (function(id) { this.router.navigate(['/CharacterDetail', { characterId: id }]) }).bind(this, character._id)
+    }
   }
 
   togglePalette(e: any) {
@@ -95,14 +116,14 @@ export class CommandPalette extends MeteorComponent {
   keyboardEvent(e) {
     e.preventDefault();
     if (this.command.length > 2)
-      this.commands = this.possibleCommands
+      this.commands = this.possibleCommands.concat(this.characterCommands, this.charactersCommands)
         .filter((i) => {
           var condition = (i.condition) ? i.condition : () => true;
           return condition() && 
             i.text.toLowerCase().indexOf(this.command.toLowerCase()) > -1;
         });
     else
-        this.commands = [];
+      this.commands = [];
   }
 
   performCommand() {

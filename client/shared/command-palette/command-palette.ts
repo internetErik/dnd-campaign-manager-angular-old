@@ -39,6 +39,10 @@ export class CommandPalette extends MeteorComponent {
 
   possibleCommands: any[] = [
     {
+      text: 'Home',
+      command: () => this.router.navigate(['/HomePage'])
+    },
+    {
       text: 'Campaigns',
       command: () => this.router.navigate(['/CampaignList'])
     },
@@ -115,7 +119,7 @@ export class CommandPalette extends MeteorComponent {
 
   keyboardEvent(e) {
     e.preventDefault();
-    if (this.command.length > 2)
+    if (this.command.length > 0)
       this.commands = this.possibleCommands.concat(this.characterCommands, this.charactersCommands)
         .filter((i) => {
           var condition = (i.condition) ? i.condition : () => true;

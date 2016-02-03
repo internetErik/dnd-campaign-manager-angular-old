@@ -1,9 +1,9 @@
-import {Component, NgZone} from 'angular2/core';
+import {Component} from 'angular2/core';
 import {Router, RouteParams} from 'angular2/router';
 
 import {Battles} from 'lib/collections/battles';
 
-import {RequireUser} from 'meteor-accounts';
+import {RequireUser, InjectUser} from 'meteor-accounts';
 import {MeteorComponent} from 'angular2-meteor';
 import {BattleForm}
 	from 'client/pages/combat-display/battle-form/battle-form';
@@ -11,15 +11,18 @@ import {CombatInitializer}
 	from 'client/pages/combat-display/combat-initializer/combat-initializer';
 import {CombatActions}
 	from 'client/pages/combat-display/combat-actions/combat-actions';
+import {CombatPhase}
+	from 'client/pages/combat-display/combat-phase/combat-phase';
 
 @Component({
 	selector: 'combat-display',
-	directives: [BattleForm, CombatInitializer, CombatActions],
+	directives: [BattleForm, CombatInitializer, CombatActions, CombatPhase],
 	template: `
 	<h1>Combat Display</h1>
 	<hr>
-	<section class="p20-0 m20-0" *ngIf="battle">
-
+	<section 
+		*ngIf="battle"
+		class="p20-0 m20-0">
 		<battle-form 
 			[battle]="battle"
 			(nameUpdated)="updateName($event)"
@@ -33,43 +36,44 @@ import {CombatActions}
 			(startTriggered)="startBattle()"
 	    (combatantControlled)="controlCombatant($event)"
 	    (combatantReleased)="releaseCombatant($event)"></combat-initializer>
-	</section>
 		
-	<div *ngIf="battle">
-		<hr *ngIf="battle.combatPhase !== -1">
+		<hr>
 		<combat-actions
 			[battle]="battle"
 			[localControlled]="localControlled"
 			(battleModified)="updateBattle()"></combat-actions>
-	</div>
+
+		<combat-phase
+			[battle]="battle"
+			[isDM]="currentUser && currentUser._id === campaign.creator"
+			(roundResolved)="roundResolved()"></combat-phase>
+			
+	</section>
 	`
 })
 @RequireUser()
+@InjectUser('currentUser')
 export class CombatDisplay extends MeteorComponent {
 	router: Router;
-	
-	battleId: string;
+  currentUser: any;
 	campaign: any;
-
+	battleId: string;
 	battle: any;
+	//characters being controlled by user
 	localControlled: any[] = [];
-	
-	constructor(zone: NgZone, params: RouteParams, _router: Router) {
+
+	constructor(params: RouteParams, _router: Router) {
 		super();
 		this.router = _router;
-
 		this.battleId = params.get('battleId');
 		this.campaign = Session.get('campaign');
-		
-		var handle = this.subscribe('battles');
 
-		Tracker.autorun(() => zone.run(() => {
-			if(handle.ready())
-				if (this.campaign)
-					this.battle = Battles.findOne({ _id: this.battleId });
-				else
-					this.router.parent.navigate(['/CampaignList']);
-		}));
+		var handle = this.subscribe('battles', this.campaign._id);
+		
+		this.autorun(() => {
+        if (handle.ready())
+          this.battle = Battles.findOne({ _id: this.battleId });	
+		}, true);
 	}
 
 	updateName(name) {
@@ -84,6 +88,7 @@ export class CombatDisplay extends MeteorComponent {
 
 	addCombatants(combatants) {
 		this.battle.combatants = this.battle.combatants.concat(combatants);
+		this.updateBattle();
 	}
 
 	removeCombatant(character) {
@@ -101,6 +106,17 @@ export class CombatDisplay extends MeteorComponent {
 		}
 	}
 
+	roundResolved() {
+    this.battle.combatPhase = 0;
+    this.battle.combatants.forEach((c) => { 
+      c.action = '';
+      c.actionSubmitted = false; 
+      c.initiative = 0;
+      if(c.roundsOccupied > 0)
+        c.roundsOccupied--;
+    });
+	}
+
 	endBattle() {
 		Meteor.call('finishBattle', this.battle._id);
 	}
@@ -114,7 +130,7 @@ export class CombatDisplay extends MeteorComponent {
   }
 
   releaseCombatant(combatant) {
-    var i = this.localControlled.indexOf(combatant)
+    var i = this.localControlled.indexOf(combatant);
     if(i > -1)
     	this.localControlled.splice(i, 1);
   }

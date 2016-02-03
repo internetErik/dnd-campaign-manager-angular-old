@@ -357,7 +357,7 @@
 		<h2>Skills</h2>
 		<h3>Skill List</h3>
 		<skill-list [skills]="character.skills"
-			[skillsRemovable]="true"
+			[skillsRemoveable]="true"
 			(skillRemoved)="unlearnSkill($event)"></skill-list>
 
 		<button (click)="showSkillModal = true">Add Skill</button>
@@ -368,7 +368,7 @@
 		<h2>Feats</h2>
 		<h3>Feat List</h3>
 		<feat-list [feats]="character.feats"
-			[featsRemovable]="true"
+			[featsRemoveable]="true"
 			(featRemoved)="unlearnFeat($event)"></feat-list>
 
 		<button (click)="showFeatModal = true">Add Feat</button>

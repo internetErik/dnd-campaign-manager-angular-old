@@ -12,9 +12,7 @@ import {MeteorComponent} from 'angular2-meteor';
 
 import {SpellList} from 'client/components/spell-list/spell-list';
 import {SpellFilter} from 'client/components/spell-filter/spell-filter';
-
 import {SkillList} from 'client/components/skill-list/skill-list';
-
 import {FeatList} from 'client/components/feat-list/feat-list';
 
 @Component({
@@ -25,10 +23,10 @@ import {FeatList} from 'client/components/feat-list/feat-list';
 @RequireUser()
 @InjectUser('currentUser')
 export class CharacterDetail extends MeteorComponent {
-    currentUser: any;
-    router: Router;
+  currentUser: any;
+  router: Router;
 
-    character: any;
+  character: any;
 
 	newSpellName: string = '';
 	newSpellLevel: number = 0;
@@ -64,29 +62,29 @@ export class CharacterDetail extends MeteorComponent {
 	constructor(_router: Router, params: RouteParams) {
 		super();
 
-        var characterId = params.get('characterId');
+    var characterId = params.get('characterId');
 
-        this.subscribe('character', characterId, () => {
-			this.character = Characters.findOne();
+    this.subscribe('character', characterId, () => {
+			this.character = Characters.findOne({ _id: characterId });
 			this.characterSpells = this.character.spells;
-        }, true);
+    }, true);
 
-        this.subscribe('spells', () => { 
+    this.subscribe('spells', () => { 
 			this.spells = Spells.find();
-        }, true);
+    }, true);
 
-        this.subscribe('skills', () => { 
+    this.subscribe('skills', () => { 
 			this.skills = Skills.find();
-        }, true);
-        
-        this.subscribe('feats', () => { 
+    }, true);
+      
+    this.subscribe('feats', () => { 
 			this.feats = Feats.find();
-        }, true);
+    }, true);
 
-        this.router = _router;
-    }
+    this.router = _router;
+  }
 
-    getHitRoll() {
+  getHitRoll() {
 		var hr = this.character.hitRoll + this.character.hitRollBonus;
 		var attacks = [];
 
@@ -107,15 +105,15 @@ export class CharacterDetail extends MeteorComponent {
 		}
 		else
 			return `+${hr}`;
-    }
+  }
 
-    getCasterLevel() {
+  getCasterLevel() {
 		var spellLevel = 9;
 		for (; spellLevel >= 0; spellLevel--)
 			if (this.character['level' + spellLevel] > 0)
 				break;
 		return spellLevel + 1;
-    }
+  }
 
 	learnSpell(spell) {
 		this.character.spells.push(spell);
@@ -212,7 +210,6 @@ export class CharacterDetail extends MeteorComponent {
 		this.sortLearnedSpells(void(0));
 	}
 
-
 	sortAllSpells(sortQuery) {
 		this.sortQuery = sortQuery;
 		this.getAllSpells();
@@ -229,12 +226,12 @@ export class CharacterDetail extends MeteorComponent {
 		}, true);
 	}
 
-    deleteCharacter(e) {
+  deleteCharacter(e) {
 		e.preventDefault();
 		if (confirm(`Are you sure you want to delete this character?`)) {
 			this.call('removeCharacter', this.character._id);
 			Session.set('character', null);
 			this.router.parent.navigate(['/CharacterList']);
 		}
-    }
+  }
 }

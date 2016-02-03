@@ -8,12 +8,14 @@ import {Component, EventEmitter} from 'angular2/core';
   <div class="p20-0">
     <h3>Combatants:</h3>
     <ul>
-      <li *ngFor="#combatant of combatants">
-      {{ combatant.name }} (bonus: {{combatant.bonus}})
-      <button (click)="remove(combatant)">remove</button>
-      
-      <button *ngIf="!combatantIsControlled(combatant)" (click)="controlCombatant(combatant)">control</button>
-      <button *ngIf="combatantIsControlled(combatant)" (click)="releaseCombatant(combatant)">release</button>
+      <li 
+        *ngFor="#combatant of combatants"
+        class="p5-0">
+        {{ combatant.name }} (bonus: {{combatant.bonus}})
+        <button (click)="remove(combatant)">remove</button>
+        
+        <button *ngIf="!combatantIsControlled(combatant)" (click)="controlCombatant(combatant)">control</button>
+        <button *ngIf="combatantIsControlled(combatant)" (click)="releaseCombatant(combatant)">release</button>
       </li>
     </ul>
   </div>

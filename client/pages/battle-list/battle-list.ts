@@ -24,24 +24,17 @@ export class BattleList extends MeteorComponent {
 
 	constructor(zone: NgZone, params: RouteParams, _router: Router) {
 		super();
-		this.battleId = params.get('battleId');
-		this.campaign = Session.get('campaign');
-
 		this.router = _router;
-
-
-		if (this.campaign) {
-		let handle = Meteor.subscribe('battles', this.campaign._id);
-
-		Tracker.autorun(() => zone.run(() => {
-			if(handle.ready())
-					this.battles = Battles.find(
-						{ campaignId: this.campaign._id }, 
-						{ sort: { createdDate: 1 } });
-			}));
-		}
-		else
-			this.router.parent.navigate(['/CampaignList']);
+		this.autorun(() => {
+			this.battleId = params.get('battleId');
+			this.campaign = Session.get('campaign');
+			if (this.campaign)
+				this.subscribe('battles', this.campaign._id, () => {
+						this.battles = Battles.find({}, { sort: { createdDate: 1 } });
+				}, true);
+			else
+				this.router.parent.navigate(['/CampaignList']);
+		}, true);
 	}
 
 	addBattle() {
@@ -50,7 +43,5 @@ export class BattleList extends MeteorComponent {
 			campaignId: this.campaign._id,
 			combatants: []
 		});
-
-		this.router.parent.navigate(['/CombatDisplay', { battleId: _id }]);
 	}
 }

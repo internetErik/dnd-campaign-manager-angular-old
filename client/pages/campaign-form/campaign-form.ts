@@ -1,4 +1,4 @@
-import {Component, NgZone} from 'angular2/core';
+import {Component} from 'angular2/core';
 import {FormBuilder, Control, ControlGroup, Validators} from 'angular2/common';
 
 import {Router} from 'angular2/router';
@@ -19,7 +19,7 @@ export class CampaignForm extends MeteorComponent {
 	router: Router;
 	currentUser: any;
 
-	constructor(zone: NgZone, _router: Router) {
+	constructor(_router: Router) {
 		super();
 		var fb = new FormBuilder();
 		this.campaignForm = fb.group({

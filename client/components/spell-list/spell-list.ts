@@ -1,10 +1,30 @@
 import {Component, EventEmitter} from 'angular2/core';
 
 @Component({
-    selector: 'spell-list',
-    inputs: ['spells', 'spellsSelectable', 'spellsRemovable'],
-    outputs: ['spellSelected', 'spellRemoved'],
-	templateUrl: 'client/components/spell-list/spell-list.html'
+  selector: 'spell-list',
+  inputs: ['spells', 'spellsSelectable', 'spellsRemovable'],
+  outputs: ['spellSelected', 'spellRemoved'],
+	template: `
+	<div 
+		*ngFor="#spell of spells;#i = index" 
+		[class.pt30]="i !== 0">
+		<h5 class="ttc">{{ spell.name }}</h5>
+		<label class="w125">Level:</label> {{spell.level}}<br>
+		<label class="w125">School:</label> {{spell.school}}<br>
+		<label class="w125">Range:</label> {{spell.range}}<br>
+		<label class="w125">Duration:</label> {{spell.duration}}<br>
+		<label class="w125">Components:</label> {{spell.components}}<br>
+		<label class="w125">Casting Time:</label> {{spell.castingTime}}<br>
+		<label class="w125">Description:</label><br>
+		{{spell.description}}<br>
+		<button 
+			*ngIf="spellsRemovable" 
+			(click)="removeSpell($event, spell)">-</button>
+		<button 
+			*ngIf="spellsSelectable" 
+			(click)="selectSpell($event, spell)">select</button>
+	</div>
+	`
 })
 export class SpellList {
 	spells: Mongo.Cursor<Object>;

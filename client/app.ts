@@ -19,8 +19,6 @@ import {CharacterDetail} from 'client/pages/character-detail/character-detail';
 import {BattleList} from 'client/pages/battle-list/battle-list';
 import {CombatDisplay} from 'client/pages/combat-display/combat-display';
 
-
-
 @Component({
     selector: 'app',
 	template: `

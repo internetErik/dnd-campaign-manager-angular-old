@@ -3,7 +3,7 @@ import {Router, RouteParams} from 'angular2/router';
 
 import {Battles} from 'lib/collections/battles';
 
-import {RequireUser} from 'meteor-accounts';
+import {RequireUser, InjectUser} from 'meteor-accounts';
 import {MeteorComponent} from 'angular2-meteor';
 import {BattleForm}
 	from 'client/pages/combat-display/battle-form/battle-form';
@@ -45,15 +45,17 @@ import {CombatPhase}
 
 		<combat-phase
 			[battle]="battle"
+			[isDM]="currentUser && currentUser._id === campaign.creator"
 			(roundResolved)="roundResolved()"></combat-phase>
 			
 	</section>
 	`
 })
 @RequireUser()
+@InjectUser('currentUser')
 export class CombatDisplay extends MeteorComponent {
 	router: Router;
-	
+  currentUser: any;
 	campaign: any;
 	battleId: string;
 	battle: any;

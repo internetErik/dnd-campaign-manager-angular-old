@@ -12,9 +12,7 @@ import {MeteorComponent} from 'angular2-meteor';
 
 import {SpellList} from 'client/components/spell-list/spell-list';
 import {SpellFilter} from 'client/components/spell-filter/spell-filter';
-
 import {SkillList} from 'client/components/skill-list/skill-list';
-
 import {FeatList} from 'client/components/feat-list/feat-list';
 
 @Component({

@@ -2,7 +2,7 @@ import {Component, EventEmitter} from 'angular2/core';
 
 @Component({
   selector: 'combat-phase',
-  inputs: ['battle'],
+  inputs: ['battle', 'isDM'],
   outputs: ['roundResolved'],
   template: `
   <section
@@ -11,9 +11,15 @@ import {Component, EventEmitter} from 'angular2/core';
     <h5>Combat Phases</h5>
     <span [class.c-gray]="battle.combatPhase !== 0">Enter Actions</span>
     <button 
+      *ngIf="isDM"
       class="p10"
       [class.c-gray]="battle.combatPhase !== 1" 
       (click)="resolveRound()">Turn Resolved</button>
+    <span
+      *ngIf="!isDM"
+      class="p10"
+      [class.c-gray]="battle.combatPhase !== 1" 
+      (click)="resolveRound()">Turn Resolved</span>
   </section>
   `
 })
@@ -24,6 +30,7 @@ export class CombatPhase {
   // 1 = resolve round
   battle: any;
   roundResolved: EventEmitter<any> = new EventEmitter();
+  isDM: boolean;
 
   resolveRound() {
     if(this.battle.combatPhase === 1)

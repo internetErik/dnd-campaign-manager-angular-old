@@ -2,7 +2,7 @@ import {Component, EventEmitter} from 'angular2/core';
 
 @Component({
   selector: 'skill-list',
-  inputs: ['skills', 'skillsSelectable', 'skillsRemovable'],
+  inputs: ['skills', 'skillsSelectable', 'skillsRemoveable'],
   outputs: ['skillSelected', 'skillRemoved'],
 	template: `
 	<ul class="pb20">
@@ -10,8 +10,12 @@ import {Component, EventEmitter} from 'angular2/core';
 			*ngFor="#skill of skills; #i = index" 
 			[class.pt15]="i !== 0">
 			{{ skill.name }} ({{skill.stat}})
+			<span *ngIf="skillsRemoveable">
+				<label for="">Level:</label>
+				<input type="number" max="20" [(ngModel)]="skill.level" />
+			</span>
 			<button 
-				*ngIf="skillsRemovable"
+				*ngIf="skillsRemoveable"
 				(click)="removeSkill($event, skill)">-</button>
 			<button 
 				*ngIf="skillsSelectable"

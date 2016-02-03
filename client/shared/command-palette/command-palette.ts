@@ -17,10 +17,10 @@ import {MeteorComponent} from 'angular2-meteor';
   </form>
   <section 
     *ngIf="commands.length > 0"
-    class="posa t100 l0 max-width bgc-white add-shadow">
+    class="posa t100 l0 curp max-width bgc-white add-shadow">
     <div
       *ngFor="#command of commands"
-      (click)="command.command()"
+      (click)="performCommand(command)"
       class="p20 bb1-s-black">
       {{command.text}}
     </div>
@@ -130,9 +130,9 @@ export class CommandPalette extends MeteorComponent {
       this.commands = [];
   }
 
-  performCommand() {
+  performCommand(command?: any) {
     if (this.commands.length > 0) {
-      this.commands[0].command();
+      command ? command.command() : this.commands[0].command();
       this.closePalette();
     }
   }

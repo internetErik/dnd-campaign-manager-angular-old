@@ -21,7 +21,7 @@ import {MeteorComponent} from 'angular2-meteor';
     <div
       *ngFor="#command of commands"
       (click)="performCommand(command)"
-      class="p20 bb1-s-black">
+      class="p20 bb1-s-black bgc-lightgray:h">
       {{command.text}}
     </div>
   </section>
@@ -84,7 +84,7 @@ export class CommandPalette extends MeteorComponent {
         this.subscribe('characters', () => {
           this.characters = Characters.find({ campaignId: this.campaign._id });
           this.charactersCommands = 
-            this.characters.map(this._charactersFunctionFactory);
+            this.characters.map(this._charactersFunctionFactory.bind(this));
         }, true);
     }, true);
     
@@ -93,9 +93,13 @@ export class CommandPalette extends MeteorComponent {
   }
 
   _charactersFunctionFactory(character) {
+    console.dir(character);
+    var func = () => 
+      this.router.navigate(['/CharacterDetail', { characterId: character._id }]);
+
     return {
       text: `Character Detail - ${character.firstName} ${character.lastName}`,
-      command: (function(id) { this.router.navigate(['/CharacterDetail', { characterId: id }]) }).bind(this, character._id)
+      command: func
     }
   }
 

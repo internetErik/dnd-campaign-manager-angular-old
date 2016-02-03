@@ -67,7 +67,7 @@ export class CharacterDetail extends MeteorComponent {
     var characterId = params.get('characterId');
 
     this.subscribe('character', characterId, () => {
-			this.character = Characters.findOne();
+			this.character = Characters.findOne({ _id: characterId });
 			this.characterSpells = this.character.spells;
     }, true);
 

@@ -19,8 +19,9 @@ import {MeteorComponent} from 'angular2-meteor';
     *ngIf="commands.length > 0"
     class="posa t100 l0 curp max-width bgc-white add-shadow">
     <div
-      *ngFor="#command of commands"
+      *ngFor="#command of commands; #i = index"
       (click)="performCommand(command)"
+      [class.bgc-lightgray]="i === curIndex"
       class="p20 bb1-s-black bgc-lightgray:h">
       {{command.text}}
     </div>
@@ -32,6 +33,7 @@ export class CommandPalette extends MeteorComponent {
   visible: boolean = false;
   command: string = '';
   router: Router;
+  curIndex: number = -1;
   campaign: any;
   character: any;
 
@@ -93,7 +95,6 @@ export class CommandPalette extends MeteorComponent {
   }
 
   _charactersFunctionFactory(character) {
-    console.dir(character);
     var func = () => 
       this.router.navigate(['/CharacterDetail', { characterId: character._id }]);
 
@@ -123,20 +124,41 @@ export class CommandPalette extends MeteorComponent {
 
   keyboardEvent(e) {
     e.preventDefault();
-    if (this.command.length > 0)
-      this.commands = this.possibleCommands.concat(this.characterCommands, this.charactersCommands)
+    if (this.commands.length > 0 && e.keyCode === 38 || e.keyCode === 40)
+      this._directionalArrows(e);
+    else
+      this._lookupCommands();
+  }
+
+  _directionalArrows(e) {
+    if (this.commands.length === 1)
+      this.curIndex = 0;
+    else if (e.keyCode === 38)
+      this.curIndex = (this.curIndex <= 0) ? 
+        this.commands.length-1 : this.curIndex-1;
+    else
+      this.curIndex = (this.curIndex === this.commands.length-1) ?
+        0 : this.curIndex+1;
+  }
+
+  _lookupCommands() {
+    if (this.command.length > 0) {
+      this.commands = this.possibleCommands
+        .concat(this.characterCommands, this.charactersCommands)
         .filter((i) => {
           var condition = (i.condition) ? i.condition : () => true;
-          return condition() && 
+          return condition() &&
             i.text.toLowerCase().indexOf(this.command.toLowerCase()) > -1;
         });
+    }
     else
       this.commands = [];
   }
 
   performCommand(command?: any) {
+    var ndx = (this.curIndex === -1) ? 0 : this.curIndex;
     if (this.commands.length > 0) {
-      command ? command.command() : this.commands[0].command();
+      command ? command.command() : this.commands[ndx].command();
       this.closePalette();
     }
   }

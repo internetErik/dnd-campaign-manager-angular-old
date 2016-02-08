@@ -26,19 +26,7 @@ export class CharacterDetail extends MeteorComponent {
   currentUser: any;
   router: Router;
 
-  character: any;
-
-	newSpellName: string = '';
-	newSpellLevel: number = 0;
-	newSpellDomain: string = '';
-	newSpellDescription: string = '';
-
-	newSkillName: string = '';
-	newSkillStat: string = '';
-	newSkillLevel: number = 0;
-
-	newFeatName: string = '';
-	newFeatDesc: string = '';
+  character: any = {};
 
 	saveMessage: string = '';
 

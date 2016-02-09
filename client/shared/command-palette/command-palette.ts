@@ -79,6 +79,7 @@ export class CommandPalette extends MeteorComponent {
   constructor(_router: Router) {
     super();
     this.router = _router;
+    window.router = this.router;
     this.autorun(() => {
       this.campaign = Session.get('campaign');
       this.character = Session.get('character');

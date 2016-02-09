@@ -41,29 +41,38 @@ export class CommandPalette extends MeteorComponent {
   characters: Mongo.Cursor<Object>;
   campaigns: Mongo.Cursor<Object>;
 
-  characterDetailPath: RegExp = new RegExp('/^\/character\/./', 'i');
+  homePath: RegExp = new RegExp('^\/$', 'i');
+  campaignListPath: RegExp = new RegExp('^\/campaign$', 'i');
+  characterDetailPath: RegExp = new RegExp('^\/character\/.', 'i');
+  characterListPath: RegExp = new RegExp('^\/character$', 'i');
+  contentCreatorPath: RegExp = new RegExp('^\/content-create$', 'i');
+  battleListPath: RegExp = new RegExp('^\/battle$', 'i');
+  battleDetailPath: RegExp = new RegExp('^\/battle\/.', 'i');
 
   possibleCommands: any[] = [
     {
       text: 'Home',
+      condition: () => !this.homePath.test(location.pathname),
       command: () => this.router.navigate(['/HomePage'])
     },
     {
       text: 'Campaigns',
+      condition: () => !this.campaignListPath.test(location.pathname),
       command: () => this.router.navigate(['/CampaignList'])
     },
     {
       text: 'Content Creator',
+      condition: () => !this.contentCreatorPath.test(location.pathname),
       command: () => this.router.navigate(['/ContentCreator'])
     },
     {
       text: 'Characters',
-      condition: () => this.campaign,
+      condition: () => this.campaign && !this.characterListPath.test(location.pathname),
       command: () => this.router.navigate(['/CharacterList'])
     },
     {
       text: 'Battles',
-      condition: () => this.campaign,
+      condition: () => this.campaign && !this.battleListPath.test(location.pathname),
       command: () => this.router.navigate(['/BattleList'])
     }
   ];
@@ -145,7 +154,6 @@ export class CommandPalette extends MeteorComponent {
   togglePalette(e: any) {
     var input: HTMLInputElement = 
       <HTMLInputElement> document.querySelector('.js-command-palette-input');
-    this.curIndex = -1;
     if (e.ctrlKey && e.altKey && e.keyCode == 80) {
       this.visible = !this.visible;
       setTimeout(() => input.focus(), 0);
@@ -158,6 +166,7 @@ export class CommandPalette extends MeteorComponent {
     this.command = '';
     this.commands = [];
     this.visible = false;
+    this.curIndex = -1;
   }
 
   keyboardEvent(e) {

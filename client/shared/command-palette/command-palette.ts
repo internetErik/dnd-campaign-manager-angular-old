@@ -1,6 +1,7 @@
 import {Component} from 'angular2/core';
 import {Router} from 'angular2/router';
 import {Characters} from 'lib/collections/characters';
+import {Campaigns} from 'lib/collections/campaigns';
 import {MeteorComponent} from 'angular2-meteor';
 
 @Component({
@@ -38,6 +39,9 @@ export class CommandPalette extends MeteorComponent {
   character: any;
 
   characters: Mongo.Cursor<Object>;
+  campaigns: Mongo.Cursor<Object>;
+
+  characterDetailPath: RegExp = new RegExp('/^\/character\/./', 'i');
 
   possibleCommands: any[] = [
     {
@@ -69,20 +73,42 @@ export class CommandPalette extends MeteorComponent {
       text: 'Character Detail',
       condition: () => this.character,
       command: () => this.router.navigate(['/CharacterDetail', {characterId: this.character._id}])
+    },
+    {//if we're on a character detail, save the character
+      text: 'Character - Save',
+      condition: () => this.characterDetailPath.test(location.pathname),
+      command: () => console.log("Need to figure how to do this part . . .")
     }
   ];
 
-  charactersCommands: any[] = [];
+  campaignCommands: any[] = [
+    {
+      text: 'Campaign Unselect',
+      condition: () => this.campaign,
+      command: () => { 
+        Session.set('campaign', null); 
+        this.router.navigate(['/CampaignList']);
+      }
+    }
+  ];
 
+  campaignsCommands: any[] = [];
+  charactersCommands: any[] = [];
   commands: any[] = [];
   
   constructor(_router: Router) {
     super();
     this.router = _router;
-    window.router = this.router;
     this.autorun(() => {
       this.campaign = Session.get('campaign');
       this.character = Session.get('character');
+
+      this.subscribe('campaigns', () => {
+          this.campaigns = Campaigns.find();
+          this.campaignsCommands =
+            this.campaigns.map(this._campaignsFunctionFactory.bind(this));
+      }, true);
+
       if(this.campaign)
         this.subscribe('characters', () => {
           this.characters = Characters.find({ campaignId: this.campaign._id });
@@ -95,8 +121,19 @@ export class CommandPalette extends MeteorComponent {
       .addEventListener('keyup', this.togglePalette.bind(this));
   }
 
+  _campaignsFunctionFactory(campaign) {
+    var func = () =>
+      Session.set('campaign', campaign);
+
+    return {
+      text: `Campaign Select - ${campaign.name}`,
+      condition: () => this.campaign == null,
+      command: func
+    }
+  }
+
   _charactersFunctionFactory(character) {
-    var func = () => 
+    var func = () =>
       this.router.navigate(['/CharacterDetail', { characterId: character._id }]);
 
     return {
@@ -108,7 +145,7 @@ export class CommandPalette extends MeteorComponent {
   togglePalette(e: any) {
     var input: HTMLInputElement = 
       <HTMLInputElement> document.querySelector('.js-command-palette-input');
-
+    this.curIndex = -1;
     if (e.ctrlKey && e.altKey && e.keyCode == 80) {
       this.visible = !this.visible;
       setTimeout(() => input.focus(), 0);
@@ -145,7 +182,10 @@ export class CommandPalette extends MeteorComponent {
   _lookupCommands() {
     if (this.command.length > 0) {
       this.commands = this.possibleCommands
-        .concat(this.characterCommands, this.charactersCommands)
+        .concat(this.characterCommands, 
+                this.charactersCommands,
+                this.campaignCommands,
+                this.campaignsCommands)
         .filter((i) => {
           var condition = (i.condition) ? i.condition : () => true;
           return condition() &&

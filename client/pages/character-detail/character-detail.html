@@ -1,4 +1,4 @@
-<div *ngIf="character">
+<div *ngIf="campaign && character">
 	<section class="p20-0 m20-0">
 		<a id="name"></a>
 		<h2>Name</h2>
@@ -422,22 +422,6 @@
 	<feat-list [feats]="feats" [featsSelectable]="true"
 		(featSelected)="learnFeat($event)"></feat-list>
 </section>
-
-<div class="jump-menu p10 r0 vertical-align-fixed bgc-white add-shadow">
-	<ul>
-		<li class="p5-0"><a href="#name">Name</a></li>
-		<li class="p5-0"><a href="#religion">Religion/Morals</a></li>
-		<li class="p5-0"><a href="#biological">Biological Information</a></li>
-		<li class="p5-0"><a href="#equipment">Equipment</a></li>
-		<li class="p5-0"><a href="#general">General Attributes</a></li>
-		<li class="p5-0"><a href="#combat">Combat Attributes</a></li>
-		<li class="p5-0"><a href="#magic">Magic</a></li>
-		<li class="p5-0 pl10"><a href="#spelllist">Spell List</a></li>
-		<li class="p5-0"><a href="#skills">Skills</a></li>
-		<li class="p5-0"><a href="#feats">Feats</a></li>
-		<li class="p5-0"><a href="#notes">Notes</a></li>
-		<li class="p5-0"><a href="#backstory">Backstory</a></li>
-	</ul>
-	<button (click)="saveCharacter($event)">Save</button> {{saveMessage}}
-	
-</div>
+<character-jump-menu
+	[saveMessage]="saveMessage"
+	(characterSaved)="updateCharacter()"></character-jump-menu>

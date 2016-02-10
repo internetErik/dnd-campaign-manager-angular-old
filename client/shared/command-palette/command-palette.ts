@@ -1,6 +1,7 @@
 import {Component} from 'angular2/core';
 import {Router} from 'angular2/router';
 import {Characters} from 'lib/collections/characters';
+import {Campaigns} from 'lib/collections/campaigns';
 import {MeteorComponent} from 'angular2-meteor';
 
 @Component({
@@ -19,8 +20,9 @@ import {MeteorComponent} from 'angular2-meteor';
     *ngIf="commands.length > 0"
     class="posa t100 l0 curp max-width bgc-white add-shadow">
     <div
-      *ngFor="#command of commands"
+      *ngFor="#command of commands; #i = index"
       (click)="performCommand(command)"
+      [class.bgc-lightgray]="i === curIndex"
       class="p20 bb1-s-black bgc-lightgray:h">
       {{command.text}}
     </div>
@@ -32,32 +34,45 @@ export class CommandPalette extends MeteorComponent {
   visible: boolean = false;
   command: string = '';
   router: Router;
+  curIndex: number = -1;
   campaign: any;
   character: any;
 
   characters: Mongo.Cursor<Object>;
+  campaigns: Mongo.Cursor<Object>;
+
+  homePath: RegExp = new RegExp('^\/$', 'i');
+  campaignListPath: RegExp = new RegExp('^\/campaign$', 'i');
+  characterDetailPath: RegExp = new RegExp('^\/character\/.', 'i');
+  characterListPath: RegExp = new RegExp('^\/character$', 'i');
+  contentCreatorPath: RegExp = new RegExp('^\/content-create$', 'i');
+  battleListPath: RegExp = new RegExp('^\/battle$', 'i');
+  battleDetailPath: RegExp = new RegExp('^\/battle\/.', 'i');
 
   possibleCommands: any[] = [
     {
       text: 'Home',
+      condition: () => !this.homePath.test(location.pathname),
       command: () => this.router.navigate(['/HomePage'])
     },
     {
       text: 'Campaigns',
+      condition: () => !this.campaignListPath.test(location.pathname),
       command: () => this.router.navigate(['/CampaignList'])
     },
     {
       text: 'Content Creator',
+      condition: () => !this.contentCreatorPath.test(location.pathname),
       command: () => this.router.navigate(['/ContentCreator'])
     },
     {
       text: 'Characters',
-      condition: () => this.campaign,
+      condition: () => this.campaign && !this.characterListPath.test(location.pathname),
       command: () => this.router.navigate(['/CharacterList'])
     },
     {
       text: 'Battles',
-      condition: () => this.campaign,
+      condition: () => this.campaign && !this.battleListPath.test(location.pathname),
       command: () => this.router.navigate(['/BattleList'])
     }
   ];
@@ -67,11 +82,27 @@ export class CommandPalette extends MeteorComponent {
       text: 'Character Detail',
       condition: () => this.character,
       command: () => this.router.navigate(['/CharacterDetail', {characterId: this.character._id}])
+    },
+    {//if we're on a character detail, save the character
+      text: 'Character - Save',
+      condition: () => this.characterDetailPath.test(location.pathname),
+      command: () => console.log("Need to figure how to do this part . . .")
     }
   ];
 
-  charactersCommands: any[] = [];
+  campaignCommands: any[] = [
+    {
+      text: 'Campaign Unselect',
+      condition: () => this.campaign,
+      command: () => { 
+        Session.set('campaign', null); 
+        this.router.navigate(['/CampaignList']);
+      }
+    }
+  ];
 
+  campaignsCommands: any[] = [];
+  charactersCommands: any[] = [];
   commands: any[] = [];
   
   constructor(_router: Router) {
@@ -80,6 +111,13 @@ export class CommandPalette extends MeteorComponent {
     this.autorun(() => {
       this.campaign = Session.get('campaign');
       this.character = Session.get('character');
+
+      this.subscribe('campaigns', () => {
+          this.campaigns = Campaigns.find();
+          this.campaignsCommands =
+            this.campaigns.map(this._campaignsFunctionFactory.bind(this));
+      }, true);
+
       if(this.campaign)
         this.subscribe('characters', () => {
           this.characters = Characters.find({ campaignId: this.campaign._id });
@@ -92,9 +130,19 @@ export class CommandPalette extends MeteorComponent {
       .addEventListener('keyup', this.togglePalette.bind(this));
   }
 
+  _campaignsFunctionFactory(campaign) {
+    var func = () =>
+      Session.set('campaign', campaign);
+
+    return {
+      text: `Campaign Select - ${campaign.name}`,
+      condition: () => this.campaign == null,
+      command: func
+    }
+  }
+
   _charactersFunctionFactory(character) {
-    console.dir(character);
-    var func = () => 
+    var func = () =>
       this.router.navigate(['/CharacterDetail', { characterId: character._id }]);
 
     return {
@@ -106,7 +154,6 @@ export class CommandPalette extends MeteorComponent {
   togglePalette(e: any) {
     var input: HTMLInputElement = 
       <HTMLInputElement> document.querySelector('.js-command-palette-input');
-
     if (e.ctrlKey && e.altKey && e.keyCode == 80) {
       this.visible = !this.visible;
       setTimeout(() => input.focus(), 0);
@@ -119,24 +166,49 @@ export class CommandPalette extends MeteorComponent {
     this.command = '';
     this.commands = [];
     this.visible = false;
+    this.curIndex = -1;
   }
 
   keyboardEvent(e) {
     e.preventDefault();
-    if (this.command.length > 0)
-      this.commands = this.possibleCommands.concat(this.characterCommands, this.charactersCommands)
+    if (this.commands.length > 0 && e.keyCode === 38 || e.keyCode === 40)
+      this._directionalArrows(e);
+    else
+      this._lookupCommands();
+  }
+
+  _directionalArrows(e) {
+    if (this.commands.length === 1)
+      this.curIndex = 0;
+    else if (e.keyCode === 38)
+      this.curIndex = (this.curIndex <= 0) ? 
+        this.commands.length-1 : this.curIndex-1;
+    else
+      this.curIndex = (this.curIndex === this.commands.length-1) ?
+        0 : this.curIndex+1;
+  }
+
+  _lookupCommands() {
+    if (this.command.length > 0) {
+      this.commands = this.possibleCommands
+        .concat(this.characterCommands, 
+                this.charactersCommands,
+                this.campaignCommands,
+                this.campaignsCommands)
         .filter((i) => {
           var condition = (i.condition) ? i.condition : () => true;
-          return condition() && 
+          return condition() &&
             i.text.toLowerCase().indexOf(this.command.toLowerCase()) > -1;
         });
+    }
     else
       this.commands = [];
   }
 
   performCommand(command?: any) {
+    var ndx = (this.curIndex === -1) ? 0 : this.curIndex;
     if (this.commands.length > 0) {
-      command ? command.command() : this.commands[0].command();
+      command ? command.command() : this.commands[ndx].command();
       this.closePalette();
     }
   }

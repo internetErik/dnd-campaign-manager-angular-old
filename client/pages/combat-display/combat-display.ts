@@ -1,8 +1,6 @@
 import {Component} from 'angular2/core';
 import {Router, RouteParams} from 'angular2/router';
-
 import {Battles} from 'lib/collections/battles';
-
 import {RequireUser, InjectUser} from 'meteor-accounts';
 import {MeteorComponent} from 'angular2-meteor';
 import {BattleForm}
@@ -62,7 +60,7 @@ export class CombatDisplay extends MeteorComponent {
 	//characters being controlled by user
 	localControlled: any[] = [];
 
-	constructor(params: RouteParams, _router: Router) {
+constructor(params: RouteParams, _router: Router) {
 		super();
 		this.router = _router;
 		this.battleId = params.get('battleId');

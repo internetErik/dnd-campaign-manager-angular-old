@@ -1,4 +1,4 @@
-import {Component} from 'angular2/core';
+import {Component, NgZone} from 'angular2/core';
 import {RouteParams, Router} from 'angular2/router';
 
 import {Characters} from 'lib/collections/characters';
@@ -14,31 +14,23 @@ import {SpellList} from 'client/components/spell-list/spell-list';
 import {SpellFilter} from 'client/components/spell-filter/spell-filter';
 import {SkillList} from 'client/components/skill-list/skill-list';
 import {FeatList} from 'client/components/feat-list/feat-list';
+import {CharacterJumpMenu} 
+	from 'client/pages/character-detail/character-jump-menu/character-jump-menu';
 
 @Component({
     selector: 'character-detail',
     templateUrl: 'client/pages/character-detail/character-detail.html',
-    directives: [SpellList, SpellFilter, SkillList, FeatList]
+    directives: [SpellList, SpellFilter, SkillList, FeatList, CharacterJumpMenu]
 })
 @RequireUser()
 @InjectUser('currentUser')
 export class CharacterDetail extends MeteorComponent {
   currentUser: any;
   router: Router;
+  zone: NgZone;
 
+  campaign: any;
   character: any;
-
-	newSpellName: string = '';
-	newSpellLevel: number = 0;
-	newSpellDomain: string = '';
-	newSpellDescription: string = '';
-
-	newSkillName: string = '';
-	newSkillStat: string = '';
-	newSkillLevel: number = 0;
-
-	newFeatName: string = '';
-	newFeatDesc: string = '';
 
 	saveMessage: string = '';
 
@@ -59,29 +51,33 @@ export class CharacterDetail extends MeteorComponent {
 	showSkillModal: boolean = false;
 	showFeatModal: boolean = false;
 
-	constructor(_router: Router, params: RouteParams) {
-		super();
-
-    var characterId = params.get('characterId');
-
-    this.subscribe('character', characterId, () => {
-			this.character = Characters.findOne({ _id: characterId });
-			this.characterSpells = this.character.spells;
-    }, true);
-
-    this.subscribe('spells', () => { 
-			this.spells = Spells.find();
-    }, true);
-
-    this.subscribe('skills', () => { 
-			this.skills = Skills.find();
-    }, true);
-      
-    this.subscribe('feats', () => { 
-			this.feats = Feats.find();
-    }, true);
-
+	constructor(_router: Router, params: RouteParams, _zone: NgZone) {
+    super(); 
+    this.zone = _zone;
     this.router = _router;
+    this.campaign = Session.get('campaign');
+    if (this.campaign) {
+      var characterId = params.get('characterId');
+
+      this.subscribe('character', characterId, () => {
+          this.character = Characters.findOne({ _id: characterId });
+          this.characterSpells = this.character.spells;
+      }, true);
+
+      this.subscribe('spells', () => {
+          this.spells = Spells.find();
+      }, true);
+
+      this.subscribe('skills', () => {
+          this.skills = Skills.find();
+      }, true);
+
+      this.subscribe('feats', () => {
+          this.feats = Feats.find();
+      }, true);
+    }
+    else
+      this.router.navigate(['/CampaignList']);
   }
 
   getHitRoll() {
@@ -154,11 +150,6 @@ export class CharacterDetail extends MeteorComponent {
 		}
 	}
 
-	saveCharacter(e) {
-		e.preventDefault();
-		this.updateCharacter();
-	}
-
 	updateCharacter() {
 		this.saveMessage = "saving . . .";
 		this.call('updateCharacter', this.character._id, this.character, (e, r) => {
@@ -168,7 +159,7 @@ export class CharacterDetail extends MeteorComponent {
 				console.log("Error updating character:", e);
 			}
 			else
-				setTimeout(() => { this.saveMessage = '' }, 500);
+      	this.zone.run(() => setTimeout(() => this.saveMessage = '', 500));
 		});
 	}
 

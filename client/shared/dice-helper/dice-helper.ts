@@ -1,4 +1,4 @@
-import {Component, NgZone} from 'angular2/core';
+import {Component} from 'angular2/core';
 
 import {simpleRoll} from 'lib/dice';
 
@@ -71,7 +71,7 @@ export class DiceHelper extends MeteorComponent {
 	//current character
 	character: any;
 
-	constructor(_zone: NgZone) {
+	constructor() {
 		super();
 		this.autorun(() => {
 			this.campaign = Session.get('campaign');

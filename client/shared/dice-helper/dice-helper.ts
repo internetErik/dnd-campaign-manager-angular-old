@@ -1,4 +1,4 @@
-import {Component} from 'angular2/core';
+import {Component, NgZone} from 'angular2/core';
 
 import {simpleRoll} from 'lib/dice';
 
@@ -71,15 +71,19 @@ export class DiceHelper extends MeteorComponent {
 	//current character
 	character: any;
 
-	constructor() {
+	constructor(_zone: NgZone) {
 		super();
 		this.autorun(() => {
 			this.campaign = Session.get('campaign');
 			if(this.campaign)
-				this.subscribe('rolls', this.campaign._id, () => {
-					this.lastRolls = Rolls.find({},{sort: {createDate: -1}});
-				}, true);
+				this.subscribeRolls()
 		}, true);
+	}
+
+  subscribeRolls() {
+    this.subscribe('rolls', this.campaign._id, () => {
+        this.lastRolls = Rolls.find({}, { sort: { createDate: -1 } });
+    }, true);
 	}
 
 	roll(sides) {
@@ -95,8 +99,10 @@ export class DiceHelper extends MeteorComponent {
 	}
 
 	clearRolls() {
-		if(this.campaign)
+		if(this.campaign) {
 			Meteor.call('clearRolls', this.campaign._id);
+      this.subscribeRolls();
+		}
 	}
 
 	insertRoll(campaign, result, sides, bonus) {

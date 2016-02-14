@@ -128,8 +128,8 @@ constructor(params: RouteParams, _router: Router) {
   }
 
   releaseCombatant(combatant) {
-    var i = this.localControlled.indexOf(combatant);
-    if(i > -1)
-    	this.localControlled.splice(i, 1);
+    var ndx = this.localControlled.indexOf(combatant);
+    if(ndx > -1)
+    	this.localControlled.splice(ndx, 1);
   }
 }

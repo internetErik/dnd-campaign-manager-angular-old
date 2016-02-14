@@ -17,41 +17,35 @@ import {simpleRoll} from 'lib/dice';
   <div *ngIf="localControlled.length === 0">
     You aren't controlling any characters! You'd better select some above.
   </div>
-  <ol>
+  <ol *ngIf="battle.combatPhase === 0">
+    <li *ngFor="#combatant of localControlled">
+      <h4>{{ combatant.name }}</h4>
+
+      <combat-action-input 
+        [submitted]="combatant.actionSubmitted"
+        (actionSubmitted)="submitAction($event, combatant)"
+        (actionUnsubmitted)="unsubmitAction(combatant)"></combat-action-input>
+    </li>
+  </ol>
+  <ol *ngIf="battle.combatPhase === 1">
     <li *ngFor="#combatant of battle.combatants">
-      <div 
-        *ngIf="battle.combatPhase === 1 || combatantIsControlled(combatant)"
-        [class.enemy]="combatant.type === 'enemy'"
-        class="bb1-s-black mb20">
+      <h4>{{ combatant.name }}</h4>
+      <label>Action:</label>
+      <div class="p10-0">
+        {{ combatant.action }}
+      </div>
+      <div>
+        initiative: {{ combatant.initiative }} | 
+        
+        Bonus: 
+        <input type="number" min="-100" max="100" 
+          [(ngModel)]="combatant.bonus">
+        
+        Rounds Occupied: 
+        <input type="number" min="0" max="100" 
+          [(ngModel)]="combatant.roundsOccupied">
 
-        <h4>{{ combatant.name }}</h4>
-
-        <div *ngIf="battle.combatPhase === 0">
-          <combat-action-input 
-            [submitted]="combatant.actionSubmitted"
-            (actionSubmitted)="submitAction($event, combatant)"
-            (actionUnsubmitted)="unsubmitAction(combatant)"></combat-action-input>
-        </div>
-        <div *ngIf="battle.combatPhase === 1">
-          <label>Action:</label>
-          <div class="p10-0">
-            {{ combatant.action }}
-          </div>
-        </div>
-
-        <div>
-          initiative: {{ combatant.initiative }} | 
-          
-          Bonus: 
-          <input type="number" min="-100" max="100" 
-            [(ngModel)]="combatant.bonus">
-          
-          Rounds Occupied: 
-          <input type="number" min="0" max="100" 
-            [(ngModel)]="combatant.roundsOccupied">
-
-          <button (click)="removeCombatant(combatant)">remove</button>
-        </div>
+        <button (click)="removeCombatant(combatant)">remove</button>
       </div>
     </li>
   </ol>
@@ -74,20 +68,28 @@ export class CombatActions {
   submitAction(action: string, combatant: any) {
     //combat phase will be advanced on server if this is the last action 
     //we are waiting on
-    if (!combatant.actionSubmitted) {
-      combatant.action = action;
-      combatant.actionSubmitted = true;
+    var ndx = this.indexOfCombatant(combatant);
+    if (ndx > -1 && !this.battle.combatants[ndx].actionSubmitted) {
+      combatant.action = "";
+      this.battle.combatants[ndx].action = action;
+      this.battle.combatants[ndx].actionSubmitted = true;
       this.battleModified.emit(void(0));
     }
   }
 
   unsubmitAction(combatant: any) {
-    combatant.action = null;
-    combatant.actionSubmitted = false;
-    this.battleModified.emit(void(0));
+    var ndx = this.indexOfCombatant(combatant);
+    if (ndx > -1) {
+      this.battle.combatants[ndx].action = null;
+      this.battle.combatants[ndx].actionSubmitted = false;
+      this.battleModified.emit(void(0));
+    }
   }
 
-  combatantIsControlled(combatant): boolean {
-    return this.localControlled.some((c) => c.name === combatant.name );
+  indexOfCombatant(combatant) {
+    return this.battle.combatants.reduce((a, c, ndx) => { 
+      if (a != -1) return a;
+      return (c.name === combatant.name) ? ndx : -1;
+    }, -1);
   }
 }

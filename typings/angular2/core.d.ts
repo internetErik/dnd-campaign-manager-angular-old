@@ -1,4 +1,4 @@
-// Type definitions for Angular v2.0.0-local_sha.cf3ce17
+// Type definitions for Angular v2.0.0-local_sha.2a2f9a9
 // Project: http://angular.io/
 // Definitions by: angular team <https://github.com/angular/>
 // Definitions: https://github.com/borisyankov/DefinitelyTyped
@@ -9,22 +9,27 @@
 // modifying this file.
 // ***********************************************************
 
-// angular2/core depends transitively on these libraries.
-// If you don't have them installed you can install them using TSD
-// https://github.com/DefinitelyTyped/tsd
 
-///<reference path="../es6-promise/es6-promise.d.ts"/>
-///<reference path="../es6-shim/es6-shim.d.ts"/>
-
-
-
+import {Observable, Subject} from 'rx';
 
 /**
- * @module
+ * @namespace
  * @description
- * Starting point to import all public core APIs.
+ * Namespace of public core APIs.
  */
-declare module core {  
+declare namespace core {
+  /**
+   * Disable Angular's development mode, which turns off assertions and other
+   * checks within the framework.
+   * 
+   * One important assertion this disables verifies that a change detection pass
+   * does not result in additional changes to any bindings (also known as
+   * unidirectional data flow).
+   */
+  function enableProdMode(): void;
+  
+
+    
   /**
    * Initialize the Angular 'platform' on the page.
    * 
@@ -88,13 +93,8 @@ declare module core {
      * typical providers, as shown in the example below.
      * 
      * ### Example
-     * ```
-     * var myAppProviders = [MyAppService];
      * 
-     * platform()
-     *   .application([myAppProviders])
-     *   .bootstrap(MyTopLevelComponent);
-     * ```
+     * {@example core/ts/platform/platform.ts region='longform'}
      * ### See Also
      * 
      * See the {@link bootstrap} documentation for more details.
@@ -157,11 +157,7 @@ declare module core {
      * child components under it.
      * 
      * ### Example
-     * ```
-     * var app = platform.application([appProviders];
-     * app.bootstrap(FirstRootComponent);
-     * app.bootstrap(SecondRootComponent, [provide(OverrideBinding, {useClass: OverriddenBinding})]);
-     * ```
+     * {@example core/ts/platform/platform.ts region='longform'}
      */
     bootstrap(componentType: Type, providers?: Array<Type | Provider | any[]>): Promise<ComponentRef>;
     
@@ -258,15 +254,30 @@ declare module core {
    * A DebugElement contains information from the Angular compiler about an
    * element and provides access to the corresponding ElementInjector and
    * underlying DOM Element, as well as a way to query for children.
+   * 
+   * A DebugElement can be obtained from a {@link ComponentFixture} or from an
+   * {@link ElementRef} via {@link inspectElement}.
    */
   abstract class DebugElement {
     
+    /**
+     * Return the instance of the component associated with this element, if any.
+     */
     componentInstance: any;
     
+    /**
+     * Return the native HTML element for this DebugElement.
+     */
     nativeElement: any;
     
+    /**
+     * Return an Angular {@link ElementRef} for this element.
+     */
     elementRef: ElementRef;
     
+    /**
+     * Get the directive active for this element with the given index, if any.
+     */
     getDirectiveInstance(directiveIndex: number): any;
     
     /**
@@ -284,12 +295,25 @@ declare module core {
      */
     componentViewChildren: DebugElement[];
     
+    /**
+     * Simulate an event from this element as if the user had caused
+     * this event to fire from the page.
+     */
     triggerEventHandler(eventName: string, eventObj: Event): void;
     
+    /**
+     * Check whether the element has a directive with the given type.
+     */
     hasDirective(type: Type): boolean;
     
+    /**
+     * Inject the given type from the element injector.
+     */
     inject(type: Type): any;
     
+    /**
+     * Read a local variable from the element (e.g. one defined with `#variable`).
+     */
     getLocal(name: string): any;
     
     /**
@@ -317,19 +341,44 @@ declare module core {
   }
 
     
+  /**
+   * Set of scope functions used with {@link DebugElement}'s query functionality.
+   */
   class Scope {
     
+    /**
+     * Scope queries to both the light dom and view of an element and its
+     * children.
+     * 
+     * ## Example
+     * 
+     * {@example core/debug/ts/debug_element/debug_element.ts region='scope_all'}
+     */
     static all(debugElement: DebugElement): DebugElement[];
     
+    /**
+     * Scope queries to the light dom of an element and its children.
+     * 
+     * ## Example
+     * 
+     * {@example core/debug/ts/debug_element/debug_element.ts region='scope_light'}
+     */
     static light(debugElement: DebugElement): DebugElement[];
     
+    /**
+     * Scope queries to the view of an element of its children.
+     * 
+     * ## Example
+     * 
+     * {@example core/debug/ts/debug_element/debug_element.ts region='scope_view'}
+     */
     static view(debugElement: DebugElement): DebugElement[];
     
   }
 
     
   /**
-   * Returns a DebugElement for a ElementRef.
+   * Returns a {@link DebugElement} for an {@link ElementRef}.
    * 
    * @param {ElementRef}: elementRef
    * @return {DebugElement}
@@ -338,6 +387,9 @@ declare module core {
   
 
     
+  /**
+   * Maps an array of {@link DebugElement}s to an array of native DOM elements.
+   */
   function asNativeElements(arr: DebugElement[]): any[];
   
 
@@ -663,16 +715,7 @@ declare module core {
    * 
    * A decorator can inject string literal `text` like so:
    * 
-   * ```javascript
-   * @Directive({
-   *   selector: `input'
-   * })
-   * class InputDirective {
-   *   constructor(@Attribute('type') type) {
-   *     // type would be `text` in this example
-   *   }
-   * }
-   * ```
+   * {@example core/ts/metadata/metadata.ts region='attributeMetadata'}
    */
   class AttributeMetadata extends DependencyMetadata {
     
@@ -711,19 +754,7 @@ declare module core {
    * 
    * ### Example
    * 
-   * ```
-   * @Component({
-   *   selector: 'greet',
-   *   template: 'Hello {{name}}!'
-   * })
-   * class Greet {
-   *   name: string;
-   * 
-   *   constructor() {
-   *     this.name = 'World';
-   *   }
-   * }
-   * ```
+   * {@example core/ts/metadata/metadata.ts region='component'}
    */
   class ComponentMetadata extends DirectiveMetadata {
     
@@ -806,6 +837,26 @@ declare module core {
     viewProviders: any[];
     
     viewBindings: any[];
+    
+    /**
+     * The module id of the module that contains the component.
+     * Needed to be able to resolve relative urls for templates and styles.
+     * In Dart, this can be determined automatically and does not need to be set.
+     * In CommonJS, this can always be set to `module.id`.
+     * 
+     * ## Simple Example
+     * 
+     * ```
+     * @Directive({
+     *   selector: 'someDir',
+     *   moduleId: module.id
+     * })
+     * class SomeDir {
+     * }
+     * 
+     * ```
+     */
+    moduleId: string;
     
     templateUrl: string;
     
@@ -1205,7 +1256,7 @@ declare module core {
   class DirectiveMetadata extends InjectableMetadata {
     
     constructor({selector, inputs, outputs, properties, events, host, bindings, providers, exportAs,
-                   moduleId, queries}?: {
+                   queries}?: {
         selector?: string,
         inputs?: string[],
         outputs?: string[],
@@ -1215,7 +1266,6 @@ declare module core {
         providers?: any[],
         /** @deprecated */ bindings?: any[],
         exportAs?: string,
-        moduleId?: string,
         queries?: {[key: string]: any}
       });
     
@@ -1521,26 +1571,6 @@ declare module core {
     exportAs: string;
     
     /**
-     * The module id of the module that contains the directive.
-     * Needed to be able to resolve relative urls for templates and styles.
-     * In Dart, this can be determined automatically and does not need to be set.
-     * In CommonJS, this can always be set to `module.id`.
-     * 
-     * ## Simple Example
-     * 
-     * ```
-     * @Directive({
-     *   selector: 'someDir',
-     *   moduleId: module.id
-     * })
-     * class SomeDir {
-     * }
-     * 
-     * ```
-     */
-    moduleId: string;
-    
-    /**
      * Configures the queries that will be injected into the directive.
      * 
      * Content queries are set before the `ngAfterContentInit` callback is called.
@@ -1586,12 +1616,7 @@ declare module core {
    * 
    * ### Example
    * 
-   * ```
-   * @Pipe({name: 'lowercase'})
-   * class Lowercase {
-   *   transform(v, args) { return v.toLowerCase(); }
-   * }
-   * ```
+   * {@example core/ts/metadata/metadata.ts region='pipe'}
    */
   class PipeMetadata extends InjectableMetadata {
     
@@ -1994,16 +2019,7 @@ declare module core {
    * 
    * ### Example as TypeScript Decorator
    * 
-   * ```
-   * import {Directive} from "angular2/angular2";
-   * 
-   * @Directive({...})
-   * class MyDirective {
-   *   constructor() {
-   *     ...
-   *   }
-   * }
-   * ```
+   * {@example core/ts/metadata/metadata.ts region='directive'}
    * 
    * ### Example as ES5 DSL
    * 
@@ -2041,7 +2057,6 @@ declare module core {
         bindings?: any[],
         providers?: any[],
         exportAs?: string,
-        moduleId?: string,
         queries?: {[key: string]: any}
       }): DirectiveMetadata;
     
@@ -2055,7 +2070,6 @@ declare module core {
         bindings?: any[],
         providers?: any[],
         exportAs?: string,
-        moduleId?: string,
         queries?: {[key: string]: any}
       }): DirectiveDecorator;
     
@@ -2067,16 +2081,7 @@ declare module core {
    * 
    * ### Example as TypeScript Decorator
    * 
-   * ```
-   * import {Component} from "angular2/angular2";
-   * 
-   * @Component({...})
-   * class MyComponent {
-   *   constructor() {
-   *     ...
-   *   }
-   * }
-   * ```
+   * {@example core/ts/metadata/metadata.ts region='component'}
    * 
    * ### Example as ES5 DSL
    * 
@@ -2164,7 +2169,7 @@ declare module core {
    * ### Example as TypeScript Decorator
    * 
    * ```
-   * import {Component, View} from "angular2/angular2";
+   * import {Component, View} from "angular2/core";
    * 
    * @Component({...})
    * @View({...})
@@ -2231,16 +2236,7 @@ declare module core {
    * 
    * ### Example as TypeScript Decorator
    * 
-   * ```
-   * import {Attribute, Component} from "angular2/angular2";
-   * 
-   * @Component({...})
-   * class MyComponent {
-   *   constructor(@Attribute('title') title: string) {
-   *     ...
-   *   }
-   * }
-   * ```
+   * {@example core/ts/metadata/metadata.ts region='attributeFactory'}
    * 
    * ### Example as ES5 DSL
    * 
@@ -2284,7 +2280,7 @@ declare module core {
    * ### Example as TypeScript Decorator
    * 
    * ```
-   * import {Query, QueryList, Component} from "angular2/angular2";
+   * import {Query, QueryList, Component} from "angular2/core";
    * 
    * @Component({...})
    * class MyComponent {
@@ -2330,6 +2326,9 @@ declare module core {
   }
 
     
+  /**
+   * Factory for {@link ContentChildren}.
+   */
   interface ContentChildrenFactory {
     
     new(selector: Type | string, {descendants}?: {descendants?: boolean}): ContentChildrenMetadata;
@@ -2339,6 +2338,9 @@ declare module core {
   }
 
     
+  /**
+   * Factory for {@link ContentChild}.
+   */
   interface ContentChildFactory {
     
     new(selector: Type | string): ContentChildFactory;
@@ -2348,6 +2350,9 @@ declare module core {
   }
 
     
+  /**
+   * Factory for {@link ViewChildren}.
+   */
   interface ViewChildrenFactory {
     
     new(selector: Type | string): ViewChildrenMetadata;
@@ -2357,6 +2362,9 @@ declare module core {
   }
 
     
+  /**
+   * Factory for {@link ViewChild}.
+   */
   interface ViewChildFactory {
     
     new(selector: Type | string): ViewChildFactory;
@@ -2369,20 +2377,9 @@ declare module core {
   /**
    * {@link PipeMetadata} factory for creating decorators.
    * 
-   * ### Example as TypeScript Decorator
+   * ### Example
    * 
-   * ```
-   * import {Pipe} from "angular2/angular2";
-   * 
-   * @Pipe({...})
-   * class MyPipe {
-   *   constructor() {
-   *     ...
-   *   }
-   * 
-   *   transform(v, args) {}
-   * }
-   * ```
+   * {@example core/ts/metadata/metadata.ts region='pipe'}
    */
   interface PipeFactory {
     
@@ -2469,19 +2466,7 @@ declare module core {
    * 
    * ### Example
    * 
-   * ```
-   * @Component({
-   *   selector: 'greet',
-   *   template: 'Hello {{name}}!'
-   * })
-   * class Greet {
-   *   name: string;
-   * 
-   *   constructor() {
-   *     this.name = 'World';
-   *   }
-   * }
-   * ```
+   * {@example core/ts/metadata/metadata.ts region='component'}
    */
   var Component: ComponentFactory;
   
@@ -2903,33 +2888,21 @@ declare module core {
 
     
   /**
-   * Metadata properties available for configuring Views.
+   * Specifies that a constant attribute value should be injected.
    * 
-   * Each Angular component requires a single `@Component` and at least one `@View` annotation. The
-   * `@View` annotation specifies the HTML template to use, and lists the directives that are active
-   * within the template.
-   * 
-   * When a component is instantiated, the template is loaded into the component's shadow root, and
-   * the expressions and statements in the template are evaluated against the component.
-   * 
-   * For details on the `@Component` annotation, see {@link ComponentMetadata}.
+   * The directive can inject constant string literals of host element attributes.
    * 
    * ### Example
    * 
-   * ```
-   * @Component({
-   *   selector: 'greet',
-   *   template: 'Hello {{name}}!',
-   *   directives: [GreetUser, Bold]
-   * })
-   * class Greet {
-   *   name: string;
+   * Suppose we have an `<input>` element and want to know its `type`.
    * 
-   *   constructor() {
-   *     this.name = 'World';
-   *   }
-   * }
+   * ```html
+   * <input type="text">
    * ```
+   * 
+   * A decorator can inject string literal `text` like so:
+   * 
+   * {@example core/ts/metadata/metadata.ts region='attributeMetadata'}
    */
   var Attribute: AttributeFactory;
   
@@ -3000,8 +2973,8 @@ declare module core {
    * 
    * ```html
    * <seeker>
-   *   <div #find-me>...</div>
-   *   <div #find-me-too>...</div>
+   *   <div #findMe>...</div>
+   *   <div #findMeToo>...</div>
    * </seeker>
    * 
    *  @Component({
@@ -3190,14 +3163,7 @@ declare module core {
    * 
    * ### Example
    * 
-   * ```
-   * @Pipe({
-   *   name: 'lowercase'
-   * })
-   * class Lowercase {
-   *   transform(v, args) { return v.toLowerCase(); }
-   * }
-   * ```
+   * {@example core/ts/metadata/metadata.ts region='pipe'}
    */
   var Pipe: PipeFactory;
   
@@ -3524,20 +3490,6 @@ declare module core {
 
     
   /**
-   * Enable Angular's development mode, which turns on assertions and other
-   * checks within the framework.
-   * 
-   * One important assertion this enables verifies that a change detection pass
-   * does not result in additional changes to any bindings (also known as
-   * unidirectional data flow).
-   * 
-   * {@example core/ts/dev_mode/dev_mode_example.ts region='enableDevMode'}
-   */
-  function enableDevMode(): void;
-  
-
-    
-  /**
    * A parameter metadata that specifies a dependency.
    * 
    * ### Example ([live demo](http://plnkr.co/edit/6uHYJK?p=preview))
@@ -3800,25 +3752,8 @@ declare module core {
    * but not yet defined. It is also used when the `token` which we use when creating a query is not
    * yet defined.
    * 
-   * ### Example ([live demo](http://plnkr.co/edit/bRs0SX2OTQiJzqvjgl8P?p=preview))
-   * 
-   * ```typescript
-   * class Door {
-   *   lock: Lock;
-   *   constructor(@Inject(forwardRef(() => Lock)) lock:Lock) {
-   *     this.lock = lock;
-   *   }
-   * }
-   * 
-   * // Only at this point Lock is defined.
-   * class Lock {
-   * }
-   * 
-   * var injector = Injector.resolveAndCreate([Door, Lock]);
-   * var door = injector.get(Door);
-   * expect(door instanceof Door).toBe(true);
-   * expect(door.lock instanceof Lock).toBe(true);
-   * ```
+   * ### Example
+   * {@example core/di/ts/forward_ref/forward_ref.ts region='forward_ref'}
    */
   function forwardRef(forwardRefFn: ForwardRefFn): Type;
   
@@ -3848,9 +3783,7 @@ declare module core {
    * 
    * ### Example
    * 
-   * ```typescript
-   * var fn:ForwardRefFn = forwardRef(() => Lock);
-   * ```
+   * {@example core/di/ts/forward_ref/forward_ref.ts region='forward_ref_fn'}
    */
   interface ForwardRefFn {
     
@@ -4168,6 +4101,8 @@ declare module core {
 
     
   /**
+   * See {@link Provider} instead.
+   * 
    * @deprecated
    */
   class Binding extends Provider {
@@ -4312,6 +4247,8 @@ declare module core {
 
     
   /**
+   * See {@link ResolvedProvider} instead.
+   * 
    * @deprecated
    */
   interface ResolvedBinding extends ResolvedProvider {
@@ -4339,6 +4276,10 @@ declare module core {
   }
 
     
+  /**
+   * `Dependency` is used by the framework to extend DI.
+   * This is internal to Angular and should not be used directly.
+   */
   class Dependency {
     
     constructor(key: Key, optional: boolean, lowerBoundVisibility: any, upperBoundVisibility: any, properties: any[]);
@@ -4359,7 +4300,6 @@ declare module core {
 
     
   /**
-   * @deprecated
    * Creates a {@link Provider}.
    * 
    * To construct a {@link Provider}, bind a `token` to either a class, a value, a factory function,
@@ -4368,6 +4308,8 @@ declare module core {
    * See {@link ProviderBuilder} for more details.
    * 
    * The `token` is most commonly a class or {@link angular2/di/OpaqueToken}.
+   * 
+   * @deprecated
    */
   function bind(token: any): ProviderBuilder;
   
@@ -4981,6 +4923,9 @@ declare module core {
   
 
     
+  /**
+   * Runtime representation of a type that is constructable (non-abstract).
+   */
   interface ConcreteType extends Type {
     
     new(...args: any[]): any;
@@ -4996,72 +4941,6 @@ declare module core {
    * the `MyCustomComponent` constructor function.
    */
   interface Type extends Function {
-    
-  }
-
-    
-  /**
-   * Allows publishing and subscribing to series of async values.
-   * 
-   * The `Observable` class is an alias to the `Observable` returned from
-   * {@link https://github.com/reactivex/rxjs}. `Observables` are a means of delivering
-   * any number of values over any period of time. `Observables` can be thought of as a
-   * mixture of `Promise` and `Array`. `Observables` are like `Arrays` in that they can have
-   * chained combinators -- like `map`, `reduce`, and `filter` -- attached in order to
-   * perform projections and transformations of data. And they are like `Promises`
-   * in that they can asynchronously deliver values. But unlike a `Promise`, an
-   * `Observable` can emit many values over time, and decides if/when it is completed.
-   * 
-   * `Observable` is also being considered for inclusion in the
-   * [ECMAScript spec](https://github.com/zenparsing/es-observable).
-   * 
-   * ## Example
-   * 
-   * A simple example of using an `Observable` is a timer `Observable`, which will
-   * notify an `Observer` each time an interval has completed.
-   * 
-   * {@example facade/ts/async/observable.ts region='Observable'}
-   * 
-   * The `Observable` in Angular currently doesn't provide any combinators by default.
-   * So it's necessary to explicitly import any combinators that an application requires.
-   * There are two ways to import RxJS combinators: pure and patched. The "pure" approach
-   * involves importing a combinator as a function every place that an application needs it,
-   * then calling the function with the source observable as the context of the function.
-   * 
-   * ## Example
-   * 
-   * {@example facade/ts/async/observable_pure.ts region='Observable'}
-   * 
-   * The "patched" approach to using combinators is to import a special module for
-   * each combinator, which will automatically cause the combinator to be patched
-   * to the `Observable` prototype, which will make it available to use anywhere in
-   * an application after the combinator has been imported once.
-   * 
-   * ## Example
-   * 
-   * (Notice the extra "add" in the path to import `map`)
-   * 
-   * {@example facade/ts/async/observable_patched.ts region='Observable'}
-   * 
-   * Notice that the sequence of operations is now able to be expressed "left-to-right"
-   * because `map` is on the `Observable` prototype. For a simple example like this one,
-   * the left-to-right expression may seem insignificant. However, when several operators
-   * are used in combination, the "callback tree" grows several levels deep, and becomes
-   * difficult to read. For this reason, the "patched" approach is the recommended approach
-   * to add new operators to `Observable`.
-   * 
-   * For applications that are less sensitive about payload size, the set of core operators
-   * can be patched onto the `Observable` prototype with a single import, by importing the
-   * `rxjs` module.
-   * 
-   * {@example facade/ts/async/observable_all.ts region='Observable'}
-   * 
-   * Full documentation on RxJS `Observable` and available combinators can be found
-   * in the RxJS [Observable docs](http://reactivex.io/RxJS/class/es6/Observable.js~Observable.html).
-   */
-  class Observable<T> extends RxObservable<T> {
-    
-    lift<T, R>(operator: Operator<T, R>): Observable<T>;
     
   }
 
@@ -5125,6 +5004,9 @@ declare module core {
   }
 
     
+  /**
+   * Wraps an exception and provides additional context or information.
+   */
   class WrappedException extends Error {
     
     constructor(_wrapperMessage: string, _originalException: any, _originalStack?: any, _context?: any);
@@ -5193,7 +5075,8 @@ declare module core {
    * 
    * ### Example ([live demo](http://plnkr.co/edit/lY9m8HLy7z06vDoUaSN2?p=preview))
    * ```
-   * import {Component, View, NgIf, NgZone} from 'angular2/angular2';
+   * import {Component, View, NgZone} from 'angular2/core';
+   * import {NgIf} from 'angular2/common';
    * 
    * @Component({
    *   selector: 'ng-zone-demo'.
@@ -5380,6 +5263,9 @@ declare module core {
   }
 
     
+  /**
+   * Interface for a function with zero arguments.
+   */
   interface ZeroArgFunction {
     
     (): void;
@@ -5387,6 +5273,9 @@ declare module core {
   }
 
     
+  /**
+   * Function type for an error handler, which takes an error and a stack trace.
+   */
   interface ErrorHandlingFn {
     
     (error: any, stackTrace: any): void;
@@ -5442,7 +5331,7 @@ declare module core {
    * 
    * If you are implementing a custom renderer, you must implement this interface.
    * 
-   * The default Renderer implementation is {@link DomRenderer}. Also see {@link WebWorkerRenderer}.
+   * The default Renderer implementation is `DomRenderer`. Also available is `WebWorkerRenderer`.
    */
   abstract class Renderer {
     
@@ -5562,6 +5451,8 @@ declare module core {
      */
     setElementAttribute(location: RenderElementRef, attributeName: string, attributeValue: string): void;
     
+    setBindingDebugInfo(location: RenderElementRef, propertyName: string, propertyValue: string): void;
+    
     /**
      * Sets a (CSS) class on the Element specified via `location`.
      * 
@@ -5657,9 +5548,9 @@ declare module core {
    * Represents a list of sibling Nodes that can be moved by the {@link Renderer} independently of
    * other Render Fragments.
    * 
-   * Any {@link RenderView} has one Render Fragment.
+   * Any {@link RenderViewRef} has one Render Fragment.
    * 
-   * Additionally any View with an Embedded View that contains a {@link NgContent View Projection}
+   * Additionally any View with an Embedded View that contains a {@link NgContentAst View Projection}
    * results in additional Render Fragment.
    */
   class RenderFragmentRef {
@@ -5690,6 +5581,9 @@ declare module core {
   }
 
     
+  /**
+   * Abstract base class for commands to the Angular renderer, using the visitor pattern.
+   */
   abstract class RenderTemplateCmd {
     
     visit(visitor: RenderCommandVisitor, context: any): any;
@@ -5697,6 +5591,9 @@ declare module core {
   }
 
     
+  /**
+   * Visitor for a {@link RenderTemplateCmd}.
+   */
   interface RenderCommandVisitor {
     
     visitText(cmd: RenderTextCmd, context: any): any;
@@ -5716,6 +5613,9 @@ declare module core {
   }
 
     
+  /**
+   * Command to render text.
+   */
   abstract class RenderTextCmd extends RenderBeginCmd {
     
     value: string;
@@ -5723,6 +5623,9 @@ declare module core {
   }
 
     
+  /**
+   * Command to render projected content.
+   */
   abstract class RenderNgContentCmd extends RenderTemplateCmd {
     
     index: number;
@@ -5732,6 +5635,9 @@ declare module core {
   }
 
     
+  /**
+   * Command to begin rendering an element.
+   */
   abstract class RenderBeginElementCmd extends RenderBeginCmd {
     
     name: string;
@@ -5743,6 +5649,9 @@ declare module core {
   }
 
     
+  /**
+   * Command to begin rendering a component.
+   */
   abstract class RenderBeginComponentCmd extends RenderBeginElementCmd {
     
     templateId: string;
@@ -5750,6 +5659,9 @@ declare module core {
   }
 
     
+  /**
+   * Command to render a component's template.
+   */
   abstract class RenderEmbeddedTemplateCmd extends RenderBeginElementCmd {
     
     isMerged: boolean;
@@ -5759,6 +5671,9 @@ declare module core {
   }
 
     
+  /**
+   * Command to begin rendering.
+   */
   abstract class RenderBeginCmd extends RenderTemplateCmd {
     
     ngContentIndex: number;
@@ -5768,6 +5683,9 @@ declare module core {
   }
 
     
+  /**
+   * Template for rendering a component, including commands and styles.
+   */
   class RenderComponentTemplate {
     
     constructor(id: string, shortId: string, encapsulation: ViewEncapsulation, commands: RenderTemplateCmd[], styles: string[]);
@@ -6112,7 +6030,7 @@ declare module core {
    * the interval when the binding is destroyed or the countdown completes.
    * 
    * ```
-   * import {OnDestroy, Pipe, PipeTransform} from 'angular2/angular2'
+   * import {OnDestroy, Pipe, PipeTransform} from 'angular2/core'
    * @Pipe({name: 'countdown', pure: false})
    * class CountDown implements PipeTransform, OnDestroy {
    *   remainingTime:Number;
@@ -6282,6 +6200,9 @@ declare module core {
   }
 
     
+  /**
+   * Resolves types to {@link ViewMetadata}.
+   */
   class ViewResolver {
     
     resolve(component: Type): ViewMetadata;
@@ -6739,7 +6660,7 @@ declare module core {
    * 
    * Properties of elements in a View can change, but the structure (number and order) of elements in
    * a View cannot. Changing the structure of Elements can only be done by inserting, moving or
-   * removing nested Views via a {@link ViewContainer}. Each View can contain many View Containers.
+   * removing nested Views via a {@link ViewContainerRef}. Each View can contain many View Containers.
    * <!-- /TODO -->
    * 
    * ### Example
@@ -7031,6 +6952,9 @@ declare module core {
   }
 
     
+  /**
+   * A global registry of {@link Testability} instances for specific elements.
+   */
   class TestabilityRegistry {
     
     constructor();
@@ -7046,6 +6970,10 @@ declare module core {
   }
 
     
+  /**
+   * Adapter interface for retrieving the `Testability` service associated for a
+   * particular context.
+   */
   interface GetTestability {
     
     addToWindow(registry: TestabilityRegistry): void;
@@ -7055,10 +6983,17 @@ declare module core {
   }
 
     
+  /**
+   * Set the {@link GetTestability} implementation used by the Angular testing framework.
+   */
   function setTestabilityGetter(getter: GetTestability): void;
   
 
     
+  /**
+   * Describes within the change detector which strategy will be used the next time change
+   * detection is triggered.
+   */
   enum ChangeDetectionStrategy {
     
     /**
@@ -7308,7 +7243,7 @@ declare module core {
      * check
      * every five seconds.
      * 
-     * See {@link detach} for more information.
+     * See {@link ChangeDetectorRef#detach} for more information.
      */
     detectChanges(): void;
     
@@ -7411,6 +7346,9 @@ declare module core {
   }
 
     
+  /**
+   * Represents a basic change from a previous to a new value.
+   */
   class SimpleChange {
     
     constructor(previousValue: any, currentValue: any);
@@ -7419,6 +7357,9 @@ declare module core {
     
     currentValue: any;
     
+    /**
+     * Check whether the new value is the first value assigned.
+     */
     isFirstChange(): boolean;
     
   }
@@ -7439,7 +7380,7 @@ declare module core {
    * The `RepeatPipe` below repeats the value as many times as indicated by the first argument:
    * 
    * ```
-   * import {Pipe, PipeTransform} from 'angular2/angular2';
+   * import {Pipe, PipeTransform} from 'angular2/core';
    * 
    * @Pipe({name: 'repeat'})
    * export class RepeatPipe implements PipeTransform {
@@ -7499,6 +7440,10 @@ declare module core {
   }
 
     
+  /**
+   * A strategy for tracking changes over time to an iterable. Used for {@link NgFor} to
+   * respond to changes in an iterable by effecting equivalent changes in the DOM.
+   */
   interface IterableDiffer {
     
     diff(object: Object): any;
@@ -7557,6 +7502,9 @@ declare module core {
   }
 
     
+  /**
+   * A differ that tracks changes made to an object over time.
+   */
   interface KeyValueDiffer {
     
     diff(object: Object): void;
@@ -7585,7 +7533,7 @@ declare module core {
    * ### Example
    * 
    * ```typescript
-   * import {PLATFORM_DIRECTIVES} from 'angular2/angular2';
+   * import {PLATFORM_DIRECTIVES} from 'angular2/core';
    * import {OtherDirective} from './myDirectives';
    * 
    * @Component({
@@ -7613,7 +7561,7 @@ declare module core {
    * ### Example
    * 
    * ```typescript
-   * import {PLATFORM_PIPES} from 'angular2/angular2';
+   * import {PLATFORM_PIPES} from 'angular2/core';
    * import {OtherPipe} from './myPipe';
    * 
    * @Component({
@@ -7648,6 +7596,10 @@ declare module core {
   
 
     
+  /**
+   * Provides access to reflection data about symbols. Used internally by Angular
+   * to power dependency injection and compilation.
+   */
   class Reflector {
     
     constructor(reflectionCapabilities: PlatformReflectionCapabilities);
@@ -7700,6 +7652,9 @@ declare module core {
   }
 
     
+  /**
+   * Reflective information about a symbol, including annotations, interfaces, and other metadata.
+   */
   class ReflectionInfo {
     
     constructor(annotations?: any[], parameters?: any[][], factory?: Function, interfaces?: any[], propMetadata?: {[key: string]: any[]});
@@ -7717,14 +7672,11 @@ declare module core {
   }
 
     
+  /**
+   * The {@link Reflector} used internally in Angular to access metadata
+   * about symbols.
+   */
   var reflector: any;
-  
-
-  
 }
 
-declare module "angular2/core" {
-  export = core;
-}
-
-
+export = core;

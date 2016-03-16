@@ -86,7 +86,7 @@ export class CommandPalette extends MeteorComponent {
     {//if we're on a character detail, save the character
       text: 'Character - Save',
       condition: () => this.characterDetailPath.test(location.pathname),
-      command: () => console.log("Need to figure how to do this part . . .")
+      command: () => console.log("Need to figure how to do this part . . . Perhaps redux?")
     }
   ];
 

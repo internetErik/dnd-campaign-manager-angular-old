@@ -7,7 +7,7 @@ import {simpleRoll} from 'lib/dice';
 @Component({
   selector: 'combat-actions',
   inputs: ['battle', 'localControlled'],
-  outputs: ['battleModified'],
+  outputs: ['battleModified', 'releaseLocalControlled'],
   directives: [CombatActionInput],
   template: `
   <section 
@@ -54,6 +54,7 @@ import {simpleRoll} from 'lib/dice';
 })
 export class CombatActions {
   battle: any;
+  releaseLocalControlled: EventEmitter<any> = new EventEmitter();
   battleModified: EventEmitter<any> = new EventEmitter();
   localControlled: any[] = [];
 
@@ -61,6 +62,9 @@ export class CombatActions {
     var i = this.battle.combatants.indexOf(character);
     if (i > -1) {
       this.battle.combatants.splice(i, 1);
+      let ch = this.localControlled.filter(c => c.name === character.name);
+      if(ch.length > 0)
+        this.releaseLocalControlled.emit(ch[0]);
       this.battleModified.emit(void(0));
     }
   }

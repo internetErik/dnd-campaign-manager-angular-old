@@ -39,6 +39,7 @@ import {CombatPhase}
 		<combat-actions
 			[battle]="battle"
 			[localControlled]="localControlled"
+			(releaseLocalControlled)="releaseCombatant($event)"
 			(battleModified)="updateBattle()"></combat-actions>
 
 		<combat-phase
@@ -128,6 +129,7 @@ constructor(params: RouteParams, _router: Router) {
   }
 
   releaseCombatant(combatant) {
+  	console.log(combatant);
     var ndx = this.localControlled.indexOf(combatant);
     if(ndx > -1)
     	this.localControlled.splice(ndx, 1);

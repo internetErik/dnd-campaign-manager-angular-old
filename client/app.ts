@@ -3,21 +3,21 @@ import {Component, provide} from 'angular2/core';
 import {ROUTER_PROVIDERS, ROUTER_DIRECTIVES, RouteConfig, APP_BASE_HREF} 
 	from 'angular2/router';
 
-import {bootstrap} from 'angular2-meteor';
+import {bootstrap} from 'angular2-meteor-auto-bootstrap';
 
-import {Navigation} from 'client/shared/navigation/navigation';
-import {DiceHelper} from 'client/shared/dice-helper/dice-helper';
-import {CommandPalette} from 'client/shared/command-palette/command-palette';
+import {Navigation} from './shared/navigation/navigation';
+import {DiceHelper} from './shared/dice-helper/dice-helper';
+import {CommandPalette} from './shared/command-palette/command-palette';
 
-import {HomePage} from 'client/pages/home-page/home-page';
-import {CampaignList} from 'client/pages/campaign-list/campaign-list';
-import {CampaignForm} from 'client/pages/campaign-form/campaign-form';
-import {ContentCreator} from 'client/pages/content-creator/content-creator';
-import {CharacterList} from 'client/pages/character-list/character-list';
-import {CharacterForm} from 'client/pages/character-form/character-form';
-import {CharacterDetail} from 'client/pages/character-detail/character-detail';
-import {BattleList} from 'client/pages/battle-list/battle-list';
-import {CombatDisplay} from 'client/pages/combat-display/combat-display';
+import {HomePage} from './pages/home-page/home-page';
+import {CampaignList} from './pages/campaign-list/campaign-list';
+import {CampaignForm} from './pages/campaign-form/campaign-form';
+import {ContentCreator} from './pages/content-creator/content-creator';
+import {CharacterList} from './pages/character-list/character-list';
+import {CharacterForm} from './pages/character-form/character-form';
+import {CharacterDetail} from './pages/character-detail/character-detail';
+import {BattleList} from './pages/battle-list/battle-list';
+import {CombatDisplay} from './pages/combat-display/combat-display';
 
 @Component({
     selector: 'app',

@@ -1,4 +1,4 @@
-import {simpleRoll} from 'lib/dice';
+import {simpleRoll} from '../dice';
 
 export var Battles = new Mongo.Collection('battles');
 

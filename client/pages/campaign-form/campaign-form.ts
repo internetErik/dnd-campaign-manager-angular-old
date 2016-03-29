@@ -3,7 +3,7 @@ import {FormBuilder, Control, ControlGroup, Validators} from 'angular2/common';
 
 import {Router} from 'angular2/router';
 
-import {Campaigns} from 'lib/collections/campaigns';
+import {Campaigns} from '../../../lib/collections/campaigns';
 
 import {RequireUser, InjectUser} from 'meteor-accounts';
 import {MeteorComponent} from 'angular2-meteor';

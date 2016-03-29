@@ -12,11 +12,10 @@ tracker                 # Meteor's client-side reactive programming library
 
 es5-shim                # ECMAScript 5 compatibility for older browsers.
 
-urigo:angular2-meteor
 accounts-password
-barbatus:ng2-meteor-accounts
 fourseven:scss
 fortawesome:fontawesome
 reactive-var
 standard-minifier-css
 standard-minifier-js
+angular2-compilers

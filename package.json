@@ -1,0 +1,25 @@
+{
+  "name": "dnd-campaign-manager",
+  "version": "1.0.0",
+  "description": "A manager for D&amp;D campaigns written with meteor and angular2 in typescript",
+  "main": "index.js",
+  "dependencies": {
+    "angular2": "^2.0.0-beta.12",
+    "angular2-meteor": "^0.5.2",
+    "angular2-meteor-auto-bootstrap": "^0.5.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/internetErik/dnd-campaign-manager.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/internetErik/dnd-campaign-manager/issues"
+  },
+  "homepage": "https://github.com/internetErik/dnd-campaign-manager#readme"
+}

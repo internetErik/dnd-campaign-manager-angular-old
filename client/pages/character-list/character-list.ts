@@ -1,5 +1,5 @@
 import {Component} from 'angular2/core';
-import {Characters} from 'lib/collections/characters';
+import {Characters} from '../../../lib/collections/characters';
 import {Router, RouterLink} from 'angular2/router';
 import {RequireUser, InjectUser} from 'meteor-accounts';
 import {MeteorComponent} from 'angular2-meteor';

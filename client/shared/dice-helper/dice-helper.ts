@@ -1,6 +1,6 @@
 import {Component}       from 'angular2/core';
-import {simpleRoll}      from 'lib/dice';
-import {Rolls}           from 'lib/collections/rolls';
+import {simpleRoll}      from '../../../lib/dice';
+import {Rolls}           from '../../../lib/collections/rolls';
 import {InjectUser}      from 'meteor-accounts';
 import {MeteorComponent} from 'angular2-meteor';
 

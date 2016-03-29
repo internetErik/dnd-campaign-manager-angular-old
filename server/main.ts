@@ -1,6 +1,6 @@
-import {initSpells} from 'server/init/initSpells';
-import {initSkills} from 'server/init/initSkills';
-import {initFeats} from 'server/init/initFeats';
+import {initSpells} from '../server/init/initSpells';
+import {initSkills} from '../server/init/initSkills';
+import {initFeats} from '../server/init/initFeats';
 
 import './publish';
 

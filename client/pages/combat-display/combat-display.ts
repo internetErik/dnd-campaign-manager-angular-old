@@ -1,16 +1,12 @@
 import {Component} from 'angular2/core';
 import {Router, RouteParams} from 'angular2/router';
-import {Battles} from 'lib/collections/battles';
+import {Battles} from '../../../lib/collections/battles';
 import {RequireUser, InjectUser} from 'meteor-accounts';
 import {MeteorComponent} from 'angular2-meteor';
-import {BattleForm}
-	from 'client/pages/combat-display/battle-form/battle-form';
-import {CombatInitializer} 
-	from 'client/pages/combat-display/combat-initializer/combat-initializer';
-import {CombatActions}
-	from 'client/pages/combat-display/combat-actions/combat-actions';
-import {CombatPhase}
-	from 'client/pages/combat-display/combat-phase/combat-phase';
+import {BattleForm} from './battle-form/battle-form';
+import {CombatInitializer}  from './combat-initializer/combat-initializer';
+import {CombatActions} from './combat-actions/combat-actions';
+import {CombatPhase} from './combat-phase/combat-phase';
 
 @Component({
 	selector: 'combat-display',

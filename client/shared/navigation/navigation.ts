@@ -1,7 +1,7 @@
 import {Component} from 'angular2/core';
 import {RouterLink, Router} from 'angular2/router';
 import {AccountsModal} 
-	from 'client/shared/navigation/accounts-modal/accounts-modal';
+	from './accounts-modal/accounts-modal';
 import {InjectUser} from 'meteor-accounts';
 import {MeteorComponent} from 'angular2-meteor';
 

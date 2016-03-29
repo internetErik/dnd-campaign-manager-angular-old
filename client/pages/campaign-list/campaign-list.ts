@@ -1,6 +1,6 @@
 import {Component} from 'angular2/core';
 import {RouterLink} from 'angular2/router';
-import {Campaigns} from 'lib/collections/campaigns';
+import {Campaigns} from '../../../lib/collections/campaigns';
 import {RequireUser, InjectUser} from 'meteor-accounts';
 import {MeteorComponent} from 'angular2-meteor';
 

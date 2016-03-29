@@ -1,7 +1,7 @@
 import {Component} from 'angular2/core';
 import {Router} from 'angular2/router';
-import {Characters} from 'lib/collections/characters';
-import {Campaigns} from 'lib/collections/campaigns';
+import {Characters} from '../../../lib/collections/characters';
+import {Campaigns} from '../../../lib/collections/campaigns';
 import {MeteorComponent} from 'angular2-meteor';
 
 @Component({

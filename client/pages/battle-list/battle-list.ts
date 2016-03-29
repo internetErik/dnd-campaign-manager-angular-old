@@ -2,7 +2,7 @@ import {Component, NgZone} from 'angular2/core';
 
 import {RouterLink, Router, RouteParams} from 'angular2/router';
 
-import {Battles} from 'lib/collections/battles';
+import {Battles} from '../../../lib/collections/battles';
 
 import {RequireUser} from 'meteor-accounts';
 

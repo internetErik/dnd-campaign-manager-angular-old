@@ -2,6 +2,7 @@
   "files": [
     "typings/angular2.d.ts",
     "typings/angular2-meteor.d.ts",
-    "typings/meteor-accounts.d.ts"
+    "typings/meteor-accounts.d.ts",
+    "typings/meteor/meteor.d.ts"
   ]
 }

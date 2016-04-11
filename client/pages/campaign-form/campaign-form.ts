@@ -1,3 +1,4 @@
+import 'reflect-metadata';
 import {Component} from 'angular2/core';
 import {FormBuilder, Control, ControlGroup, Validators} from 'angular2/common';
 
@@ -5,7 +6,7 @@ import {Router} from 'angular2/router';
 
 import {Campaigns} from '../../../lib/collections/campaigns';
 
-import {RequireUser, InjectUser} from 'meteor-accounts';
+import {RequireUser, InjectUser} from 'angular2-meteor-accounts-ui';
 import {MeteorComponent} from 'angular2-meteor';
 
 @Component({

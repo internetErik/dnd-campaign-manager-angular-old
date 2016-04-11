@@ -1,7 +1,8 @@
+import 'reflect-metadata';
 import {Component} from 'angular2/core';
 import {Characters} from '../../../lib/collections/characters';
 import {Router, RouterLink} from 'angular2/router';
-import {RequireUser, InjectUser} from 'meteor-accounts';
+import {RequireUser, InjectUser} from 'angular2-meteor-accounts-ui';
 import {MeteorComponent} from 'angular2-meteor';
 
 @Component({

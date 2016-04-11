@@ -1,3 +1,4 @@
+import 'reflect-metadata';
 import {Component} from 'angular2/core';
 import {Router} from 'angular2/router';
 
@@ -11,7 +12,7 @@ import {SkillList} from '../../components/skill-list/skill-list';
 import {FeatList} from '../../components/feat-list/feat-list';
 import {MonsterForm} from '../../components/monster-form/monster-form';
 
-import {RequireUser, InjectUser} from 'meteor-accounts';
+import {RequireUser, InjectUser} from 'angular2-meteor-accounts-ui';
 
 import {MeteorComponent} from 'angular2-meteor';
 

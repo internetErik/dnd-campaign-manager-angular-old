@@ -1,3 +1,4 @@
+import 'reflect-metadata';
 import {Component} from 'angular2/core';
 import {Router} from 'angular2/router';
 import {Characters} from '../../../lib/collections/characters';

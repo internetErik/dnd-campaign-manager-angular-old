@@ -19,3 +19,4 @@ reactive-var
 standard-minifier-css
 standard-minifier-js
 angular2-compilers
+ecmascript

@@ -1,3 +1,4 @@
+import 'reflect-metadata';
 import {Component, EventEmitter} from 'angular2/core';
 import {CombatantAdder} from './combatant-adder/combatant-adder';  
 import {CombatantList} from './combatant-list/combatant-list';

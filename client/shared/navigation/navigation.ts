@@ -1,8 +1,9 @@
-import {Component} from 'angular2/core';
-import {RouterLink, Router} from 'angular2/router';
+import 'reflect-metadata';
+import {Component} from '../../../node_modules/angular2/core';
+import {RouterLink, Router} from '../../../node_modules/angular2/router';
 import {AccountsModal} 
 	from './accounts-modal/accounts-modal';
-import {InjectUser} from 'meteor-accounts';
+import {InjectUser} from 'angular2-meteor-accounts-ui';
 import {MeteorComponent} from 'angular2-meteor';
 
 @Component({

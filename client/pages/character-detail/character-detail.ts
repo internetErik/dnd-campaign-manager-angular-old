@@ -12,6 +12,7 @@ import {SpellFilter} from '../../components/spell-filter/spell-filter';
 import {SkillList} from '../../components/skill-list/skill-list';
 import {FeatList} from '../../components/feat-list/feat-list';
 import {CharacterJumpMenu} from '../character-detail/character-jump-menu/character-jump-menu';
+import {CommandPaletteService} from '../../services/command-palette-service';
 
 @Component({
     selector: 'character-detail',
@@ -74,6 +75,10 @@ export class CharacterDetail extends MeteorComponent {
     }
     else
       this.router.navigate(['/CampaignList']);
+
+    CommandPaletteService.registerAction('save-character', () => {
+      this.updateCharacter();
+    });
   }
 
   getHitRoll() {

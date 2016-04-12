@@ -1,7 +1,6 @@
 import 'reflect-metadata';
 import {Component, EventEmitter} from 'angular2/core';
 import {CombatActionInput} from './combat-action-input/combat-action-input';
-
 import {simpleRoll} from '../../../../lib/dice';
 
 @Component({

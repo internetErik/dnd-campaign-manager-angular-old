@@ -1,16 +1,12 @@
 import 'reflect-metadata';
 import {Component, NgZone} from 'angular2/core';
 import {RouteParams, Router} from 'angular2/router';
-
 import {Characters} from '../../../lib/collections/characters';
 import {Spells} from '../../../lib/collections/spells';
 import {Skills} from '../../../lib/collections/skills';
 import {Feats} from '../../../lib/collections/feats';
-
 import {RequireUser, InjectUser} from 'angular2-meteor-accounts-ui';
-
 import {MeteorComponent} from 'angular2-meteor';
-
 import {SpellList} from '../../components/spell-list/spell-list';
 import {SpellFilter} from '../../components/spell-filter/spell-filter';
 import {SkillList} from '../../components/skill-list/skill-list';

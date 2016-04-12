@@ -1,10 +1,7 @@
 import 'reflect-metadata';
 import {Component, NgZone} from 'angular2/core';
-
 import {FormBuilder, Control, ControlGroup, Validators} from 'angular2/common';
-
 import {InjectUser} from 'angular2-meteor-accounts-ui';
-
 import {MeteorComponent} from 'angular2-meteor';
 
 @Component({

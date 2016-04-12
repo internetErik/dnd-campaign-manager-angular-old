@@ -3,7 +3,7 @@ import 'zone.js/dist/zone';
 import {Component, provide} from 'angular2/core';
 
 import {ROUTER_PROVIDERS, ROUTER_DIRECTIVES, RouteConfig, APP_BASE_HREF} 
-	from '../node_modules/angular2/router';
+	from 'angular2/router';
 
 import {bootstrap} from 'angular2-meteor-auto-bootstrap';
 

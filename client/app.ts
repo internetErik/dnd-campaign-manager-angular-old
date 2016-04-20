@@ -22,7 +22,7 @@ import {BattleList} from './pages/battle-list/battle-list';
 import {CombatDisplay} from './pages/combat-display/combat-display';
 
 @Component({
-    selector: 'app',
+  selector: 'app',
 	template: `
 	<command-palette></command-palette>
 	<div class="bgc-lightgray posf max-width max-height"></div>

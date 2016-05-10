@@ -1,11 +1,10 @@
 import 'reflect-metadata';
-import {Component}       from 'angular2/core';
+import {Component}       from '@angular/core';
 import {simpleRoll}      from '../../../lib/dice';
 import {Rolls}           from '../../../lib/collections/rolls';
 import {InjectUser}      from 'angular2-meteor-accounts-ui';
 import {MeteorComponent} from 'angular2-meteor';
 import {CommandPaletteService} from '../../services/command-palette-service';
-
 @Component({
   selector: 'dice-helper',
 	template: `
@@ -18,7 +17,7 @@ import {CommandPaletteService} from '../../services/command-palette-service';
 		<button class="p10-0 pl20 pr20" 
 			[disabled]="!campaign"
 			(click)="clearRolls()">Clear</button>
-		<button *ngFor="#die of dice"
+		<button *ngFor="let die of dice"
 			class="p10-0 pl20 pr20 mr5"
 			[disabled]="disabled"
 			(click)="roll(die)">
@@ -31,7 +30,7 @@ import {CommandPaletteService} from '../../services/command-palette-service';
 		<div *ngIf="currentUser && campaign">
 			<div class="p10-0" *ngIf="rollPublic">
 				Last 5 Rolls: 
-				<span *ngFor="#roll of lastRolls; #last = last" 
+				<span *ngFor="let roll of lastRolls;let last = last" 
 					[class.critical-roll]="roll.result === roll.sides">
 					{{roll.result + roll.bonus}} (d{{roll.sides}} + {{roll.bonus}})<span *ngIf="!last">,</span> 
 				</span>

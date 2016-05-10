@@ -1,9 +1,8 @@
 import 'reflect-metadata';
-import {Component} from 'angular2/core';
-import {FormBuilder, Control, ControlGroup, Validators} from 'angular2/common';
+import {Component} from '@angular/core';
+import {FormBuilder, Control, ControlGroup, Validators} from '@angular/common';
 import {Monsters} from '../../../lib/collections/monsters';
 import {RequireUser} from 'angular2-meteor-accounts-ui';
-
 @Component({
     selector: 'monster-form',
 	templateUrl: 'client/components/monster-form/monster-form.html'

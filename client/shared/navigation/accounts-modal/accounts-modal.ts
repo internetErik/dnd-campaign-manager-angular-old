@@ -1,9 +1,8 @@
 import 'reflect-metadata';
-import {Component, NgZone} from 'angular2/core';
-import {FormBuilder, Control, ControlGroup, Validators} from 'angular2/common';
+import {Component, NgZone} from '@angular/core';
+import {FormBuilder, Control, ControlGroup, Validators} from '@angular/common';
 import {InjectUser} from 'angular2-meteor-accounts-ui';
 import {MeteorComponent} from 'angular2-meteor';
-
 @Component({
 	selector: 'accounts-modal',
 	templateUrl: 'client/shared/navigation/accounts-modal/accounts-modal.html'
@@ -20,7 +19,6 @@ export class AccountsModal extends MeteorComponent {
 
 	constructor(fb: FormBuilder, zone: NgZone) {
 		super();
-		
 		this.loginForm = fb.group({
 			email: ["", this.validEmail],
 			password: ["", Validators.required]
@@ -33,6 +31,10 @@ export class AccountsModal extends MeteorComponent {
 				rePassword: ["", Validators.required]
 			}, { validator: this.matchingPasswords })
 		});
+	}
+
+	toggleModal() {
+		this.modalOpen = !this.modalOpen;
 	}
 
 	logout() {

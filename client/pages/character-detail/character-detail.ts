@@ -1,6 +1,7 @@
 import 'reflect-metadata';
-import {Component, NgZone} from 'angular2/core';
-import {RouteParams, Router} from 'angular2/router';
+import {Component, NgZone} from '@angular/core';
+import {Router} from '@angular/router';
+import {RouteParams} from '@angular/router-deprecated';
 import {Characters} from '../../../lib/collections/characters';
 import {Spells} from '../../../lib/collections/spells';
 import {Skills} from '../../../lib/collections/skills';
@@ -13,7 +14,6 @@ import {SkillList} from '../../components/skill-list/skill-list';
 import {FeatList} from '../../components/feat-list/feat-list';
 import {CharacterJumpMenu} from '../character-detail/character-jump-menu/character-jump-menu';
 import {CommandPaletteService} from '../../services/command-palette-service';
-
 @Component({
     selector: 'character-detail',
     templateUrl: 'client/pages/character-detail/character-detail.html',
@@ -223,7 +223,7 @@ export class CharacterDetail extends MeteorComponent {
 		if (confirm(`Are you sure you want to delete this character?`)) {
 			this.call('removeCharacter', this.character._id);
 			Session.set('character', null);
-			this.router.parent.navigate(['/CharacterList']);
+			this.router.navigate(['/CharacterList']);
 		}
   }
 }

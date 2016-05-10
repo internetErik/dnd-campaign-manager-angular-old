@@ -1,6 +1,5 @@
 import 'reflect-metadata';
-import {Component, EventEmitter} from 'angular2/core';
-
+import {Component, EventEmitter} from '@angular/core';
 @Component({
   selector: 'feat-list',
   inputs: ['feats', 'featsSelectable', 'featsRemovable'],
@@ -8,7 +7,7 @@ import {Component, EventEmitter} from 'angular2/core';
 	template: `
 	<ul class="pb20">
 		<li 
-			*ngFor="#feat of feats;#i = index" 
+			*ngFor="let feat of feats;let i = index" 
 			[class.pt30]="i !== 0">
 			<h5>{{ feat.name }}</h5>
 			<div 

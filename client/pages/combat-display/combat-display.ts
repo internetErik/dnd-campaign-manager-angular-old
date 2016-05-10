@@ -1,6 +1,7 @@
 import 'reflect-metadata';
-import {Component} from 'angular2/core';
-import {Router, RouteParams} from 'angular2/router';
+import {Component} from '@angular/core';
+import {Router} from '@angular/router';
+import {RouteParams} from '@angular/router-deprecated';
 import {Battles} from '../../../lib/collections/battles';
 import {RequireUser, InjectUser} from 'angular2-meteor-accounts-ui';
 import {MeteorComponent} from 'angular2-meteor';
@@ -8,7 +9,6 @@ import {BattleForm} from './battle-form/battle-form';
 import {CombatInitializer}  from './combat-initializer/combat-initializer';
 import {CombatActions} from './combat-actions/combat-actions';
 import {CombatPhase} from './combat-phase/combat-phase';
-
 @Component({
 	selector: 'combat-display',
 	directives: [BattleForm, CombatInitializer, CombatActions, CombatPhase],
@@ -78,7 +78,7 @@ constructor(params: RouteParams, _router: Router) {
 	}
 
 	deleteBattle() {
-		this.router.parent.navigate(['/BattleList']);
+		this.router.navigate(['/BattleList']);
 		Meteor.call('removeBattle', this.battle._id);
 	}
 

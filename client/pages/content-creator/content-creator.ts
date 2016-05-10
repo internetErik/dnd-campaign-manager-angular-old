@@ -1,6 +1,6 @@
 import 'reflect-metadata';
-import {Component} from 'angular2/core';
-import {Router} from 'angular2/router';
+import {Component} from '@angular/core';
+import {Router} from '@angular/router';
 import {Spells} from '../../../lib/collections/spells';
 import {Skills} from '../../../lib/collections/skills';
 import {Feats}  from '../../../lib/collections/feats';
@@ -11,7 +11,6 @@ import {FeatList} from '../../components/feat-list/feat-list';
 import {MonsterForm} from '../../components/monster-form/monster-form';
 import {RequireUser, InjectUser} from 'angular2-meteor-accounts-ui';
 import {MeteorComponent} from 'angular2-meteor';
-
 @Component({
     selector: 'content-creator',
 	templateUrl: 'client/pages/content-creator/content-creator.html',

@@ -1,10 +1,9 @@
 import 'reflect-metadata';
-import {Component} from 'angular2/core';
-import {FormBuilder, Control, ControlGroup, Validators} from 'angular2/common';
-import {Router} from 'angular2/router';
+import {Component} from '@angular/core';
+import {FormBuilder, Control, ControlGroup, Validators} from '@angular/common';
+import {Router} from '@angular/router';
 import {Characters} from '../../../lib/collections/characters';
 import {RequireUser, InjectUser} from 'angular2-meteor-accounts-ui';
-
 @Component({
 	selector: 'character-form',
 	templateUrl: 'client/pages/character-form/character-form.html'
@@ -177,7 +176,7 @@ export class CharacterForm {
 				if (e)
 					console.log("Error inserting character: ", e);
 				else
-					this.router.parent.navigate(['/CharacterDetail', { characterId: r }]);
+					this.router.navigate(['/CharacterDetail', { characterId: r }]);
 			});
 
 		}

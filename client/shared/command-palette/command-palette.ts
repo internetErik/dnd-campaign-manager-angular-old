@@ -1,11 +1,10 @@
 import 'reflect-metadata';
-import {Component} from 'angular2/core';
-import {Router} from 'angular2/router';
+import {Component} from '@angular/core';
+import {Router} from '@angular/router';
 import {Characters} from '../../../lib/collections/characters';
 import {Campaigns} from '../../../lib/collections/campaigns';
 import {MeteorComponent} from 'angular2-meteor';
 import {CommandPaletteService} from '../../services/command-palette-service';
-
 @Component({
     selector: 'command-palette',
     template: `
@@ -22,7 +21,7 @@ import {CommandPaletteService} from '../../services/command-palette-service';
     *ngIf="commands.length > 0"
     class="posa t100 l0 curp max-width bgc-white add-shadow">
     <div
-      *ngFor="#command of commands; #i = index"
+      *ngFor="let command of commands; let i = index"
       (click)="performCommand(command)"
       [class.bgc-lightgray]="i === curIndex"
       class="p20 bb1-s-black bgc-lightgray:h">

@@ -1,8 +1,7 @@
 import 'reflect-metadata';
-import {Component, EventEmitter} from 'angular2/core';
+import {Component, EventEmitter} from '@angular/core';
 import {CombatantAdder} from './combatant-adder/combatant-adder';  
-import {CombatantList} from './combatant-list/combatant-list';
-  
+import {CombatantList} from './combatant-list/combatant-list';  
 @Component({
 	selector: 'combat-initializer',
   inputs: ['combatants', 'localControlled'],

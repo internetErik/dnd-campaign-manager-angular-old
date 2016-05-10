@@ -1,10 +1,10 @@
-import 'reflect-metadata';
 import 'zone.js/dist/zone';
-import {Component, provide} from 'angular2/core';
+import 'reflect-metadata';
+import {Component, provide} from '@angular/core';
 import {ROUTER_PROVIDERS, 
 				ROUTER_DIRECTIVES, 
-				RouteConfig}				from 'angular2/router';
-import {APP_BASE_HREF} 			from 'angular2/platform/common';
+				Routes}							from '@angular/router';
+import {APP_BASE_HREF} 			from '@angular/common';
 import {bootstrap} 					from 'angular2-meteor-auto-bootstrap';
 import {Navigation} 				from './shared/navigation/navigation';
 import {DiceHelper} 				from './shared/dice-helper/dice-helper';
@@ -33,51 +33,41 @@ import {CombatDisplay} 			from './pages/combat-display/combat-display';
 	`,
 	directives: [ROUTER_DIRECTIVES, Navigation, DiceHelper, CommandPalette]
 })
-@RouteConfig([
+@Routes([
 	{
 		path: '/',
-		name: 'HomePage',
-		component: HomePage,
-		useAsDefault: true
+		component: HomePage
 	},
 	{
 		path: '/campaign',
-		name: 'CampaignList',
 		component: CampaignList
 	},
     {
 		path: '/campaign/add',
-		name: 'CampaignForm',
 		component: CampaignForm
     },
     {
 		path: '/content-create',
-		name: 'ContentCreator',
 		component: ContentCreator
     },
 	{
 		path: '/character',
-		name: 'CharacterList',
 		component: CharacterList
 	},
 	{
 		path: '/character/add',
-		name: 'CharacterForm',
 		component: CharacterForm
 	},
 	{
 		path: '/character/:characterId',
-		name: 'CharacterDetail',
 		component: CharacterDetail
 	},
 	{
 		path: '/battle',
-		name: 'BattleList',
 		component: BattleList
 	},
 	{
 		path: '/battle/:battleId',
-		name: 'CombatDisplay',
 		component: CombatDisplay
 	}
 ])

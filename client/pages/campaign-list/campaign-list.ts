@@ -1,10 +1,9 @@
 import 'reflect-metadata';
-import {Component} from 'angular2/core';
-import {RouterLink} from 'angular2/router';
+import {Component} from '@angular/core';
+import {RouterLink} from '@angular/router-deprecated';
 import {Campaigns} from '../../../lib/collections/campaigns';
 import {RequireUser, InjectUser} from 'angular2-meteor-accounts-ui';
 import {MeteorComponent} from 'angular2-meteor';
-
 @Component({
 	selector: 'campaign-list',
 	directives: [RouterLink],
@@ -12,7 +11,7 @@ import {MeteorComponent} from 'angular2-meteor';
 <h1>Select a Campaign</h1>
 <hr>
 <section class="p20-0 m20-0">
-	<div *ngFor="#campaign of campaigns" class="p10-0">
+	<div *ngFor="let campaign of campaigns" class="p10-0">
 		<a href="javascript:void(0)" 
 			(click)="selectCampaign(campaign)">
 			{{campaign.name}}

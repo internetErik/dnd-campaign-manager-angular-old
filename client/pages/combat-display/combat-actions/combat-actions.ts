@@ -1,8 +1,7 @@
 import 'reflect-metadata';
-import {Component, EventEmitter} from 'angular2/core';
+import {Component, EventEmitter} from '@angular/core';
 import {CombatActionInput} from './combat-action-input/combat-action-input';
 import {simpleRoll} from '../../../../lib/dice';
-
 @Component({
   selector: 'combat-actions',
   inputs: ['battle', 'localControlled'],
@@ -17,7 +16,7 @@ import {simpleRoll} from '../../../../lib/dice';
     You aren't controlling any characters! You'd better select some above.
   </div>
   <ol *ngIf="battle.combatPhase === 0">
-    <li *ngFor="#combatant of localControlled">
+    <li *ngFor="let combatant of localControlled">
       <h4>{{ combatant.name }}</h4>
 
       <combat-action-input 
@@ -27,7 +26,7 @@ import {simpleRoll} from '../../../../lib/dice';
     </li>
   </ol>
   <ol *ngIf="battle.combatPhase === 1">
-    <li *ngFor="#combatant of battle.combatants">
+    <li *ngFor="let combatant of battle.combatants">
       <h4>{{ combatant.name }}</h4>
       <label>Action:</label>
       <div class="p10-0">

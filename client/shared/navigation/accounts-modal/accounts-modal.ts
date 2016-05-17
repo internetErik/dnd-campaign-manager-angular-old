@@ -35,6 +35,7 @@ export class AccountsModal extends MeteorComponent {
 
 	toggleModal() {
 		this.modalOpen = !this.modalOpen;
+		console.log("toggling modal ", this.modalOpen);
 	}
 
 	logout() {

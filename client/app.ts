@@ -41,8 +41,7 @@ import {CombatDisplay} 			from './pages/combat-display/combat-display';
 	{
 		path: '/campaign',
 		component: CampaignList
-	},
-    {
+	},{
 		path: '/campaign/add',
 		component: CampaignForm
     },
@@ -53,23 +52,21 @@ import {CombatDisplay} 			from './pages/combat-display/combat-display';
 	{
 		path: '/character',
 		component: CharacterList
-	},
-	{
-		path: '/character/add',
-		component: CharacterForm
-	},
-	{
-		path: '/character/:characterId',
-		component: CharacterDetail
-	},
+	},{
+			path: '/character/add',
+			component: CharacterForm
+		},
+		{
+			path: '/character/:characterId',
+			component: CharacterDetail
+		},
 	{
 		path: '/battle',
 		component: BattleList
-	},
-	{
-		path: '/battle/:battleId',
-		component: CombatDisplay
-	}
+	},{
+			path: '/battle/:battleId',
+			component: CombatDisplay
+		}
 ])
 class App {}
-bootstrap(App, [ROUTER_PROVIDERS, provide(APP_BASE_HREF, { useValue: '/' })]);
+bootstrap(App, [ROUTER_PROVIDERS]);

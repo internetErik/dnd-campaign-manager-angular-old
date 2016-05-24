@@ -1,7 +1,7 @@
 import 'reflect-metadata';
 import {Component, NgZone} from '@angular/core';
-import {Router} from '@angular/router';
-import {RouteParams} from '@angular/router-deprecated';
+// import {Router} from '@angular/router';
+import {Router, RouteParams} from '@angular/router-deprecated';
 import {Characters} from '../../../lib/collections/characters';
 import {Spells} from '../../../lib/collections/spells';
 import {Skills} from '../../../lib/collections/skills';

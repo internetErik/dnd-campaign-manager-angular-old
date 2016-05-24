@@ -1,6 +1,7 @@
 import 'reflect-metadata';
 import {Component} from '@angular/core';
-import {Router} from '@angular/router';
+// import {Router} from '@angular/router';
+import {Router} from '@angular/router-deprecated';
 import {Spells} from '../../../lib/collections/spells';
 import {Skills} from '../../../lib/collections/skills';
 import {Feats}  from '../../../lib/collections/feats';

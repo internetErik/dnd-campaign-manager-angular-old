@@ -1,7 +1,7 @@
 import 'reflect-metadata';
 import {Component, NgZone} from '@angular/core';
-import {Router} from '@angular/router';
-import {RouterLink, RouteParams} from '@angular/router-deprecated';
+// import {Router} from '@angular/router';
+import {Router, RouterLink, RouteParams} from '@angular/router-deprecated';
 import {Battles} from '../../../lib/collections/battles';
 import {RequireUser} from 'angular2-meteor-accounts-ui';
 import {MeteorComponent} from 'angular2-meteor';

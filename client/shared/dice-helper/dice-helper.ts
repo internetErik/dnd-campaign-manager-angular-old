@@ -1,23 +1,23 @@
-import {Component, NgZone} from 'angular2/core';
-
-import {simpleRoll} from 'lib/dice';
-import {Rolls} from 'lib/collections/rolls';
-import {InjectUser} from 'meteor-accounts';
+import 'reflect-metadata';
+import {Component}       from '@angular/core';
+import {simpleRoll}      from '../../../lib/dice';
+import {Rolls}           from '../../../lib/collections/rolls';
+import {InjectUser}      from 'angular2-meteor-accounts-ui';
 import {MeteorComponent} from 'angular2-meteor';
-
+import {CommandPaletteService} from '../../services/command-palette-service';
 @Component({
   selector: 'dice-helper',
 	template: `
 	<div class="dice-helper p20 posf b0 l0 bgc-white add-shadow max-width" 
 		[class.hide-dice]="diceHidden">
-		<button class="p10-0 pl20 pr20" (click)="diceHidden = !diceHidden">
+		<button class="p10-0 pl20 pr20" (click)="toggleDiceHelper()">
 			<span *ngIf="diceHidden">Show</span>
 			<span *ngIf="!diceHidden">Hide</span>
 		</button>
 		<button class="p10-0 pl20 pr20" 
 			[disabled]="!campaign"
 			(click)="clearRolls()">Clear</button>
-		<button *ngFor="#die of dice"
+		<button *ngFor="let die of dice"
 			class="p10-0 pl20 pr20 mr5"
 			[disabled]="disabled"
 			(click)="roll(die)">
@@ -30,7 +30,7 @@ import {MeteorComponent} from 'angular2-meteor';
 		<div *ngIf="currentUser && campaign">
 			<div class="p10-0" *ngIf="rollPublic">
 				Last 5 Rolls: 
-				<span *ngFor="#roll of lastRolls; #last = last" 
+				<span *ngFor="let roll of lastRolls;let last = last" 
 					[class.critical-roll]="roll.result === roll.sides">
 					{{roll.result + roll.bonus}} (d{{roll.sides}} + {{roll.bonus}})<span *ngIf="!last">,</span> 
 				</span>
@@ -38,7 +38,7 @@ import {MeteorComponent} from 'angular2-meteor';
 			<div class="p20-0">
 				<button class="p10-0 pl20 pr20" 
 					[disabled]="!campaign"
-					(click)="rollPublic = !rollPublic">
+					(click)="togglePublicRolls()">
 					<span *ngIf="rollPublic">Private</span>
 					<span *ngIf="!rollPublic">Public</span>
 				</button>
@@ -68,13 +68,30 @@ export class DiceHelper extends MeteorComponent {
 	//current character
 	character: any;
 
-	constructor(_zone: NgZone) {
+	constructor() {
 		super();
 		this.autorun(() => {
 			this.campaign = Session.get('campaign');
 			if(this.campaign)
 				this.subscribeRolls()
 		}, true);
+		//register actions that can be taken from the command palette
+		this.dice.map((sides) => {
+			CommandPaletteService.registerAction(`dice-roll-1d${sides}`, () => {
+				if(this.diceHidden) this.toggleDiceHelper();
+				this.roll(sides);
+			})
+		});
+		CommandPaletteService.registerAction('dice-toggle', () => this.toggleDiceHelper() );
+		CommandPaletteService.registerAction('dice-clear-rolls', () => this.clearRolls() );
+	}
+
+	toggleDiceHelper() {
+		this.diceHidden = !this.diceHidden;
+	}
+
+	togglePublicRolls() {
+		this.rollPublic = !this.rollPublic;
 	}
 
   subscribeRolls() {

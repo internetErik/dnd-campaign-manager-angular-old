@@ -1,9 +1,10 @@
-import {Component} from 'angular2/core';
-import {Characters} from 'lib/collections/characters';
-import {Router, RouterLink} from 'angular2/router';
-import {RequireUser, InjectUser} from 'meteor-accounts';
+import 'reflect-metadata';
+import {Component} from '@angular/core';
+// import {Router} from '@angular/router';
+import {Router, RouterLink} from '@angular/router-deprecated';
+import {Characters} from '../../../lib/collections/characters';
+import {RequireUser, InjectUser} from 'angular2-meteor-accounts-ui';
 import {MeteorComponent} from 'angular2-meteor';
-
 @Component({
   selector: 'character-list',
   directives: [RouterLink],
@@ -18,7 +19,7 @@ import {MeteorComponent} from 'angular2-meteor';
 	</section>
 	<section class="p20-0 m20-0">
 		<h2>PCs</h2>
-		<div *ngFor="#character of pcs" class="p10-0">
+		<div *ngFor="let character of pcs" class="p10-0">
 			<a [routerLink]="['/CharacterDetail', {characterId: character._id}]">
 				{{character.firstName}} {{character.middleName}} {{character.lastName}}
 			</a>
@@ -30,7 +31,7 @@ import {MeteorComponent} from 'angular2-meteor';
 		<hr>
 		<section class="p20-0 m20-0">
 			<h2>NPCs</h2>
-			<div *ngFor="#character of npcs" class="p10-0">
+			<div *ngFor="let character of npcs" class="p10-0">
 				<a [routerLink]="['/CharacterDetail', {characterId: character._id}]">
 					{{character.firstName}} {{character.middleName}} {{character.lastName}}
 				</a>

@@ -1,13 +1,10 @@
-import {Component, NgZone} from 'angular2/core';
-
-import {RouterLink, Router, RouteParams} from 'angular2/router';
-
-import {Battles} from 'lib/collections/battles';
-
-import {RequireUser} from 'meteor-accounts';
-
+import 'reflect-metadata';
+import {Component, NgZone} from '@angular/core';
+// import {Router} from '@angular/router';
+import {Router, RouterLink, RouteParams} from '@angular/router-deprecated';
+import {Battles} from '../../../lib/collections/battles';
+import {RequireUser} from 'angular2-meteor-accounts-ui';
 import {MeteorComponent} from 'angular2-meteor';
-
 @Component({
 	selector: 'battle-list',
 	templateUrl: 'client/pages/battle-list/battle-list.html',
@@ -33,7 +30,7 @@ export class BattleList extends MeteorComponent {
 						this.battles = Battles.find({}, { sort: { createdDate: 1 } });
 				}, true);
 			else
-				this.router.parent.navigate(['/CampaignList']);
+				this.router.navigate(['/CampaignList']);
 		}, true);
 	}
 

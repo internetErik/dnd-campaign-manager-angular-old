@@ -1,5 +1,5 @@
-import {Component, EventEmitter} from 'angular2/core';
-
+import 'reflect-metadata';
+import {Component, EventEmitter} from '@angular/core';
 @Component({
   selector: 'skill-list',
   inputs: ['skills', 'skillsSelectable', 'skillsRemoveable'],
@@ -7,7 +7,7 @@ import {Component, EventEmitter} from 'angular2/core';
 	template: `
 	<ul class="pb20">
 		<li 
-			*ngFor="#skill of skills; #i = index" 
+			*ngFor="let skill of skills;let i = index" 
 			[class.pt15]="i !== 0">
 			{{ skill.name }} ({{skill.stat}})
 			<span *ngIf="skillsRemoveable">

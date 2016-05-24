@@ -1,5 +1,5 @@
-import {Component, EventEmitter} from 'angular2/core';
-
+import 'reflect-metadata';
+import {Component, EventEmitter} from '@angular/core';
 @Component({
 	selector: 'combat-action-input',
 	inputs: ['submitted'],

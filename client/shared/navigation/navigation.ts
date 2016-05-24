@@ -1,10 +1,10 @@
-import {Component} from 'angular2/core';
-import {RouterLink, Router} from 'angular2/router';
-import {AccountsModal} 
-	from 'client/shared/navigation/accounts-modal/accounts-modal';
-import {InjectUser} from 'meteor-accounts';
+import 'reflect-metadata';
+import {Component} from '@angular/core';
+// import {Router} from '@angular/router';
+import {Router, RouterLink} from '@angular/router-deprecated';
+import {AccountsModal} from './accounts-modal/accounts-modal';
+import {InjectUser} from 'angular2-meteor-accounts-ui';
 import {MeteorComponent} from 'angular2-meteor';
-
 @Component({
   selector: 'navigation',
 	directives: [RouterLink, AccountsModal],
@@ -16,16 +16,12 @@ import {MeteorComponent} from 'angular2-meteor';
 		<a class="tdn" [routerLink]="['/ContentCreator']">Content Creator</a>
 	</div>
 </nav>
-
 <accounts-modal class="posa r0 t0 w300 p30"></accounts-modal>
-
 <div class="sub-menu bgc-black c-white posr p0-50 heading5 h50 add-bottom-shadow">
 	<span *ngIf="currentUser && campaign" class="vertical-align dib">
-		
 		Playing: {{ campaign.name }}
 		<button class="c-white bd1-s-white" 
 			(click)="unselectCampaign()">&times;</button>
-		
 		<span *ngIf="character">
 			as 
 			<a class="tdn" 
@@ -35,7 +31,7 @@ import {MeteorComponent} from 'angular2-meteor';
 			<button class="c-white bd1-s-white" 
 				(click)="unselectCharacter()">&times;</button>
 		</span>
-		>
+		&gt;
 		<a class="tdn" 
 			[routerLink]="['/CharacterList']">
 				Characters
@@ -49,7 +45,7 @@ import {MeteorComponent} from 'angular2-meteor';
 		No Campaign Selected.
 	</span>
 </div>
-	`
+`
 })
 @InjectUser('currentUser')
 export class Navigation extends MeteorComponent {

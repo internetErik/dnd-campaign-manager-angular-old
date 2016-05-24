@@ -1,6 +1,13 @@
 {
-  "files": [
-    "typings/angular2-meteor.d.ts",
-    "typings/meteor-accounts.d.ts"
-  ]
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "module"                : "commonjs",
+    "target"                : "es5",
+    "isolatedModules"       : false,
+    "moduleResolution"      : "node",
+    "emitDecoratorMetadata" : true,
+    "removeComments"        : false,
+    "noImplicitAny"         : false,
+    "sourceMap"             : true
+  }
 }

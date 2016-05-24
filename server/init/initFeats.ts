@@ -1,4 +1,4 @@
-import {Feats} from 'lib/collections/feats';
+import {Feats} from '../../lib/collections/feats';
 
 export function initFeats() {
 	if(Feats.find().count() === 0) {

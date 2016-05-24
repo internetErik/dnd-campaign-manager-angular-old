@@ -1,5 +1,5 @@
-import {Component, EventEmitter} from 'angular2/core';
-
+import 'reflect-metadata';
+import {Component, EventEmitter} from '@angular/core';
 @Component({
 	selector: 'spell-filter',
 	templateUrl: 'client/components/spell-filter/spell-filter.html',

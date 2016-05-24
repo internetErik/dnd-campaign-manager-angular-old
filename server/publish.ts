@@ -1,11 +1,11 @@
-import {Characters} from 'lib/collections/characters';
-import {Campaigns} from 'lib/collections/campaigns';
-import {Rolls} from 'lib/collections/rolls';
-import {Spells} from 'lib/collections/spells';
-import {Skills} from 'lib/collections/skills';
-import {Feats} from 'lib/collections/feats';
-import {Monsters} from 'lib/collections/monsters';
-import {Battles} from 'lib/collections/battles';
+import {Characters} from '../lib/collections/characters';
+import {Campaigns} from '../lib/collections/campaigns';
+import {Rolls} from '../lib/collections/rolls';
+import {Spells} from '../lib/collections/spells';
+import {Skills} from '../lib/collections/skills';
+import {Feats} from '../lib/collections/feats';
+import {Monsters} from '../lib/collections/monsters';
+import {Battles} from '../lib/collections/battles';
 
 Meteor.publish('battles', function(campaignId: string) {
   return Battles.find({campaignId: campaignId});

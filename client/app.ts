@@ -1,26 +1,28 @@
-import {Component, provide} from 'angular2/core';
-
-import {ROUTER_PROVIDERS, ROUTER_DIRECTIVES, RouteConfig, APP_BASE_HREF} 
-	from 'angular2/router';
-
-import {bootstrap} from 'angular2-meteor';
-
-import {Navigation} from 'client/shared/navigation/navigation';
-import {DiceHelper} from 'client/shared/dice-helper/dice-helper';
-import {CommandPalette} from 'client/shared/command-palette/command-palette';
-
-import {HomePage} from 'client/pages/home-page/home-page';
-import {CampaignList} from 'client/pages/campaign-list/campaign-list';
-import {CampaignForm} from 'client/pages/campaign-form/campaign-form';
-import {ContentCreator} from 'client/pages/content-creator/content-creator';
-import {CharacterList} from 'client/pages/character-list/character-list';
-import {CharacterForm} from 'client/pages/character-form/character-form';
-import {CharacterDetail} from 'client/pages/character-detail/character-detail';
-import {BattleList} from 'client/pages/battle-list/battle-list';
-import {CombatDisplay} from 'client/pages/combat-display/combat-display';
-
+import 'zone.js/dist/zone';
+import 'reflect-metadata';
+import {Component, provide} from '@angular/core';
+import {ROUTER_PROVIDERS, 
+				ROUTER_DIRECTIVES, 
+				RouteConfig}        from '@angular/router-deprecated';
+// import {ROUTER_PROVIDERS, 
+// 				ROUTER_DIRECTIVES, 
+// 				Routes}							from '@angular/router';
+import {APP_BASE_HREF} 			from '@angular/common';
+import {bootstrap} 					from 'angular2-meteor-auto-bootstrap';
+import {Navigation} 				from './shared/navigation/navigation';
+import {DiceHelper} 				from './shared/dice-helper/dice-helper';
+import {CommandPalette} 		from './shared/command-palette/command-palette';
+import {HomePage} 					from './pages/home-page/home-page';
+import {CampaignList} 			from './pages/campaign-list/campaign-list';
+import {CampaignForm} 			from './pages/campaign-form/campaign-form';
+import {ContentCreator} 		from './pages/content-creator/content-creator';
+import {CharacterList} 			from './pages/character-list/character-list';
+import {CharacterForm} 			from './pages/character-form/character-form';
+import {CharacterDetail} 		from './pages/character-detail/character-detail';
+import {BattleList} 				from './pages/battle-list/battle-list';
+import {CombatDisplay} 			from './pages/combat-display/combat-display';
 @Component({
-    selector: 'app',
+  selector: 'app',
 	template: `
 	<command-palette></command-palette>
 	<div class="bgc-lightgray posf max-width max-height"></div>
@@ -36,51 +38,82 @@ import {CombatDisplay} from 'client/pages/combat-display/combat-display';
 })
 @RouteConfig([
 	{
-		path: '/',
-		name: 'HomePage',
-		component: HomePage,
-		useAsDefault: true
+		path:      '/',
+		as:        'HomePage',
+		component: HomePage
 	},
 	{
-		path: '/campaign',
-		name: 'CampaignList',
+		path:      '/campaign',
+		as:        'CampaignList',
 		component: CampaignList
-	},
-    {
-		path: '/campaign/add',
-		name: 'CampaignForm',
+	},{
+		path:      '/campaign/add',
+		as:        'CampaignForm',
 		component: CampaignForm
     },
     {
-		path: '/content-create',
-		name: 'ContentCreator',
+		path:      '/content-create',
+		as:        'ContentCreator',
 		component: ContentCreator
     },
 	{
-		path: '/character',
-		name: 'CharacterList',
+		path:      '/character',
+		as:        'CharacterList',
 		component: CharacterList
-	},
+	},{
+			path:      '/character/add',
+			as:        'CharacterForm',
+			component: CharacterForm
+		},
+		{
+			path: 		 '/character/:characterId',
+			as:        'CharacterDetail',
+			component: CharacterDetail
+		},
 	{
-		path: '/character/add',
-		name: 'CharacterForm',
-		component: CharacterForm
-	},
-	{
-		path: '/character/:characterId',
-		name: 'CharacterDetail',
-		component: CharacterDetail
-	},
-	{
-		path: '/battle',
-		name: 'BattleList',
+		path:      '/battle',
+		as:        'BattleList',
 		component: BattleList
-	},
-	{
-		path: '/battle/:battleId',
-		name: 'CombatDisplay',
-		component: CombatDisplay
-	}
+	},{
+			path:      '/battle/:battleId',
+			as:        'CombatDisplay',
+			component: CombatDisplay
+		}
 ])
+// @Routes([
+// 	{
+// 		path: '/',
+// 		component: HomePage
+// 	},
+// 	{
+// 		path: '/campaign',
+// 		component: CampaignList
+// 	},{
+// 		path: '/campaign/add',
+// 		component: CampaignForm
+//     },
+//     {
+// 		path: '/content-create',
+// 		component: ContentCreator
+//     },
+// 	{
+// 		path: '/character',
+// 		component: CharacterList
+// 	},{
+// 			path: '/character/add',
+// 			component: CharacterForm
+// 		},
+// 		{
+// 			path: '/character/:characterId',
+// 			component: CharacterDetail
+// 		},
+// 	{
+// 		path: '/battle',
+// 		component: BattleList
+// 	},{
+// 			path: '/battle/:battleId',
+// 			component: CombatDisplay
+// 		}
+// ])
 class App {}
 bootstrap(App, [ROUTER_PROVIDERS, provide(APP_BASE_HREF, { useValue: '/' })]);

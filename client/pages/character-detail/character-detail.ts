@@ -1,22 +1,19 @@
-import {Component, NgZone} from 'angular2/core';
-import {RouteParams, Router} from 'angular2/router';
-
-import {Characters} from 'lib/collections/characters';
-import {Spells} from 'lib/collections/spells';
-import {Skills} from 'lib/collections/skills';
-import {Feats} from 'lib/collections/feats';
-
-import {RequireUser, InjectUser} from 'meteor-accounts';
-
+import 'reflect-metadata';
+import {Component, NgZone} from '@angular/core';
+// import {Router} from '@angular/router';
+import {Router, RouteParams} from '@angular/router-deprecated';
+import {Characters} from '../../../lib/collections/characters';
+import {Spells} from '../../../lib/collections/spells';
+import {Skills} from '../../../lib/collections/skills';
+import {Feats} from '../../../lib/collections/feats';
+import {RequireUser, InjectUser} from 'angular2-meteor-accounts-ui';
 import {MeteorComponent} from 'angular2-meteor';
-
-import {SpellList} from 'client/components/spell-list/spell-list';
-import {SpellFilter} from 'client/components/spell-filter/spell-filter';
-import {SkillList} from 'client/components/skill-list/skill-list';
-import {FeatList} from 'client/components/feat-list/feat-list';
-import {CharacterJumpMenu} 
-	from 'client/pages/character-detail/character-jump-menu/character-jump-menu';
-
+import {SpellList} from '../../components/spell-list/spell-list';
+import {SpellFilter} from '../../components/spell-filter/spell-filter';
+import {SkillList} from '../../components/skill-list/skill-list';
+import {FeatList} from '../../components/feat-list/feat-list';
+import {CharacterJumpMenu} from '../character-detail/character-jump-menu/character-jump-menu';
+import {CommandPaletteService} from '../../services/command-palette-service';
 @Component({
     selector: 'character-detail',
     templateUrl: 'client/pages/character-detail/character-detail.html',
@@ -78,6 +75,10 @@ export class CharacterDetail extends MeteorComponent {
     }
     else
       this.router.navigate(['/CampaignList']);
+
+    CommandPaletteService.registerAction('save-character', () => {
+      this.updateCharacter();
+    });
   }
 
   getHitRoll() {
@@ -222,7 +223,7 @@ export class CharacterDetail extends MeteorComponent {
 		if (confirm(`Are you sure you want to delete this character?`)) {
 			this.call('removeCharacter', this.character._id);
 			Session.set('character', null);
-			this.router.parent.navigate(['/CharacterList']);
+			this.router.navigate(['/CharacterList']);
 		}
   }
 }

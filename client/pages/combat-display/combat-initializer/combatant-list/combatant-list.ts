@@ -1,5 +1,5 @@
-import {Component, EventEmitter} from 'angular2/core';
-
+import 'reflect-metadata';
+import {Component, EventEmitter} from '@angular/core';
 @Component({
   selector: 'combatant-list',
   inputs: ['combatants', 'localControlled'],
@@ -9,7 +9,7 @@ import {Component, EventEmitter} from 'angular2/core';
     <h3>Combatants:</h3>
     <ul>
       <li 
-        *ngFor="#combatant of combatants"
+        *ngFor="let combatant of combatants"
         class="p5-0">
         {{ combatant.name }} (bonus: {{combatant.bonus}})
         <button (click)="remove(combatant)">remove</button>

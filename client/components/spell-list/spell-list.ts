@@ -1,12 +1,12 @@
-import {Component, EventEmitter} from 'angular2/core';
-
+import 'reflect-metadata';
+import {Component, EventEmitter} from '@angular/core';
 @Component({
   selector: 'spell-list',
   inputs: ['spells', 'spellsSelectable', 'spellsRemovable'],
   outputs: ['spellSelected', 'spellRemoved'],
 	template: `
 	<div 
-		*ngFor="#spell of spells;#i = index" 
+		*ngFor="let spell of spells;let i = index" 
 		[class.pt30]="i !== 0">
 		<h5 class="ttc">{{ spell.name }}</h5>
 		<label class="w125">Level:</label> {{spell.level}}<br>

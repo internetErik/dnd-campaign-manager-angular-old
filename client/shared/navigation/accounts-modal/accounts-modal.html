@@ -4,7 +4,7 @@
 		<button (click)="logout()">&times;</button>
 	</span>
 	<span *ngIf="!currentUser">
-		<span class="curp" (click)="modalOpen = !modalOpen">
+		<span class="curp" (click)="toggleModal()">
 			Sign In
 			<i *ngIf="!modalOpen" class="fa fa-angle-down"></i>
 			<i *ngIf="modalOpen" class="fa fa-angle-up"></i>

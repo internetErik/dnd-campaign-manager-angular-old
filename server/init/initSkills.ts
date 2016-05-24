@@ -1,4 +1,4 @@
-import {Skills} from 'lib/collections/skills';
+import {Skills} from '../../lib/collections/skills';
 
 export function initSkills() {
 	if(Skills.find().count() === 0) {

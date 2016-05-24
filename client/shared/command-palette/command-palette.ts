@@ -1,9 +1,11 @@
-import {Component} from 'angular2/core';
-import {Router} from 'angular2/router';
-import {Characters} from 'lib/collections/characters';
-import {Campaigns} from 'lib/collections/campaigns';
+import 'reflect-metadata';
+import {Component} from '@angular/core';
+// import {Router} from '@angular/router';
+import {Router} from '@angular/router-deprecated';
+import {Characters} from '../../../lib/collections/characters';
+import {Campaigns} from '../../../lib/collections/campaigns';
 import {MeteorComponent} from 'angular2-meteor';
-
+import {CommandPaletteService} from '../../services/command-palette-service';
 @Component({
     selector: 'command-palette',
     template: `
@@ -20,7 +22,7 @@ import {MeteorComponent} from 'angular2-meteor';
     *ngIf="commands.length > 0"
     class="posa t100 l0 curp max-width bgc-white add-shadow">
     <div
-      *ngFor="#command of commands; #i = index"
+      *ngFor="let command of commands; let i = index"
       (click)="performCommand(command)"
       [class.bgc-lightgray]="i === curIndex"
       class="p20 bb1-s-black bgc-lightgray:h">
@@ -41,13 +43,13 @@ export class CommandPalette extends MeteorComponent {
   characters: Mongo.Cursor<Object>;
   campaigns: Mongo.Cursor<Object>;
 
-  homePath: RegExp = new RegExp('^\/$', 'i');
-  campaignListPath: RegExp = new RegExp('^\/campaign$', 'i');
+  homePath           : RegExp = new RegExp('^\/$', 'i');
+  campaignListPath   : RegExp = new RegExp('^\/campaign$', 'i');
   characterDetailPath: RegExp = new RegExp('^\/character\/.', 'i');
-  characterListPath: RegExp = new RegExp('^\/character$', 'i');
-  contentCreatorPath: RegExp = new RegExp('^\/content-create$', 'i');
-  battleListPath: RegExp = new RegExp('^\/battle$', 'i');
-  battleDetailPath: RegExp = new RegExp('^\/battle\/.', 'i');
+  characterListPath  : RegExp = new RegExp('^\/character$', 'i');
+  contentCreatorPath : RegExp = new RegExp('^\/content-create$', 'i');
+  battleListPath     : RegExp = new RegExp('^\/battle$', 'i');
+  battleDetailPath   : RegExp = new RegExp('^\/battle\/.', 'i');
 
   possibleCommands: any[] = [
     {
@@ -86,7 +88,7 @@ export class CommandPalette extends MeteorComponent {
     {//if we're on a character detail, save the character
       text: 'Character - Save',
       condition: () => this.characterDetailPath.test(location.pathname),
-      command: () => console.log("Need to figure how to do this part . . .")
+      command: () => CommandPaletteService.performAction('save-character', [])
     }
   ];
 
@@ -98,6 +100,17 @@ export class CommandPalette extends MeteorComponent {
         Session.set('campaign', null); 
         this.router.navigate(['/CampaignList']);
       }
+    }
+  ];
+
+  diceCommands: any[] = [
+    {
+      text: 'dice - clear rolls',
+      command: () => CommandPaletteService.performAction('dice-clear-rolls', [])
+    },
+    {
+      text: 'dice - toggle',
+      command: () => CommandPaletteService.performAction('dice-toggle', [])
     }
   ];
 
@@ -125,6 +138,9 @@ export class CommandPalette extends MeteorComponent {
             this.characters.map(this._charactersFunctionFactory.bind(this));
         }, true);
     }, true);
+
+    this.diceCommands = this.diceCommands.concat([2, 4, 6, 8, 10, 12, 20, 100]
+                               .map(this._diceFunctionFactory));
     
     document.querySelector('body')
       .addEventListener('keyup', this.togglePalette.bind(this));
@@ -151,14 +167,28 @@ export class CommandPalette extends MeteorComponent {
     }
   }
 
+  _diceFunctionFactory(sides) {
+    var func = () => CommandPaletteService.performAction(`dice-roll-1d${sides}`, []);
+
+    return {
+      text: `Dice - roll 1d${sides}`,
+      command: func
+    }
+  }
+
+
+
   togglePalette(e: any) {
     var input: HTMLInputElement = 
       <HTMLInputElement> document.querySelector('.js-command-palette-input');
-    if (e.ctrlKey && e.altKey && e.keyCode == 80) {
+    if (e.ctrlKey && e.altKey && e.keyCode == 80) { //ctrl+alt+p = command palette
       this.visible = !this.visible;
       setTimeout(() => input.focus(), 0);
     }
-    else if (e.keyCode == 27)
+    else if (e.ctrlKey && e.altKey && e.keyCode == 83) { //ctrl+alt+s = spell command palette
+      //open in spell mode spell menu
+    }
+    else if (this.visible && e.keyCode == 27) //esc = close palette
       this.closePalette();
   }
 
@@ -194,7 +224,8 @@ export class CommandPalette extends MeteorComponent {
         .concat(this.characterCommands, 
                 this.charactersCommands,
                 this.campaignCommands,
-                this.campaignsCommands)
+                this.campaignsCommands,
+                this.diceCommands)
         .filter((i) => {
           var condition = (i.condition) ? i.condition : () => true;
           return condition() &&

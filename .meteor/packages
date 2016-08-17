@@ -4,19 +4,19 @@
 # 'meteor add' and 'meteor remove' will edit this file for you,
 # but you can also edit it by hand.
 
-meteor-base             # Packages every Meteor app needs to have
-mobile-experience       # Packages for a great mobile UX
-mongo                   # The database Meteor supports right now
-session                 # Client-side reactive dictionary for your app
-tracker                 # Meteor's client-side reactive programming library
+meteor-base@1.0.4             # Packages every Meteor app needs to have
+mobile-experience@1.0.4       # Packages for a great mobile UX
+mongo@1.1.10                   # The database Meteor supports right now
+session@1.1.6                 # Client-side reactive dictionary for your app
+tracker@1.1.0                 # Meteor's client-side reactive programming library
 
-es5-shim                # ECMAScript 5 compatibility for older browsers.
+es5-shim@4.6.13                # ECMAScript 5 compatibility for older browsers.
 
-accounts-password
-fourseven:scss
+accounts-password@1.2.12
 fortawesome:fontawesome
-reactive-var
-standard-minifier-css
-standard-minifier-js
-angular2-compilers
-ecmascript
+reactive-var@1.0.10
+standard-minifier-css@1.1.8
+standard-minifier-js@1.1.8
+ecmascript@0.5.7
+fourseven:scss@3.8.0_1
+angular2-compilers@=0.6.0

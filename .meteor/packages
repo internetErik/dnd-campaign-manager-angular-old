@@ -18,5 +18,4 @@ reactive-var@1.0.10
 standard-minifier-css@1.1.8
 standard-minifier-js@1.1.8
 ecmascript@0.5.7
-fourseven:scss@3.8.0_1
 angular2-compilers@=0.6.0

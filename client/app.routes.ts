@@ -1,7 +1,4 @@
 import { RouterConfig, provideRouter } from '@angular/router';
-import {Navigation}         from './shared/navigation/navigation';
-import {DiceHelper}         from './shared/dice-helper/dice-helper';
-import {CommandPalette}     from './shared/command-palette/command-palette';
 import {HomePage}           from './pages/home-page/home-page';
 import {CampaignList}       from './pages/campaign-list/campaign-list';
 import {CampaignForm}       from './pages/campaign-form/campaign-form';

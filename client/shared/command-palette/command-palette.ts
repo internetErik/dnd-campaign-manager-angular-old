@@ -1,7 +1,6 @@
 import 'reflect-metadata';
 import {Component} from '@angular/core';
-// import {Router} from '@angular/router';
-import {Router} from '@angular/router-deprecated';
+import {Router} from '@angular/router';
 import {Characters} from '../../../lib/collections/characters';
 import {Campaigns} from '../../../lib/collections/campaigns';
 import {MeteorComponent} from 'angular2-meteor';

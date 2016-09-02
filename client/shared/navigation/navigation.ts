@@ -1,19 +1,18 @@
 import 'reflect-metadata';
 import {Component} from '@angular/core';
-// import {Router} from '@angular/router';
-import {Router, RouterLink} from '@angular/router-deprecated';
+import {Router} from '@angular/router';
 import {AccountsModal} from './accounts-modal/accounts-modal';
 import {InjectUser} from 'angular2-meteor-accounts-ui';
 import {MeteorComponent} from 'angular2-meteor';
 @Component({
   selector: 'navigation',
-	directives: [RouterLink, AccountsModal],
+	directives: [AccountsModal],
 	template: `
 <nav class="bgc-white h70 posr p0-50 heading5">
 	<div class="vertical-align" *ngIf="currentUser">
-		<a class="tdn" [routerLink]="['/HomePage']">Home</a> |
-		<a class="tdn" [routerLink]="['/CampaignList']">Campaigns</a> |
-		<a class="tdn" [routerLink]="['/ContentCreator']">Content Creator</a>
+		<a class="tdn" routerLink="/HomePage">Home</a> |
+		<a class="tdn" routerLink="/CampaignList">Campaigns</a> |
+		<a class="tdn" routerLink="/ContentCreator">Content Creator</a>
 	</div>
 </nav>
 <accounts-modal class="posa r0 t0 w300 p30"></accounts-modal>
@@ -25,7 +24,7 @@ import {MeteorComponent} from 'angular2-meteor';
 		<span *ngIf="character">
 			as 
 			<a class="tdn" 
-				[routerLink]="['/CharacterDetail', {characterId: character._id}]">
+				routerLink="/CharacterDetail, {characterId: character._id}]">
 					{{ character.firstName }}
 			</a>
 			<button class="c-white bd1-s-white" 

@@ -1,12 +1,10 @@
 import 'reflect-metadata';
 import {Component} from '@angular/core';
-import {RouterLink} from '@angular/router-deprecated';
 import {Campaigns} from '../../../lib/collections/campaigns';
 import {RequireUser, InjectUser} from 'angular2-meteor-accounts-ui';
 import {MeteorComponent} from 'angular2-meteor';
 @Component({
 	selector: 'campaign-list',
-	directives: [RouterLink],
 	template: `
 <h1>Select a Campaign</h1>
 <hr>

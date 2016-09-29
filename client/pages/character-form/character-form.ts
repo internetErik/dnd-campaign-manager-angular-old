@@ -3,12 +3,11 @@ import {Component} from '@angular/core';
 import {FormBuilder, Control, ControlGroup, Validators} from '@angular/common';
 import {Router} from '@angular/router';
 import {Characters} from '../../../lib/collections/characters';
-import {RequireUser, InjectUser} from 'angular2-meteor-accounts-ui';
+import {InjectUser} from 'angular2-meteor-accounts-ui';
 @Component({
 	selector: 'character-form',
 	templateUrl: 'client/pages/character-form/character-form.html'
 })
-@RequireUser()
 @InjectUser('currentUser')
 export class CharacterForm {
 	characterForm: ControlGroup;

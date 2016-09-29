@@ -5,7 +5,7 @@ import {Characters} from '../../../lib/collections/characters';
 import {Spells} from '../../../lib/collections/spells';
 import {Skills} from '../../../lib/collections/skills';
 import {Feats} from '../../../lib/collections/feats';
-import {RequireUser, InjectUser} from 'angular2-meteor-accounts-ui';
+import {InjectUser} from 'angular2-meteor-accounts-ui';
 import {MeteorComponent} from 'angular2-meteor';
 import {SpellList} from '../../components/spell-list/spell-list';
 import {SpellFilter} from '../../components/spell-filter/spell-filter';
@@ -16,9 +16,7 @@ import {CommandPaletteService} from '../../services/command-palette-service';
 @Component({
     selector: 'character-detail',
     templateUrl: 'client/pages/character-detail/character-detail.html',
-    directives: [SpellList, SpellFilter, SkillList, FeatList, CharacterJumpMenu]
 })
-@RequireUser()
 @InjectUser('currentUser')
 export class CharacterDetail extends MeteorComponent {
   currentUser: any;

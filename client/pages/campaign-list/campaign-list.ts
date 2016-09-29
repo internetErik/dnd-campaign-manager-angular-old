@@ -1,7 +1,7 @@
 import 'reflect-metadata';
 import {Component} from '@angular/core';
 import {Campaigns} from '../../../lib/collections/campaigns';
-import {RequireUser, InjectUser} from 'angular2-meteor-accounts-ui';
+import {InjectUser} from 'angular2-meteor-accounts-ui';
 import {MeteorComponent} from 'angular2-meteor';
 @Component({
 	selector: 'campaign-list',
@@ -21,7 +21,6 @@ import {MeteorComponent} from 'angular2-meteor';
 </section>
 	`
 })
-@RequireUser()
 @InjectUser('currentUser')
 export class CampaignList extends MeteorComponent {
 	campaigns: Mongo.Cursor<any>;

@@ -6,7 +6,6 @@ import {InjectUser} from 'angular2-meteor-accounts-ui';
 import {MeteorComponent} from 'angular2-meteor';
 @Component({
   selector: 'navigation',
-	directives: [AccountsModal],
 	template: `
 <nav class="bgc-white h70 posr p0-50 heading5">
 	<div class="vertical-align" *ngIf="currentUser">

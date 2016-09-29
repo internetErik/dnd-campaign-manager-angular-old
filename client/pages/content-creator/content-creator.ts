@@ -4,19 +4,12 @@ import {Router} from '@angular/router';
 import {Spells} from '../../../lib/collections/spells';
 import {Skills} from '../../../lib/collections/skills';
 import {Feats}  from '../../../lib/collections/feats';
-import {SpellList} from '../../components/spell-list/spell-list';
-import {SpellFilter} from '../../components/spell-filter/spell-filter';
-import {SkillList} from '../../components/skill-list/skill-list';
-import {FeatList} from '../../components/feat-list/feat-list';
-import {MonsterForm} from '../../components/monster-form/monster-form';
-import {RequireUser, InjectUser} from 'angular2-meteor-accounts-ui';
+import {InjectUser} from 'angular2-meteor-accounts-ui';
 import {MeteorComponent} from 'angular2-meteor';
 @Component({
-    selector: 'content-creator',
+  selector   : 'content-creator',
 	templateUrl: 'client/pages/content-creator/content-creator.html',
-	directives: [SpellFilter, SpellList, MonsterForm, SkillList, FeatList]
 })
-@RequireUser()
 @InjectUser('currentUser')
 export class ContentCreator extends MeteorComponent {
 	currentUser: any;

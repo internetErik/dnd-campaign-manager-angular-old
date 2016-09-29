@@ -6,7 +6,6 @@ import {simpleRoll} from '../../../../lib/dice';
   selector: 'combat-actions',
   inputs: ['battle', 'localControlled'],
   outputs: ['battleModified', 'releaseLocalControlled'],
-  directives: [CombatActionInput],
   template: `
   <section 
     *ngIf="battle.combatPhase !== -1"

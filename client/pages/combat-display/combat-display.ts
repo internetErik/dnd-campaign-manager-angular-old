@@ -2,7 +2,7 @@ import 'reflect-metadata';
 import {Component} from '@angular/core';
 import {Router} from '@angular/router';
 import {Battles} from '../../../lib/collections/battles';
-import {RequireUser, InjectUser} from 'angular2-meteor-accounts-ui';
+import {InjectUser} from 'angular2-meteor-accounts-ui';
 import {MeteorComponent} from 'angular2-meteor';
 import {BattleForm} from './battle-form/battle-form';
 import {CombatInitializer}  from './combat-initializer/combat-initializer';
@@ -10,7 +10,6 @@ import {CombatActions} from './combat-actions/combat-actions';
 import {CombatPhase} from './combat-phase/combat-phase';
 @Component({
 	selector: 'combat-display',
-	directives: [BattleForm, CombatInitializer, CombatActions, CombatPhase],
 	template: `
 	<h1>Combat Display</h1>
 	<hr>
@@ -46,7 +45,6 @@ import {CombatPhase} from './combat-phase/combat-phase';
 	</section>
 	`
 })
-@RequireUser()
 @InjectUser('currentUser')
 export class CombatDisplay extends MeteorComponent {
 	router: Router;

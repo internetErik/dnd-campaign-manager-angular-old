@@ -1,8 +1,4 @@
-import { Component } from '@angular/core';
-import {Navigation}         from './shared/navigation/navigation';
-import {DiceHelper}         from './shared/dice-helper/dice-helper';
-import {CommandPalette}     from './shared/command-palette/command-palette';
-import { ROUTER_DIRECTIVES } from '@angular/router';
+import { Component }        from '@angular/core';
  
 @Component({
   selector: 'app',
@@ -17,6 +13,5 @@ import { ROUTER_DIRECTIVES } from '@angular/router';
   </div>
   <dice-helper></dice-helper>
   `,
-  directives: [ROUTER_DIRECTIVES, Navigation, DiceHelper, CommandPalette]
 })
 export class AppComponent {}

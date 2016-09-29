@@ -2,11 +2,10 @@ import 'reflect-metadata';
 import {Component} from '@angular/core';
 import {Router} from '@angular/router';
 import {Characters} from '../../../lib/collections/characters';
-import {RequireUser, InjectUser} from 'angular2-meteor-accounts-ui';
+import {InjectUser} from 'angular2-meteor-accounts-ui';
 import {MeteorComponent} from 'angular2-meteor';
 @Component({
   selector: 'character-list',
-  directives: [RouterLink],
   template: `
 <div *ngIf="campaign">
 	<h1>Character List</h1>
@@ -40,7 +39,6 @@ import {MeteorComponent} from 'angular2-meteor';
 </div>
   `
 })
-@RequireUser()
 @InjectUser('currentUser')
 export class CharacterList extends MeteorComponent {
 	currentUser: any;

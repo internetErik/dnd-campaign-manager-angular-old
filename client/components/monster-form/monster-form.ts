@@ -1,13 +1,12 @@
 import 'reflect-metadata';
 import {Component} from '@angular/core';
-import {FormBuilder, Control, ControlGroup, Validators} from '@angular/common';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Monsters} from '../../../lib/collections/monsters';
-import {RequireUser} from 'angular2-meteor-accounts-ui';
+import { Meteor } from 'meteor/meteor';
 @Component({
-    selector: 'monster-form',
+  selector   : 'monster-form',
 	templateUrl: 'client/components/monster-form/monster-form.html'
 })
-@RequireUser()
 export class MonsterForm {
 	monsterForm: ControlGroup;
 

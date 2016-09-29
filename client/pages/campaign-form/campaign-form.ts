@@ -3,13 +3,12 @@ import {Component} from '@angular/core';
 import {FormBuilder, Control, ControlGroup, Validators} from '@angular/common';
 import {Router} from '@angular/router';
 import {Campaigns} from '../../../lib/collections/campaigns';
-import {RequireUser, InjectUser} from 'angular2-meteor-accounts-ui';
+import {InjectUser} from 'angular2-meteor-accounts-ui';
 import {MeteorComponent} from 'angular2-meteor';
 @Component({
 	selector: 'campaign-form',
 	templateUrl: 'client/pages/campaign-form/campaign-form.html'
 })
-@RequireUser()
 @InjectUser('currentUser')
 export class CampaignForm extends MeteorComponent {
 	campaignForm: ControlGroup;

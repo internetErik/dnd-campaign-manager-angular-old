@@ -2,13 +2,11 @@ import 'reflect-metadata';
 import {Component, NgZone} from '@angular/core';
 import {Router, RouteParams} from '@angular/router';
 import {Battles} from '../../../lib/collections/battles';
-import {RequireUser} from 'angular2-meteor-accounts-ui';
 import {MeteorComponent} from 'angular2-meteor';
 @Component({
 	selector: 'battle-list',
 	templateUrl: 'client/pages/battle-list/battle-list.html',
 })
-@RequireUser()
 export class BattleList extends MeteorComponent {
 	router: Router;
 	battleId: string;

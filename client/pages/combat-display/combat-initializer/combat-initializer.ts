@@ -6,7 +6,6 @@ import {CombatantList} from './combatant-list/combatant-list';
 	selector: 'combat-initializer',
   inputs: ['combatants', 'localControlled'],
 	outputs: ['combatantsAdded', 'removeCombatant', 'startTriggered', 'combatantControlled', 'combatantReleased'],
-  directives: [CombatantAdder, CombatantList],
 	template: `
 	<h2>Add Combatants</h2>
   <combatant-adder

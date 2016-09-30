@@ -1,6 +1,5 @@
-import 'reflect-metadata';
 import {Component, NgZone} from '@angular/core';
-import {FormBuilder, Control, ControlGroup, Validators} from '@angular/common';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {InjectUser} from 'angular2-meteor-accounts-ui';
 import {MeteorComponent} from 'angular2-meteor';
 @Component({
@@ -10,8 +9,8 @@ import {MeteorComponent} from 'angular2-meteor';
 @InjectUser('currentUser')
 export class AccountsModal extends MeteorComponent {
 	currentUser: any;
-	loginForm: ControlGroup;
-	registerForm: ControlGroup;
+	loginForm: FormGroup;
+	registerForm: FormGroup;
 	
 	//state
 	modalOpen: boolean = false;
@@ -44,7 +43,7 @@ export class AccountsModal extends MeteorComponent {
 		this.modalState = 'login';
 	}
 
-	validEmail(emailControl: Control) {
+	validEmail(emailControl: FormControl) {
 		var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 		return (re.test(emailControl.value)) ?
 			null : { invalidEmail: true };

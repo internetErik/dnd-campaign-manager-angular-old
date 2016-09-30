@@ -16,7 +16,7 @@ import {CombatDisplay}         from './pages/combat-display/combat-display'
 const appRoutes: Routes = [
   {
     path: '',
-    redirectTo: '/home',
+    redirectTo: 'home',
     pathMatch: 'full',
   },
   {

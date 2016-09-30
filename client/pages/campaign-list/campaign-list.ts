@@ -1,8 +1,7 @@
-import 'reflect-metadata';
-import {Component} from '@angular/core';
-import {Campaigns} from '../../../lib/collections/campaigns';
-import {InjectUser} from 'angular2-meteor-accounts-ui';
-import {MeteorComponent} from 'angular2-meteor';
+import { Component } from '@angular/core';
+import { Campaigns } from '../../../lib/collections/campaigns';
+import { InjectUser } from 'angular2-meteor-accounts-ui';
+import { MeteorComponent } from 'angular2-meteor';
 @Component({
 	selector: 'campaign-list',
 	template: `

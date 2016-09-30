@@ -1,18 +1,17 @@
-import 'reflect-metadata';
-import {Component, NgZone} from '@angular/core';
-import {Router} from '@angular/router';
-import {Characters} from '../../../lib/collections/characters';
-import {Spells} from '../../../lib/collections/spells';
-import {Skills} from '../../../lib/collections/skills';
-import {Feats} from '../../../lib/collections/feats';
-import {InjectUser} from 'angular2-meteor-accounts-ui';
-import {MeteorComponent} from 'angular2-meteor';
-import {SpellList} from '../../components/spell-list/spell-list';
-import {SpellFilter} from '../../components/spell-filter/spell-filter';
-import {SkillList} from '../../components/skill-list/skill-list';
-import {FeatList} from '../../components/feat-list/feat-list';
-import {CharacterJumpMenu} from '../character-detail/character-jump-menu/character-jump-menu';
-import {CommandPaletteService} from '../../services/command-palette-service';
+import { Component, NgZone } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Characters } from '../../../lib/collections/characters';
+import { Spells } from '../../../lib/collections/spells';
+import { Skills } from '../../../lib/collections/skills';
+import { Feats } from '../../../lib/collections/feats';
+import { InjectUser } from 'angular2-meteor-accounts-ui';
+import { MeteorComponent } from 'angular2-meteor';
+import { SpellList } from '../../components/spell-list/spell-list';
+import { SpellFilter } from '../../components/spell-filter/spell-filter';
+import { SkillList } from '../../components/skill-list/skill-list';
+import { FeatList } from '../../components/feat-list/feat-list';
+import { CharacterJumpMenu } from '../character-detail/character-jump-menu/character-jump-menu';
+import { CommandPaletteService } from '../../services/command-palette-service';
 @Component({
     selector: 'character-detail',
     templateUrl: 'client/pages/character-detail/character-detail.html',
@@ -45,30 +44,32 @@ export class CharacterDetail extends MeteorComponent {
 	showSkillModal: boolean = false;
 	showFeatModal: boolean = false;
 
-	constructor(_router: Router, params: RouteParams, _zone: NgZone) {
+	constructor(_router: Router, private route: ActivatedRoute , _zone: NgZone) {
     super(); 
-    this.zone = _zone;
-    this.router = _router;
-    this.campaign = Session.get('campaign');
+    this.zone = _zone
+    this.router = _router
+    this.campaign = Session.get('campaign')
     if (this.campaign) {
-      var characterId = params.get('characterId');
+			route.params.subscribe( params => {
+				let characterId = params['characterId']
+				this.subscribe('character', characterId, () => {
+	          this.character = Characters.findOne({ _id: characterId })
+	          this.characterSpells = this.character.spells
+	      }, true)
+	
+	      this.subscribe('spells', () => {
+	          this.spells = Spells.find()
+	      }, true)
+	
+	      this.subscribe('skills', () => {
+	          this.skills = Skills.find()
+	      }, true)
+	
+	      this.subscribe('feats', () => {
+	          this.feats = Feats.find()
+	      }, true)
+			})
 
-      this.subscribe('character', characterId, () => {
-          this.character = Characters.findOne({ _id: characterId });
-          this.characterSpells = this.character.spells;
-      }, true);
-
-      this.subscribe('spells', () => {
-          this.spells = Spells.find();
-      }, true);
-
-      this.subscribe('skills', () => {
-          this.skills = Skills.find();
-      }, true);
-
-      this.subscribe('feats', () => {
-          this.feats = Feats.find();
-      }, true);
     }
     else
       this.router.navigate(['/CampaignList']);

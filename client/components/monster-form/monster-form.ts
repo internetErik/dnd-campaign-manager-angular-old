@@ -1,4 +1,3 @@
-import 'reflect-metadata';
 import {Component} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Monsters} from '../../../lib/collections/monsters';
@@ -8,7 +7,7 @@ import { Meteor } from 'meteor/meteor';
 	templateUrl: 'client/components/monster-form/monster-form.html'
 })
 export class MonsterForm {
-	monsterForm: ControlGroup;
+	monsterForm: FormGroup;
 
 	constructor() {
 		var fb = new FormBuilder();

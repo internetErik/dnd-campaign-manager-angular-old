@@ -1,4 +1,3 @@
-import 'reflect-metadata';
 import {Component, EventEmitter} from '@angular/core';
 import {MeteorComponent} from 'angular2-meteor';
 @Component({

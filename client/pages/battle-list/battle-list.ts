@@ -1,8 +1,7 @@
-import 'reflect-metadata';
-import {Component, NgZone} from '@angular/core';
-import {Router, RouteParams} from '@angular/router';
-import {Battles} from '../../../lib/collections/battles';
-import {MeteorComponent} from 'angular2-meteor';
+import { Component, NgZone } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Battles } from '../../../lib/collections/battles';
+import { MeteorComponent } from 'angular2-meteor';
 @Component({
 	selector: 'battle-list',
 	templateUrl: 'client/pages/battle-list/battle-list.html',
@@ -15,11 +14,11 @@ export class BattleList extends MeteorComponent {
 
 	battles: Mongo.Cursor<Object>;
 
-	constructor(zone: NgZone, params: RouteParams, _router: Router) {
+	constructor(zone: NgZone, private route: ActivatedRoute, _router: Router) {
 		super();
 		this.router = _router;
 		this.autorun(() => {
-			this.battleId = params.get('battleId');
+			// this.battleId = params.get('battleId');
 			this.campaign = Session.get('campaign');
 			if (this.campaign)
 				this.subscribe('battles', this.campaign._id, () => {

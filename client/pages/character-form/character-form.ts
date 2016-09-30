@@ -1,25 +1,24 @@
-import 'reflect-metadata';
-import {Component} from '@angular/core';
-import {FormBuilder, Control, ControlGroup, Validators} from '@angular/common';
-import {Router} from '@angular/router';
-import {Characters} from '../../../lib/collections/characters';
-import {InjectUser} from 'angular2-meteor-accounts-ui';
+import {Component} from '@angular/core'
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms'
+import {Router} from '@angular/router'
+import {Characters} from '../../../lib/collections/characters'
+import {InjectUser} from 'angular2-meteor-accounts-ui'
 @Component({
 	selector: 'character-form',
 	templateUrl: 'client/pages/character-form/character-form.html'
 })
 @InjectUser('currentUser')
 export class CharacterForm {
-	characterForm: ControlGroup;
-	router: Router;
-	campaign: any;
+	characterForm: FormGroup
+	router: Router
+	campaign: any
 
-	newSpellName: string;
-	newSkillName: string;
-	newFeatName: string;
-	spells: string[];
-	skills: string[];
-	feats: string[];
+	newSpellName: string
+	newSkillName: string
+	newFeatName: string
+	spells: string[]
+	skills: string[]
+	feats: string[]
 
 	constructor(_router: Router) {
 		var fb = new FormBuilder();

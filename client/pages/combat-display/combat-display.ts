@@ -1,7 +1,6 @@
-import 'reflect-metadata';
-import {Component} from '@angular/core';
-import {Router} from '@angular/router';
-import {Battles} from '../../../lib/collections/battles';
+import { Component } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Battles} from '../../../lib/collections/battles';
 import {InjectUser} from 'angular2-meteor-accounts-ui';
 import {MeteorComponent} from 'angular2-meteor';
 import {BattleForm} from './battle-form/battle-form';
@@ -55,18 +54,20 @@ export class CombatDisplay extends MeteorComponent {
 	//characters being controlled by user
 	localControlled: any[] = [];
 
-constructor(params: RouteParams, _router: Router) {
+constructor(private route: ActivatedRoute, _router: Router) {
 		super();
 		this.router = _router;
-		this.battleId = params.get('battleId');
-		this.campaign = Session.get('campaign');
-
-		var handle = this.subscribe('battles', this.campaign._id);
-		
-		this.autorun(() => {
-        if (handle.ready())
-          this.battle = Battles.findOne({ _id: this.battleId });	
-		}, true);
+		route.params.subscribe( params => {
+			this.battleId = params['battleId']
+			this.campaign = params['campaign'];		
+	
+			var handle = this.subscribe('battles', this.campaign._id);
+			
+			this.autorun(() => {
+	        if (handle.ready())
+	          this.battle = Battles.findOne({ _id: this.battleId });	
+			}, true);
+		})
 	}
 
 	updateName(name) {

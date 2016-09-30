@@ -1,9 +1,7 @@
-import 'reflect-metadata';
-import {Component} from '@angular/core';
-import {Router} from '@angular/router';
-import {AccountsModal} from './accounts-modal/accounts-modal';
-import {InjectUser} from 'angular2-meteor-accounts-ui';
-import {MeteorComponent} from 'angular2-meteor';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { InjectUser } from 'angular2-meteor-accounts-ui';
+import { MeteorComponent } from 'angular2-meteor';
 @Component({
   selector: 'navigation',
 	template: `

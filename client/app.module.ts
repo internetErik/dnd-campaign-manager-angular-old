@@ -1,5 +1,6 @@
 import { NgModule }         from '@angular/core'
-import { CommonModule }       from '@angular/common'
+import { BrowserModule }    from '@angular/platform-browser'
+import { CommonModule }     from '@angular/common'
 import { HttpModule }       from '@angular/http'
 import { 
   FormsModule, 
@@ -12,6 +13,7 @@ import { declarations }     from './app.component-declarations'
 
 @NgModule({
   imports     : [
+    BrowserModule,
     CommonModule,
     HttpModule,
     FormsModule,

@@ -15,36 +15,41 @@ import {CombatDisplay}         from './pages/combat-display/combat-display'
 
 const appRoutes: Routes = [
   {
-    path: '/',
+    path: '',
+    redirectTo: '/home',
+    pathMatch: 'full',
+  },
+  {
+    path: 'home',
     component: HomePage,
   },
   {
-    path: '/campaign',
+    path: 'campaign',
     component: CampaignList,
   },{
-    path: '/campaign/add',
+    path: 'campaign/add',
     component: CampaignForm,
     },
     {
-    path: '/content-create',
+    path: 'content-create',
     component: ContentCreator,
     },
   {
-    path: '/character',
+    path: 'character',
     component: CharacterList,
   },{
-      path: '/character/add',
+      path: 'character/add',
       component: CharacterForm,
     },
     {
-      path: '/character/:characterId',
+      path: 'character/:characterId',
       component: CharacterDetail,
     },
   {
-    path: '/battle',
+    path: 'battle',
     component: BattleList,
   },{
-      path: '/battle/:battleId',
+      path: 'battle/:battleId',
       component: CombatDisplay,
     },
 ];

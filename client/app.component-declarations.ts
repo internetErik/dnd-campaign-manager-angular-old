@@ -8,6 +8,7 @@ import { CharacterDetail }   from './pages/character-detail/character-detail'
 import { BattleList }        from './pages/battle-list/battle-list'
 import { CombatDisplay }     from './pages/combat-display/combat-display'
 
+import { CharacterJumpMenu } from './pages/character-detail/character-jump-menu/character-jump-menu'
 import { FeatList }          from './components/feat-list/feat-list'
 import { MonsterForm }       from './components/monster-form/monster-form'
 import { SkillList }         from './components/skill-list/skill-list'
@@ -53,6 +54,7 @@ const components: any = [
   CombatantAdder,
   CombatantList,
   CombatPhase,
+  CharacterJumpMenu,
 ]
 
 const sharedComponents: any = [

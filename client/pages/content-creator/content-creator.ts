@@ -1,4 +1,3 @@
-import 'reflect-metadata';
 import {Component} from '@angular/core';
 import {Router} from '@angular/router';
 import {Spells} from '../../../lib/collections/spells';

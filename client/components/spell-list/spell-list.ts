@@ -1,4 +1,3 @@
-import 'reflect-metadata';
 import {Component, EventEmitter} from '@angular/core';
 @Component({
   selector: 'spell-list',

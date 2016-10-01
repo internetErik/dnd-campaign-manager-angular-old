@@ -1,4 +1,3 @@
-import 'reflect-metadata';
 import {Component}       from '@angular/core';
 import {simpleRoll}      from '../../../lib/dice';
 import {Rolls}           from '../../../lib/collections/rolls';

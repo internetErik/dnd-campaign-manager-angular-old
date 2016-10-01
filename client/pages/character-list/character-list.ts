@@ -1,9 +1,8 @@
-import 'reflect-metadata';
-import {Component} from '@angular/core';
-import {Router} from '@angular/router';
-import {Characters} from '../../../lib/collections/characters';
-import {InjectUser} from 'angular2-meteor-accounts-ui';
-import {MeteorComponent} from 'angular2-meteor';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { Characters } from '../../../lib/collections/characters';
+import { InjectUser } from 'angular2-meteor-accounts-ui';
+import { MeteorComponent } from 'angular2-meteor';
 @Component({
   selector: 'character-list',
   template: `

@@ -22,18 +22,26 @@ import {MeteorComponent} from 'angular2-meteor';
 			<button class="posa t5 r5 border-circle" 
 				(click)="modalOpen = false">&times;</button>
 			
-			<form (submit)="login($event)" 
+			<form
+				[formGroup]="loginForm" 
+				(ngSubmit)="login(loginForm.value)" 
 				*ngIf="modalState === 'login'">
 				<div class="p10">
 					<label for="email">E-Mail:</label>
-					<input class="w200" id="email" type="text"
+					<input 
+						class="w200" 
+						id="email" 
+						type="text"
 						placeholder="email@example.com"
-						ngControl="email">
+						[formControl]="loginForm.controls.email">
 				</div>
 				<div class="p10">
 					<label for="password">Password:</label>
-					<input class="w200" id="password" type="password" 
-						ngControl="password">
+					<input 
+						class="w200" 
+						id="password" 
+						type="password" 
+						[formControl]="loginForm.controls.password">
 				</div>
 				<div *ngIf="loginForm.dirty">
 					<div class="fz12 color-red p5-0" 
@@ -52,7 +60,9 @@ import {MeteorComponent} from 'angular2-meteor';
 				</div>
 			</form>
 
-			<form (submit)="register($event)" 
+			<form 
+				#registerForm="ngForm"
+				(submit)="register($event)" 
 				*ngIf="modalState === 'register'">
 				<div class="p10">
 					<label for="email">E-Mail:</label>
@@ -100,7 +110,7 @@ import {MeteorComponent} from 'angular2-meteor';
 	</span>
 </div>
 	`,
-	templateUrl: 'client/shared/navigation/accounts-modal/accounts-modal.html'
+	// templateUrl: 'client/shared/navigation/accounts-modal/accounts-modal.html'
 })
 @InjectUser('currentUser')
 export class AccountsModal extends MeteorComponent {
@@ -151,9 +161,8 @@ export class AccountsModal extends MeteorComponent {
 		return (pw1 === pw2) ? null : { passwordMismatch: true };
 	}
 
-	login(event) {
-		event.preventDefault();
-
+	login(form) {
+		console.log(form);
 		if (this.loginForm.valid) {
 			Meteor.loginWithPassword(
 				this.loginForm.value.email, 

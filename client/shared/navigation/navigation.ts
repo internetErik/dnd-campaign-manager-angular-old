@@ -2,14 +2,15 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { InjectUser } from 'angular2-meteor-accounts-ui';
 import { MeteorComponent } from 'angular2-meteor';
+
 @Component({
   selector: 'navigation',
 	template: `
 <nav class="bgc-white h70 posr p0-50 heading5">
 	<div class="vertical-align" *ngIf="currentUser">
-		<a class="tdn" routerLink="/HomePage">Home</a> |
-		<a class="tdn" routerLink="/CampaignList">Campaigns</a> |
-		<a class="tdn" routerLink="/ContentCreator">Content Creator</a>
+		<a class="tdn" routerLink="/home">Home</a> |
+		<a class="tdn" routerLink="/campaign">Campaigns</a> |
+		<a class="tdn" routerLink="/content-creator">Content Creator</a>
 	</div>
 </nav>
 <accounts-modal class="posa r0 t0 w300 p30"></accounts-modal>
@@ -21,7 +22,7 @@ import { MeteorComponent } from 'angular2-meteor';
 		<span *ngIf="character">
 			as 
 			<a class="tdn" 
-				routerLink="/CharacterDetail, {characterId: character._id}]">
+				[routerLink]="['/character', character._id]">
 					{{ character.firstName }}
 			</a>
 			<button class="c-white bd1-s-white" 
@@ -29,11 +30,11 @@ import { MeteorComponent } from 'angular2-meteor';
 		</span>
 		&gt;
 		<a class="tdn" 
-			[routerLink]="['/CharacterList']">
+			routerLink="/character">
 				Characters
 		</a> |
 		<a class="tdn" 
-			[routerLink]="['/BattleList']">
+			routerLink="/battle">
 				Battle List
 		</a>
 	</span>
@@ -62,13 +63,13 @@ export class Navigation extends MeteorComponent {
 	}
  
 	unselectCampaign() {
-		this.router.navigate(['/CampaignList']);
+		this.router.navigateByUrl('/campaign');
 		Session.set('character', null);
 		Session.set('campaign', null);
 	}
 
 	unselectCharacter() {
-		this.router.navigate(['/CharacterList']);
+		this.router.navigateByUrl('/character');
 		Session.set('character', null);
 	}
 }

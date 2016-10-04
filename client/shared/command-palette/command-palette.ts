@@ -11,7 +11,9 @@ import {CommandPaletteService} from '../../services/command-palette-service';
   class="t50 w50% p20 horizontal-align-fixed add-shadow z1 bgc-white dn"
   [class.db]="visible">
   <form (submit)="performCommand()">
-    <input type="text"
+    <input 
+      name="command" 
+      type="text"
       [(ngModel)]="command"
       (keyup)="keyboardEvent($event)"
       class="js-command-palette-input max-width h40 p0-20 fz18"/>
@@ -53,27 +55,27 @@ export class CommandPalette extends MeteorComponent {
     {
       text: 'Home',
       condition: () => !this.homePath.test(location.pathname),
-      command: () => this.router.navigate(['/HomePage'])
+      command: () => this.router.navigateByUrl('/home')
     },
     {
       text: 'Campaigns',
       condition: () => !this.campaignListPath.test(location.pathname),
-      command: () => this.router.navigate(['/CampaignList'])
+      command: () => this.router.navigateByUrl('/campaign')
     },
     {
       text: 'Content Creator',
       condition: () => !this.contentCreatorPath.test(location.pathname),
-      command: () => this.router.navigate(['/ContentCreator'])
+      command: () => this.router.navigateByUrl('/content-creator')
     },
     {
       text: 'Characters',
       condition: () => this.campaign && !this.characterListPath.test(location.pathname),
-      command: () => this.router.navigate(['/CharacterList'])
+      command: () => this.router.navigateByUrl('/character')
     },
     {
       text: 'Battles',
       condition: () => this.campaign && !this.battleListPath.test(location.pathname),
-      command: () => this.router.navigate(['/BattleList'])
+      command: () => this.router.navigateByUrl('/battle')
     }
   ];
 
@@ -81,7 +83,7 @@ export class CommandPalette extends MeteorComponent {
     {
       text: 'Character Detail',
       condition: () => this.character,
-      command: () => this.router.navigate(['/CharacterDetail', {characterId: this.character._id}])
+      command: () => this.router.navigateByUrl(`/character/${this.character._id}`)
     },
     {//if we're on a character detail, save the character
       text: 'Character - Save',
@@ -96,7 +98,7 @@ export class CommandPalette extends MeteorComponent {
       condition: () => this.campaign,
       command: () => { 
         Session.set('campaign', null); 
-        this.router.navigate(['/CampaignList']);
+        this.router.navigateByUrl('/CampaignList');
       }
     }
   ];
@@ -157,7 +159,7 @@ export class CommandPalette extends MeteorComponent {
 
   _charactersFunctionFactory(character) {
     var func = () =>
-      this.router.navigate(['/CharacterDetail', { characterId: character._id }]);
+      this.router.navigateByUrl(`/characters/${character._id}`);
 
     return {
       text: `Character Detail - ${character.firstName} ${character.lastName}`,
